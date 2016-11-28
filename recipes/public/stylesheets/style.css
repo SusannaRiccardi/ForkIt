@@ -1,5 +1,5 @@
 body {
-    background-color: ghostwhite;
+    background-color: rgb(35, 35, 35);
 }
 
 #menubar {
@@ -21,13 +21,13 @@ body {
     left: 0px;
     right: 0px;
     top: 0px;
-    background-color: ghostwhite;
+    background-color: rgb(35, 35, 35);
 }
 
 /*Receipt preview*/
 .receipt-preview {
     border-radius: 10px;
-    border: 2px solid white;
+    border: 3px solid rgb(155, 33, 65);
     width: 380px;
     height: 500px;
     padding: 0px;
@@ -37,15 +37,21 @@ body {
 }
 
 /*Receipt preview text*/
-.receipt-text {
+.receipt-text-frame {
     width: 100%;
-    height: 100%;
-    text-align: center;
-    padding: 10px;
-    position: inherit;
-    font-size: 1.5em;
-    /*opacity: 0.;*/
-    background-color: rgba(255, 255, 255, 0.5)
+    height:70px;
+    left: 0px;
+    top: 200px;
+    position: relative;
+    border: 2px solid rgb(224, 206, 206);
+    background-color: rgba(240, 240, 240, 0.9);
+}
+
+.receipt-text {
+  font-family: 'Dancing Script', cursive;
+  text-align: center;
+  font-size: 2.5em;
+  color: rgb(289, 43, 43)
 }
 
 /*Receipt preview image*/
