@@ -3,9 +3,7 @@ body {
     background-size: 100%;
 }
 
-
 /*MenuBar-->*/
-
 #menuwrapper {
     font-family: 'Lato', sans-serif;
     font-size: 1.3em;
@@ -16,89 +14,90 @@ body {
     z-index: 1;
 }
 
-#menuwrapper ul,
-#menuwrapper ul li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-#menuwrapper ul li {
-    background-color: rgba(30, 30, 30, 0.8);
-    width: 250px;
-    cursor: pointer;
-}
-
-#menuwrapper ul li:hover {
-    background-color: rgba(30, 30, 30, 0.8);
-    position: relative;
-}
-
-#menuwrapper ul li a {
-    padding: 15px 25px;
-    color: white;
-    display: inline-block;
-    text-decoration: none;
-}
-
-#menuwrapper ul li ul {
-    position: absolute;
-    display: none;
-}
-
-#menuwrapper ul li:hover ul {
-    top: auto;
-    display: block;
-}
-
-#menuwrapper ul li ul li {
-    background-color: rgba(30, 30, 30, 0.7);
-}
-
-#menuwrapper ul li:hover ul li:hover {
-    background-color: rgba(170, 170, 170, 0.7);
-}
-
-#menuwrapper ul li ul li a {
-    color: white;
-    display: inline-block;
-    width: 160px;
-}
-
-#menuwrapper ul li:hover ul li ul {
-    position: absolute;
-    display: none;
-}
-
-#menuwrapper ul li:hover ul li:hover ul {
-    display: block;
-    left: 250px;
-    top: 0;
-}
-
-#menuwrapper ul li:hover ul li:hover ul li {
-    background-color: rgba(0, 0, 0, 0.1);
-    width: 200px;
-}
-
-#menuwrapper ul li:hover ul li:hover ul li:hover {
-    background-color: rgba(0, 0, 0, 0.3);
-}
-
-#menuwrapper ul li:hover ul li:hover ul li a {
-    color: #ffffff;
-}
-
-.clear {
-    clear: both;
+#menuwrapper ul, #menuwrapper ul li{
+  margin:0;
+  padding:0;
+  list-style:none;
 }
 
 
+#menuwrapper ul li{
+  background-color:rgba(30, 30, 30, 0.8);
+  width:250px;
+  cursor:pointer;
+}
+
+
+#menuwrapper ul li:hover{
+  background-color:rgba(30, 30, 30, 0.8);
+  position:relative;
+}
+
+
+#menuwrapper ul li a{
+  padding:15px 25px;
+  color:white;
+  display:inline-block;
+  text-decoration:none;
+}
+
+
+#menuwrapper ul li ul{
+  position:absolute;
+  display:none;
+}
+
+
+#menuwrapper ul li:hover ul{
+  top:auto;
+  display:block;
+}
+
+
+#menuwrapper ul li ul li{
+  background-color:rgba(30, 30, 30, 0.7);
+}
+
+#menuwrapper ul li:hover ul li:hover{
+  background-color:rgba(170, 170, 170, 0.7);
+}
+
+#menuwrapper ul li ul li a{
+  color: white;
+  display:inline-block;
+  width:160px;
+}
+
+#menuwrapper ul li:hover ul li ul{
+  position:absolute;
+  display:none;
+}
+
+#menuwrapper ul li:hover ul li:hover ul{
+  display:block;
+  left:250px;
+  top:0;
+}
+
+#menuwrapper ul li:hover ul li:hover ul li{
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 200px;
+}
+
+#menuwrapper ul li:hover ul li:hover ul li:hover{
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+#menuwrapper ul li:hover ul li:hover ul li a{
+  color:#ffffff;
+}
+
+.clear{
+  clear:both;
+}
 /*<--MenuBar*/
 
-
 /*Content*/
-
 #content {
     left: 310px;
     right: 30px;
@@ -111,9 +110,7 @@ body {
     -webkit-backdrop-filter: blur(10px);
 }
 
-
 /*receipe Title*/
-
 #receipe-title {
     font-family: 'Lato', sans-serif;
     font-size: 2.3em;
@@ -122,9 +119,7 @@ body {
     color: white;
 }
 
-
 /*receipe Subtitle*/
-
 #receipe-subtitle {
     font-family: 'Lato', sans-serif;
     font-size: 1.8em;
@@ -134,12 +129,9 @@ body {
     color: white;
 }
 
-
 /*receipe scroll-view-->*/
 
-
 /*receipes caroussel*/
-
 #receipes-swipe {
     margin: 0px;
     display: flex;
@@ -148,9 +140,7 @@ body {
     align-content: flex-start;
 }
 
-
 /*receipe preview*/
-
 .receipe-preview {
     border-radius: 125px;
     width: 250px;
@@ -161,25 +151,19 @@ body {
     overflow: hidden;
 }
 
-
 /*receipe preview image*/
-
 .receipe-picture {
     position: static;
-    width: auto;
+    width: auto; 
     height: 100%;
 }
 
-
 /*Direction arrows*/
-
 .arrow {
     height: 250px;
     padding: 0px;
     margin: 20px;
 }
-
-
 /*<--receipe scroll-view*/
 
 #receipe-text {
@@ -205,10 +189,9 @@ body {
     background-color: rgba(76, 120, 34, 0.9);
 }
 
-
 /*/////////////////////////////// size adaptation /////////////////////////////*/
 
-@media (max-width: 1550px) {
+@media (max-width: 1550px) { 
     .receipe-preview {
         width: 200px;
         height: 200px;
@@ -241,7 +224,8 @@ body {
     /*body {
         background: rgba(56, 113, 40, 1);
     }*/
-    #menuwrapper {
+
+   #menuwrapper {
         left: 0px;
         right: 0px;
         top: 0px;
@@ -255,25 +239,27 @@ body {
         margin-top: 25px;
         /*position: relative;*/
     }
-    #menuwrapper ul li {
+    #menuwrapper ul li{
+        background-color:rgba(30, 30, 30, 1);
+        width:100%;
+    }
+    #menuwrapper ul, #menuwrapper ul li{
         background-color: rgba(30, 30, 30, 1);
         width: 100%;
+        margin:0;
+        padding:0;
+        list-style:none;
     }
-    #menuwrapper ul,
-    #menuwrapper ul li {
-        background-color: rgba(30, 30, 30, 1);
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-    }
+
     #receipe-text {
         display: initial;
     }
+
     #receipe-ingredients {
         width: auto;
         background-color: rgba(76, 120, 34, 1);
     }
+
     #receipe-preparation {
         width: auto;
         background-color: rgba(76, 120, 34, 1);
