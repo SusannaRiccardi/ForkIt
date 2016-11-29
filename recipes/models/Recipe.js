@@ -2,7 +2,6 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const ObjectId = mongoose.Schema.Types.ObjectId;
 const IngredientSchema = require("./Ingredient");
 const CommentSchema = require("./Comment");
 
@@ -17,8 +16,8 @@ const RecipeSchema = new mongoose.Schema({
   video : {type:String, default: ""},
   ingredients : {type:[IngredientSchema], default:[]},
   description: {type:String, required:true},
-  like : {type:Number, default:0},
-  unlike : {type:Number, default:0},
+  likes : {type:Number, default:0},
+  dislikes : {type:Number, default:0},
   comments : {type:[CommentSchema], },
 });
 
