@@ -110,8 +110,8 @@ body {
     -webkit-backdrop-filter: blur(10px);
 }
 
-/*recipe Title*/
-#recipe-title {
+/*receipe Title*/
+#receipe-title {
     font-family: 'Lato', sans-serif;
     font-size: 2.3em;
     margin-left: 30px;
@@ -119,8 +119,8 @@ body {
     color: white;
 }
 
-/*recipe Subtitle*/
-#recipe-subtitle {
+/*receipe Subtitle*/
+#receipe-subtitle {
     font-family: 'Lato', sans-serif;
     font-size: 1.8em;
     margin-left: 30px;
@@ -129,10 +129,10 @@ body {
     color: white;
 }
 
-/*recipe scroll-view-->*/
+/*receipe scroll-view-->*/
 
-/*recipes caroussel*/
-#recipes-swipe {
+/*receipes caroussel*/
+#receipes-swipe {
     margin: 0px;
     display: flex;
     flex-wrap: wrap;
@@ -140,8 +140,8 @@ body {
     align-content: flex-start;
 }
 
-/*recipe preview*/
-.recipe-preview {
+/*receipe preview*/
+.receipe-preview {
     border-radius: 125px;
     width: 250px;
     height: 250px;
@@ -151,8 +151,8 @@ body {
     overflow: hidden;
 }
 
-/*recipe preview image*/
-.recipe-picture {
+/*receipe preview image*/
+.receipe-picture {
     position: static;
     width: auto; 
     height: 100%;
@@ -164,9 +164,9 @@ body {
     padding: 0px;
     margin: 20px;
 }
-/*<--recipe scroll-view*/
+/*<--receipe scroll-view*/
 
-#recipe-text {
+#receipe-text {
     font-family: 'Lato', sans-serif;
     font-size: 1.3em;
     color: white;
@@ -177,13 +177,13 @@ body {
     justify-content: space-around;
 }
 
-#recipe-ingredients {
+#receipe-ingredients {
     padding: 15px;
     width: 40%;
     background-color: rgba(76, 120, 34, 0.9);
 }
 
-#recipe-preparation {
+#receipe-preparation {
     padding: 15px;
     width: 40%;
     background-color: rgba(76, 120, 34, 0.9);
@@ -192,7 +192,7 @@ body {
 /*/////////////////////////////// size adaptation /////////////////////////////*/
 
 @media (max-width: 1550px) { 
-    .recipe-preview {
+    .receipe-preview {
         width: 200px;
         height: 200px;
     }
@@ -202,7 +202,7 @@ body {
 }
 
 @media (max-width: 1350px) {
-    .recipe-preview {
+    .receipe-preview {
         width: 130px;
         height: 130px;
     }
@@ -251,16 +251,16 @@ body {
         list-style:none;
     }
 
-    #recipe-text {
+    #receipe-text {
         display: initial;
     }
 
-    #recipe-ingredients {
+    #receipe-ingredients {
         width: auto;
         background-color: rgba(76, 120, 34, 1);
     }
 
-    #recipe-preparation {
+    #receipe-preparation {
         width: auto;
         background-color: rgba(76, 120, 34, 1);
     }
