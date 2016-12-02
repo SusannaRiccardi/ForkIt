@@ -1,4 +1,4 @@
-# ForkIt
+# ForkIt - 🍴
 
 A recipe website where you can find your favourite recipes and post your own!
 
