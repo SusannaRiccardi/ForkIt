@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
     }
 
     let recipes = {'recipes' : found};
-    htmlOrJson(req, res, recipes, 'recipes');
+    // htmlOrJson(req, res, recipes, 'recipes');
   })
 });
 
@@ -36,7 +36,7 @@ router.get('/:recipeid', function(req, res) {
         message: "Not Found"
       });
       addLinks(recipe);
-      htmlOrJson(req, res, recipe, 'recipes')
+      // htmlOrJson(req, res, recipe, 'recipes')
     }
   })
 })

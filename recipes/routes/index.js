@@ -6,7 +6,8 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   // TODO: Deal with index route.
-  res.render('index', { title: 'Express' });
+  res.render('layout', {});
+  // res.render('index', { title: 'Express' });
 
   // data = queryDb();
   // htmlOrJson(req,res, data, 'recipes')
