@@ -9,7 +9,7 @@ body {
 #login {
     font-family: 'Lato', sans-serif;
     font-size: 1.3em;
-    width: 250px;
+    width: 300px;
     left: 30px;
     top: 30px;
     position: fixed;
@@ -19,26 +19,29 @@ body {
 }
 
 #login input {
-    border: none;
-    margin: 5%;
-    width: 90%;
+    margin: 20px;
+    width: calc(100% - 40px)!important;
+    box-sizing: border-box;
     height: 40px;
     font-size: 1em;
-    display: inline-block
 }
 
 #login-submit-btn {
+    margin: 20px;
+    width: calc(100% - 40px)!important;
     background-color: #4CAF50;
     border: none;
     color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 16px;
     height: auto!important;
-    margin: 5%;
-    width: 90%!important;
+    margin-top: 40px;
+}
+
+#login-submit-btn:hover {
+    cursor: pointer;
 }
 
 #login-btn-back {
@@ -81,7 +84,7 @@ body {
 #menuwrapper {
     font-family: 'Lato', sans-serif;
     font-size: 1.3em;
-    width: 250px;
+    width: 300px;
     left: 30px;
     top: 30px;
     bottom: 30px;
@@ -98,7 +101,7 @@ body {
 
 #menuwrapper ul li {
     background-color: rgba(30, 30, 30, 0.8);
-    width: 250px;
+    width: 300px;
     cursor: pointer;
 }
 
@@ -135,7 +138,7 @@ body {
 
 #menuwrapper ul li:hover ul li:hover ul {
     display: block;
-    left: 250px;
+    left: 300px;
     top: 0;
 }
 
@@ -159,7 +162,7 @@ body {
 /*Content-->*/
 
 #content {
-    left: 310px;
+    left: 360px;
     right: 30px;
     top: 30px;
     height: auto;
@@ -176,18 +179,6 @@ body {
 
 /*/////////////////////////////// size adaptation /////////////////////////////*/
 
-@media (max-width: 1550px) {
-    /**/
-}
-
-@media (max-width: 1350px) {
-    /**/
-}
-
-@media (max-width: 1080px) {
-    /**/
-}
-
 @media (max-width: 900px) {
     #menuwrapper {
         width: 100%;
@@ -197,6 +188,7 @@ body {
         position: absolute;
     }
     #login {
+        padding: 0px;
         font-size: 2em;
         width: 100%;
         left: 0px;
@@ -204,15 +196,19 @@ body {
         top: 0px;
         bottom: 0px;
         background-color: rgba(30, 30, 30, 1);
-        position: absolute;
+        position: fixed;
+        z-index: 2;
+        margin: 0px;
     }
     #login input {
-        height: 54px;
-        font-size: 1.2em;
+        height: 50px;
+        font-size: 0.7em;
     }
     #login-submit-btn {
-        bottom: 0px;
+        /*width: calc(100%-260px);*/
+        bottom: 15px;
         position: absolute;
+        left: 0px;
     }
     #content {
         overflow: initial;
