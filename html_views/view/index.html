@@ -12,41 +12,44 @@
 
 <body>
 
-    <div id="menuwrapper">
-        <!--LOGIN-->
-        <!--<ul>
-            <li>
-                <a href="#" id="menu-btn">
-                    <span class="btn-img"><i class="material-icons">reorder</i></span>
-                    <span class="btn-text">MENU</span>
-                </a>
-                <ul>
-                    <li><a href="#">TODAY'S RECIPE</a></li>
-                    <li><a href="#">CREATE</a></li>
-                    <li><a href="#">DISCOVER</a></li>
-                    <li><a href="#">ABOUT</a></li>
-                    <li><a href="#">LOGIN</a></li>
-                </ul>
-            </li>
-        </ul>-->
-        <!-- MENU-->
-        <!--LOGIN -->
-        <div id="login">
-            LOGIN<br><br>
-            <form>
-                Username:<br>
-                <input type="text" name="username" value="">
-                <br> Password:<br>
-                <input type="password" name="password" value="">
-                <br><br>
-                <input type="submit" value="Submit" id="login-submit-btn">
-            </form>
+    <div id="menubar">
+
+        <div id="menuwrapper">
+            <ul>
+                <li>
+                    <a href="#" class="menu-btn">
+                        <span class="btn-img"><i class="material-icons">reorder</i></span>
+                        <span class="btn-text">MENU</span>
+                    </a>
+                    <ul>
+                        <li><a href="#">TODAY'S RECIPE</a></li>
+                        <li><a href="#">CREATE</a></li>
+                        <li><a href="#">DISCOVER</a></li>
+                        <li><a href="#">ABOUT</a></li>
+                        <li><a href="#" id="login-btn">LOGIN</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-        <!--MENU-->
+
+
+        <div id="login" style="display: none;">
+            <div id="login-btn-back"><i class="material-icons">keyboard_backspace</i></div>
+            <form>
+                <span class="login-form-text">Username:<span><br>
+            <input type="text" name="username" value="">
+            <br><span class="login-form-text">Password:<span><br>
+            <input type="password" name="password" value="">
+            <br><br>
+            <input type="submit" value="Submit" id="login-submit-btn">
+        </form>
     </div>
+
+    </div>
+
+
     <!--<a id="login"><i class="material-icons">perm_identity</i></a>-->
     <div id="content">
-        Test Content <br> Ciao
         <!--Page Content-->
     </div>
 

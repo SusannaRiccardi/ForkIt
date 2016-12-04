@@ -9,21 +9,22 @@ body {
 #login {
     font-family: 'Lato', sans-serif;
     font-size: 1.3em;
+    width: 250px;
     left: 30px;
     top: 30px;
+    position: fixed;
     z-index: 1;
-    margin: 0;
-    padding: 0;
     background-color: rgba(30, 30, 30, 0.8);
     color: white;
-    padding: 7%;
 }
 
 #login input {
-    margin-top: 8px;
-    width: 98.5%;
+    border: none;
+    margin: 5%;
+    width: 90%;
     height: 40px;
     font-size: 1em;
+    display: inline-block
 }
 
 #login-submit-btn {
@@ -36,7 +37,20 @@ body {
     display: inline-block;
     font-size: 16px;
     height: auto!important;
-    width: 100%!important;
+    margin: 5%;
+    width: 90%!important;
+}
+
+#login-btn-back {
+    margin: 5%;
+}
+
+#login-btn-back:hover {
+    cursor: pointer;
+}
+
+.login-form-text {
+    margin: 5%;
 }
 
 
@@ -58,7 +72,7 @@ body {
     padding-left: 3px;
 }
 
-#menu-btn {
+.menu-btn {
     vertical-align: middle;
     height: 27px;
     /*vertical-align: text-bottom;*/
@@ -182,6 +196,24 @@ body {
         top: 0px;
         position: absolute;
     }
+    #login {
+        font-size: 2em;
+        width: 100%;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        background-color: rgba(30, 30, 30, 1);
+        position: absolute;
+    }
+    #login input {
+        height: 54px;
+        font-size: 1.2em;
+    }
+    #login-submit-btn {
+        bottom: 0px;
+        position: absolute;
+    }
     #content {
         overflow: initial;
         left: 0px;
@@ -189,6 +221,7 @@ body {
         bottom: 0px;
         margin-top: 25px;
         /*position: relative;*/
+        /*TODO: hide when login is selected*/
     }
     #menuwrapper ul li {
         background-color: rgba(30, 30, 30, 1);

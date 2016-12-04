@@ -3,30 +3,49 @@
 
 <head>
     <title>ForkIt</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
     <link rel="stylesheet" type="text/css" href="style/mystyle.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/app.js"></script>
+    <script src="js/index.js"></script>
 </head>
 
 <body>
 
-    <div id="menuwrapper">
-        <ul>
-            <li><a href="#">MENU</a>
-                <ul>
-                    <li><a href="#">TODAY'S RECIPE</a></li>
-                    <li><a href="#">CREATE</a>
-                        <ul>
-                            <!--<li><a href="languages.html">Languages</a></li>
-              <li><a href="computer-skills.html">Computer Skills</a></li>-->
-                        </ul>
-                    </li>
-                    <li><a href="#">DISCOVER</a></li>
-                    <li><a href="#">ABOUT</a></li>
-                </ul>
-            </li>
-        </ul>
+    <div id="menubar">
+
+        <div id="menuwrapper">
+            <ul>
+                <li>
+                    <a href="#" class="menu-btn">
+                        <span class="btn-img"><i class="material-icons">reorder</i></span>
+                        <span class="btn-text">MENU</span>
+                    </a>
+                    <ul>
+                        <li><a href="#">TODAY'S RECIPE</a></li>
+                        <li><a href="#">CREATE</a></li>
+                        <li><a href="#">DISCOVER</a></li>
+                        <li><a href="#">ABOUT</a></li>
+                        <li><a href="#" id="login-btn">LOGIN</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+
+        <div id="login" style="display: none;">
+            <div id="login-btn-back"><i class="material-icons">keyboard_backspace</i></div>
+            <form>
+                <span class="login-form-text">Username:<span><br>
+            <input type="text" name="username" value="">
+            <br><span class="login-form-text">Password:<span><br>
+            <input type="password" name="password" value="">
+            <br><br>
+            <input type="submit" value="Submit" id="login-submit-btn">
+        </form>
+    </div>
+
     </div>
 
     <div id="content">
