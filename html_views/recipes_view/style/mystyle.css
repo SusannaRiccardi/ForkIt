@@ -73,7 +73,7 @@
     font-size: 1.3em;
     color: white;
     padding-top: 50px;
-    padding-bottom: 30px;
+    padding-bottom: 50px;
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -89,6 +89,68 @@
     padding: 15px;
     width: 40%;
     background-color: rgba(76, 120, 34, 0.9);
+}
+
+#recipe-comments {
+    font-family: 'Lato', sans-serif;
+    color: black;
+    padding-bottom: 30px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: rgba(76, 120, 34, 0.9);
+}
+
+.recipe-comments-element {
+    padding: 10px;
+    width: 92%;
+    margin-top: 30px;
+    background: floralwhite;
+}
+
+.comment-name {
+    display: block;
+    font-size: 1.5em;
+}
+
+.comment-text {
+    font-size: 1em;
+}
+
+#my-comment {
+    font-family: 'Lato', sans-serif;
+    color: black;
+    padding-bottom: 30px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: rgba(76, 120, 34, 0.9);
+}
+
+#my-comment textarea {
+    font-family: 'Lato', sans-serif;
+    font-size: 1em;
+    padding: 10px;
+    width: 92%;
+    margin-top: 30px;
+    /*background: floralwhite;*/
+}
+
+#my-comment button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 30px;
+    /*display: inline-block;*/
+    font-size: 16px;
+    height: auto!important;
+    width: auto;
+    cursor: pointer;
 }
 
 
@@ -136,3 +198,6 @@
         background-color: rgba(76, 120, 34, 1);
     }
 }
+
+
+/*Comments*/
