@@ -3,28 +3,47 @@
 
 <head>
     <title>ForkIt</title>
+    <title>ForkIt</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
     <link rel="stylesheet" type="text/css" href="style/index.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/app.js"></script>
+    <script src="js/index.js"></script>
 </head>
 
 <body>
 
-    <div id="menuwrapper">
-        <ul>
-            <li><a href="#">MENU</a>
-                <ul>
-                    <li><a href="#">TODAY'S RECIPE</a></li>
-                    <li><a href="#">CREATE</a>
-                        <ul>
-                        </ul>
-                    </li>
-                    <li><a href="#">DISCOVER</a></li>
-                    <li><a href="#">ABOUT</a></li>
-                </ul>
-            </li>
-        </ul>
+    <div id="menubar">
+
+        <div id="menuwrapper">
+            <ul>
+                <li>
+                    <a href="#" class="menu-btn">
+                        <span class="btn-img"><i class="material-icons">reorder</i></span>
+                        <span class="btn-text">MENU</span>
+                    </a>
+                    <ul>
+                        <li><a href="#">TODAY'S RECIPE</a></li>
+                        <li><a href="#">CREATE</a></li>
+                        <li><a href="#">DISCOVER</a></li>
+                        <li><a href="#">ABOUT</a></li>
+                        <li><a href="#" id="login-btn">LOGIN</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+
+        <div id="login" style="display: none;">
+            <div id="login-btn-back"><i class="material-icons">keyboard_backspace</i></div>
+            <div class="login-form-text">Username:</div>
+            <input type="text" name="username" value="">
+            <div class="login-form-text">Password:</div>
+            <input type="password" name="password" value="">
+            <button id="login-submit-btn">Login</button>
+        </div>
+
     </div>
 
     <input type="checkbox" name="toggle" id="toggle" />
@@ -35,14 +54,14 @@
 
 
         <div id="main">
-        <h1 id="title">DISCOVER NEW TASTES</h1>
+            <p id="title">DISCOVER NEW TASTES</p>
 
-        <div id="icon-carousel">
-        <img class="icon" src="./images/icons/beer.png">
-        <img class="icon" src="./images/icons/bread.png">
-        <img class="icon" src="./images/icons/drink.png">
-        <img class="icon" src="./images/icons/muffin.png">
-        </div>
+            <div id="icon-carousel">
+                <img class="icon" src="./images/icons/beer.png">
+                <img class="icon" src="./images/icons/bread.png">
+                <img class="icon" src="./images/icons/drink.png">
+                <img class="icon" src="./images/icons/muffin.png">
+            </div>
         </div>
 
         <video playsinline autoplay muted loop id="bgvid">
@@ -58,10 +77,6 @@
         <input id="food" type="text" name="food" placeholder="SEARCH FOOD">
 
     </div>
-
-
-    <script>
-    </script>
 
 </body>
 
