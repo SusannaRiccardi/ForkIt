@@ -6,131 +6,12 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url("../images/bamboo.jpg");
-}
+    /*background-image: url("../images/bamboo.jpg");*/
+    background-color: black;
 
-/*/////////////////////////////// login /////////////////////////////*/
-
-#login{
-    right: 30px;
-    top: 30px;
-    width: 150px;
-    bottom: 30px;
-    margin: 0;
-    padding: 0;
-    position: fixed;
-
-}
-
-#login button{
-    font-size: 1.3em;
-    top: auto;
-    border: none;
-    color: #FFFFFF;
-    background: none;
-}
-
-.material-icons {
-    vertical-align:-14%;
-    color: #FFFFFF;
-    font-size: 64px!important;
-}
-
-/*/////////////////////////////// menu bar /////////////////////////////*/
-#menuwrapper {
-    font-family: 'Lato', sans-serif;
-    font-size: 1.3em;
-    left: 30px;
-    top: 30px;
-    bottom: 30px;
-    position: fixed;
-    z-index: 1;
-}
-
-#menuwrapper ul, #menuwrapper ul li{
-    margin:0;
-    padding:0;
-    list-style:none;
-}
-
-
-#menuwrapper ul li{
-    background-color:rgba(30, 30, 30, 0.8);
-    width:250px;
-    cursor:pointer;
-}
-
-
-#menuwrapper ul li:hover{
-    background-color:rgba(30, 30, 30, 0.8);
-    position:relative;
-}
-
-
-#menuwrapper ul li a{
-    padding:15px 25px;
-    color:white;
-    display:inline-block;
-    text-decoration:none;
-}
-
-
-#menuwrapper ul li ul{
-    position:absolute;
-    display:none;
-}
-
-
-#menuwrapper ul li:hover ul{
-    top:auto;
-    display:block;
-}
-
-
-#menuwrapper ul li ul li{
-    background-color:rgba(30, 30, 30, 0.7);
-}
-
-#menuwrapper ul li:hover ul li:hover{
-    background-color:rgba(170, 170, 170, 0.7);
-}
-
-#menuwrapper ul li ul li a{
-    color: white;
-    display:inline-block;
-    width:160px;
-}
-
-#menuwrapper ul li:hover ul li ul{
-    position:absolute;
-    display:none;
-}
-
-#menuwrapper ul li:hover ul li:hover ul{
-    display:block;
-    left:250px;
-    top:0;
-}
-
-#menuwrapper ul li:hover ul li:hover ul li{
-    background-color: rgba(0, 0, 0, 0.1);
-    width: 200px;
-}
-
-#menuwrapper ul li:hover ul li:hover ul li:hover{
-    background-color: rgba(0, 0, 0, 0.3);
-}
-
-#menuwrapper ul li:hover ul li:hover ul li a{
-    color:#ffffff;
-}
-
-.clear{
-    clear:both;
 }
 
 /*/////////////////////////////// image grid /////////////////////////////*/
-
 
 #content {
     left: 310px;
@@ -148,24 +29,43 @@ body {
 /*/////////////////////////////// image grid /////////////////////////////*/
 .image-grid {
     overflow: hidden;
-    margin: 10px;
+    /*margin: 10px;*/
 }
 .image-cell {
     float: left;
     position: relative;
     width: 20%;
+    /*width: calc(100% - 340px);*/
     padding-bottom: 20%;
+    /*margin: 10px;*/
+
 }
 .cell-inner {
+    margin-right: auto;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
     position: absolute;
-    left: 4px;
-    right: 4px;
-    top: 4px;
-    bottom: 4px;
+    /*left: 4px;*/
+    /*right: 4px;*/
+    /*top: 4px;*/
+    /*bottom: 4px;*/
     overflow: hidden;
+
 }
 .cell-inner img {
     width: 100%;
+    height: 100%;
+    /*border-radius: 50%;*/
+    /*top:50%;*/
+    /*-webkit-transform: translate(-50%, -50%);*/
+    /*min-height:50%;*/
+    /*display:block;*/
+    /*left:50%;*/
+    /*min-width: 100%;*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+
 }
 .cell-inner .cell-title {
     position: absolute;
@@ -205,32 +105,6 @@ body.no-touch .cell-inner:hover .cell-title, body.touch .cell-inner.touchFocus .
     .image-cell {
         width: 33.3%;
         padding-bottom: 33.3%;
-    }
-
-    #menuwrapper {
-        left: 0px;
-        right: 0px;
-        top: 0px;
-        position: absolute;
-    }
-    #content {
-        overflow: initial;
-        left: 0px;
-        right: 0px;
-        bottom: 0px;
-        margin-top: 25px;
-        /*position: relative;*/
-    }
-    #menuwrapper ul li{
-        background-color:rgba(30, 30, 30, 1);
-        width:100%;
-    }
-    #menuwrapper ul, #menuwrapper ul li{
-        background-color: rgba(30, 30, 30, 1);
-        width: 100%;
-        margin:0;
-        padding:0;
-        list-style:none;
     }
 }
 @media only screen and (max-width : 1290px) and (min-width : 1051px) {
