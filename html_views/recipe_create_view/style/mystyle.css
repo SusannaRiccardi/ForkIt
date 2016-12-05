@@ -1,0 +1,35 @@
+/*body {
+    background-image: url("images/create_background.jpg");
+    width: 100%;
+    height: 100%;
+}*/
+
+body {
+    background-image: url("../images/create_background.jpg");
+    background-attachment: fixed;
+    background-size: 100%;
+}
+
+#content {
+    left: 360px;
+    right: 30px;
+    top: 30px;
+    height: auto;
+    margin: 0px;
+    z-index: 0;
+    position: absolute;
+    background-color: rgba(250, 250, 250, 0.7);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+@media (max-width: 900px) {
+    #content {
+        overflow: initial;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        margin-top: 25px;
+        /*position: relative;*/
+        /*TODO: hide when login is selected*/
+    }
+}

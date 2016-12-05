@@ -1,0 +1,220 @@
+#menubar {
+    z-index: 4;
+    position: fixed;
+    padding: 0px;
+    margin: 0px;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    border: 0px;
+}
+
+#menubar:focus {
+    z-index: 4;
+}
+
+#login {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.3em;
+    width: 300px;
+    left: 30px;
+    top: 30px;
+    position: fixed;
+    z-index: 1;
+    background-color: rgba(30, 30, 30, 0.8);
+    color: white;
+}
+
+#login input {
+    margin: 20px;
+    width: calc(100% - 40px)!important;
+    box-sizing: border-box;
+    height: 40px;
+    font-size: 1em;
+}
+
+#login-submit-btn {
+    margin: 20px;
+    width: calc(100% - 40px)!important;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    height: auto!important;
+    margin-top: 40px;
+}
+
+#login-submit-btn:hover {
+    cursor: pointer;
+}
+
+#login-btn-back {
+    margin: 5%;
+}
+
+#login-btn-back:hover {
+    cursor: pointer;
+}
+
+.login-form-text {
+    margin: 5%;
+}
+
+
+/*MenuBar-->*/
+
+.material-icons {
+    color: white;
+    font-size: 27px!important;
+}
+
+.btn-img {
+    float: left;
+    vertical-align: text-middle;
+}
+
+.btn-text {
+    float: left;
+    vertical-align: text-middle;
+    padding-left: 3px;
+}
+
+.menu-btn {
+    vertical-align: middle;
+    height: 27px;
+    /*vertical-align: text-bottom;*/
+}
+
+#menuwrapper {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.3em;
+    width: 300px;
+    left: 30px;
+    top: 30px;
+    bottom: 30px;
+    position: fixed;
+    z-index: 1;
+}
+
+#menuwrapper ul,
+#menuwrapper ul li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#menuwrapper ul li {
+    background-color: rgba(30, 30, 30, 0.8);
+    width: 300px;
+    cursor: pointer;
+}
+
+#menuwrapper ul li:hover {
+    background-color: rgba(30, 30, 30, 0.8);
+    position: relative;
+}
+
+#menuwrapper ul li a {
+    padding: 15px 25px;
+    color: white;
+    display: inline-block;
+    text-decoration: none;
+}
+
+#menuwrapper ul li ul {
+    position: absolute;
+    display: none;
+}
+
+#menuwrapper ul li:hover ul {
+    top: auto;
+    display: block;
+}
+
+#menuwrapper ul li:hover ul li:hover {
+    background-color: rgba(170, 170, 170, 0.7);
+}
+
+#menuwrapper ul li:hover ul li ul {
+    position: absolute;
+    display: none;
+}
+
+#menuwrapper ul li:hover ul li:hover ul {
+    display: block;
+    left: 300px;
+    top: 0;
+}
+
+#menuwrapper ul li:hover ul li:hover ul li {
+    background-color: rgba(0, 0, 0, 0.1);
+    width: 200px;
+}
+
+#menuwrapper ul li:hover ul li:hover ul li:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+#menuwrapper ul li:hover ul li:hover ul li a {
+    color: #ffffff;
+}
+
+
+/*<--MenuBar*/
+
+
+/*Content-->*/
+
+
+/*<--Content*/
+
+
+/*/////////////////////////////// size adaptation /////////////////////////////*/
+
+@media (max-width: 900px) {
+    #menuwrapper {
+        width: 100%;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        position: absolute;
+    }
+    #login {
+        padding: 0px;
+        font-size: 2em;
+        width: 100%;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        background-color: rgba(30, 30, 30, 1);
+        position: fixed;
+        z-index: 2;
+        margin: 0px;
+    }
+    #login input {
+        height: 50px;
+        font-size: 0.7em;
+    }
+    #login-submit-btn {
+        /*width: calc(100%-260px);*/
+        bottom: 15px;
+        position: absolute;
+        left: 0px;
+    }
+    #menuwrapper ul li {
+        background-color: rgba(30, 30, 30, 1);
+        width: 100%;
+    }
+    #menuwrapper ul,
+    #menuwrapper ul li {
+        background-color: rgba(30, 30, 30, 1);
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+}
