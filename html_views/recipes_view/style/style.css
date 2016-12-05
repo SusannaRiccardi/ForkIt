@@ -1,3 +1,11 @@
+body {
+    background-image: url("../images/bamboo.jpg");
+    background-size: 100%;
+}
+
+
+/**/
+
 #login {
     font-family: 'Lato', sans-serif;
     font-size: 1.3em;

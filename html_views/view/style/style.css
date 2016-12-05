@@ -1,3 +1,11 @@
+body {
+    background-image: url("../images/bamboo.jpg");
+    background-size: 100%;
+}
+
+
+/**/
+
 #login {
     font-family: 'Lato', sans-serif;
     font-size: 1.3em;
@@ -146,6 +154,21 @@
 
 
 /*<--MenuBar*/
+
+
+/*Content-->*/
+
+#content {
+    left: 310px;
+    right: 30px;
+    top: 30px;
+    height: auto;
+    margin: 0px;
+    z-index: 0;
+    position: absolute;
+    background-color: rgba(56, 113, 40, 0.8);
+    -webkit-backdrop-filter: blur(10px);
+}
 
 
 /*<--Content*/
