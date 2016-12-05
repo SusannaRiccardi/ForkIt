@@ -1,6 +1,6 @@
 #menubar {
     z-index: 4;
-    position: relative;
+    position: fixed;
     padding: 0px;
     margin: 0px;
     left: 0px;
