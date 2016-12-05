@@ -163,7 +163,7 @@ body {
 
 /*/////////////////////////////// size adaptation /////////////////////////////*/
 
-@media (max-width: 1600px) {
+@media (max-width: 1550px) {
     .recipe-preview {
         width: 200px;
         height: 200px;
@@ -173,7 +173,7 @@ body {
     }
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1350px) {
     .recipe-preview {
         width: 130px;
         height: 130px;
@@ -183,7 +183,7 @@ body {
     }
 }
 
-@media (max-width: 1230px) {
+@media (max-width: 1080px) {
     #image-back {
         display: none;
     }
