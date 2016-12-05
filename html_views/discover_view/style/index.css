@@ -11,6 +11,28 @@ body {
 
 }
 
+#grid-view{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.grid-cell {
+    border-radius: 50%;
+    width: 350px;
+    height: 350px;
+    padding: 0px;
+    margin: 40px;
+    background-color: white;
+    overflow: hidden;
+}
+
+.recipe-picture {
+    position: static;
+    width: auto;
+    height: 100%;
+}
+
 /*/////////////////////////////// image grid /////////////////////////////*/
 
 #content {
@@ -42,8 +64,9 @@ body {
 }
 .cell-inner {
     margin-right: auto;
-    height: 150px;
-    width: 150px;
+    height: 80%;
+    width: 80%;
+
     border-radius: 50%;
     position: absolute;
     /*left: 4px;*/
