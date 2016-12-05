@@ -5,6 +5,7 @@ var router = express.Router();
 const mongoose = require('mongoose');
 require('../models');
 const Recipe = mongoose.model('Recipe');
+const config = require('../config')
 const fieldsFilter = {'__v' : 0};
 
 /* GET users listing. */
@@ -18,14 +19,16 @@ router.get('/', function(req, res, next) {
       addLinks(obj);
     }
 
-    let recipes = {'recipes' : found};
+    let recipes = {'recipes' : found}
+    console.log(recipes.recipes);
+    res.render('recipes', {title : "Recipes", message : recipes});
     // htmlOrJson(req, res, recipes, 'recipes');
   })
 });
 
 // Get /recipes/_id -- Get for single recipe view
 router.get('/:recipeid', function(req, res) {
-  Recipe.findByID(req.params.recipe, fieldsFilter).lean().populate('recipe').exec(function(err, recipe) {
+  Recipe.findById(req.params.recipeid, fieldsFilter).lean().populate('recipe').exec(function(err, recipe) {
     if (err) {
       throw err
     }
@@ -35,8 +38,10 @@ router.get('/:recipeid', function(req, res) {
         statusCode: 404,
         message: "Not Found"
       });
+    } else {
       addLinks(recipe);
       // htmlOrJson(req, res, recipe, 'recipes')
+      res.render('recipe', {title : "Recipe", message : recipe});
     }
   })
 })
@@ -44,9 +49,12 @@ router.get('/:recipeid', function(req, res) {
 // Post /recipes
 router.post('/', function(req, res) {
   // TODO: Take all fields for new recipe.
+  video = req.body.video || "";
+  image = req.body.video || "";
   const newRecipe = new Recipe({
     title: req.body.title,
-    description: req.body.description
+    description: req.body.description,
+    ingredients : req.body.ingredients
   });
   newRecipe.save(function(err, saved) {
     if (err) {
@@ -55,6 +63,24 @@ router.post('/', function(req, res) {
     res.json(saved);
   })
 })
+
+router.delete('/:recipeid', function(req, res, next) {
+  Recipe.findById(req.params.recipeid, fieldsFilter , function(err, recipe){
+    if (err) return next (err);
+    if (!recipe) {
+      res.status(404);
+      res.json({
+        statusCode: 404,
+        message: "Not Found"
+      });
+      return;
+    }
+    recipe.remove(function(err, removed){
+      if (err) return next (err);
+      res.status(204).end();
+    })
+  });
+});
 
 // Function to decide how to render the view.
 function htmlOrJson(req, res, data, viewName) {

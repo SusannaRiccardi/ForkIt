@@ -1,0 +1,10 @@
+doctype html
+html
+  head
+    title= title
+
+  body
+    h1= title
+    for recipe in message.recipes
+      h2= recipe.title
+      p= recipe.description

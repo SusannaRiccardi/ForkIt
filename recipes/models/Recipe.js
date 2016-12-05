@@ -14,11 +14,11 @@ const RecipeSchema = new mongoose.Schema({
   title : { type: String, required: true},
   image : {type:String, default: ""},
   video : {type:String, default: ""},
-  ingredients : {type:[IngredientSchema], default:[]},
+  ingredients : {type:[IngredientSchema]},
   description: {type:String, required:true},
   likes : {type:Number, default:0},
   dislikes : {type:Number, default:0},
-  comments : {type:[CommentSchema], },
+  comments : {type:[CommentSchema]},
 });
 
 mongoose.model('Recipe', RecipeSchema);
