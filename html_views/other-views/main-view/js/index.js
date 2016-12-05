@@ -7,6 +7,8 @@ window.onload = function() {
     let login = document.getElementById('login');
     let recipeView = document.getElementById('recipe-view');
     let mainView = document.getElementById('main-view');
+    let menuBtnFont = document.getElementsByClassName('btn-img')[0].getElementsByTagName('i')[0];
+    console.log(menuBtnFont);
 
     loginBtn.addEventListener('click', function() {
         login.removeAttribute('style');
@@ -22,4 +24,13 @@ window.onload = function() {
         recipeView.removeAttribute('style');
         mainView.setAttribute('style', 'display: none;');
     });
+
+    menuwrapper.addEventListener('mouseenter', function() {
+        menuBtnFont.setAttribute('Style', '-ms-transform: rotate(90deg); -webkit-transform: rotate(90deg); transform: rotate(90 deg);');
+    });
+
+    menuwrapper.addEventListener('mouseleave', function() {
+        menuBtnFont.removeAttribute('Style');
+    });
+
 };

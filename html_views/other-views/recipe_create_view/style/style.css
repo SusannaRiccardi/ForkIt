@@ -13,6 +13,9 @@
     z-index: 4;
 }
 
+
+/*#menubar:active {}*/
+
 #login {
     font-family: 'Lato', sans-serif;
     font-size: 1.3em;
@@ -94,9 +97,9 @@
     width: 300px;
     left: 30px;
     top: 30px;
-    bottom: 30px;
     position: fixed;
     z-index: 1;
+    height: auto;
 }
 
 #menuwrapper ul,
@@ -168,6 +171,18 @@
 
 /*Content-->*/
 
+#content {
+    left: 360px;
+    right: 30px;
+    top: 30px;
+    height: auto;
+    margin: 0px;
+    z-index: 0;
+    position: absolute;
+    background-color: rgba(56, 113, 40, 0.8);
+    -webkit-backdrop-filter: blur(10px);
+}
+
 
 /*<--Content*/
 
@@ -204,6 +219,15 @@
         bottom: 15px;
         position: absolute;
         left: 0px;
+    }
+    #content {
+        overflow: initial;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        margin-top: 25px;
+        /*position: relative;*/
+        /*TODO: hide when login is selected*/
     }
     #menuwrapper ul li {
         background-color: rgba(30, 30, 30, 1);

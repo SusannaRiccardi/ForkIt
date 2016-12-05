@@ -1,6 +1,6 @@
 #menubar {
     z-index: 4;
-    position: relative;
+    position: fixed;
     padding: 0px;
     margin: 0px;
     left: 0px;
@@ -12,6 +12,9 @@
 #menubar:focus {
     z-index: 4;
 }
+
+
+/*#menubar:active {}*/
 
 #login {
     font-family: 'Lato', sans-serif;
@@ -94,9 +97,9 @@
     width: 300px;
     left: 30px;
     top: 30px;
-    bottom: 30px;
     position: fixed;
     z-index: 1;
+    height: auto;
 }
 
 #menuwrapper ul,
