@@ -82,6 +82,7 @@ body {
     height: 250px;
     padding: 0px;
     margin: 20px;
+    cursor: pointer;
 }
 
 
@@ -205,6 +206,16 @@ body {
 }
 
 @media (max-width: 900px) {
+    #recipe-view {
+        overflow: initial;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        top: 27px;
+        margin-top: 25px;
+        position: relative;
+        /*TODO: hide when login is selected*/
+    }
     #recipe-text {
         display: initial;
     }
