@@ -50,23 +50,39 @@
 
       <div id="create-view">
            <div id="create-title">CREATE</div>
-            <div id="create-subtitle">Create your recipe</div>
+            <div id="create-subtitle">Create your recipe</div><br>
             <form>
                 <label class="input-label">Title</label><br><br>
-                <input name="recipe-name" type="text"><br><br>
+                <input class="large-input" name="recipe-name" type="text"><br><br>
+                <label class="input-label">Description</label><br><br>
+                <input class="large-input" name="recipe-subtitle" type="text"><br><br>
+                <label class="input-label">Ingredients</label><br><br>
+                <div id="recipe-create-ingredients">
+                    <div class="recipe-create-single-ing">
+                        <input name="recipe-ingredient" placeholder="Ingredient" type="text">
+                        <input name="recipe-ingredient-quantity" placeholder="Quantity" type="text">
+                        <span><img src="./images/add.png"></span>
+                    </div>
+                </div><br>
                 <input class="load-file" name="picture" type="file" size="50" accept="*/*">
                 <label class="input-label">Preparation</label><br><br>
-                <textarea rows="4" cols="20" id="create-description"></textarea><br><br><br>
-                <label for="file-upload" class="custom-label">
-                    <i class="fa fa-cloud-upload"></i>Upload Image
-                </label>
-                <input id="file-upload" type="file"/><br>
-                <label for="submit-recipe" class="custom-label">
-                    Submit
-                </label>
-                <button id="submit-recipe" type="submit"/><br>
+                <textarea rows="4" cols="20" id="create-description"></textarea>
+
+                <div id="submit-bar">
+                    <label for="file-upload" class="custom-label-left">
+                        <!--<i class="fa fa-cloud-upload">-->
+                            <!--<img src="./images/image-upload_icon.png">-->
+                            Load Image
+                    </label>
+                    <input id="file-upload" type="file"/><br>
+                    <label for="submit-recipe" class="custom-label-right">
+                        Submit
+                    </label>
+                    <button id="submit-recipe" type="submit"/><br>
+                </div>
             </form>
     </div>
+
 
 </body>
 

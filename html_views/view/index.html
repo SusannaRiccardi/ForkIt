@@ -6,6 +6,7 @@
   <link rel="stylesheet" type="text/css" href="style/style.css">
   <link rel="stylesheet" type="text/css" href="style/main_view.css">
   <link rel="stylesheet" type="text/css" href="style/recipe_view.css">
+  <link rel="stylesheet" type="text/css" href="style/create_view.css">
   <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +15,8 @@
 </head>
 
 <body>
-  
+
+  <!--menubar-->
   <div id="menubar">
 
     <div id="menuwrapper">
@@ -34,6 +36,7 @@
         </li>
       </ul>
     </div>
+
 
     <div id="login-view">
       <!--Login-->
@@ -58,111 +61,161 @@
                 <br><span class="login-form-text">Password:<span><br>
                   <input type="password" name="password" value="">
                   <br><span class="login-form-text">Repeat password:<span><br>
-                  <input type="password" name="RepeatPassword" value="">
-                  <a id="btn-signup-login"><img src="./images/arrow_down.png"></a>
-                  <br>
-                  <input type="submit" value="Signup" class="submit-btn" id="signup-submit-btn">
-                </form>
-              </div>
-            </div>
-
-          </div>
-
-          <div id="recipe-view">
-            <div id="recipe-title">SASHIMI</div>
-            <div id="recipe-subtitle">Yokuro Tanaka</div>
-            <div id="recipes-swipe">
-              <img src="images/left_arrow.png" class="arrow" id="arrow-back" alt="Food">
-              <div class="recipe-preview" id="image-back"><img src="images/1.jpg" alt="Food" class="recipe-picture"></div>
-              <div class="recipe-preview" id="image-actual"><img src="images/2.jpg" alt="Food" class="recipe-picture"></div>
-              <div class="recipe-preview" id="image-next"><img src="images/3.jpg" alt="Food" class="recipe-picture"></div>
-              <img src="images/right_arrow.png" class="arrow" id="arrow-next" alt="Food">
-            </div>
-            <div id="recipe-text">
-              <div id="recipe-ingredients"><b>Ingredients</b><br><br>- Salt 50g<br>- Fresh Tuna, Salmon<br>- Soy Sauce<br>- Wasabi</div>
-              <div id="recipe-preparation"><b>Preparation</b><br><br>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-                At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
-              </div>
-
-              <div id="recipe-comments">
-                <div class="recipe-comments-element">
-                  <span class="comment-name">Samuele</span>
-                  <span class="comment-text">Ricetta molto buona, aggiungerei del pepe</span>
+                    <input type="password" name="RepeatPassword" value="">
+                    <a id="btn-signup-login"><img src="./images/arrow_down.png"></a>
+                    <br>
+                    <input type="submit" value="Signup" class="submit-btn" id="signup-submit-btn">
+                  </form>
                 </div>
               </div>
-              <div id="my-comment">
-                <textarea rows="4" cols="50"></textarea>
-                <button type="button">Submit</button>
-              </div>
             </div>
+            <!---->
 
-            <div id="main-view">
-              <input type="checkbox" name="toggle" id="toggle" />
-              <label for="toggle"></label>
+            <!--recipe-view-->
+            <div id="recipe-view">
+              <div id="recipe-title">SASHIMI</div>
+              <div id="recipe-subtitle">Yokuro Tanaka</div>
+              <div id="recipes-swipe">
+                <img src="images/left_arrow.png" class="arrow" id="arrow-back" alt="Food">
+                <div class="recipe-preview" id="image-back"><img src="images/1.jpg" alt="Food" class="recipe-picture"></div>
+                <div class="recipe-preview" id="image-actual"><img src="images/2.jpg" alt="Food" class="recipe-picture"></div>
+                <div class="recipe-preview" id="image-next"><img src="images/3.jpg" alt="Food" class="recipe-picture"></div>
+                <img src="images/right_arrow.png" class="arrow" id="arrow-next" alt="Food">
+              </div>
+              <div id="recipe-text">
+                <div id="recipe-ingredients"><b>Ingredients</b><br><br>- Salt 50g<br>- Fresh Tuna, Salmon<br>- Soy Sauce<br>- Wasabi</div>
+                <div id="recipe-preparation"><b>Preparation</b><br><br>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                  Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                  At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+                </div>
 
-              <div class="container">
-
-
-
-                <div id="main">
-                  <p id="title">DISCOVER NEW TASTES</p>
-
-                  <div id="icon-carousel">
-                    <img class="icon" src="./images/icons/chineese.png">
-                    <img class="icon" src="./images/icons/bread.png">
-                    <img class="icon" src="./images/icons/red_vine.png">
-                    <img class="icon" src="./images/icons/muffin.png">
+                <div id="recipe-comments">
+                  <div class="recipe-comments-element">
+                    <span class="comment-name">Samuele</span>
+                    <span class="comment-text">Ricetta molto buona, aggiungerei del pepe</span>
                   </div>
                 </div>
-
-                <video playsinline autoplay muted loop id="bgvid">
-                  <source src="./images/foodPreparing.mp4" type="video/mp4">
-                  </video>
-
-                </div>
-
-                <div id="mainPageSearch" class="message">
-                  <input id="food" type="text" name="food" placeholder="SEARCH FOOD">
+                <div id="my-comment">
+                  <textarea rows="4" cols="50"></textarea>
+                  <button type="button">Submit</button>
                 </div>
               </div>
+              <!---->
 
-            </body>
+              <!--main-view-->
+              <div id="main-view">
+                <input type="checkbox" name="toggle" id="toggle" />
+                <label for="toggle"></label>
 
-            <script>
-            $(document).ready(function() {
-              $('#recipe-view').hide();
-              $('#login-view').hide();
-              $('#signup').hide();
-            });
+                <div class="container">
 
-            $(function() {
-              // SHOW login
-              $('#btn-login').on('click', function() {
-                $('#menuwrapper').fadeOut(300).hide();
-                $('#login-view').fadeIn(300).show();
-              });
-              // SHOW menubar
-              $('.btn-login-back').on('click', function() {
+
+
+                  <div id="main">
+                    <p id="title">DISCOVER NEW TASTES</p>
+
+                    <div id="icon-carousel">
+                      <img class="icon" src="./images/icons/chineese.png">
+                      <img class="icon" src="./images/icons/bread.png">
+                      <img class="icon" src="./images/icons/red_vine.png">
+                      <img class="icon" src="./images/icons/muffin.png">
+                    </div>
+                  </div>
+
+
+                  <video playsinline autoplay muted loop id="bgvid">
+                    <source src="./images/foodPreparing.mp4" type="video/mp4">
+                    </video>
+
+                  </div>
+
+                  <div id="mainPageSearch" class="message">
+                    <input id="food" type="text" name="food" placeholder="SEARCH FOOD">
+                  </div>
+                </div>
+                <!---->
+
+                <!--crate-view-->
+                <div id="create-view">
+                  <div id="create-title">CREATE</div>
+                  <div id="create-subtitle">Create your recipe</div><br>
+                  <form>
+                    <label class="input-label">Title</label><br><br>
+                    <input class="large-input" name="recipe-name" type="text"><br><br>
+                    <label class="input-label">Description</label><br><br>
+                    <input class="large-input" name="recipe-subtitle" type="text"><br><br>
+                    <label class="input-label">Ingredients</label><br><br>
+                    <div id="recipe-create-ingredients">
+                      <div class="recipe-create-single-ing">
+                        <input name="recipe-ingredient" placeholder="Ingredient" type="text">
+                        <input name="recipe-ingredient-quantity" placeholder="Quantity" type="text">
+                        <span><img src="./images/add.png"></span>
+                      </div>
+                    </div><br>
+                    <input class="load-file" name="picture" type="file" size="50" accept="*/*">
+                    <label class="input-label">Preparation</label><br><br>
+                    <textarea rows="4" cols="20" id="create-description"></textarea>
+
+                    <div id="submit-bar">
+                      <label for="file-upload" class="custom-label-left">
+                        <!--<i class="fa fa-cloud-upload">-->
+                        <!--<img src="./images/image-upload_icon.png">-->
+                        Load Image
+                      </label>
+                      <input id="file-upload" type="file"/><br>
+                      <label for="submit-recipe" class="custom-label-right">
+                        Submit
+                      </label>
+                      <button id="submit-recipe" type="submit"/><br>
+                    </div>
+                  </form>
+                </div>
+                <!---->
+
+              </body>
+
+              <script>
+              $(document).ready(function() {
+                $('#recipe-view').hide();
+                $('#create-view').hide();
                 $('#login-view').hide();
-                $('#menuwrapper').fadeIn(300).show();
+                $('#signup').hide();
               });
-              // SHOW today's recipe
-              $('#btn-tdRecipe').on('click', function() {
-                $('#main-view').hide();
-                $('#recipe-view').fadeIn(300).show();
-              });
-              // SHOW signup
-              $('#btn-signup').on('click', function() {
-                $('#signup').show();
-                $('#login').hide();
-              });
-              // SHOW login
-              $('#btn-signup-login').on('click', function() {
-                $('#login').show();
-                $('#signup').slideUp(300).hide();
-              });
-            });
-            </script>
 
-            </html>
+              $(function() {
+                // SHOW login
+                $('#btn-login').on('click', function() {
+                  $('#menuwrapper').fadeOut(300).hide();
+                  $('#login-view').fadeIn(300).show();
+                });
+                // SHOW menubar
+                $('.btn-login-back').on('click', function() {
+                  $('#login-view').hide();
+                  $('#menuwrapper').fadeIn(300).show();
+                });
+                // SHOW today's recipe
+                $('#btn-tdRecipe').on('click', function() {
+                  $('#main-view').hide();
+                  $('#create-view').hide();
+                  $('#recipe-view').fadeIn(300).show();
+                });
+                // SHOW create
+                $('#btn-create').on('click', function() {
+                  $('#main-view').hide();
+                  $('#recipe-view').hide();
+                  $('#create-view').fadeIn(300).show();
+                });
+                // SHOW signup
+                $('#btn-signup').on('click', function() {
+                  $('#signup').show();
+                  $('#login').hide();
+                });
+                // SHOW login
+                $('#btn-signup-login').on('click', function() {
+                  $('#login').show();
+                  $('#signup').slideUp(300).hide();
+                });
+              });
+              </script>
+
+              </html>
