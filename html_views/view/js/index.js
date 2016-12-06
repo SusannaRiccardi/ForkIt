@@ -8,22 +8,10 @@ window.onload = function() {
     let recipeView = document.getElementById('recipe-view');
     let mainView = document.getElementById('main-view');
     let menuBtnFont = document.getElementsByClassName('btn-img')[0].getElementsByTagName('i')[0];
-    console.log(menuBtnFont);
+    let mainPageSearch = document.getElementById('mainPageSearch');
+    let mainPageSearchContent = document.getElementById('food');
 
-    loginBtn.addEventListener('click', function() {
-        login.removeAttribute('style');
-        menuwrapper.setAttribute('style', 'display: none;');
-    })
-
-    loginBackBtn.addEventListener('click', function() {
-        menuwrapper.removeAttribute('style');
-        login.setAttribute('style', 'display: none;');
-    })
-
-    recipesBtn.addEventListener('click', function() {
-        recipeView.removeAttribute('style');
-        mainView.setAttribute('style', 'display: none;');
-    });
+    console.log(mainPageSearch.getAttribute('placeholder'));
 
     menuwrapper.addEventListener('mouseenter', function() {
         menuBtnFont.setAttribute('Style', '-ms-transform: rotate(90deg); -webkit-transform: rotate(90deg); transform: rotate(90 deg);');
@@ -31,6 +19,16 @@ window.onload = function() {
 
     menuwrapper.addEventListener('mouseleave', function() {
         menuBtnFont.removeAttribute('Style');
+    });
+
+    mainPageSearchContent.addEventListener('focus', function() {
+        console.log('inside');
+        mainPageSearchContent.removeAttribute('placeholder');
+    });
+
+    mainPageSearchContent.addEventListener('blur', function() {
+        console.log('outside');
+        mainPageSearchContent.setAttribute('placeholder', 'SEACH FOOD');
     });
 
 };

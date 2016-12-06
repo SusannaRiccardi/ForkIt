@@ -16,7 +16,7 @@
 
 /*#menubar:active {}*/
 
-#login {
+.login {
     font-family: 'Lato', sans-serif;
     font-size: 1.3em;
     width: 300px;
@@ -28,7 +28,7 @@
     color: white;
 }
 
-#login input {
+.login input {
     margin: 20px;
     width: calc(100% - 40px)!important;
     box-sizing: border-box;
@@ -36,7 +36,7 @@
     font-size: 1em;
 }
 
-#login-submit-btn {
+.submit-btn {
     margin: 20px;
     width: calc(100% - 40px)!important;
     background-color: #4CAF50;
@@ -50,15 +50,15 @@
     margin-top: 40px;
 }
 
-#login-submit-btn:hover {
+.submit-btn:hover {
     cursor: pointer;
 }
 
-#login-btn-back {
+.btn-login-back {
     margin: 5%;
 }
 
-#login-btn-back:hover {
+.btn-login-back:hover {
     cursor: pointer;
 }
 
@@ -100,6 +100,11 @@
     position: fixed;
     z-index: 1;
     height: auto;
+}
+
+#menuwrapper a {
+    width: auto; 
+    /*TODO: fix width*/
 }
 
 #menuwrapper ul,
@@ -197,7 +202,7 @@
         top: 0px;
         position: absolute;
     }
-    #login {
+    .login {
         padding: 0px;
         font-size: 2em;
         width: 100%;
@@ -210,11 +215,11 @@
         z-index: 2;
         margin: 0px;
     }
-    #login input {
+    .login input {
         height: 50px;
         font-size: 0.7em;
     }
-    #login-submit-btn {
+    .login-submit-btn {
         /*width: calc(100%-260px);*/
         bottom: 15px;
         position: absolute;

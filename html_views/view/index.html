@@ -2,128 +2,167 @@
 <html>
 
 <head>
-    <title>ForkIt</title>
-    <link rel="stylesheet" type="text/css" href="style/style.css">
-    <link rel="stylesheet" type="text/css" href="style/mystyle.css">
-    <link rel="stylesheet" type="text/css" href="style/index.css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/index.js"></script>
+  <title>ForkIt</title>
+  <link rel="stylesheet" type="text/css" href="style/style.css">
+  <link rel="stylesheet" type="text/css" href="style/main_view.css">
+  <link rel="stylesheet" type="text/css" href="style/recipe_view.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-3.1.1.js"></script>
+  <script src="js/index.js"></script>
 </head>
 
 <body>
+  
+  <div id="menubar">
 
-    <div id="menubar">
+    <div id="menuwrapper">
+      <ul>
+        <li>
+          <a href="#" class="menu-btn">
+            <span class="btn-img"><i class="material-icons">reorder</i></span>
+            <span class="btn-text">MENU</span>
+          </a>
+          <ul>
+            <li><a id="btn-tdRecipe" href="#">TODAY'S RECIPE</a></li>
+            <li><a id="btn-create" href="#">CREATE</a></li>
+            <li><a id="btn-discover" href="#">DISCOVER</a></li>
+            <li><a id="btn-about" href="#">ABOUT</a></li>
+            <li><a id="btn-login" href="#">LOGIN</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
 
-        <div id="menuwrapper">
-            <ul>
-                <li>
-                    <a href="#" class="menu-btn">
-                        <span class="btn-img"><i class="material-icons">reorder</i></span>
-                        <span class="btn-text">MENU</span>
-                    </a>
-                    <ul>
-                        <li><a href="#">TODAY'S RECIPE</a></li>
-                        <li><a href="#">CREATE</a></li>
-                        <li><a id="recipes-view-btn" href="#">DISCOVER</a></li>
-                        <li><a href="#">ABOUT</a></li>
-                        <li><a href="#" id="login-btn">LOGIN</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
-
-        <div id="login" style="display: none;">
-            <div id="login-btn-back"><i class="material-icons">keyboard_backspace</i></div>
-            <form>
-                <span class="login-form-text">Username:<span><br>
-          <input type="text" name="username" value="">
-          <br><span class="login-form-text">Password:<span><br>
-            <input type="password" name="password" value="">
-            <br><br>
-            <input type="submit" value="Submit" id="login-submit-btn">
-          </form>
-        </div>
-
-      </div>
-
-      <div id="recipe-view" style="display: none">
-          <div id="recipe-title">SASHIMI</div>
-          <div id="recipe-subtitle">Yokuro Tanaka</div>
-          <div id="recipes-swipe">
-            <img src="images/left_arrow.png" class="arrow" id="arrow-back" alt="Food">
-            <div class="recipe-preview" id="image-back"><img src="images/1.jpg" alt="Food" class="recipe-picture"></div>
-            <div class="recipe-preview" id="image-actual"><img src="images/2.jpg" alt="Food" class="recipe-picture"></div>
-            <div class="recipe-preview" id="image-next"><img src="images/3.jpg" alt="Food" class="recipe-picture"></div>
-            <img src="images/right_arrow.png" class="arrow" id="arrow-next" alt="Food">
+    <div id="login-view">
+      <!--Login-->
+      <div class="login" id="login">
+        <div class="btn-login-back"><i class="material-icons">keyboard_backspace</i></div>
+        <form>
+          <span class="login-form-text">Username:<span><br>
+            <input type="text" name="username" value="">
+            <br><span class="login-form-text">Password:<span><br>
+              <input type="password" name="password" value="">
+              <a id="btn-signup"><img src="./images/arrow_down.png"></a>
+              <br>
+              <input type="submit" value="Login" class="submit-btn" id="login-submit-btn">
+            </form>
           </div>
-          <div id="recipe-text">
-            <div id="recipe-ingredients"><b>Ingredients</b><br><br>- Salt 50g<br>- Fresh Tuna, Salmon<br>- Soy Sauce<br>- Wasabi</div>
-            <div id="recipe-preparation"><b>Preparation</b><br><br>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-              Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-              At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+          <!--Signup-->
+          <div class="login" id="signup">
+            <div class="btn-login-back"><i class="material-icons">keyboard_backspace</i></div>
+            <form>
+              <span class="login-form-text">Username:<span><br>
+                <input type="text" name="username" value="">
+                <br><span class="login-form-text">Password:<span><br>
+                  <input type="password" name="password" value="">
+                  <br><span class="login-form-text">Repeat password:<span><br>
+                  <input type="password" name="RepeatPassword" value="">
+                  <a id="btn-signup-login"><img src="./images/arrow_down.png"></a>
+                  <br>
+                  <input type="submit" value="Signup" class="submit-btn" id="signup-submit-btn">
+                </form>
+              </div>
             </div>
 
-            <div id="recipe-comments">
-              <div class="recipe-comments-element">
-                <span class="comment-name">Samuele</span>
-                <span class="comment-text">Ricetta molto buona, aggiungerei del pepe</span>
-        </div>
-        <div class="recipe-comments-element">
-            <span class="comment-name">Vanessa</span>
-            <span class="comment-text">Preferisco mangiare al McDonald</span>
-        </div>
-        <div class="recipe-comments-element">
-            <span class="comment-name">Susanna</span>
-            <span class="comment-text">Buonissima, pota :)</span>
-        </div>
-        <div class="recipe-comments-element">
-            <span class="comment-name">Andrea</span>
-            <span class="comment-text">Preferisco il cibo giapponese</span>
-        </div>
-    </div>
-    <div id="my-comment">
-        <textarea rows="4" cols="50"></textarea>
-        <button type="button">Submit</button>
-    </div>
-    </div>
+          </div>
 
-    <div id="main-view">
-        <input type="checkbox" name="toggle" id="toggle" />
-        <label for="toggle"></label>
+          <div id="recipe-view">
+            <div id="recipe-title">SASHIMI</div>
+            <div id="recipe-subtitle">Yokuro Tanaka</div>
+            <div id="recipes-swipe">
+              <img src="images/left_arrow.png" class="arrow" id="arrow-back" alt="Food">
+              <div class="recipe-preview" id="image-back"><img src="images/1.jpg" alt="Food" class="recipe-picture"></div>
+              <div class="recipe-preview" id="image-actual"><img src="images/2.jpg" alt="Food" class="recipe-picture"></div>
+              <div class="recipe-preview" id="image-next"><img src="images/3.jpg" alt="Food" class="recipe-picture"></div>
+              <img src="images/right_arrow.png" class="arrow" id="arrow-next" alt="Food">
+            </div>
+            <div id="recipe-text">
+              <div id="recipe-ingredients"><b>Ingredients</b><br><br>- Salt 50g<br>- Fresh Tuna, Salmon<br>- Soy Sauce<br>- Wasabi</div>
+              <div id="recipe-preparation"><b>Preparation</b><br><br>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+              </div>
 
-        <div class="container">
+              <div id="recipe-comments">
+                <div class="recipe-comments-element">
+                  <span class="comment-name">Samuele</span>
+                  <span class="comment-text">Ricetta molto buona, aggiungerei del pepe</span>
+                </div>
+              </div>
+              <div id="my-comment">
+                <textarea rows="4" cols="50"></textarea>
+                <button type="button">Submit</button>
+              </div>
+            </div>
+
+            <div id="main-view">
+              <input type="checkbox" name="toggle" id="toggle" />
+              <label for="toggle"></label>
+
+              <div class="container">
 
 
 
-            <div id="main">
-                <p id="title">DISCOVER NEW TASTES</p>
+                <div id="main">
+                  <p id="title">DISCOVER NEW TASTES</p>
 
-                <div id="icon-carousel">
+                  <div id="icon-carousel">
                     <img class="icon" src="./images/icons/chineese.png">
                     <img class="icon" src="./images/icons/bread.png">
                     <img class="icon" src="./images/icons/red_vine.png">
                     <img class="icon" src="./images/icons/muffin.png">
+                  </div>
                 </div>
-            </div>
 
-            <video playsinline autoplay muted loop id="bgvid">
-              <!--<source src="polina.webm" type="video/webm">-->
-              <source src="./images/foodPreparing.mp4" type="video/mp4">
-                <!--<source src="./images/foodPreparing.mov" type="video/mov">-->
+                <video playsinline autoplay muted loop id="bgvid">
+                  <source src="./images/foodPreparing.mp4" type="video/mp4">
+                  </video>
 
-              </video>
+                </div>
 
-        </div>
+                <div id="mainPageSearch" class="message">
+                  <input id="food" type="text" name="food" placeholder="SEARCH FOOD">
+                </div>
+              </div>
 
-        <div class="message">
-            <input id="food" type="text" name="food" placeholder="SEARCH FOOD">
+            </body>
 
-        </div>
-    </div>
+            <script>
+            $(document).ready(function() {
+              $('#recipe-view').hide();
+              $('#login-view').hide();
+              $('#signup').hide();
+            });
 
-</body>
+            $(function() {
+              // SHOW login
+              $('#btn-login').on('click', function() {
+                $('#menuwrapper').fadeOut(300).hide();
+                $('#login-view').fadeIn(300).show();
+              });
+              // SHOW menubar
+              $('.btn-login-back').on('click', function() {
+                $('#login-view').hide();
+                $('#menuwrapper').fadeIn(300).show();
+              });
+              // SHOW today's recipe
+              $('#btn-tdRecipe').on('click', function() {
+                $('#main-view').hide();
+                $('#recipe-view').fadeIn(300).show();
+              });
+              // SHOW signup
+              $('#btn-signup').on('click', function() {
+                $('#signup').show();
+                $('#login').hide();
+              });
+              // SHOW login
+              $('#btn-signup-login').on('click', function() {
+                $('#login').show();
+                $('#signup').slideUp(300).hide();
+              });
+            });
+            </script>
 
-</html>
+            </html>
