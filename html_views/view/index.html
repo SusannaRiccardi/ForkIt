@@ -5,6 +5,7 @@
   <title>ForkIt</title>
   <link rel="stylesheet" type="text/css" href="style/style.css">
   <link rel="stylesheet" type="text/css" href="style/main_view.css">
+  <link rel="stylesheet" type="text/css" href="style/discover_view.css">
   <link rel="stylesheet" type="text/css" href="style/recipe_view.css">
   <link rel="stylesheet" type="text/css" href="style/create_view.css">
   <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
@@ -12,9 +13,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="js/jquery-3.1.1.js"></script>
   <script src="js/index.js"></script>
+  <!--<script src="js/discover.js"></script>-->
 </head>
 
-<body>
+<body class="no-touch">
 
   <!--menubar-->
   <div id="menubar">
@@ -27,14 +29,33 @@
             <span class="btn-text">MENU</span>
           </a>
           <ul>
+            <li><a id="btn-search">SEARCH</a></li>
             <li><a id="btn-tdRecipe" href="#">TODAY'S RECIPE</a></li>
             <li><a id="btn-create" href="#">CREATE</a></li>
             <li><a id="btn-discover" href="#">DISCOVER</a></li>
             <li><a id="btn-about" href="#">ABOUT</a></li>
-            <li><a id="btn-login" href="#">LOGIN</a></li>
+            <li><a href="#" id="btn-login">LOGIN</a></li>
           </ul>
         </li>
       </ul>
+    </div>
+
+    <!--searchbar-->
+    <div id="search-view">
+      <div id="search-btn-back"><i class="material-icons icon">keyboard_backspace</i></div>
+      <div class="form-text">Search</div>
+      <input type="text" name="search" placeholder="Japanese - Vegan - Onions">
+      <div class="form-text">Exclude</div>
+      <input type="text" name="filter" placeholder="Fish - Meat - Spicy">
+      <div class="form-text">User Rating</div> <br>
+      <div class="form-text" id="stars">
+        <i class="material-icons star" id="star1" style="color: rgba(0,0,0,0);">star</i>
+        <i class="material-icons star" id="star2" style="color: rgba(0,0,0,0);">star</i>
+        <i class="material-icons star" id="star3" style="color: rgba(0,0,0,0);">star</i>
+        <i class="material-icons star" id="star4" style="color: rgba(0,0,0,0);">star</i>
+        <i class="material-icons star" id="star5" style="color: rgba(0,0,0,0);">star</i>
+      </div>
+      <button id="search-submit-btn">Search</button>
     </div>
 
 
@@ -43,9 +64,9 @@
       <div class="login" id="login">
         <div class="btn-login-back"><i class="material-icons">keyboard_backspace</i></div>
         <form>
-          <span class="login-form-text">Username:<span><br>
+          <span class="form-text">Username:<span><br>
             <input type="text" name="username" value="">
-            <br><span class="login-form-text">Password:<span><br>
+            <br><span class="form-text">Password:<span><br>
               <input type="password" name="password" value="">
               <a id="btn-signup"><img src="./images/arrow_down.png"></a>
               <br>
@@ -56,11 +77,11 @@
           <div class="login" id="signup">
             <div class="btn-login-back"><i class="material-icons">keyboard_backspace</i></div>
             <form>
-              <span class="login-form-text">Username:<span><br>
+              <span class="form-text">Username:<span><br>
                 <input type="text" name="username" value="">
-                <br><span class="login-form-text">Password:<span><br>
+                <br><span class="form-text">Password:<span><br>
                   <input type="password" name="password" value="">
-                  <br><span class="login-form-text">Repeat password:<span><br>
+                  <br><span class="form-text">Repeat password:<span><br>
                     <input type="password" name="RepeatPassword" value="">
                     <a id="btn-signup-login"><img src="./images/arrow_down.png"></a>
                     <br>
@@ -88,7 +109,6 @@
                   Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
                   At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
                 </div>
-
                 <div id="recipe-comments">
                   <div class="recipe-comments-element">
                     <span class="comment-name">Samuele</span>
@@ -102,18 +122,27 @@
               </div>
               <!---->
 
+              <!--discover-view-->
+              <div id="discover-view" class="content">
+                <div class="grid-block">
+                  <div class="grid-cell" id="cell-1"><img src="./images/img00000.jpg" alt="Food" class="recipe-picture"></div>
+                  <div class="grid-cell" id="cell-2"><img src="./images/img00007.jpg" alt="Food" class="recipe-picture"></div>
+                  <div class="grid-cell" id="cell-3"><img src="./images/img00002.jpg" alt="Food" class="recipe-picture"></div>
+                  <div class="grid-cell" id="cell-4"><img src="./images/img00006.jpg" alt="Food" class="recipe-picture"></div>
+                  <div class="grid-cell" id="cell-5"><img src="./images/img00004.jpg" alt="Food" class="recipe-picture"></div>
+                  <div class="grid-cell" id="cell-6"><img src="./images/img00005.jpg" alt="Food" class="recipe-picture"></div>
+                </div>
+                <div id="arrow-down"><img src="images/arrow_down.png"></div>
+              </div>
+              <!---->
+
               <!--main-view-->
               <div id="main-view">
                 <input type="checkbox" name="toggle" id="toggle" />
                 <label for="toggle"></label>
-
                 <div class="container">
-
-
-
                   <div id="main">
                     <p id="title">DISCOVER NEW TASTES</p>
-
                     <div id="icon-carousel">
                       <img class="icon" src="./images/icons/chineese.png">
                       <img class="icon" src="./images/icons/bread.png">
@@ -121,14 +150,10 @@
                       <img class="icon" src="./images/icons/muffin.png">
                     </div>
                   </div>
-
-
                   <video playsinline autoplay muted loop id="bgvid">
                     <source src="./images/foodPreparing.mp4" type="video/mp4">
                     </video>
-
                   </div>
-
                   <div id="mainPageSearch" class="message">
                     <input id="food" type="text" name="food" placeholder="SEARCH FOOD">
                   </div>
@@ -155,11 +180,8 @@
                     <input class="load-file" name="picture" type="file" size="50" accept="*/*">
                     <label class="input-label">Preparation</label><br><br>
                     <textarea rows="4" cols="20" id="create-description"></textarea>
-
                     <div id="submit-bar">
                       <label for="file-upload" class="custom-label-left">
-                        <!--<i class="fa fa-cloud-upload">-->
-                        <!--<img src="./images/image-upload_icon.png">-->
                         Load Image
                       </label>
                       <input id="file-upload" type="file"/><br>
@@ -175,35 +197,57 @@
               </body>
 
               <script>
+
               $(document).ready(function() {
                 $('#recipe-view').hide();
+                $('#discover-view').hide();
                 $('#create-view').hide();
+                $('#search-view').hide();
                 $('#login-view').hide();
                 $('#signup').hide();
               });
 
               $(function() {
-                // SHOW login
-                $('#btn-login').on('click', function() {
-                  $('#menuwrapper').fadeOut(300).hide();
-                  $('#login-view').fadeIn(300).show();
-                });
-                // SHOW menubar
-                $('.btn-login-back').on('click', function() {
-                  $('#login-view').hide();
-                  $('#menuwrapper').fadeIn(300).show();
-                });
                 // SHOW today's recipe
                 $('#btn-tdRecipe').on('click', function() {
                   $('#main-view').hide();
+                  $('#discover-view').hide();
                   $('#create-view').hide();
                   $('#recipe-view').fadeIn(300).show();
                 });
                 // SHOW create
                 $('#btn-create').on('click', function() {
                   $('#main-view').hide();
+                  $('#discover-view').hide();
                   $('#recipe-view').hide();
                   $('#create-view').fadeIn(300).show();
+                });
+                // SHOW discover
+                $('#btn-discover').on('click', function() {
+                  $('#main-view').hide();
+                  $('#create-view').hide();
+                  $('#recipe-view').hide();
+                  $('#discover-view').fadeIn(300).show();
+                });
+                
+                //SHOW search-view
+                $('#btn-search').on('click', function() {
+                  $('#menuwrapper').fadeOut(300).hide();
+                  $('#search-view').fadeIn(300).show();
+                });
+                // SHOW login-view
+                $('#btn-login').on('click', function() {
+                  $('#menuwrapper').fadeOut(300).hide();
+                  $('#login-view').fadeIn(300).show();
+                });
+                // SHOW menubar-view
+                $('.btn-login-back').on('click', function() {
+                  $('#login-view').fadeOut(300).hide();
+                  $('#menuwrapper').fadeIn(300).show();
+                });
+                $('#search-btn-back').on('click', function() {
+                  $('#search-view').fadeOut(300).hide();
+                  $('#menuwrapper').fadeIn(300).show();
                 });
                 // SHOW signup
                 $('#btn-signup').on('click', function() {
@@ -216,6 +260,7 @@
                   $('#signup').slideUp(300).hide();
                 });
               });
+
               </script>
 
               </html>

@@ -1,178 +1,178 @@
 * {
-    font-family: 'Lato', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 body {
-    margin: 0;
+  margin: 0;
 }
 
 #main {
-    margin-top: 13%;
+  margin-top: 13%;
 }
 
 #title {
-    text-align: center;
-    color: white;
-    font-size: 2em;
-    font-weight: bold;
+  text-align: center;
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
 }
 
 #icon-carousel {
-    text-align: center;
+  text-align: center;
 }
 
 .icon {
-    width: 40px;
-    margin-left: 1%;
-    margin-right: 1%;
+  width: 40px;
+  margin-left: 1%;
+  margin-right: 1%;
 }
 
 
 /*/////////////////////////////// video background /////////////////////////////*/
 
 #bgvid {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    height: 100%;
-    width: auto;
-    z-index: -1;
-    -ms-transform: translateX(-50%) translateY(-50%);
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
-    background-color: black;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  height: 100%;
+  width: auto;
+  z-index: -1;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  background-color: black;
 }
 
 .message {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    transition: top 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
-    overflow: hidden;
-    box-sizing: border-box;
-    text-align: center;
-    background-image: url("../images/pasta.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: black;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  transition: top 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
+  overflow: hidden;
+  box-sizing: border-box;
+  text-align: center;
+  background-image: url("../images/pasta.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: black;
 }
 
 #content {
-    margin-top: 10%;
+  margin-top: 10%;
 }
 
 #toggle {
-    position: absolute;
-    cursor: pointer;
-    left: -100%;
-    top: -100%;
+  position: absolute;
+  cursor: pointer;
+  left: -100%;
+  top: -100%;
 }
 
 #toggle+label {
-    position: absolute;
-    cursor: pointer;
-    /*padding: 15px 20px;*/
-    /*background: rgba(255, 255, 255, 0.1);*/
-    width: 100px;
-    /*color: white;*/
-    line-height: 20px;
-    /*font-size:18px;*/
-    /*text-align:center;*/
-    /*-webkit-font-smoothing: antialiased;*/
-    /*cursor: pointer;*/
-    /*margin-top: 20%;*/
-    transition: all 500ms ease;
-    z-index: 1;
-    /*border: 2px solid white;*/
-    margin-left: calc(50% - 50px)!important;
-    bottom: 40px;
-    height: 188px;
-    background-image: url("../images/arrow_down.png");
-    background-size: 55%;
-    background-repeat: no-repeat;
-    background-position: center;
+  position: absolute;
+  cursor: pointer;
+  /*padding: 15px 20px;*/
+  /*background: rgba(255, 255, 255, 0.1);*/
+  width: 100px;
+  /*color: white;*/
+  line-height: 20px;
+  /*font-size:18px;*/
+  /*text-align:center;*/
+  /*-webkit-font-smoothing: antialiased;*/
+  /*cursor: pointer;*/
+  /*margin-top: 20%;*/
+  transition: all 500ms ease;
+  z-index: 1;
+  /*border: 2px solid white;*/
+  margin-left: calc(50% - 50px)!important;
+  bottom: 40px;
+  height: 188px;
+  background-image: url("../images/arrow_down.png");
+  background-size: 55%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 #toggle+label:after {}
 
-#toggle:checked+label:after {}
+  #toggle:checked+label:after {}
 
-.container {
-    transition: margin 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
-    padding: 5em 3em;
-}
-
-#toggle:checked~.message {
-    top: 0;
-}
-
-#toggle:checked~.container {}
-
-#toggle:checked+label {
-    -moz-transform: scaleY(-1);
-    -o-transform: scaleY(-1);
-    -webkit-transform: scaleY(-1);
-    transform: scaleY(-1);
-    filter: FlipY;
-    -ms-filter: "FlipY";
-    /*margin-left: 42%;*/
-    /*margin-left: calc(20px - 10px);*/
-}
-
-
-/*/////////////////////////////// text field /////////////////////////////*/
-
-#food {
-    text-align: center;
-    border-width: 2px;
-    border-radius: 5px;
-    height: 70px;
-    width: 350px;
-    z-index: 3;
-    font-size: 1.3em;
-    font-weight: bold;
-    border-style: solid;
-    color: white;
-    border-color: white;
-    background-color: rgba(250, 250, 255, 0.1);
-    margin-top: 19%;
-    position: relative;
-}
-
-::-webkit-input-placeholder {
-    /* Chrome/Opera/Safari */
-    color: white;
-}
-
-::-moz-placeholder {
-    /* Firefox 19+ */
-    color: white;
-}
-
-:-ms-input-placeholder {
-    /* IE 10+ */
-    color: white;
-}
-
-:-moz-placeholder {
-    /* Firefox 18- */
-    color: white;
-}
-
-#food:focus {
-    outline: none;
-}
-
-@media screen and (min-aspect-ratio: 16/9) {
-    #bgvid {
-        width: 100%;
-        height: auto;
+    .container {
+      transition: margin 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
+      padding: 5em 3em;
     }
-}
+
+    #toggle:checked~.message {
+      top: 0;
+    }
+
+    #toggle:checked~.container {}
+
+      #toggle:checked+label {
+        -moz-transform: scaleY(-1);
+        -o-transform: scaleY(-1);
+        -webkit-transform: scaleY(-1);
+        transform: scaleY(-1);
+        filter: FlipY;
+        -ms-filter: "FlipY";
+        /*margin-left: 42%;*/
+        /*margin-left: calc(20px - 10px);*/
+      }
+
+
+      /*/////////////////////////////// text field /////////////////////////////*/
+
+      #food {
+        text-align: center;
+        border-width: 2px;
+        border-radius: 5px;
+        height: 70px;
+        width: 350px;
+        z-index: 3;
+        font-size: 1.3em;
+        font-weight: bold;
+        border-style: solid;
+        color: white;
+        border-color: white;
+        background-color: rgba(250, 250, 255, 0.1);
+        margin-top: 19%;
+        position: relative;
+      }
+
+      ::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+        color: white;
+      }
+
+      ::-moz-placeholder {
+        /* Firefox 19+ */
+        color: white;
+      }
+
+      :-ms-input-placeholder {
+        /* IE 10+ */
+        color: white;
+      }
+
+      :-moz-placeholder {
+        /* Firefox 18- */
+        color: white;
+      }
+
+      #food:focus {
+        outline: none;
+      }
+
+      @media screen and (min-aspect-ratio: 16/9) {
+        #bgvid {
+          width: 100%;
+          height: auto;
+        }
+      }
