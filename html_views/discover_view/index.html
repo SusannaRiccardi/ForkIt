@@ -21,23 +21,46 @@
         <ul>
             <li>
                 <a href="#" class="menu-btn">
-                    <span class="btn-img"><i class="material-icons">reorder</i></span>
+                    <span class="btn-img"><i class="material-icons icon">reorder</i></span>
                     <span class="btn-text">MENU</span>
                 </a>
                 <ul>
+                    <li><a href="#" id="search-btn">SEARCH</a></li>
                     <li><a href="#">TODAY'S RECIPE</a></li>
                     <li><a href="#">CREATE</a></li>
                     <li><a href="#">DISCOVER</a></li>
                     <li><a href="#">ABOUT</a></li>
                     <li><a href="#" id="login-btn">LOGIN</a></li>
+
                 </ul>
             </li>
         </ul>
     </div>
 
 
+    <div id="search" style="display: none;">
+        <div id="search-btn-back"><i class="material-icons icon">keyboard_backspace</i></div>
+        <div class="search-form-text">Search</div>
+        <input type="text" name="search" placeholder="Japanese - Vegan - Onions">
+        <div class="search-form-text">Exclude</div>
+        <input type="text" name="filter" placeholder="Fish - Meat - Spicy">
+        <div class="search-form-text">User Rating</div> <br>
+        <div class="search-form-text" id="stars">
+            <i class="material-icons star" id="star1" style="color: rgba(0,0,0,0);">star</i>
+            <i class="material-icons star" id="star2" style="color: rgba(0,0,0,0);">star</i>
+            <i class="material-icons star" id="star3" style="color: rgba(0,0,0,0);">star</i>
+            <i class="material-icons star" id="star4" style="color: rgba(0,0,0,0);">star</i>
+            <i class="material-icons star" id="star5" style="color: rgba(0,0,0,0);">star</i>
+        </div>
+
+        <!--<input type="checkbox" name="vehicle1" value="Bike"> I have a bike-->
+
+        <button id="search-submit-btn">Search</button>
+    </div>
+
+
     <div id="login" style="display: none;">
-        <div id="login-btn-back"><i class="material-icons">keyboard_backspace</i></div>
+        <div id="login-btn-back"><i class="material-icons icon">keyboard_backspace</i></div>
         <div class="login-form-text">Username:</div>
         <input type="text" name="username" value="">
         <div class="login-form-text">Password:</div>
@@ -51,12 +74,12 @@
 
 
     <div class="grid-block">
-        <div class="grid-cell"><img src="./images/img00000.jpg" alt="Food" class="recipe-picture"></div>
-        <div class="grid-cell"><img src="./images/img00007.jpg" alt="Food" class="recipe-picture"></div>
-        <div class="grid-cell"><img src="./images/img00002.jpg" alt="Food" class="recipe-picture"></div>
-        <div class="grid-cell"><img src="./images/img00006.jpg" alt="Food" class="recipe-picture"></div>
-        <div class="grid-cell"><img src="./images/img00004.jpg" alt="Food" class="recipe-picture"></div>
-        <div class="grid-cell"><img src="./images/img00005.jpg" alt="Food" class="recipe-picture"></div>
+        <div class="grid-cell" id="cell-1"><img src="./images/img00000.jpg" alt="Food" class="recipe-picture"></div>
+        <div class="grid-cell" id="cell-2"><img src="./images/img00007.jpg" alt="Food" class="recipe-picture"></div>
+        <div class="grid-cell" id="cell-3"><img src="./images/img00002.jpg" alt="Food" class="recipe-picture"></div>
+        <div class="grid-cell" id="cell-4"><img src="./images/img00006.jpg" alt="Food" class="recipe-picture"></div>
+        <div class="grid-cell" id="cell-5"><img src="./images/img00004.jpg" alt="Food" class="recipe-picture"></div>
+        <div class="grid-cell" id="cell-6"><img src="./images/img00005.jpg" alt="Food" class="recipe-picture"></div>
     </div>
     
     <div id="arrow-down"><img src="images/arrow_down.png"></div>

@@ -17,7 +17,7 @@ body {
 /*/////////////////////////////// image grid /////////////////////////////*/
 
 .grid-block{
-    margin-top: 30px;
+    margin-top: 50px;
     display: flex;
     flex-wrap: wrap;
     position: relative;
@@ -25,11 +25,11 @@ body {
 }
 
 .grid-cell {
-    margin: 20px;
+    /*margin: 1px;*/
     cursor: pointer;
-    border-radius: 50%;
-    width: 270px;
-    height: 270px;
+    /*border-radius: 15%;*/
+    width: 290px;
+    height: 290px;
     padding: 0px;
     /*margin: 20px;*/
     background-color: white;
@@ -41,7 +41,6 @@ body {
     width: auto;
     height: 100%;
 }
-
 
 #arrow-down{
     text-align: center;
@@ -134,15 +133,17 @@ body {
     .grid-cell{
         width: 150px;
         height: 150px;
-        margin: 15px;
+        margin: 3px;
     }
+
 }
 
 @media only screen and (max-width : 650px) and (min-width : 481px) {
     /* Tablet view: 2 tiles */
     .grid-cell{
-        width: 200px;
-        height: 200px;
+        width: 150px;
+        height: 150px;
+        margin: 3px;
     }
 }
 
@@ -151,7 +152,10 @@ body {
     .grid-cell{
         width: 200px;
         height: 200px;
+        margin: 3px;
+
     }
+
 }
 
 @media only screen and (max-width : 1290px) and (min-width : 1051px) {
@@ -165,6 +169,6 @@ body {
 @media only screen and (max-width : 1490px) and (min-width : 1291px) {
     /* Large desktop: 3 tiles */
     .grid-cell{
-        margin: 15px;
+        /*margin: 15px;*/
     }
 }
