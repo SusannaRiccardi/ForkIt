@@ -49,12 +49,14 @@ router.get('/:recipeid', function(req, res) {
 // Post /recipes
 router.post('/', function(req, res) {
   // TODO: Take all fields for new recipe.
-  video = req.body.video || "";
-  image = req.body.video || "";
+  videoNew = req.body.video || "";
+  imageNew = req.body.video || "";
   const newRecipe = new Recipe({
-    title: req.body.title,
-    description: req.body.description,
-    ingredients : req.body.ingredients
+    title : req.body.title,
+    instructions : req.body.instructions,
+    ingredients : req.body.ingredients,
+    video : videoNew,
+    image : imageNew
   });
   newRecipe.save(function(err, saved) {
     if (err) {

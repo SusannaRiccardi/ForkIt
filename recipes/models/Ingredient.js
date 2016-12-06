@@ -9,8 +9,9 @@ const mongoose = require('mongoose');
 */
 
 const IngredientSchema = new mongoose.Schema({
-  name : { type: String, required:true},
-  quantity : {type:String, required:true}
+  name : {type: String, required:true},
+  amount : {type:Number, required:true},
+  unit : {type: String, required: true}
 });
 
 mongoose.model('Ingredient', IngredientSchema);
