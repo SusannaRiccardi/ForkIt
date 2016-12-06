@@ -1,2 +1,3 @@
 *.idea
 recipes/node_modules
+recipes/npm-debug.log
