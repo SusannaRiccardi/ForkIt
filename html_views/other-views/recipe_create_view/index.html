@@ -38,18 +38,34 @@
             <div id="login-btn-back"><i class="material-icons">keyboard_backspace</i></div>
             <form>
                 <span class="login-form-text">Username:<span><br>
-          <input type="text" name="username" value="">
-          <br><span class="login-form-text">Password:<span><br>
-            <input type="password" name="password" value="">
-            <br><br>
-            <input type="submit" value="Submit" id="login-submit-btn">
-          </form>
+                <input type="text" name="username" value="">
+                <br><span class="login-form-text">Password:<span><br>
+                <input type="password" name="password" value="">
+                <br><br>
+                <input type="submit" value="Submit" id="login-submit-btn">
+            </form>
         </div>
 
       </div>
 
-      <div id="content">
-           
+      <div id="create-view">
+           <div id="create-title">CREATE</div>
+            <div id="create-subtitle">Create your recipe</div>
+            <form>
+                <label class="input-label">Title</label><br><br>
+                <input name="recipe-name" type="text"><br><br>
+                <input class="load-file" name="picture" type="file" size="50" accept="*/*">
+                <label class="input-label">Preparation</label><br><br>
+                <textarea rows="4" cols="20" id="create-description"></textarea><br><br><br>
+                <label for="file-upload" class="custom-label">
+                    <i class="fa fa-cloud-upload"></i>Upload Image
+                </label>
+                <input id="file-upload" type="file"/><br>
+                <label for="submit-recipe" class="custom-label">
+                    Submit
+                </label>
+                <button id="submit-recipe" type="submit"/><br>
+            </form>
     </div>
 
 </body>

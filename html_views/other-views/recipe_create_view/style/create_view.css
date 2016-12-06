@@ -1,16 +1,11 @@
-/*body {
-    background-image: url("images/create_background.jpg");
-    width: 100%;
-    height: 100%;
-}*/
-
 body {
     background-image: url("../images/create_background.jpg");
     background-attachment: fixed;
     background-size: 100%;
 }
 
-#content {
+#create-view {
+    color: white;
     left: 360px;
     right: 30px;
     top: 30px;
@@ -18,12 +13,92 @@ body {
     margin: 0px;
     z-index: 0;
     position: absolute;
-    background-color: rgba(250, 250, 250, 0.7);
+    background-color: rgba(30, 30, 30, 0.8);
     -webkit-backdrop-filter: blur(10px);
 }
 
+#create-title {
+    font-family: 'Lato', sans-serif;
+    font-size: 2.3em;
+    margin-left: 30px;
+    margin-top: 30px;
+    color: white;
+}
+
+#create-subtitle {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.8em;
+    margin-left: 30px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    color: white;
+}
+
+#create-description {
+    padding: 20px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.8em;
+    margin-left: 30px;
+    width: calc(100% - 100px)!important;
+}
+
+#create-view input {
+    height: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+#create-view input {
+    height: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+#create-view .load-file {
+    margin: 20px;
+    width: calc(100% - 40px)!important;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    height: auto!important;
+    margin-top: 40px;
+}
+
+.custom-label {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.3em;
+    margin-bottom: 30px;;
+    margin-left: 30px;
+    margin-right: 30px;
+    background-color: #4CAF50;
+    text-decoration: none;
+    height: auto!important;
+    display: inline-block;
+    padding: 15px 32px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+button[type="submit"] {
+    display: none;
+}
+
+.input-label {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.3em;
+    margin: 30px;
+}
+
 @media (max-width: 900px) {
-    #content {
+    #create-view {
         overflow: initial;
         left: 0px;
         right: 0px;

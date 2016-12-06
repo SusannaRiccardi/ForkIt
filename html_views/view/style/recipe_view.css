@@ -1,9 +1,14 @@
-body {
+/*body {
     background-image: url("../images/bamboo.jpg");
     background-size: 100%;
     background-attachment: fixed;
-}
+}*/
 
+body {
+    background-image: url("../images/create_background.jpg");
+    background-attachment: fixed;
+    background-size: 100%;
+}
 
 /*recipe Title*/
 
@@ -35,7 +40,8 @@ body {
     margin: 0px;
     z-index: 0;
     position: absolute;
-    background-color: rgba(56, 113, 40, 0.8);
+    background-color: rgba(30, 30, 30, 0.8);
+    /*background-color: rgba(56, 113, 40, 0.8)*/
     -webkit-backdrop-filter: blur(10px);
 }
 
