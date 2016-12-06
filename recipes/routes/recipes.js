@@ -1,7 +1,5 @@
-// This is just something to start. As soon as we have a more complete website, the routes will be adapted.
-
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const mongoose = require('mongoose');
 require('../models');
 const Recipe = mongoose.model('Recipe');
@@ -22,7 +20,6 @@ router.get('/', function(req, res, next) {
     let recipes = {'recipes' : found}
     console.log(recipes.recipes);
     res.render('recipes', {title : "Recipes", message : recipes});
-    // htmlOrJson(req, res, recipes, 'recipes');
   })
 });
 
@@ -40,7 +37,6 @@ router.get('/:recipeid', function(req, res) {
       });
     } else {
       addLinks(recipe);
-      // htmlOrJson(req, res, recipe, 'recipes')
       res.render('recipe', {title : "Recipe", message : recipe});
     }
   })
@@ -48,7 +44,6 @@ router.get('/:recipeid', function(req, res) {
 
 // Post /recipes
 router.post('/', function(req, res) {
-  // TODO: Take all fields for new recipe.
   videoNew = req.body.video || "";
   imageNew = req.body.video || "";
   const newRecipe = new Recipe({
@@ -84,14 +79,6 @@ router.delete('/:recipeid', function(req, res, next) {
   });
 });
 
-// Function to decide how to render the view.
-function htmlOrJson(req, res, data, viewName) {
-  if (req.accepts('html')) {
-    res.render(viewName, data);
-  } else {
-    res.json(data);
-  }
-}
 
 function addLinks(recipe) {
   recipe.links = [
