@@ -14,7 +14,7 @@ background-size: cover;
 
 }*/
 
-#discover-view {
+/*#discover-view {
   left: 360px;
   right: 30px;
   top: 30px;
@@ -24,7 +24,7 @@ background-size: cover;
   position: absolute;
   background-color: rgba(25, 25, 25, 0.8);
   -webkit-backdrop-filter: blur(10px);
-}
+}*/
 
 /*/////////////////////////////// image grid /////////////////////////////*/
 

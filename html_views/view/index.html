@@ -12,6 +12,10 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="js/jquery-3.1.1.js"></script>
+  <script src="pug/main-view.js"></script>
+  <script src="pug/recipe-view.js"></script>
+  <script src="pug/create-view.js"></script>
+  <script src="pug/discover-view.js"></script>
   <script src="js/index.js"></script>
   <!--<script src="js/discover.js"></script>-->
 </head>
@@ -47,14 +51,14 @@
       <input type="text" name="search" placeholder="Japanese - Vegan - Onions">
       <div class="form-text">Exclude</div>
       <input type="text" name="filter" placeholder="Fish - Meat - Spicy">
-      <div class="form-text">User Rating</div> <br>
+      <!--<div class="form-text">User Rating</div> <br>
       <div class="form-text" id="stars">
         <i class="material-icons star" id="star1" style="color: rgba(0,0,0,0);">star</i>
         <i class="material-icons star" id="star2" style="color: rgba(0,0,0,0);">star</i>
         <i class="material-icons star" id="star3" style="color: rgba(0,0,0,0);">star</i>
         <i class="material-icons star" id="star4" style="color: rgba(0,0,0,0);">star</i>
         <i class="material-icons star" id="star5" style="color: rgba(0,0,0,0);">star</i>
-      </div>
+      </div>-->
       <button id="search-submit-btn">Search</button>
     </div>
 
@@ -92,144 +96,20 @@
             </div>
             <!---->
 
-            <!--recipe-view-->
-            <div id="recipe-view">
-              <div id="recipe-title">SASHIMI</div>
-              <div id="recipe-subtitle">Yokuro Tanaka</div>
-              <div id="recipes-swipe">
-                <img src="images/left_arrow.png" class="arrow" id="arrow-back" alt="Food">
-                <div class="recipe-preview" id="image-back"><img src="images/1.jpg" alt="Food" class="recipe-picture"></div>
-                <div class="recipe-preview" id="image-actual"><img src="images/2.jpg" alt="Food" class="recipe-picture"></div>
-                <div class="recipe-preview" id="image-next"><img src="images/3.jpg" alt="Food" class="recipe-picture"></div>
-                <img src="images/right_arrow.png" class="arrow" id="arrow-next" alt="Food">
-              </div>
-              <div id="recipe-text">
-                <div id="recipe-ingredients"><b>Ingredients</b><br><br>- Salt 50g<br>- Fresh Tuna, Salmon<br>- Soy Sauce<br>- Wasabi</div>
-                <div id="recipe-preparation"><b>Preparation</b><br><br>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                  Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-                  At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
-                </div>
-                <div id="recipe-comments">
-                  <div class="recipe-comments-element">
-                    <span class="comment-name">Samuele</span>
-                    <span class="comment-text">Ricetta molto buona, aggiungerei del pepe</span>
-                  </div>
-                </div>
-                <div id="my-comment">
-                  <textarea rows="4" cols="50"></textarea>
-                  <button type="button">Submit</button>
-                </div>
-              </div>
-              <!---->
-
-              <!--discover-view-->
-              <div id="discover-view" class="content">
-                <div class="grid-block">
-                  <div class="grid-cell" id="cell-1"><img src="./images/img00000.jpg" alt="Food" class="recipe-picture"></div>
-                  <div class="grid-cell" id="cell-2"><img src="./images/img00007.jpg" alt="Food" class="recipe-picture"></div>
-                  <div class="grid-cell" id="cell-3"><img src="./images/img00002.jpg" alt="Food" class="recipe-picture"></div>
-                  <div class="grid-cell" id="cell-4"><img src="./images/img00006.jpg" alt="Food" class="recipe-picture"></div>
-                  <div class="grid-cell" id="cell-5"><img src="./images/img00004.jpg" alt="Food" class="recipe-picture"></div>
-                  <div class="grid-cell" id="cell-6"><img src="./images/img00005.jpg" alt="Food" class="recipe-picture"></div>
-                </div>
-                <div id="arrow-down"><img src="images/arrow_down.png"></div>
-              </div>
-              <!---->
-
-              <!--main-view-->
-              <div id="main-view">
-                <input type="checkbox" name="toggle" id="toggle" />
-                <label for="toggle"></label>
-                <div class="container">
-                  <div id="main">
-                    <p id="title">DISCOVER NEW TASTES</p>
-                    <div id="icon-carousel">
-                      <img class="icon" src="./images/icons/chineese.png">
-                      <img class="icon" src="./images/icons/bread.png">
-                      <img class="icon" src="./images/icons/red_vine.png">
-                      <img class="icon" src="./images/icons/muffin.png">
-                    </div>
-                  </div>
-                  <video playsinline autoplay muted loop id="bgvid">
-                    <source src="./images/foodPreparing.mp4" type="video/mp4">
-                    </video>
-                  </div>
-                  <div id="mainPageSearch" class="message">
-                    <input id="food" type="text" name="food" placeholder="SEARCH FOOD">
-                  </div>
-                </div>
-                <!---->
-
-                <!--crate-view-->
-                <div id="create-view">
-                  <div id="create-title">CREATE</div>
-                  <div id="create-subtitle">Create your recipe</div><br>
-                  <form>
-                    <label class="input-label">Title</label><br><br>
-                    <input class="large-input" name="recipe-name" type="text"><br><br>
-                    <label class="input-label">Description</label><br><br>
-                    <input class="large-input" name="recipe-subtitle" type="text"><br><br>
-                    <label class="input-label">Ingredients</label><br><br>
-                    <div id="recipe-create-ingredients">
-                      <div class="recipe-create-single-ing">
-                        <input name="recipe-ingredient" placeholder="Ingredient" type="text">
-                        <input name="recipe-ingredient-quantity" placeholder="Quantity" type="text">
-                        <span><img src="./images/add.png"></span>
-                      </div>
-                    </div><br>
-                    <input class="load-file" name="picture" type="file" size="50" accept="*/*">
-                    <label class="input-label">Preparation</label><br><br>
-                    <textarea rows="4" cols="20" id="create-description"></textarea>
-                    <div id="submit-bar">
-                      <label for="file-upload" class="custom-label-left">
-                        Load Image
-                      </label>
-                      <input id="file-upload" type="file"/><br>
-                      <label for="submit-recipe" class="custom-label-right">
-                        Submit
-                      </label>
-                      <button id="submit-recipe" type="submit"/><br>
-                    </div>
-                  </form>
-                </div>
-                <!---->
+            <div id="page-content">
+            </div>
 
               </body>
 
               <script>
 
               $(document).ready(function() {
-                $('#recipe-view').hide();
-                $('#discover-view').hide();
-                $('#create-view').hide();
                 $('#search-view').hide();
                 $('#login-view').hide();
                 $('#signup').hide();
               });
 
-              $(function() {
-                // SHOW today's recipe
-                $('#btn-tdRecipe').on('click', function() {
-                  $('#main-view').hide();
-                  $('#discover-view').hide();
-                  $('#create-view').hide();
-                  $('#recipe-view').fadeIn(300).show();
-                });
-                // SHOW create
-                $('#btn-create').on('click', function() {
-                  $('#main-view').hide();
-                  $('#discover-view').hide();
-                  $('#recipe-view').hide();
-                  $('#create-view').fadeIn(300).show();
-                });
-                // SHOW discover
-                $('#btn-discover').on('click', function() {
-                  $('#main-view').hide();
-                  $('#create-view').hide();
-                  $('#recipe-view').hide();
-                  $('#discover-view').fadeIn(300).show();
-                });
-                
+              $(function() {                
                 //SHOW search-view
                 $('#btn-search').on('click', function() {
                   $('#menuwrapper').fadeOut(300).hide();
