@@ -1,0 +1,39 @@
+#recipe-view
+  #recipe-title SASHIMI
+  #recipe-subtitle Yokuro Tanaka
+  #recipes-swipe
+    img#arrow-back.arrow(src='images/left_arrow.png', alt='Food')
+    #image-back.recipe-preview
+      img.recipe-picture(src='images/1.jpg', alt='Food')
+    #image-actual.recipe-preview
+      img.recipe-picture(src='images/2.jpg', alt='Food')
+    #image-next.recipe-preview
+      img.recipe-picture(src='images/3.jpg', alt='Food')
+    img#arrow-next.arrow(src='images/right_arrow.png', alt='Food')
+  #recipe-text
+    #recipe-ingredients
+      b Ingredients
+      br
+      br
+      | - Salt 50g
+      br
+      | - Fresh Tuna, Salmon
+      br
+      | - Soy Sauce
+      br
+      | - Wasabi
+    #recipe-preparation
+      b Preparation
+      br
+      br
+      | Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+      |                   Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+      |                   At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+  #recipe-comments
+    .recipe-comments-element
+      span.comment-name Samuele
+      span.comment-text Ricetta molto buona, aggiungerei del pepe
+  #my-comment
+    textarea(rows='4', cols='50')
+    button(type='button') Submit
+

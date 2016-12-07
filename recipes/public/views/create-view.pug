@@ -1,0 +1,43 @@
+#create-view
+  #create-title CREATE
+  #create-subtitle Create your recipe
+  br
+  form
+    label.input-label Title
+    br
+    br
+    input.large-input(name='recipe-name', type='text')
+    br
+    br
+    label.input-label Description
+    br
+    br
+    input.large-input(name='recipe-subtitle', type='text')
+    br
+    br
+    label.input-label Ingredients
+    br
+    br
+    #recipe-create-ingredients
+      .recipe-create-single-ing
+        input(name='recipe-ingredient', placeholder='Ingredient', type='text')
+        input(name='recipe-ingredient-quantity', placeholder='Quantity', type='text')
+        #btnAddIngredient
+          span
+            img(src='./images/add.png')
+    br
+    input.load-file(name='picture', type='file', size='50', accept='*/*')
+    label.input-label Preparation
+    br
+    br
+    textarea#create-description(rows='4', cols='20')
+    #submit-bar
+      label.custom-label-left(for='file-upload')
+        | Load Image
+      input#file-upload(type='file')
+      br
+      label.custom-label-right(for='submit-recipe')
+        | Submit
+      button#submit-recipe(type='submit')
+        br
+

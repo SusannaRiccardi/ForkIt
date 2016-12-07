@@ -8,10 +8,11 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var recipes = require('./routes/recipes');
+var create = require('./routes/create');
 
 var app = express();
 
-const mongoose   = require('mongoose');
+const mongoose = require('mongoose');
 mongoose.connect(config.mongoUrl + config.mongoDbName);
 
 require('./models');
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/recipes', recipes);
+app.use('/create', create);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

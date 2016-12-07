@@ -2,56 +2,56 @@
 <html>
 
 <head>
-  <title>ForkIt</title>
-  <link rel="stylesheet" type="text/css" href="style/style.css">
-  <link rel="stylesheet" type="text/css" href="style/main_view.css">
-  <link rel="stylesheet" type="text/css" href="style/discover_view.css">
-  <link rel="stylesheet" type="text/css" href="style/recipe_view.css">
-  <link rel="stylesheet" type="text/css" href="style/create_view.css">
-  <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="js/jquery-3.1.1.js"></script>
-  <script src="pug/main-view.js"></script>
-  <script src="pug/recipe-view.js"></script>
-  <script src="pug/create-view.js"></script>
-  <script src="pug/discover-view.js"></script>
-  <script src="js/index.js"></script>
-  <!--<script src="js/discover.js"></script>-->
+    <title>ForkIt</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <link rel="stylesheet" type="text/css" href="style/main_view.css">
+    <link rel="stylesheet" type="text/css" href="style/discover_view.css">
+    <link rel="stylesheet" type="text/css" href="style/recipe_view.css">
+    <link rel="stylesheet" type="text/css" href="style/create_view.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/jquery-3.1.1.js"></script>
+    <script src="pug/main-view.js"></script>
+    <script src="pug/recipe-view.js"></script>
+    <script src="pug/create-view.js"></script>
+    <script src="pug/discover-view.js"></script>
+    <script src="js/index.js"></script>
+    <!--<script src="js/discover.js"></script>-->
 </head>
 
 <body class="no-touch">
 
-  <!--menubar-->
-  <div id="menubar">
+    <!--menubar-->
+    <div id="menubar">
 
-    <div id="menuwrapper">
-      <ul>
-        <li>
-          <a href="#" class="menu-btn">
-            <span class="btn-img"><i class="material-icons">reorder</i></span>
-            <span class="btn-text">MENU</span>
-          </a>
-          <ul>
-            <li><a id="btn-search">SEARCH</a></li>
-            <li><a id="btn-tdRecipe" href="#">TODAY'S RECIPE</a></li>
-            <li><a id="btn-create" href="#">CREATE</a></li>
-            <li><a id="btn-discover" href="#">DISCOVER</a></li>
-            <li><a id="btn-about" href="#">ABOUT</a></li>
-            <li><a href="#" id="btn-login">LOGIN</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+        <div id="menuwrapper">
+            <ul>
+                <li>
+                    <a href="#" class="menu-btn">
+                        <span class="btn-img"><i class="material-icons">reorder</i></span>
+                        <span class="btn-text">MENU</span>
+                    </a>
+                    <ul>
+                        <li><a id="btn-search">SEARCH</a></li>
+                        <li><a id="btn-tdRecipe" href="#">TODAY'S RECIPE</a></li>
+                        <li><a id="btn-create" href="#">CREATE</a></li>
+                        <li><a id="btn-discover" href="#">DISCOVER</a></li>
+                        <li><a id="btn-about" href="#">ABOUT</a></li>
+                        <li><a href="#" id="btn-login">LOGIN</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
 
-    <!--searchbar-->
-    <div id="search-view">
-      <div id="search-btn-back"><i class="material-icons icon">keyboard_backspace</i></div>
-      <div class="form-text">Search</div>
-      <input type="text" name="search" placeholder="Japanese - Vegan - Onions">
-      <div class="form-text">Exclude</div>
-      <input type="text" name="filter" placeholder="Fish - Meat - Spicy">
-      <!--<div class="form-text">User Rating</div> <br>
+        <!--searchbar-->
+        <div id="search-view">
+            <div id="search-btn-back"><i class="material-icons icon">keyboard_backspace</i></div>
+            <div class="form-text">Search</div>
+            <input id='searchField' type="text" name="search" placeholder="Japanese - Vegan - Onions">
+            <div class="form-text">Exclude</div>
+            <input id='excludeField' type="text" name="filter" placeholder="Fish - Meat - Spicy">
+            <!--<div class="form-text">User Rating</div> <br>
       <div class="form-text" id="stars">
         <i class="material-icons star" id="star1" style="color: rgba(0,0,0,0);">star</i>
         <i class="material-icons star" id="star2" style="color: rgba(0,0,0,0);">star</i>
@@ -59,16 +59,16 @@
         <i class="material-icons star" id="star4" style="color: rgba(0,0,0,0);">star</i>
         <i class="material-icons star" id="star5" style="color: rgba(0,0,0,0);">star</i>
       </div>-->
-      <button id="search-submit-btn">Search</button>
-    </div>
+            <button id="search-submit-btn">Search</button>
+        </div>
 
 
-    <div id="login-view">
-      <!--Login-->
-      <div class="login" id="login">
-        <div class="btn-login-back"><i class="material-icons">keyboard_backspace</i></div>
-        <form>
-          <span class="form-text">Username:<span><br>
+        <div id="login-view">
+            <!--Login-->
+            <div class="login" id="login">
+                <div class="btn-login-back"><i class="material-icons">keyboard_backspace</i></div>
+                <form>
+                    <span class="form-text">Username:<span><br>
             <input type="text" name="username" value="">
             <br><span class="form-text">Password:<span><br>
               <input type="password" name="password" value="">
