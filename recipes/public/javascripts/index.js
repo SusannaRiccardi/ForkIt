@@ -15,7 +15,8 @@ window.onload = function() {
     });
 
     btnTdRecipe.addEventListener('click', function() {
-        pageContent.innerHTML = recipeTemplate();
+        // example
+        pageContent.innerHTML = recipeTemplate({ recipe: { title: 'Sushi', instructions: 'Go to McDonald', author: "Andrea", comments: [{ text: 'Buonissimo', username: 'samuelebischof' }, { text: 'Che schifo', username: 'lucaferrari' }], ingredients: [{ name: 'pane', quantity: '1Kg' }, { name: 'acqua', quantity: '3dl' }] } });
     });
 
     btnCreate.addEventListener('click', function() {
@@ -54,7 +55,8 @@ window.onload = function() {
         //     pageContent.innerHTML = discoverTemplate({ recipes: receivedArray.slice(receivedJSONPos, receivedJSONPos + 6) });
         //     receivedJSONPos += 6;
         // })
-        pageContent.innerHTML = discoverTemplate({});
+        // example
+        pageContent.innerHTML = discoverTemplate({ recipes: [{ image: './images/1.jpg' }, { image: './images/2.jpg' }, { image: './images/3.jpg' }, { image: './images/4.jpg' }, { image: './images/5.jpg' }, { image: './images/6.jpg' }] });
     });
 
     btnSearchSubmit.addEventListener('click', function(e) {
@@ -68,10 +70,7 @@ window.onload = function() {
         let filterJson = JSON.stringify(filter);
 
         // doJSONRequest(method, url, headers, data, callback){
-        doJSONRequest('GET', '/discover', {}, filterJson, function(req, res) {
-                // console.log(req);
-                // console.log(res);
-            })
+        doJSONRequest('GET', '/discover', {}, filterJson, function(req, res) {})
             // pageContent.innerHTML = discoverTemplate();
     });
 
@@ -193,12 +192,6 @@ function doJSONRequest(method, url, headers, data, callback) {
                 console.log(req.status);
         }
     };
-
-    // dust.render('contactitem', created, function(err, out) {
-    //     if (!err) document.getElementById('contactList').innerHTML += out;
-
-    //     addDeleteListener();
-    // });
 
     req.setRequestHeader("Accept", "application/json");
 
