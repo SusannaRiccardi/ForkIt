@@ -1,0 +1,72 @@
+doctype html
+html
+    head
+        title ForkIt
+        link(rel='stylesheet', type='text/css', href='./style/index.css')
+        link(rel='stylesheet', type='text/css', href='style/style.css')
+        link(href='https://fonts.googleapis.com/css?family=Lato:300', rel='stylesheet')
+        link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        script(src='js/index.js')
+    body
+        #menubar
+            #menuwrapper
+                ul
+                    li
+                        a.menu-btn(href='#')
+                            span.btn-img
+                                i.material-icons.icon reorder
+                            span.btn-text MENU
+                        ul
+                            li
+                                a#search-btn(href='#') SEARCH
+                            li
+                                a(href='#') TODAY'S RECIPE
+                            li
+                                a(href='#') CREATE
+                            li
+                                a(href='#') DISCOVER
+                            li
+                                a(href='#') ABOUT
+                            li
+                                a#login-btn(href='#') LOGIN
+            #search(style='display: none;')
+                #search-btn-back
+                    i.material-icons.icon keyboard_backspace
+                .search-form-text Search
+                input(type='text', name='search', placeholder='Japanese - Vegan - Onions')
+                .search-form-text Exclude
+                input(type='text', name='filter', placeholder='Fish - Meat - Spicy')
+                .search-form-text User Rating
+                br
+                #stars.search-form-text
+                    i#star1.material-icons.star(style='color: rgba(0,0,0,0);') star
+                    i#star2.material-icons.star(style='color: rgba(0,0,0,0);') star
+                    i#star3.material-icons.star(style='color: rgba(0,0,0,0);') star
+                    i#star4.material-icons.star(style='color: rgba(0,0,0,0);') star
+                    i#star5.material-icons.star(style='color: rgba(0,0,0,0);') star
+                button#search-submit-btn Search
+            #login(style='display: none;')
+                #login-btn-back
+                    i.material-icons.icon keyboard_backspace
+                .login-form-text Username:
+                input(type='text', name='username', value='')
+                .login-form-text Password:
+                input(type='password', name='password', value='')
+                button#login-submit-btn Login
+        #content
+            .grid-block
+                .grid-cell
+                    img.recipe-picture(src='./images/img00000.jpg', alt='Food')
+                .grid-cell
+                    img.recipe-picture(src='./images/img00007.jpg', alt='Food')
+                .grid-cell
+                    img.recipe-picture(src='./images/img00002.jpg', alt='Food')
+                .grid-cell
+                    img.recipe-picture(src='./images/img00006.jpg', alt='Food')
+                .grid-cell
+                    img.recipe-picture(src='./images/img00004.jpg', alt='Food')
+                .grid-cell
+                    img.recipe-picture(src='./images/img00005.jpg', alt='Food')
+            #arrow-down
+                img(src='images/arrow_down.png')
