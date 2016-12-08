@@ -57,6 +57,7 @@ router.post('/', function(req, res) {
     if (err) {
       throw err
     }
+    console.log(saved);
     res.json(saved);
   })
 })

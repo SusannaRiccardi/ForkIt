@@ -38,7 +38,6 @@ function displayPage(e){
   }
   if (href == 'create'){
     pageContent.innerHTML = createTemplate();
-
     create();
   }
   if (href == 'discover'){
@@ -54,26 +53,47 @@ function displayPage(e){
 
 
 function create() {
-  let ingredientsContainer = document.getElementById('recipe-create-ingredients');
-  let btnAddIngredient = document.getElementById('btnAddIngredient');
-  let addIngredient = function() {
-    btnAddIngredient.addEventListener('click', function() {
-      document.getElementById("btnAddIngredient").outerHTML = '';
-      ingredientsContainer.innerHTML += ingredientTemplate();
-      btnAddIngredient = document.getElementById('btnAddIngredient');
-      addIngredient();
-    })
-  }
-  addIngredient();
-  let createBtn = document.getElementsByClassName('custom-label-right');
+  addIngredients();
+  let createBtn = document.getElementById('submit-recipe');
   createBtn.addEventListener('click', createRecipe);
 }
 function createRecipe(e) {
   e.preventDefault();
+  let title = document.getElementById('create-name').value;
+  let instructions = document.getElementById('create-description').value;
+  let ingredients = [];
+  let names = document.getElementsByClassName('create-ingredient-name');
+  let quantities = document.getElementsByClassName('create-ingredient-quantity');
+  //console.log(names)
+  let ing = {};
+  ing.name = names[0].value
+  ing.quant = quantities[0].value
+  console.log(ing)
+  ingredients.push(ing);
+  // for (let name of names){
+  //   //console.log(name.value);
+  //   let ing = {};
+  //   ing.name = name.value
+  //   ing.quant = ''
+  //   //console.log(ing)
+  //   ingredients.push(ing);
+  // }
+  //
+  // for (name in names){
+  //   let ingredient = {};
+  //   ingredient.name = names[name].value;
+  //   ingredient.quantity = '';
+  //   console.log(ingredient);
+  //   ingredients.push(ingredient);
+  // }
 
-  // let obj = {};
-  // let el = document.getElementsByClassName('form-control');
-  // let ingredients = {};
+  let obj = {};
+  obj.title = title;
+  obj.instructions = instructions;
+  obj.ingredients = ingredients;
+  doJSONRequest('POST', '/recipes', null, obj, function(){});
+
+
   // for(let i of el){
   //   let id = i.getAttribute('id');
   //   if(id == 'title'){
@@ -100,6 +120,20 @@ function createRecipe(e) {
   // doJSONRequest('POST', '/recipes', null, obj, function(){});
 }
 
+// Add more ingredients
+function addIngredients(){
+  let ingredientsContainer = document.getElementById('recipe-create-ingredients');
+  let btnAddIngredient = document.getElementById('btnAddIngredient');
+  let addIngredient = function() {
+    btnAddIngredient.addEventListener('click', function(e) {
+      document.getElementById("btnAddIngredient").outerHTML = '';
+      ingredientsContainer.innerHTML += ingredientTemplate();
+      btnAddIngredient = document.getElementById('btnAddIngredient');
+      addIngredient();
+    })
+  }
+  addIngredient();
+}
 
 
 
