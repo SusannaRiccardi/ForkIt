@@ -46,12 +46,18 @@ router.get('/:recipeid', function(req, res) {
 router.post('/', function(req, res) {
   videoNew = req.body.video || "";
   imageNew = req.body.video || "";
+  lactosefree = req.body.lactosefree || false;
+  glutenfree = req.body.glutenfree || false;
+  vegetarian = req.body.vegetarian || false;
   const newRecipe = new Recipe({
     title : req.body.title,
     instructions : req.body.instructions,
     ingredients : req.body.ingredients,
     video : videoNew,
-    image : imageNew
+    image : imageNew,
+    lactosefree : lactosefree,
+    glutenfree : glutenfree,
+    vegetarian : vegetarian
   });
   newRecipe.save(function(err, saved) {
     if (err) {

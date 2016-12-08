@@ -19,7 +19,10 @@ const RecipeSchema = new mongoose.Schema({
     instructions: { type: String, required: true },
     likes: { type: Number, default: 0 },
     dislikes: { type: Number, default: 0 },
-    comments: { type: [CommentSchema] }
+    comments: { type: [CommentSchema] },
+    lactosefree : {type: Boolean, default: false},
+    glutenfree : {type: Boolean, default: false},
+    vegetarian : {type: Boolean, default: false},
 });
 
 mongoose.model('Recipe', RecipeSchema);
