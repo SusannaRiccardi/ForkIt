@@ -16,6 +16,7 @@ html
     script(src='views/recipe-view.js')
     script(src='views/create-view.js')
     script(src='views/discover-view.js')
+    script(src='views/categories-view.js')
     script(src='views/create-view-ingredient.js')
   body
     .background#back-one
@@ -25,7 +26,7 @@ html
       #menuwrapper
         ul
           li
-            a.menu-btn(href='#')
+            a.menu-btn(href='menu')
               span.btn-img
                 i.material-icons reorder
               span.btn-text MENU
@@ -33,15 +34,15 @@ html
               li
                 a#btn-search SEARCH
               li
-                a#btn-tdRecipe(href='todayRecipe') TODAY'S RECIPE
+                a#btn-discover(href='discover') DISCOVER
+              li
+                a#btn-categories(href='categories') CATEGORIES
               li
                 a#btn-create(href='create') CREATE
               li
-                a#btn-discover(href='discover') DISCOVER
-              li
                 a#btn-about(href='about') ABOUT
               li
-                a#btn-login(href='#') LOGIN
+                a#btn-login LOGIN
       // searchbar
       #search-view
         #search-btn-back
@@ -118,11 +119,15 @@ html
     });
     $(function() {
     // CREATE change background
-    $('#btn-create').on('click', function() {
-    $('#back-two').fadeOut(300);
-    });
+      $('#btn-create').on('click', function () {
+        $('#back-two').fadeOut(300);
+      });
     // DISCOVER change background
     $('#btn-discover').on('click', function() {
+    $('#back-two').fadeIn(300);
+    });
+    // CATEGORIES change background
+    $('#btn-categories').on('click', function () {
     $('#back-two').fadeIn(300);
     });
     // ABOUT change background

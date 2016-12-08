@@ -1,8 +1,3 @@
-*{
-  font-family: 'Lato', sans-serif;
-}
-
-
 /*body {
 margin: 0;
 padding: 0;
@@ -29,7 +24,7 @@ background-size: cover;
 /*/////////////////////////////// image grid /////////////////////////////*/
 
 .grid-block{
-  margin-top: 50px;
+  margin: 50px;
   display: flex;
   flex-wrap: wrap;
   position: relative;
@@ -41,11 +36,17 @@ background-size: cover;
   cursor: pointer;
   /*border-radius: 15%;*/
   width: 290px;
-  height: 290px;
+  height: 340px;
   padding: 0px;
   /*margin: 20px;*/
   background-color: white;
   overflow: hidden;
+  filter: brightness(90%);
+  position: relative;
+}
+
+.grid-cell:hover{
+  filter: brightness(100%);
 }
 
 .recipe-picture {
@@ -73,6 +74,42 @@ background-size: cover;
 /*transition: all 0.3s ease-out;*/
 /*}*/
 
+
+/*/////////////////////////////// category title /////////////////////////////*/
+
+
+.category-title{
+  position: absolute;
+  left: 0;
+  /*top: 80%;*/
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 20%;
+  background-color: rgba(50,50,55,0.8);
+  z-index: 1;
+}
+
+.grid-cell img{
+  position: absolute;
+  z-index: 0;
+}
+
+.category-title div{
+  font-size: 1.2em;
+  position: absolute;
+  top:calc(50% - 0.6em);
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+/*.category-title div{*/
+  /*height: 20%;*/
+  /*display: block;*/
+  /*!*padding-top: calc(50% - 1em);*!*/
+  /*padding-top: 50%;*/
+/*}*/
 
 /*/////////////////////////////// image grid /////////////////////////////*/
 /*.image-grid {*/
@@ -143,44 +180,55 @@ background-size: cover;
 @media only screen and (max-width : 480px) {
   /*Smartphone view:*/
   .grid-cell{
-    width: 150px;
+    width: 128px;
     height: 150px;
     margin: 3px;
+  }
+  .grid-block{
+    margin: 25px;
   }
 
 }
 
 @media only screen and (max-width : 650px) and (min-width : 481px) {
-  /* Tablet view: 2 tiles */
+  /* Tablet view:*/
   .grid-cell{
-    width: 150px;
+    width: 128px;
     height: 150px;
     margin: 3px;
+  }
+  .grid-block{
+    margin: 25px;
   }
 }
 
 @media only screen and (max-width : 1050px) and (min-width : 651px) {
-  /* Small desktop / ipad view: 3 tiles */
+  /* Small desktop / ipad view:*/
   .grid-cell{
-    width: 200px;
+    width: 171px;
     height: 200px;
     margin: 3px;
+  }
 
+  .grid-block{
+    margin: 25px;
   }
 
 }
 
 @media only screen and (max-width : 1290px) and (min-width : 1051px) {
-  /* Medium desktop: 3 tiles */
+  /* Medium desktop:*/
   .grid-cell{
-    width: 200px;
+    width: 171px;
     height: 200px;
   }
 }
 
 @media only screen and (max-width : 1490px) and (min-width : 1291px) {
-  /* Large desktop: 3 tiles */
+  /* Large desktop:*/
   .grid-cell{
+    /*width: 250px;*/
+    /*height: 250px;*/
     /*margin: 15px;*/
   }
 }

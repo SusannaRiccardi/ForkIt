@@ -1,3 +1,7 @@
+*{
+  font-family: 'Lato', sans-serif;
+}
+
 .background {
   background-attachment: fixed; 
   background-repeat: no-repeat;

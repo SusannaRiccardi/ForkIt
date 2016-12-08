@@ -4,22 +4,22 @@ window.onload = function() {
 
   //menu buttons and functionality
   let btnMain = document.getElementById('btn-about').parentNode;
-  let btnTdRecipe = document.getElementById('btn-tdRecipe').parentNode;
   let btnCreate = document.getElementById('btn-create').parentNode;
   let btnDiscover = document.getElementById('btn-discover').parentNode;
   let btnAbout = document.getElementById('btn-about').parentNode;
   let btnSearchSubmit = document.getElementById('search-submit-btn');
+  let btnCategories = document.getElementById('btn-categories').parentNode;
 
   // Da togliere quando cambiano nell'html
-  btnTdRecipe.href = "todayRecipe";
+  btnCategories.href = "categories";
   btnCreate.href = "create";
   btnDiscover.href = "discover";
   btnAbout.href = "about";
 
-  btnTdRecipe.addEventListener('click', displayPage);
   btnCreate.addEventListener('click', displayPage);
   btnDiscover.addEventListener('click', displayPage);
   btnAbout.addEventListener('click', displayPage);
+  btnCategories.addEventListener('click', displayPage)
 
 }
 
@@ -29,12 +29,15 @@ function displayPage(e){
   e.preventDefault();
   var pageContent = document.getElementById('page-content');
   let href = e.target.href.split('/').pop();
-  if (href == 'todayRecipe'){
-    pageContent.innerHTML = recipeTemplate({ recipe: { title: 'Sushi',
-    instructions: 'Go to McDonald',
-    author: "Andrea",
-    comments: [{ text: 'Buonissimo', username: 'samuelebischof' }, { text: 'Che schifo', username: 'lucaferrari' }],
-    ingredients: [{ name: 'pane', quantity: '1Kg' }, { name: 'acqua', quantity: '3dl' }] } });
+  // if (href == 'todayRecipe'){
+  //   pageContent.innerHTML = recipeTemplate({ recipe: { title: 'Sushi',
+  //   instructions: 'Go to McDonald',
+  //   author: "Andrea",
+  //   comments: [{ text: 'Buonissimo', username: 'samuelebischof' }, { text: 'Che schifo', username: 'lucaferrari' }],
+  //   ingredients: [{ name: 'pane', quantity: '1Kg' }, { name: 'acqua', quantity: '3dl' }] } });
+  // }
+  if(href == 'categories'){
+    pageContent.innerHTML = categoriesTemplate();
   }
   if (href == 'create'){
     pageContent.innerHTML = createTemplate();
@@ -46,6 +49,7 @@ function displayPage(e){
   if (href == 'about'){
     pageContent.innerHTML = "";
   }
+
   // if (href == search){
   //
   // }
