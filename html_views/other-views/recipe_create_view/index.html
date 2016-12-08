@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ForkIt</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <link rel="stylesheet" type="text/css" href="style/create_view.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/index.js"></script>
+</head>
+
+<body>
+
+    <div id="menubar">
+
+        <div id="menuwrapper">
+            <ul>
+                <li>
+                    <a href="#" class="menu-btn">
+                        <span class="btn-img"><i class="material-icons">reorder</i></span>
+                        <span class="btn-text">MENU</span>
+                    </a>
+                    <ul>
+                        <li><a href="#">TODAY'S RECIPE</a></li>
+                        <li><a href="#">CREATE</a></li>
+                        <li><a id="recipes-view-btn" href="#">DISCOVER</a></li>
+                        <li><a href="#">ABOUT</a></li>
+                        <li><a href="#" id="login-btn">LOGIN</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+
+        <div id="login" style="display: none;">
+            <div id="login-btn-back"><i class="material-icons">keyboard_backspace</i></div>
+            <form>
+                <span class="login-form-text">Username:<span><br>
+                <input type="text" name="username" value="">
+                <br><span class="login-form-text">Password:<span><br>
+                <input type="password" name="password" value="">
+                <br><br>
+                <input type="submit" value="Submit" id="login-submit-btn">
+            </form>
+        </div>
+
+      </div>
+
+      <div id="create-view">
+           <div id="create-title">CREATE</div>
+            <div id="create-subtitle">Create your recipe</div><br>
+            <form>
+                <label class="input-label">Title</label><br><br>
+                <input class="large-input" name="recipe-name" type="text"><br><br>
+                <label class="input-label">Description</label><br><br>
+                <input class="large-input" name="recipe-subtitle" type="text"><br><br>
+                <label class="input-label">Ingredients</label><br><br>
+                <div id="recipe-create-ingredients">
+                    <div class="recipe-create-single-ing">
+                        <input name="recipe-ingredient" placeholder="Ingredient" type="text">
+                        <input name="recipe-ingredient-quantity" placeholder="Quantity" type="text">
+                        <span><img src="./images/add.png"></span>
+                    </div>
+                </div><br>
+                <input class="load-file" name="picture" type="file" size="50" accept="*/*">
+                <label class="input-label">Preparation</label><br><br>
+                <textarea rows="4" cols="20" id="create-description"></textarea>
+
+                <div id="submit-bar">
+                    <label for="file-upload" class="custom-label-left">
+                        <!--<i class="fa fa-cloud-upload">-->
+                            <!--<img src="./images/image-upload_icon.png">-->
+                            Load Image
+                    </label>
+                    <input id="file-upload" type="file"/><br>
+                    <label for="submit-recipe" class="custom-label-right">
+                        Submit
+                    </label>
+                    <button id="submit-recipe" type="submit"/><br>
+                </div>
+            </form>
+    </div>
+
+
+</body>
+
+</html>

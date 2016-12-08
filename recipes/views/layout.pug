@@ -3,53 +3,145 @@ html
   head
     title ForkIt
     link(rel='stylesheet', type='text/css', href='stylesheets/style.css')
+    link(rel='stylesheet', type='text/css', href='stylesheets/main_view.css')
+    link(rel='stylesheet', type='text/css', href='stylesheets/discover_view.css')
+    link(rel='stylesheet', type='text/css', href='stylesheets/recipe_view.css')
+    link(rel='stylesheet', type='text/css', href='stylesheets/create_view.css')
     link(href='https://fonts.googleapis.com/css?family=Lato:300', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    script(src='javascripts/app.js')
+    script(src='javascripts/jquery-3.1.1.js')
+    script(src='javascripts/index.js')
+    script(src='views/main-view.js')
+    script(src='views/recipe-view.js')
+    script(src='views/create-view.js')
+    script(src='views/discover-view.js')
+    script(src='views/create-view-ingredient.js')
   body
-    #menuwrapper
-      ul
-        li
-          a(href='#') MENU
-          ul
-            li
-              a(href='#') TODAY'S RECIPE
-            li
-              a(href='#') CREATE
-              ul
-                //
-                  <li><a href="languages.html">Languages</a></li>
-                  <li><a href="computer-skills.html">Computer Skills</a></li>
-            li
-              a(href='#') DISCOVER
-            li
-              a(href='#') ABOUT
-    #content
-      #receipe-title SASHIMI
-      #receipe-subtitle Yokuro Tanaka
-      #receipes-swipe
-        img.arrow(src='images/left_arrow.png', alt='Food')
-        #image-back.receipe-preview
-          img.receipe-picture(src='images/img00005.jpg', alt='Food')
-        #image-actual.receipe-preview
-          img.receipe-picture(src='images/img00007.jpg', alt='Food')
-        #image-next.receipe-preview
-          img.receipe-picture(src='images/img00009.jpg', alt='Food')
-        img.arrow(src='images/right_arrow.png', alt='Food')
-      #receipe-text
-        #receipe-ingredients
-          b Ingredients
-          br
-          br
-          | - Salt 50g
-          br
-          | - Fresh Tuna, Salmon
-          br
-          | - Soy Sauce
-          br
-          | - Wasabi
-        #receipe-preparation
-          b Preparation
-          br
-          br
-          | Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+    // menubar
+    #menubar
+      #menuwrapper
+        ul
+          li
+            a.menu-btn(href='#')
+              span.btn-img
+                i.material-icons reorder
+              span.btn-text MENU
+            ul
+              li
+                a#btn-search SEARCH
+              li
+                a#btn-tdRecipe(href='#') TODAY'S RECIPE
+              li
+                a#btn-create(href='#') CREATE
+              li
+                a#btn-discover(href='#') DISCOVER
+              li
+                a#btn-about(href='#') ABOUT
+              li
+                a#btn-login(href='#') LOGIN
+      // searchbar
+      #search-view
+        #search-btn-back
+          i.material-icons.icon keyboard_backspace
+        .form-text Search
+        input#searchField(type='text', name='search', placeholder='Japanese - Vegan - Onions')
+        .form-text Exclude
+        input#excludeField(type='text', name='filter', placeholder='Fish - Meat - Spicy')
+        //
+          <div class="form-text">User Rating</div> <br>
+          <div class="form-text" id="stars">
+          <i class="material-icons star" id="star1" style="color: rgba(0,0,0,0);">star</i>
+          <i class="material-icons star" id="star2" style="color: rgba(0,0,0,0);">star</i>
+          <i class="material-icons star" id="star3" style="color: rgba(0,0,0,0);">star</i>
+          <i class="material-icons star" id="star4" style="color: rgba(0,0,0,0);">star</i>
+          <i class="material-icons star" id="star5" style="color: rgba(0,0,0,0);">star</i>
+          </div>
+        button#search-submit-btn Search
+      #login-view
+        // Login
+        #login.login
+          .btn-login-back
+            i.material-icons keyboard_backspace
+          form
+            span.form-text
+              | Username:
+              span
+                br
+                input(type='text', name='username', value='')
+                br
+                span.form-text
+                  | Password:
+                  span
+                    br
+                    input(type='password', name='password', value='')
+                    a#btn-signup
+                      img(src='./images/arrow_down.png')
+                    br
+                    input#login-submit-btn.submit-btn(type='submit', value='Login')
+        // Signup
+        #signup.login
+          .btn-login-back
+            i.material-icons keyboard_backspace
+          form
+            span.form-text
+              | Username:
+              span
+                br
+                input(type='text', name='username', value='')
+                br
+                span.form-text
+                  | Password:
+                  span
+                    br
+                    input(type='password', name='password', value='')
+                    br
+                    span.form-text
+                      | Repeat password:
+                      span
+                        br
+                        input(type='password', name='RepeatPassword', value='')
+                        a#btn-signup-login
+                          img(src='./images/arrow_down.png')
+                        br
+                        input#signup-submit-btn.submit-btn(type='submit', value='Signup')
+    // 
+    #page-content
+  script.
+    $(document).ready(function() {
+    $('#search-view').hide();
+    $('#login-view').hide();
+    $('#signup').hide();
+    });
+    $(function() {
+    //SHOW search-view
+    $('#btn-search').on('click', function() {
+    $('#menuwrapper').fadeOut(300).hide();
+    $('#search-view').fadeIn(300).show();
+    });
+    // SHOW login-view
+    $('#btn-login').on('click', function() {
+    $('#menuwrapper').fadeOut(300).hide();
+    $('#login-view').fadeIn(300).show();
+    });
+    // SHOW menubar-view
+    $('.btn-login-back').on('click', function() {
+    $('#login-view').fadeOut(300).hide();
+    $('#menuwrapper').fadeIn(300).show();
+    });
+    $('#search-btn-back').on('click', function() {
+    $('#search-view').fadeOut(300).hide();
+    $('#menuwrapper').fadeIn(300).show();
+    });
+    // SHOW signup
+    $('#btn-signup').on('click', function() {
+    $('#signup').show();
+    $('#login').hide();
+    });
+    // SHOW login
+    $('#btn-signup-login').on('click', function() {
+    $('#login').show();
+    $('#signup').slideUp(300).hide();
+    });
+    });
+

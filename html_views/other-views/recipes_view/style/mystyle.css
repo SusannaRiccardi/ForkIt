@@ -1,0 +1,210 @@
+body {
+    background-image: url("../images/bamboo.jpg");
+    background-size: 100%;
+    background-attachment: fixed;
+}
+
+
+/*recipe Title*/
+
+#recipe-title {
+    font-family: 'Lato', sans-serif;
+    font-size: 2.3em;
+    margin-left: 30px;
+    margin-top: 30px;
+    color: white;
+}
+
+
+/*recipe Subtitle*/
+
+#recipe-subtitle {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.8em;
+    margin-left: 30px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    color: white;
+}
+
+
+/*recipe scroll-view-->*/
+
+
+/*recipes caroussel*/
+
+#recipes-swipe {
+    margin: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+}
+
+
+/*recipe preview*/
+
+.recipe-preview {
+    border-radius: 125px;
+    width: 250px;
+    height: 250px;
+    padding: 0px;
+    margin: 20px;
+    background-color: white;
+    overflow: hidden;
+}
+
+
+/*recipe preview image*/
+
+.recipe-picture {
+    position: static;
+    width: auto;
+    height: 100%;
+}
+
+
+/*Direction arrows*/
+
+.arrow {
+    height: 250px;
+    padding: 0px;
+    margin: 20px;
+}
+
+
+/*<--recipe scroll-view*/
+
+#recipe-text {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.3em;
+    color: white;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+#recipe-ingredients {
+    padding: 15px;
+    width: 40%;
+    background-color: rgba(76, 120, 34, 0.9);
+}
+
+#recipe-preparation {
+    padding: 15px;
+    width: 40%;
+    background-color: rgba(76, 120, 34, 0.9);
+}
+
+#recipe-comments {
+    font-family: 'Lato', sans-serif;
+    color: black;
+    padding-bottom: 30px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: rgba(76, 120, 34, 0.9);
+}
+
+.recipe-comments-element {
+    padding: 10px;
+    width: 92%;
+    margin-top: 30px;
+    background: floralwhite;
+}
+
+.comment-name {
+    display: block;
+    font-size: 1.5em;
+}
+
+.comment-text {
+    font-size: 1em;
+}
+
+#my-comment {
+    font-family: 'Lato', sans-serif;
+    color: black;
+    padding-bottom: 30px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: rgba(76, 120, 34, 0.9);
+}
+
+#my-comment textarea {
+    font-family: 'Lato', sans-serif;
+    font-size: 1em;
+    padding: 10px;
+    width: 92%;
+    margin-top: 30px;
+    /*background: floralwhite;*/
+}
+
+#my-comment button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 30px;
+    /*display: inline-block;*/
+    font-size: 16px;
+    height: auto!important;
+    width: auto;
+    cursor: pointer;
+}
+
+
+/*/////////////////////////////// size adaptation /////////////////////////////*/
+
+@media (max-width: 1550px) {
+    .recipe-preview {
+        width: 200px;
+        height: 200px;
+    }
+    .arrow {
+        height: 200px;
+    }
+}
+
+@media (max-width: 1350px) {
+    .recipe-preview {
+        width: 130px;
+        height: 130px;
+    }
+    .arrow {
+        height: 130px;
+    }
+}
+
+@media (max-width: 1080px) {
+    #image-back {
+        display: none;
+    }
+    #image-next {
+        display: none;
+    }
+}
+
+@media (max-width: 900px) {
+    #recipe-text {
+        display: initial;
+    }
+    #recipe-ingredients {
+        width: auto;
+        background-color: rgba(76, 120, 34, 1);
+    }
+    #recipe-preparation {
+        width: auto;
+        background-color: rgba(76, 120, 34, 1);
+    }
+}
+
+
+/*Comments*/

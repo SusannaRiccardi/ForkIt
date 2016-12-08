@@ -1,0 +1,35 @@
+#recipe-view
+  #recipe-title= recipe.title
+  #recipe-subtitle= recipe.author
+  #recipes-swipe
+    img#arrow-back.arrow(src='images/left_arrow.png', alt='Food')
+    #image-back.recipe-preview
+      img.recipe-picture(src='', alt='Food')
+    #image-actual.recipe-preview
+      img.recipe-picture(src='', alt='Food')
+    #image-next.recipe-preview
+      img.recipe-picture(src='', alt='Food')
+    img#arrow-next.arrow(src='images/right_arrow.png', alt='Food')
+  #recipe-text
+    #recipe-ingredients
+      b Ingredients
+      br
+      span#ingredients
+        ul
+          each ingredient in recipe.ingredients
+            li= ingredient.quantity + ' ' + ingredient.name
+
+    #recipe-preparation
+      b Preparation
+      br
+      span#preparation
+      p= recipe.instructions
+  #recipe-comments
+    each comment in recipe.comments
+      .recipe-comments-element
+        span.comment-name= comment.username
+        span.comment-text= comment.text
+  #my-comment
+    textarea(rows='4', cols='50')
+    button(type='button') Submit
+
