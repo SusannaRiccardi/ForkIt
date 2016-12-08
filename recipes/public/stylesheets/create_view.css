@@ -1,10 +1,3 @@
-body {
-  background-image: url("../images/create_background.jpg");
-  background-attachment: fixed;
-  background-size: 100%;
-}
-
-/*Move to style.css*/
 input {
   box-sizing: border-box;
 }

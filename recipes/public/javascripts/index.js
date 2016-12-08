@@ -3,11 +3,11 @@ window.onload = function() {
   pageContent.innerHTML = mainTemplate();
 
   //menu buttons and functionality
-  let btnMain = document.getElementById('btn-about');
-  let btnTdRecipe = document.getElementById('btn-tdRecipe');
-  let btnCreate = document.getElementById('btn-create');
-  let btnDiscover = document.getElementById('btn-discover');
-  let btnAbout = document.getElementById('btn-about');
+  let btnMain = document.getElementById('btn-about').parentNode;
+  let btnTdRecipe = document.getElementById('btn-tdRecipe').parentNode;
+  let btnCreate = document.getElementById('btn-create').parentNode;
+  let btnDiscover = document.getElementById('btn-discover').parentNode;
+  let btnAbout = document.getElementById('btn-about').parentNode;
   let btnSearchSubmit = document.getElementById('search-submit-btn');
 
   // Da togliere quando cambiano nell'html
@@ -91,7 +91,10 @@ function addIngredients(){
   let addIngredient = function() {
     btnAddIngredient.addEventListener('click', function(e) {
       document.getElementById("btnAddIngredient").outerHTML = '';
-      ingredientsContainer.innerHTML += ingredientTemplate();
+      var container = document.createElement("div");
+      container.className = 'recipe-create-single-ing';
+      container.innerHTML = ingredientTemplate();
+      ingredientsContainer.lastChild.appendChild(container);
       btnAddIngredient = document.getElementById('btnAddIngredient');
       addIngredient();
     })
