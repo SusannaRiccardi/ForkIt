@@ -6,13 +6,7 @@
     label.input-label Title
     br
     br
-    input.large-input(name='recipe-name', type='text')
-    br
-    br
-    label.input-label Description
-    br
-    br
-    input.large-input(name='recipe-subtitle', type='text')
+    input.large-input(id='create-name', name='recipe-name', type='text')
     br
     br
     label.input-label Ingredients
@@ -20,13 +14,13 @@
     br
     #recipe-create-ingredients
       .recipe-create-single-ing
-        input(name='recipe-ingredient', placeholder='Ingredient', type='text')
-        input(name='recipe-ingredient-quantity', placeholder='Quantity', type='text')
+        input(class='create-ingredient-name', name='recipe-ingredient', placeholder='Ingredient', type='text')
+        input(class='create-ingredient-quantity', name='recipe-ingredient-quantity', placeholder='Quantity', type='text')
         #btnAddIngredient
           span
             img(src='./images/add.png')
     br
-    input.load-file(name='picture', type='file', size='50', accept='*/*')
+    input.load-file(name='picture', type='file', size='50', accept='image/*')
     label.input-label Preparation
     br
     br
@@ -34,7 +28,7 @@
     #submit-bar
       label.custom-label-left(for='file-upload')
         | Load Image
-      input#file-upload(type='file')
+      input#file-upload(type='file', accept='image/*')
       br
       label.custom-label-right(for='submit-recipe')
         | Submit
