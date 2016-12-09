@@ -26,8 +26,8 @@ html
       #menuwrapper
         ul
           li
-            li
-              a.menu-btn(href='menu')
+            div
+              a(href='menu').menu-btn
                 span.btn-img
                   i.material-icons reorder
                 span.btn-text MENU
@@ -48,9 +48,11 @@ html
       #search-view
         #search-btn-back
           i.material-icons.icon keyboard_backspace
-        .form-text Search
+        .form-text Search by name
         input#searchField(type='text', name='search', placeholder='Japanese - Vegan - Onions')
-        .form-text Exclude
+        .form-text Include ingredient
+        input#searchField(type='text', name='search', placeholder='Japanese - Vegan - Onions')
+        .form-text Exclude ingredient
         input#excludeField(type='text', name='filter', placeholder='Fish - Meat - Spicy')
         //
           <div class="form-text">User Rating</div> <br>
