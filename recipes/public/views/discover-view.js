@@ -7,14 +7,14 @@ var pug_match_html=/["&<>]/;function discoverTemplate(locals) {var pug_html = ""
   if ('number' == typeof $$obj.length) {
       for (var pug_index0 = 0, $$l = $$obj.length; pug_index0 < $$l; pug_index0++) {
         var recipe = $$obj[pug_index0];
-pug_html = pug_html + "\u003Cdiv class=\"grid-cell\"\u003E\u003Cimg" + (" class=\"recipe-picture\""+pug_attr("src", recipe.image, true, false)+pug_attr("id", recipe.id, true, false)+" alt=\"Food\"") + "\u002F\u003E\u003Cdiv class=\"category-title\"\u003E\u003Cdiv\u003E" + (pug_escape(null == (pug_interp = recipe.title) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"grid-cell\"\u003E\u003Cimg" + (" class=\"recipe-picture\""+pug_attr("src", 'https://spoonacular.com/recipeImages/' + recipe.image, true, false)+pug_attr("id", recipe.id, true, false)+" alt=\"Food\"") + "\u002F\u003E\u003Cdiv class=\"category-title\"\u003E\u003Cdiv\u003E" + (pug_escape(null == (pug_interp = recipe.title) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
       }
   } else {
     var $$l = 0;
     for (var pug_index0 in $$obj) {
       $$l++;
       var recipe = $$obj[pug_index0];
-pug_html = pug_html + "\u003Cdiv class=\"grid-cell\"\u003E\u003Cimg" + (" class=\"recipe-picture\""+pug_attr("src", recipe.image, true, false)+pug_attr("id", recipe.id, true, false)+" alt=\"Food\"") + "\u002F\u003E\u003Cdiv class=\"category-title\"\u003E\u003Cdiv\u003E" + (pug_escape(null == (pug_interp = recipe.title) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"grid-cell\"\u003E\u003Cimg" + (" class=\"recipe-picture\""+pug_attr("src", 'https://spoonacular.com/recipeImages/' + recipe.image, true, false)+pug_attr("id", recipe.id, true, false)+" alt=\"Food\"") + "\u002F\u003E\u003Cdiv class=\"category-title\"\u003E\u003Cdiv\u003E" + (pug_escape(null == (pug_interp = recipe.title) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
     }
   }
 }).call(this);

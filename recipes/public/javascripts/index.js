@@ -79,18 +79,16 @@ function displayPage(e){
   // }
   if(href == 'categories'){
     pageContent.innerHTML = categoriesTemplate();
-    let btnBritish = document.getElementsByClassName('grid-cell');
-    for (let element in btnBritish) {
-      element.addEventListener('click', stamp);
-    }
-    
+    clickCategory();
   }
   if (href == 'create'){
     pageContent.innerHTML = createTemplate();
     create();
   }
   if (href == 'discover'){
-    pageContent.innerHTML = discoverTemplate({ results: [{ image: './images/1.jpg', id:'1', title:'Cheese' }, { image: './images/2.jpg', id:'2', title:'Cheese' },{ image: './images/3.jpg', id:'3', title:'Cheese' }, { image: './images/4.jpg', id:'4', title:'Cheese' },{ image: './images/5.jpg', id:'5', title:'Cheese' }, { image: './images/6.jpg', id:'6', title:'Cheese' }] });
+    doJSONRequest('GET', '/search', null, null, function(res, req){
+      pageContent.innerHTML = discoverTemplate(res);
+    })
   }
   if (href == 'about'){
     pageContent.innerHTML = "";
@@ -159,6 +157,40 @@ function addIngredients(){
 }
 
 
+function clickCategory() {
+  let greek = document.getElementById('greek');
+  let british = document.getElementById('british');
+  let indian = document.getElementById('indian');
+  let japanese = document.getElementById('japanese');
+  let chinese = document.getElementById('chinese');
+  let thai = document.getElementById('thai');
+  let italian = document.getElementById('italian');
+  let mexican = document.getElementById('mexican');
+  let french = document.getElementById('french');
+  let swiss = document.getElementById('swiss');
+  let spanish = document.getElementById('spanish');
+  let middleeast = document.getElementById('middleeast');
+
+  greek.addEventListener('click', openCategory);
+  british.addEventListener('click', openCategory);
+  indian.addEventListener('click', openCategory);
+  japanese.addEventListener('click', openCategory);
+  chinese.addEventListener('click', openCategory);
+  thai.addEventListener('click', openCategory);
+  italian.addEventListener('click', openCategory);
+  mexican.addEventListener('click', openCategory);
+  french.addEventListener('click', openCategory);
+  swiss.addEventListener('click', openCategory);
+  spanish.addEventListener('click', openCategory);
+  middleeast.addEventListener('click', openCategory);
+}
+
+function openCategory(e) {
+  let recipeId = e.target.alt;
+  doJSONRequest('GET', '/search', null, null, function(res, req){
+    res.send(recipeId);
+  })
+}
 
 
 
