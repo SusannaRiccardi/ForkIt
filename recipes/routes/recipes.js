@@ -17,9 +17,8 @@ router.get('/', function(req, res, next) {
       addLinks(obj);
     }
 
-    let recipes = {'recipes' : found}
-    console.log(recipes.recipes);
-    res.render('recipes', {title : "Recipes", message : recipes});
+    let recipes = {'results' : found}
+    res.send(recipes);
   })
 });
 

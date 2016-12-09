@@ -86,7 +86,7 @@ function displayPage(e){
     create();
   }
   if (href == 'discover'){
-    doJSONRequest('GET', '/search', null, null, function(res, req){
+    doJSONRequest('GET', '/recipes', null, null, function(res, req){
       pageContent.innerHTML = discoverTemplate(res);
     })
   }
@@ -188,7 +188,7 @@ function clickCategory() {
 function openCategory(e) {
   var pageContent = document.getElementById('page-content');
   let recipeId = e.target.alt;
-  doJSONRequest('GET', '/search/'+ recipeId, null, null, function(res, req){
+  doJSONRequest('GET', '/category/'+ recipeId, null, null, function(res, req){
     pageContent.innerHTML = discoverTemplate(res);
   });
 }
