@@ -3,6 +3,7 @@ window.onload = function() {
   pageContent.innerHTML = mainTemplate();
 
   //menu buttons and functionality
+  let btnMenu = document.getElementsByClassName('menu-btn')[0].parentNode;
   let btnMain = document.getElementById('btn-about').parentNode;
   let btnCreate = document.getElementById('btn-create').parentNode;
   let btnDiscover = document.getElementById('btn-discover').parentNode;
@@ -16,6 +17,7 @@ window.onload = function() {
   btnDiscover.href = "discover";
   btnAbout.href = "about";
 
+  btnMenu.addEventListener('click', displayPage);
   btnCreate.addEventListener('click', displayPage);
   btnDiscover.addEventListener('click', displayPage);
   btnAbout.addEventListener('click', displayPage);
