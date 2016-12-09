@@ -16,6 +16,7 @@ window.onload = function() {
   btnCreate.href = "create";
   btnDiscover.href = "discover";
   btnAbout.href = "about";
+  btnMenu.href = "menu";
 
   btnMenu.addEventListener('click', displayPage);
   btnCreate.addEventListener('click', displayPage);
@@ -78,6 +79,11 @@ function displayPage(e){
   // }
   if(href == 'categories'){
     pageContent.innerHTML = categoriesTemplate();
+    let btnBritish = document.getElementsByClassName('grid-cell');
+    for (let element in btnBritish) {
+      element.addEventListener('click', stamp);
+    }
+    
   }
   if (href == 'create'){
     pageContent.innerHTML = createTemplate();
@@ -89,9 +95,16 @@ function displayPage(e){
   if (href == 'about'){
     pageContent.innerHTML = "";
   }
-  if (href == search){
+  if (href == 'search'){
     search();
   }
+  if (href == 'menu'){
+    pageContent.innerHTML = mainTemplate();
+  }
+}
+
+function stamp(){
+  alert('pressed');
 }
 
 
