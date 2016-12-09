@@ -51,8 +51,11 @@ background-size: cover;
 
 .recipe-picture {
   position: static;
+  min-width: 100%;
+  min-width: 100%;
+  height: auto;
   width: auto;
-  height: 100%;
+  /*height: auto;*/
 }
 
 #arrow-down{
@@ -180,12 +183,16 @@ background-size: cover;
 @media only screen and (max-width : 480px) {
   /*Smartphone view:*/
   .grid-cell{
-    width: 128px;
-    height: 150px;
+    width: 145px;
+    height: 170px;
     margin: 3px;
   }
   .grid-block{
     margin: 25px;
+  }
+  .category-title div{
+    font-size: 1em;
+    top:calc(50% - 0.5em);
   }
 
 }
@@ -193,12 +200,16 @@ background-size: cover;
 @media only screen and (max-width : 650px) and (min-width : 481px) {
   /* Tablet view:*/
   .grid-cell{
-    width: 128px;
-    height: 150px;
+    width: 145px;
+    height: 170px;
     margin: 3px;
   }
   .grid-block{
     margin: 25px;
+  }
+  .category-title div{
+    font-size: 1em;
+    top:calc(50% - 0.5em);
   }
 }
 

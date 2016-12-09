@@ -82,7 +82,7 @@ function displayPage(e){
     create();
   }
   if (href == 'discover'){
-    pageContent.innerHTML = discoverTemplate({ results: [{ image: './images/1.jpg', id:'1' }, { image: './images/2.jpg', id:'2' },{ image: './images/3.jpg', id:'3' }, { image: './images/4.jpg', id:'4' },{ image: './images/5.jpg', id:'5' }, { image: './images/6.jpg', id:'6' }] });
+    pageContent.innerHTML = discoverTemplate({ results: [{ image: './images/1.jpg', id:'1', title:'Cheese' }, { image: './images/2.jpg', id:'2', title:'Cheese' },{ image: './images/3.jpg', id:'3', title:'Cheese' }, { image: './images/4.jpg', id:'4', title:'Cheese' },{ image: './images/5.jpg', id:'5', title:'Cheese' }, { image: './images/6.jpg', id:'6', title:'Cheese' }] });
   }
   if (href == 'about'){
     pageContent.innerHTML = "";
