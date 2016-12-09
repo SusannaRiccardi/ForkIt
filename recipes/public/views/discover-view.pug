@@ -1,8 +1,8 @@
 #discover-view.content
   .grid-block
-    each recipe in recipes
+    each recipe in results
       .grid-cell
-        img.recipe-picture(src = recipe.image, alt='Food')
+        img.recipe-picture(src = recipe.image id = recipe.id alt='Food')
   #arrow-down
     img(src='images/arrow_down.png')
 

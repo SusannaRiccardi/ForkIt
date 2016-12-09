@@ -39,8 +39,6 @@ window.onload = function() {
   let search = document.getElementById('search');
 
   let inputField = document.getElementsByTagName('input');
-  let stars = document.getElementsByClassName('star');
-  let starContainer = document.getElementById('stars');
 
   console.log(mainPageSearch.getAttribute('placeholder'));
 
@@ -84,7 +82,7 @@ function displayPage(e){
     create();
   }
   if (href == 'discover'){
-    pageContent.innerHTML = discoverTemplate({ recipes: [{ image: './images/1.jpg' }, { image: './images/2.jpg' },{ image: './images/3.jpg' }, { image: './images/4.jpg' },{ image: './images/5.jpg' }, { image: './images/6.jpg' }] });
+    pageContent.innerHTML = discoverTemplate({ results: [{ image: './images/1.jpg', id:'1' }, { image: './images/2.jpg', id:'2' },{ image: './images/3.jpg', id:'3' }, { image: './images/4.jpg', id:'4' },{ image: './images/5.jpg', id:'5' }, { image: './images/6.jpg', id:'6' }] });
   }
   if (href == 'about'){
     pageContent.innerHTML = "";
