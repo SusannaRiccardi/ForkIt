@@ -9,8 +9,10 @@
         img.icon(src='./images/icons/bread.png')
         img.icon(src='./images/icons/red_vine.png')
         img.icon(src='./images/icons/muffin.png')
-    video#bgvid(playsinline='', autoplay='', muted='', loop='')
-      source(src='./images/foodPreparing.mp4', type='video/mp4')
+    .video-background
+      .video-foreground
+        //width='1280', height='720', IN case too slow to load video
+        iframe(src='https://www.youtube.com/embed/f1CBFUc4LVY?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&list=PLvMZraBTdNAtF-2eELQsz90BAFwJHwUpF', frameborder='0', allowfullscreen='')
   #mainPageSearch.message
     input#food(type='text', name='food', placeholder='SEARCH FOOD')
 
