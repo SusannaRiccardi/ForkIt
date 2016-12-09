@@ -23,7 +23,7 @@ const RecipeSchema = new mongoose.Schema({
     lactosefree : {type: Boolean, default: false},
     glutenfree : {type: Boolean, default: false},
     vegetarian : {type: Boolean, default: false},
-    category : {type: String, enum: [greek, british, indian, japanese, chinese, thai, italian, mexican, french, swiss, spanish, middleeast]}
+    category : {type: String, enum: ["greek", "british", "indian", "japanese", "chinese", "thai", "italian", "mexican", "french", "swiss", "spanish", "middleeast"]}
 });
 
 mongoose.model('Recipe', RecipeSchema);
