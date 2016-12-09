@@ -39,6 +39,10 @@ a {
   cursor: pointer;
 }
 
+input{
+  padding-left: 4px;
+  padding-right: 4px;
+}
 
 /*#menubar:active {}*/
 
