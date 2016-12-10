@@ -290,6 +290,19 @@ input{
   -webkit-text-stroke-color: white;
 }
 
+input[type="checkbox"] {
+}
+input[type="checkbox"] + label span {
+  display:inline-block;
+  width:19px;
+  height:19px;
+  margin:-1px 4px 0 0;
+  vertical-align:middle;
+  cursor:pointer;
+}
+input[type="checkbox"]:checked + label span {
+}
+
 
 /*Content-->*/
 

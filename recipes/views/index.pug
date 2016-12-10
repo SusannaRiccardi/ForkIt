@@ -50,11 +50,21 @@ html
         #search-btn-back
           i.material-icons.icon keyboard_backspace
         .form-text Search by name
-        input#searchField(type='text', name='search', placeholder='Japanese - Vegan - Onions')
+        input#searchField(type='text', name='search', placeholder="Yoji's sushi - Apple Pie")
         .form-text Include ingredient
         input#searchField(type='text', name='search', placeholder='Japanese - Vegan - Onions')
         .form-text Exclude ingredient
         input#excludeField(type='text', name='filter', placeholder='Fish - Meat - Spicy')
+
+        input#a.checkbox(type='checkbox', name='a')
+        label.checkbox(for='a') Gluten Free
+
+        input#b.checkbox(type='checkbox', name='b')
+        label.checkbox(for='b') Dairy
+
+        input#c.checkbox(type='checkbox', name='c')
+        label.checkbox(for='c') Vegan
+
         //
           <div class="form-text">User Rating</div> <br>
           <div class="form-text" id="stars">
