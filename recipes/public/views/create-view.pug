@@ -24,11 +24,11 @@
     label.input-label Preparation
     br
     br
-    textarea#create-description(rows='4', cols='20')
+    textarea#create-description(name='description' rows='4', cols='20')
     #submit-bar
       label.custom-label-left(for='file-upload')
         | Load Image
-      input#file-upload(type='file', accept='image/*')
+      input#file-upload(type='file', name='file' accept='image/*')
       br
       label.custom-label-right(for='submit-recipe')
         | Submit

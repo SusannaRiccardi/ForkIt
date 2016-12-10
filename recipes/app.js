@@ -15,6 +15,7 @@ var singlerecipe = require('./routes/singlerecipe');
 var app = express();
 
 const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 mongoose.connect(config.mongoUrl + config.mongoDbName);
 
 require('./models');

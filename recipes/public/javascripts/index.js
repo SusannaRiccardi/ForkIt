@@ -74,8 +74,10 @@ function displayPage(e){
   }
   if (href == 'discover'){
     doJSONRequest('GET', '/recipes', null, null, function(res, req){
+
       pageContent.innerHTML = discoverTemplate(res);
       accessToSingleRecipeMongo();
+
     })
   }
   if (href == 'about'){
@@ -99,6 +101,7 @@ function create() {
   let createBtn = document.getElementById('submit-recipe');
   createBtn.addEventListener('click', createRecipe);
 }
+
 function createRecipe(e) {
   e.preventDefault();
   let title = document.getElementById('create-name').value;
@@ -106,6 +109,9 @@ function createRecipe(e) {
   let ingredients = [];
   let names = document.getElementsByClassName('create-ingredient-name');
   let quantities = document.getElementsByClassName('create-ingredient-quantity');
+  let inputFile = document.getElementById('file-upload').files[0];
+  let data = new FormData();
+
 
   if(title == ''){
     window.alert('The title of the recipe is a compulsory field');
@@ -119,20 +125,28 @@ function createRecipe(e) {
   else {
     for (i = 0; i < names.length; i++) {
       let q = (quantities[i].value).split(/(\d+)/);
+
       let ing = {};
       ing.name = names[i].value;
       ing.quant = Number(q[1]);
       ing.unity = q[2];
       ingredients.push(ing);
     }
-    let obj = {};
-    obj.title = title;
-    obj.instructions = instructions;
-    obj.ingredients = ingredients;
-    doJSONRequest('POST', '/recipes', null, obj, function(){});
+    data.append('title', title);
+    data.append('instructions', instructions);
+    data.append('ingredients', ingredients);
+    if (inputFile === undefined) {
+      data.append('image', '');
+    } else {
+      let inputField = document.getElementById('file-upload')
+      data.append('image', inputField.value.split('.')[inputField.value.split('.').length-1]);
+    }
+
+    data.append('file', inputFile);
+    doFormDataRequest('POST', '/recipes', data)
     var pageContent = document.getElementById('page-content');
     pageContent.innerHTML = mainTemplate();
-  }
+}
 }
 
 // Add more ingredients
@@ -331,6 +345,13 @@ function doJSONRequest(method, url, headers, data, callback) {
 
   //send the request to the server
   r.send(dataToSend);
+}
+
+function doFormDataRequest(method, url, data) {
+  var xhr = new XMLHttpRequest();
+  xhr.open( method, url, true );
+  // xhr.onreadystatechange = handler;
+  xhr.send( data );
 }
 
 function canJSON(value) {
