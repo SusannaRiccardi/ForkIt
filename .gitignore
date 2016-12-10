@@ -2,3 +2,4 @@
 recipes/node_modules
 recipes/npm-debug.log
 html_views/view/.eslintrc.json
+recipes/public/uploads/*
