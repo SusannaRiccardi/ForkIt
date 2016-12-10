@@ -1,4 +1,4 @@
-*{
+* {
   font-family: 'Lato', sans-serif;
 }
 
@@ -30,6 +30,7 @@
   right: 0px;
   border: 0px;
 }
+
 
 #menubar:focus {
   z-index: 4;
@@ -99,21 +100,41 @@ input{
 
 #btn-signup {
   position: relative;
-  left: calc(50% - 18.5px)!important;
+  width: 100%;
+  /*left: calc(50% - 18.5px)!important;*/
+}
+
+#btn-signup p {
+  margin: 0px;
+  text-align: center;
+  position: relative;
+  left: 0;
+  right: 0;
 }
 
 #btn-signup img {
   width: 37px;
+  margin-left: calc(50% - 18.5px)!important;
+  margin-right: calc(50% - 18.5px)!important;
 }
 
 #btn-signup-login {
   position: relative;
-  left: calc(50% - 18.5px)!important;
-  -moz-transform: scale(1, -1);
+  width: 100%;
+}
+
+#btn-signup-login p {
+  margin: 0px;
+  text-align: center;
+  position: relative;
+  left: 0;
+  right: 0;
 }
 
 #btn-signup-login img {
   width: 37px;
+  margin-left: calc(50% - 18.5px)!important;
+  margin-right: calc(50% - 18.5px)!important;
   -webkit-transform: scale(1, -1);
   -o-transform: scale(1, -1);
   -ms-transform: scale(1, -1);
@@ -280,28 +301,43 @@ input{
   cursor: pointer;
 }
 
-#stars{
-  margin-left: 5%;
-}
-
-.star{
-
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: white;
+.outerCheckbox {
+  margin: 20px;
 }
 
 input[type="checkbox"] {
+    display:none;
 }
 input[type="checkbox"] + label span {
-  display:inline-block;
-  width:19px;
-  height:19px;
-  margin:-1px 4px 0 0;
-  vertical-align:middle;
-  cursor:pointer;
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    background:url("../images/check_radio_sheet.png") left top no-repeat;
+    cursor:pointer;
 }
 input[type="checkbox"]:checked + label span {
+    background:url("../images/check_radio_sheet.png") -19px top no-repeat;
 }
+
+
+/*input[type="checkbox"] {
+  width: 10px;
+  background: red;
+  margin: 0px;
+  padding: 0px;
+}*/
+
+/*input[type="checkbox"] + label span {*/
+  /*height:19px;
+  margin:-1px 4px 0 0;
+  vertical-align:middle;
+  cursor:pointer;*/
+/*}*/
+
+/*input[type="checkbox"]:checked + label span {
+}*/
 
 
 /*Content-->*/

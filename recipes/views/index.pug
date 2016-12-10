@@ -56,14 +56,21 @@ html
         .form-text Exclude ingredient
         input#excludeField(type='text', name='filter', placeholder='Fish - Meat - Spicy')
 
-        input#a.checkbox(type='checkbox', name='a')
-        label.checkbox(for='a') Gluten Free
-
-        input#b.checkbox(type='checkbox', name='b')
-        label.checkbox(for='b') Dairy
-
-        input#c.checkbox(type='checkbox', name='c')
-        label.checkbox(for='c') Vegan
+        .outerCheckbox
+          input#c1(type='checkbox', name='gluten')
+          label(for='c1')
+            span
+            | Gluten free
+        .outerCheckbox
+          input#c2(type='checkbox', name='dairy')
+          label(for='c2')
+            span
+            | Dairy
+        .outerCheckbox
+          input#c3(type='checkbox', name='vegan')
+          label(for='c3')
+            span
+            | Vegan
 
         //
           <div class="form-text">User Rating</div> <br>
@@ -93,6 +100,7 @@ html
                     br
                     input(type='password', name='password', value='')
                     a#btn-signup
+                      p Signup
                       img(src='./images/arrow_down.png')
                     br
                     input#login-submit-btn.submit-btn(type='submit', value='Login')
@@ -120,6 +128,7 @@ html
                         input(type='password', name='RepeatPassword', value='')
                         a#btn-signup-login
                           img(src='./images/arrow_down.png')
+                          p Login
                         br
                         input#signup-submit-btn.submit-btn(type='submit', value='Signup')
     // 
