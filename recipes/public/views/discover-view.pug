@@ -2,7 +2,7 @@
   .grid-block
     each recipe in results
       .grid-cell
-        img.recipe-picture(src= 'https://spoonacular.com/recipeImages/' + recipe.image id = recipe.id alt='Food')
+        img.recipe-picture(src= 'https://spoonacular.com/recipeImages/' + recipe.image id = (recipe.id || recipe._id) alt='Food')
         .category-title
           div= recipe.title
   #arrow-down

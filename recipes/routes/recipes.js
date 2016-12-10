@@ -24,6 +24,7 @@ router.get('/', function(req, res, next) {
 
 // Get /recipes/_id -- Get for single recipe view
 router.get('/:recipeid', function(req, res) {
+  console.log(req.params.recipeid);
   Recipe.findById(req.params.recipeid, fieldsFilter).lean().populate('recipe').exec(function(err, recipe) {
     if (err) {
       throw err
@@ -36,7 +37,7 @@ router.get('/:recipeid', function(req, res) {
       });
     } else {
       addLinks(recipe);
-      res.render('recipe', {title : "Recipe", message : recipe});
+      res.send(recipe);
     }
   })
 })

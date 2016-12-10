@@ -75,7 +75,7 @@ function displayPage(e){
   if (href == 'discover'){
     doJSONRequest('GET', '/recipes', null, null, function(res, req){
       pageContent.innerHTML = discoverTemplate(res);
-      accessToSingleRecipe();
+      accessToSingleRecipeMongo();
     })
   }
   if (href == 'about'){
@@ -153,6 +153,13 @@ function addIngredients(){
   addIngredient();
 }
 
+function accessToSingleRecipeMongo(){
+  let recipes = document.getElementsByClassName('grid-cell');
+  console.log(recipes);
+  for (let recipe of recipes){
+    recipe.addEventListener('click', openSingleRecipeMongo);
+  }
+}
 
 
 // CATEGORIES VIEW
@@ -225,6 +232,28 @@ function openSingleRecipe (e){
   })
 }
 
+function openSingleRecipeMongo (e){
+  var pageContent = document.getElementById('page-content');
+  doJSONRequest('GET', '/recipes/' + e.target.id, null, null, function(res, req){
+    let recipe = res;
+    console.log(recipe);
+    let obj = {};
+    obj.title = recipe.title;
+    obj.author = 'Vanessa';
+    obj.instructions = recipe.instructions;
+    obj.ingredients = [];
+    for (let ingr of recipe.ingredients){
+      let ingredient = {};
+      ingredient.name = ingr.name;
+      ingredient.quantity = ingr.amount + " " +ingr.unit;
+      obj.ingredients.push(ingredient);
+    }
+    obj.image = recipe.image;
+    obj.comments = [];
+    console.log(obj)
+    pageContent.innerHTML = recipeTemplate({recipe : obj});
+  })
+}
 
 
 
