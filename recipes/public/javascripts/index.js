@@ -25,8 +25,6 @@ window.onload = function() {
   btnCategories.addEventListener('click', displayPage)
 
 
-
-
   let menubar = document.getElementById('menubar');
   let recipesBtn = document.getElementById('recipes-view-btn');
   let menuwrapper = document.getElementById('menuwrapper');
@@ -101,12 +99,6 @@ function displayPage(e){
   }
 }
 
-function stamp(){
-  alert('pressed');
-}
-
-
-
 // Creation of the recipe with the post request
 function create() {
   addIngredients();
@@ -122,20 +114,34 @@ function createRecipe(e) {
   let quantities = document.getElementsByClassName('create-ingredient-quantity');
   //console.log(names)
 
-  for (i = 0; i < names.length; i++) {
-    let ing = {};
-    ing.name = names[i].value
-    ing.quant = quantities[i].value
-    console.log(ing)
-    ingredients.push(ing);
+  if(title == ''){
+    window.alert('The title of the recipe is a compulsory field');
   }
-  let obj = {};
-  obj.title = title;
-  obj.instructions = instructions;
-  obj.ingredients = ingredients;
-  doJSONRequest('POST', '/recipes', null, obj, function(){});
-  var pageContent = document.getElementById('page-content');
-  pageContent.innerHTML = mainTemplate();
+  else if(instructions == ''){
+    window.alert('Description of the preparation of the recipe is a compulsory field');
+  }
+  else if(names[0].value == ''){
+    window.alert('Ingredients of the recipe are compulsory fields');
+  }
+  else {
+    for (i = 0; i < names.length; i++) {
+      let q = (quantities[i].value).split(/(\d+)/);
+      console.log(q);
+      let ing = {};
+      ing.name = names[i].value;
+      ing.quant = Number(q[1]);
+      ing.unity = q[2];
+      console.log(ing)
+      ingredients.push(ing);
+    }
+    let obj = {};
+    obj.title = title;
+    obj.instructions = instructions;
+    obj.ingredients = ingredients;
+    doJSONRequest('POST', '/recipes', null, obj, function(){});
+    var pageContent = document.getElementById('page-content');
+    pageContent.innerHTML = mainTemplate();
+  }
 }
 
 // Add more ingredients
@@ -192,49 +198,6 @@ function openCategory(e) {
     pageContent.innerHTML = discoverTemplate(res);
   });
 }
-
-
-
-//   let receivedArray = [];
-//   let receivedJSONPos = 0;
-//   btnDiscover.addEventListener('click', function(e) {
-//     // doJSONRequest('GET', '/discover', {}, null, function(req, res) {
-//     //     let receivedJSON = req.body;
-//
-//     //     for (let recipe of receivedJSON) {
-//     //         receivedArray.push(recipe);
-//     //     }
-//
-//     //     pageContent.innerHTML = discoverTemplate({ recipes: receivedArray.slice(receivedJSONPos, receivedJSONPos + 6) });
-//     //     receivedJSONPos += 6;
-//     // })
-//     // example
-//     e.preventDefault();
-//     pageContent.innerHTML = discoverTemplate({ recipes: [{ image: './images/1.jpg' }, { image: './images/2.jpg' }, { image: './images/3.jpg' }, { image: './images/4.jpg' }, { image: './images/5.jpg' }, { image: './images/6.jpg' }] });
-//   });
-//
-//   btnSearchSubmit.addEventListener('click', function(e) {
-//     e.preventDefault;
-//     let search = document.getElementById('searchField').value;
-//     let exclude = document.getElementById('excludeField').value;
-//     let filter = {
-//       search: search,
-//       exclude: exclude
-//     };
-//     let filterJson = JSON.stringify(filter);
-//
-//     // doJSONRequest(method, url, headers, data, callback){
-//     doJSONRequest('GET', '/discover', {}, filterJson, function(req, res) {})
-//     // pageContent.innerHTML = discoverTemplate();
-//   });
-//
-//   btnAbout.addEventListener('click', function(e) {
-//     e.preventDefault();
-//     pageContent.innerHTML = "";
-//   });
-//
-//
-//
 
 
 
