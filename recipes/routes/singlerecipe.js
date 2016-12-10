@@ -10,7 +10,7 @@ var unirest = require('unirest');
 router.get('/:id', function(req, res, next) {
   let id = req.params.id;
   unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + id +"/information?includeNutrition=false")
-  .header("X-Mashape-Key", "IgkoEfef7smshtIMHugi9DUMxa89p13LuZNjsnLXNeXXPe9Xte")
+  .header("X-Mashape-Key", "gAlLXPZyJsmshAGu1ZMh0jlusuoVp1e9WKZjsnUUFxeSibN4A9")
   .header("Accept", "application/json")
   .end(function (result) {
     res.send(result.body);
