@@ -75,7 +75,7 @@ function displayPage(e){
   if (href == 'discover'){
     doJSONRequest('GET', '/recipes', null, null, function(res, req){
 
-      pageContent.innerHTML = discoverTemplate(res);
+      pageContent.innerHTML = discoverUserTemplate(res);
       accessToSingleRecipeMongo();
 
     })
