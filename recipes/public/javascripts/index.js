@@ -239,19 +239,55 @@ function openSingleRecipeMongo (e){
     console.log(recipe);
     let obj = {};
     obj.title = recipe.title;
-    obj.author = 'Vanessa';
+    obj.author = 'Susanna';
     obj.instructions = recipe.instructions;
     obj.ingredients = [];
     for (let ingr of recipe.ingredients){
       let ingredient = {};
+      console.log()
       ingredient.name = ingr.name;
-      ingredient.quantity = ingr.amount + " " +ingr.unit;
+      ingredient.quantity = ingr.quant + " " +ingr.unity;
       obj.ingredients.push(ingredient);
     }
     obj.image = recipe.image;
     obj.comments = [];
     console.log(obj)
     pageContent.innerHTML = recipeTemplate({recipe : obj});
+    // upvotes(e.target.id);
+    // downvotes(e.target.id);
+  })
+}
+
+
+
+
+// Upvote and dowvote the recipe
+function upvotes(idRecipe) {
+  const mongoose = require('mongoose');
+  let upvote = document.getElementById('arrow-back');
+  upvote.addEventListener('click', function(){
+    doJSONRequest('GET', '/recipes/'+idRecipe, null, null, function(res, req){
+      let recipe = res;
+      let up = recipe.likes;
+      res.update({_id:idRecipe}, {$set:{likes:up++}}, function(err, result) {
+        if (err)
+        console.log(result);
+      });
+    })
+  })
+}
+
+function downvotes(idRecipe) {
+  let downvote = document.getElementById('arrow-next');
+  downvote.addEventListener('click', function(){
+    doJSONRequest('GET', '/recipes/'+idRecipe, null, null, function(res, req){
+      let recipe = res;
+      let down = recipe.dislikes;
+      res.update({_id:idRecipe}, {$set:{dislikes:down++}}, function(err, result) {
+        if (err)
+        console.log(result);
+      });
+    })
   })
 }
 
