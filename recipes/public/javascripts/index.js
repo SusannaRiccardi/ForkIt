@@ -203,9 +203,25 @@ function accessToSingleRecipe(){
 }
 
 function openSingleRecipe (e){
-  console.log(e.target.id);
+  var pageContent = document.getElementById('page-content');
   doJSONRequest('GET', '/singlerecipe/' + e.target.id, null, null, function(res, req){
-    console.log(res);
+    let recipe = res;
+    console.log(recipe);
+    let obj = {};
+    obj.title = recipe.title;
+    obj.author = 'Vanessa';
+    obj.instructions = recipe.instructions;
+    obj.ingredients = [];
+    for (let ingr of recipe.extendedIngredients){
+      let ingredient = {};
+      ingredient.name = ingr.name;
+      ingredient.quantity = ingr.amount + " " +ingr.unit;
+      obj.ingredients.push(ingredient);
+    }
+    obj.image = recipe.image;
+    obj.comments = [];
+    console.log(obj)
+    pageContent.innerHTML = recipeTemplate({recipe : obj});
   })
 }
 
