@@ -11,7 +11,6 @@ window.onload = function() {
   let btnSearchSubmit = document.getElementById('search-submit-btn');
   let btnCategories = document.getElementById('btn-categories').parentNode;
 
-  // Da togliere quando cambiano nell'html
   btnCategories.href = "categories";
   btnCreate.href = "create";
   btnDiscover.href = "discover";
@@ -41,8 +40,6 @@ window.onload = function() {
 
   let inputField = document.getElementsByTagName('input');
 
-  console.log(mainPageSearch.getAttribute('placeholder'));
-
   menuwrapper.addEventListener('mouseenter', function() {
       menuBtnFont.setAttribute('Style', '-ms-transform: rotate(90deg); -webkit-transform: rotate(90deg); transform: rotate(90 deg);');
   });
@@ -58,9 +55,8 @@ window.onload = function() {
   mainPageSearchContent.addEventListener('blur', function() {
       mainPageSearchContent.setAttribute('placeholder', 'SEACH FOOD');
   });
-
-
 }
+
 
 
 // Display different pages when the menu buttons are clicked
@@ -68,13 +64,6 @@ function displayPage(e){
   e.preventDefault();
   var pageContent = document.getElementById('page-content');
   let href = e.target.href.split('/').pop();
-  // if (href == 'todayRecipe'){
-  //   pageContent.innerHTML = recipeTemplate({ recipe: { title: 'Sushi',
-  //   instructions: 'Go to McDonald',
-  //   author: "Andrea",
-  //   comments: [{ text: 'Buonissimo', username: 'samuelebischof' }, { text: 'Che schifo', username: 'lucaferrari' }],
-  //   ingredients: [{ name: 'pane', quantity: '1Kg' }, { name: 'acqua', quantity: '3dl' }] } });
-  // }
   if(href == 'categories'){
     pageContent.innerHTML = categoriesTemplate();
     clickCategory();
@@ -86,6 +75,7 @@ function displayPage(e){
   if (href == 'discover'){
     doJSONRequest('GET', '/recipes', null, null, function(res, req){
       pageContent.innerHTML = discoverTemplate(res);
+      accessToSingleRecipe();
     })
   }
   if (href == 'about'){
@@ -99,6 +89,10 @@ function displayPage(e){
   }
 }
 
+
+
+
+// CREAT RECIPE VIEW
 // Creation of the recipe with the post request
 function create() {
   addIngredients();
@@ -112,7 +106,6 @@ function createRecipe(e) {
   let ingredients = [];
   let names = document.getElementsByClassName('create-ingredient-name');
   let quantities = document.getElementsByClassName('create-ingredient-quantity');
-  //console.log(names)
 
   if(title == ''){
     window.alert('The title of the recipe is a compulsory field');
@@ -126,12 +119,10 @@ function createRecipe(e) {
   else {
     for (i = 0; i < names.length; i++) {
       let q = (quantities[i].value).split(/(\d+)/);
-      console.log(q);
       let ing = {};
       ing.name = names[i].value;
       ing.quant = Number(q[1]);
       ing.unity = q[2];
-      console.log(ing)
       ingredients.push(ing);
     }
     let obj = {};
@@ -163,6 +154,9 @@ function addIngredients(){
 }
 
 
+
+// CATEGORIES VIEW
+// click on a single category and open all the recipes of that category
 function clickCategory() {
   let greek = document.getElementById('greek');
   let british = document.getElementById('british');
@@ -196,9 +190,24 @@ function openCategory(e) {
   let recipeId = e.target.alt;
   doJSONRequest('GET', '/category/'+ recipeId, null, null, function(res, req){
     pageContent.innerHTML = discoverTemplate(res);
+    accessToSingleRecipe();
   });
 }
 
+function accessToSingleRecipe(){
+  let recipes = document.getElementsByClassName('grid-cell');
+  console.log(recipes);
+  for (let recipe of recipes){
+    recipe.addEventListener('click', openSingleRecipe);
+  }
+}
+
+function openSingleRecipe (e){
+  console.log(e.target.id);
+  doJSONRequest('GET', '/singlerecipe/' + e.target.id, null, null, function(res, req){
+    console.log(res);
+  })
+}
 
 
 
@@ -238,8 +247,6 @@ function doJSONRequest(method, url, headers, data, callback) {
   if (!("undefined" == typeof data)
   && !(data === null))
   dataToSend = JSON.stringify(data);
-
-  //console.log(dataToSend)
 
   //send the request to the server
   r.send(dataToSend);
