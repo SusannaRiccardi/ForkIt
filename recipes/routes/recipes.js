@@ -51,15 +51,15 @@ router.post('/', function(req, res) {
   let form = new formidable.IncomingForm();
   form.parse(req, function(err, fields, files) {
     console.log(fields);
-    let ingredients = []
-    for(let ing of fields['ingredients']){
-      ingredients.push(JSON.parse(ing));
-    }
+    // let ingredients = []
+    // for(let ing of fields['ingredients']){
+    //    ingredients.push(JSON.parse(ing));
+    // }
 
     const newRecipe = new Recipe({
       title : fields['title'],
       instructions : fields['instructions'],
-      ingredients : ingredients,
+      ingredients : JSON.parse(fields['ingredients']),
       video : fields['video'] || '',
       image : fields['image'] || '',
       lactosefree : 'TODO',
