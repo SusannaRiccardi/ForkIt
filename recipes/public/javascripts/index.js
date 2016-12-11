@@ -102,6 +102,9 @@ function create() {
   createBtn.addEventListener('click', createRecipe);
 }
 
+
+
+////////////////////// Create Recipe /////////////////////////////
 function createRecipe(e) {
   e.preventDefault();
   let title = document.getElementById('create-name').value;
@@ -158,7 +161,7 @@ function createRecipe(e) {
   }
 }
 
-// Add more ingredients
+////////////////////// Add ingredient /////////////////////////////
 function addIngredients(){
   let ingredientsContainer = document.getElementById('recipe-create-ingredients');
   let btnAddIngredient = document.getElementById('btnAddIngredient');
@@ -178,8 +181,11 @@ function addIngredients(){
 
 function accessToSingleRecipeMongo(){
   let recipes = document.getElementsByClassName('grid-cell');
-  for (let recipe of recipes){
-    recipe.addEventListener('click', openSingleRecipeMongo);
+  console.log(recipes)
+
+  for (let i = 0; i<recipes.length;i++){
+    console.log(recipes[i]);
+    recipes[i].addEventListener('click', openSingleRecipeMongo)
   }
 }
 
