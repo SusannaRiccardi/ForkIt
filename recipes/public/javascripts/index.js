@@ -271,7 +271,7 @@ function openSingleRecipeMongo (e){
 }
 
 
-
+//Search Recipe
 
 // Upvote and dowvote the recipe
 function upvotes(idRecipe) {
