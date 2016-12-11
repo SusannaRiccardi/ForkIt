@@ -9,6 +9,12 @@
     input.large-input(id='create-name', name='recipe-name', type='text')
     br
     br
+    label.input-label Required time
+    br
+    br
+    input.large-input(id='create-time', name='recipe-time', type='text')
+    br
+    br
     label.input-label Ingredients
     br
     br
@@ -19,7 +25,22 @@
         #btnAddIngredient
           span
             img(src='./images/add.png')
-    br
+    #checkboxCreate
+      .outerCheckbox
+        input#c11(type='checkbox', name='gluten')
+        label(for='c11')
+          span
+          | Gluten free
+      .outerCheckbox
+        input#c22(type='checkbox', name='dairy')
+        label(for='c22')
+          span
+          | Dairy
+      .outerCheckbox
+        input#c33(type='checkbox', name='vegan')
+        label(for='c33')
+          span
+          | Vegan
     input.load-file(name='picture', type='file', size='50', accept='image/*')
     label.input-label Preparation
     br

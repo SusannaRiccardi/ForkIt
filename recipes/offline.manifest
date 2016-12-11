@@ -1,0 +1,43 @@
+CACHE MANIFEST
+
+# Time: Sat Dec 10 2016 20:01:40 GMT+0000 (UTC)
+
+CACHE:
+/
+/stylesheets/style.css
+/offline.manifest
+/stylesheets/main_view.css
+/stylesheets/discover_view.css
+/stylesheets/recipe_view.css
+/stylesheets/create_view.css
+/javascripts/index.js
+/javascripts/offline.js
+/views/main-view.js
+views/offline-menu-view.js
+/views/recipe-view.js
+/views/create-view.js
+/views/discover-view.js
+/views/create-view-ingredient.js
+/views/categories-view.js
+/images/icons/bread.png
+/images/arrow_down.png
+/javascripts/jquery-3.1.1.js
+/images/check_radio_sheet.png
+/images/lattuce.jpg
+/images/create_background.jpg
+/images/pasta.png
+/images/icons/chineese.png
+/images/icons/muffin.png
+/images/add.png
+/images/icons/red_vine.png
+https://fonts.googleapis.com/css?family=Lato:300
+https://fonts.gstatic.com/s/lato/v11/IY9HZVvI1cMoAHxvl0w9LVKPGs1ZzpMvnHX-7fPOuAc.woff2
+https://fonts.googleapis.com/icon?family=Material+Icons
+https://fonts.gstatic.com/s/materialicons/v19/2fcrYFNaTjcS6g4U3t-Y5UEw0lE80llgEseQY3FEmqw.woff2
+
+FALLBACK:
+#/ offline.html
+
+NETWORK:
+*
+/offline.manifest

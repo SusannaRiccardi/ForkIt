@@ -58,13 +58,14 @@ router.post('/', function(req, res) {
 
     const newRecipe = new Recipe({
       title : fields['title'],
+      readyInMinutes : fields['readyInMinutes'],
       instructions : fields['instructions'],
       ingredients : JSON.parse(fields['ingredients']),
       video : fields['video'] || '',
       image : fields['image'] || '',
-      lactosefree : 'TODO',
-      glutenfree : 'TODO',
-      vegetarian : 'TODO'
+      lactosefree : fields['lactosefree'],
+      glutenfree : fields['glutenfree'],
+      vegan : fields['vegan']
     });
 
     newRecipe.save(function(err, saved) {
