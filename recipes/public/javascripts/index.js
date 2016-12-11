@@ -266,8 +266,9 @@ function openSingleRecipeMongo (e){
     obj.image = recipe.image;
     obj.comments = [];
     pageContent.innerHTML = recipeTemplate({recipe : obj});
-    // upvotes(e.target.id);
-    // downvotes(e.target.id);
+    upvotes(e.target.id);
+    downvotes(e.target.id);
+    // commentRecipe(e.target.id);
   })
 }
 
@@ -295,16 +296,13 @@ function searchSubmit(e) {
 
 // Upvote and dowvote the recipe
 function upvotes(idRecipe) {
-  const mongoose = require('mongoose');
   let upvote = document.getElementById('arrow-back');
   upvote.addEventListener('click', function(){
     doJSONRequest('GET', '/recipes/'+idRecipe, null, null, function(res, req){
       let recipe = res;
-      let up = recipe.likes;
-      res.update({_id:idRecipe}, {$set:{likes:up++}}, function(err, result) {
-        // if (err)
-        // console.log(result);
-      });
+      let up = recipe.upvotes + 1;
+      let down = recipe.downvotes;
+      doJSONRequest('PUT', '/recipes/'+idRecipe, null, {upvotes : up}, function(){});
     })
   })
 }
@@ -314,13 +312,26 @@ function downvotes(idRecipe) {
   downvote.addEventListener('click', function(){
     doJSONRequest('GET', '/recipes/'+idRecipe, null, null, function(res, req){
       let recipe = res;
-      let down = recipe.dislikes;
-      res.update({_id:idRecipe}, {$set:{dislikes:down++}}, function(err, result) {
-        // if (err)
-        // console.log(result);
-      });
+      let up = recipe.upvotes;
+      let down = recipe.downvotes + 1;
+      doJSONRequest('PUT', '/recipes/'+idRecipe, null, {downvotes : down}, function(){});
     })
   })
+}
+
+function commentRecipe(idRecipe) {
+  let commentSubmit = document.getElementById('submit-comment');
+  let comment = document.getElementById('inner-editor');
+  console.log(comment);
+  commentSubmit.addEventListener('click', function(){
+    if(comment.value == ''){
+      alert('You have to insert a comment before submit');
+    }
+    else {
+      doJSONRequest('PUT', '/recipes/'+idRecipe, null, {comment : comment.value}, function(){});
+    }
+  })
+
 }
 
 
