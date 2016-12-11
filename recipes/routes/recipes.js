@@ -9,6 +9,7 @@ require('../models');
 const Recipe = mongoose.model('Recipe');
 const config = require('../config')
 const fieldsFilter = {'__v' : 0};
+const pubsub = require('../pubsub');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -98,6 +99,74 @@ router.delete('/:recipeid', function(req, res, next) {
     })
   });
 });
+
+
+//updateRecipe
+router.put('/:recipeid', function(req, res, next) {
+  const data = req.body;
+  if(data.upvotes){
+    Recipe.findById(req.params.recipeid, fieldsFilter , function(err, recipe){
+      if (err) return next (err);
+      if (recipe){
+        recipe.upvotes =  data.upvotes;
+
+        recipe.save(onModelSave(res));
+      }
+    });
+  }
+  if(data.downvotes){
+    Recipe.findById(req.params.recipeid, fieldsFilter , function(err, recipe){
+      if (err) return next (err);
+      if (recipe){
+        recipe.downvotes = data.downvotes;
+
+        recipe.save(onModelSave(res));
+      }
+    });
+  }
+  if(data.comment){
+    Recipe.findById(req.params.recipeid, fieldsFilter , function(err, recipe){
+      if (err) return next (err);
+      if (recipe){
+        recipe.comments.push(data.comment);
+
+        recipe.save(onModelSave(res));
+      }
+    });
+  }
+});
+
+function onModelSave(res, status, sendItAsResponse){
+  const statusCode = status || 204;
+  const sendItAsResponseCheck = sendItAsResponse || false;
+  return function(err, saved){
+    if (err) {
+      if (err.name === 'ValidationError'
+      || err.name === 'TypeError' ) {
+        res.status(400)
+        return res.json({
+          statusCode: 400,
+          message: "Bad Request"
+        });
+      }else{
+        return next (err);
+      }
+    }
+
+    pubsub.emit('artist.updated', {})
+    if(sendItAsResponseCheck){
+      const obj = saved.toObject();
+      delete obj.password;
+      delete obj.__v;
+      addLinks(obj);
+      return res.status(statusCode).json(obj);
+    }else{
+      return res.status(statusCode).end();
+    }
+  }
+}
+
+
 
 
 function addLinks(recipe) {
