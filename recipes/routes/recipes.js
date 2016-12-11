@@ -82,7 +82,7 @@ router.post('/', function(req, res) {
         }
 
         form.uploadDir = "./public/uploads/";
-        fs.rename(files.file.path, "./public/uploads/" + saved.id + '.png');
+        fs.rename(files.file.path, "./public/uploads/" + saved.id + '.' + fields['image']);
       }
       res.json(saved);
     })
