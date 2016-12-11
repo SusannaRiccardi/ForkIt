@@ -7,15 +7,26 @@ const config = require('../config')
 const fieldsFilter = {'__v' : 0};
 var unirest = require('unirest');
 
-router.get('/:id', function(req, res, next) {
-  let id = req.params.id.toLowerCase();
-  console.log(req.params.id);
-  unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=100&offset=0&query=" + id)
-  .header("X-Mashape-Key", "gAlLXPZyJsmshAGu1ZMh0jlusuoVp1e9WKZjsnUUFxeSibN4A9")
-  .header("Accept", "application/json")
-  .end(function (result) {
-    res.send(result.body);
-  });
+router.get('/', function(req, res, next) {
+  let name = req.query.name;
+  let ingredients = req.query.ingredient || "";
+  unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?excludeIngredients="+ingredients+"&number=100&offset=0&query="+name)
+    .header("X-Mashape-Key", "gAlLXPZyJsmshAGu1ZMh0jlusuoVp1e9WKZjsnUUFxeSibN4A9")
+    .header("Accept", "application/json")
+    .end(function (result) {
+      res.send(result.body);
+    });
 });
+
+
+
+// unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?diet=vegan&excludeIngredients=sugar&intolerances=dairy%2C+gluten&number=100&offset=0&query=cake")
+// .header("X-Mashape-Key", "gAlLXPZyJsmshAGu1ZMh0jlusuoVp1e9WKZjsnUUFxeSibN4A9")
+// .header("Accept", "application/json")
+// .end(function (result) {
+//   console.log(result.status, result.headers, result.body);
+// });
+
+
 
 module.exports = router;

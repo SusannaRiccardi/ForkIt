@@ -279,14 +279,15 @@ function searchSubmit(e) {
   e.preventDefault();
   var pageContent = document.getElementById('page-content');
   let searchName = document.getElementById('searchName').value;
-  let searchIngredient = document.getElementById('searchIngredient').value;
   let excludeField = document.getElementById('excludeField').value;
 
   let c1 = document.getElementById("c1").checked;
   let c2 = document.getElementById("c2").checked;
   let c3 = document.getElementById("c3").checked;
 
-  doJSONRequest("GET", "/search/" + searchName, null, null, function(res, req) {
+  console.log(excludeField);
+
+  doJSONRequest("GET", "/search?name=" + searchName + "&ingredient=" + excludeField, null, null, function(res, req) {
     pageContent.innerHTML = discoverTemplate(res);
     accessToSingleRecipe();
   })
