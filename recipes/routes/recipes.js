@@ -28,7 +28,6 @@ router.get('/', function(req, res, next) {
 
 // Get /recipes/_id -- Get for single recipe view
 router.get('/:recipeid', function(req, res) {
-  console.log(req.params.recipeid);
   Recipe.findById(req.params.recipeid, fieldsFilter).lean().populate('recipe').exec(function(err, recipe) {
     if (err) {
       throw err
@@ -48,10 +47,8 @@ router.get('/:recipeid', function(req, res) {
 
 // Post /recipes
 router.post('/', function(req, res) {
-  console.log('POST request received')
 
   let form = new formidable.IncomingForm();
-  console.log('');
 	form.parse(req, function(err, fields, files) {
 
     const newRecipe = new Recipe({
@@ -69,15 +66,14 @@ router.post('/', function(req, res) {
       if (err) {
         throw err
       }
-      console.log(saved);
       if (newRecipe['image'] !== '') {
         form.uploadDir = "./public/uploads/";
         fs.rename(files.file.path, "./public/uploads/" + saved.id + '.png');
-      } 
+      }
       res.json(saved);
     })
-    
-  });	
+
+  });
 })
 
 router.delete('/:recipeid', function(req, res, next) {

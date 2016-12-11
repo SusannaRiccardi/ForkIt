@@ -14,7 +14,6 @@ router.get('/:id', function(req, res, next) {
   .header("Accept", "application/json")
   .end(function (result) {
     res.send(result.body);
-    console.log(result.body);
   });
 });
 

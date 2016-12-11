@@ -41,19 +41,19 @@ window.onload = function() {
   let inputField = document.getElementsByTagName('input');
 
   menuwrapper.addEventListener('mouseenter', function() {
-      menuBtnFont.setAttribute('Style', '-ms-transform: rotate(90deg); -webkit-transform: rotate(90deg); transform: rotate(90 deg);');
+    menuBtnFont.setAttribute('Style', '-ms-transform: rotate(90deg); -webkit-transform: rotate(90deg); transform: rotate(90 deg);');
   });
 
   menuwrapper.addEventListener('mouseleave', function() {
-      menuBtnFont.removeAttribute('Style');
+    menuBtnFont.removeAttribute('Style');
   });
 
   mainPageSearchContent.addEventListener('focus', function() {
-      mainPageSearchContent.removeAttribute('placeholder');
+    mainPageSearchContent.removeAttribute('placeholder');
   });
 
   mainPageSearchContent.addEventListener('blur', function() {
-      mainPageSearchContent.setAttribute('placeholder', 'SEACH FOOD');
+    mainPageSearchContent.setAttribute('placeholder', 'SEACH FOOD');
   });
 }
 
@@ -128,8 +128,8 @@ function createRecipe(e) {
 
       let ing = {};
       ing.name = names[i].value;
-      ing.quant = Number(q[1]);
-      ing.unity = q[2];
+      ing.amount = Number(q[1]);
+      ing.unit = q[2];
       ingredients.push(ing);
     }
     data.append('title', title);
@@ -146,7 +146,7 @@ function createRecipe(e) {
     doFormDataRequest('POST', '/recipes', data)
     var pageContent = document.getElementById('page-content');
     pageContent.innerHTML = mainTemplate();
-}
+  }
 }
 
 // Add more ingredients
@@ -169,7 +169,6 @@ function addIngredients(){
 
 function accessToSingleRecipeMongo(){
   let recipes = document.getElementsByClassName('grid-cell');
-  console.log(recipes);
   for (let recipe of recipes){
     recipe.addEventListener('click', openSingleRecipeMongo);
   }
@@ -188,9 +187,8 @@ function clickCategory() {
   let italian = document.getElementById('italian');
   let mexican = document.getElementById('mexican');
   let french = document.getElementById('french');
-  let swiss = document.getElementById('swiss');
   let spanish = document.getElementById('spanish');
-  let middleeast = document.getElementById('middleeast');
+  let usersrecipes = document.getElementById('usersrecipes');
 
   greek.addEventListener('click', openCategory);
   british.addEventListener('click', openCategory);
@@ -201,9 +199,14 @@ function clickCategory() {
   italian.addEventListener('click', openCategory);
   mexican.addEventListener('click', openCategory);
   french.addEventListener('click', openCategory);
-  swiss.addEventListener('click', openCategory);
   spanish.addEventListener('click', openCategory);
-  middleeast.addEventListener('click', openCategory);
+  usersrecipes.addEventListener('click', function(){
+    var pageContent = document.getElementById('page-content');
+    doJSONRequest('GET', '/recipes', null, null, function(res, req){
+      pageContent.innerHTML = discoverTemplate(res);
+      accessToSingleRecipeMongo();
+    })
+  });
 }
 
 function openCategory(e) {
@@ -217,7 +220,6 @@ function openCategory(e) {
 
 function accessToSingleRecipe(){
   let recipes = document.getElementsByClassName('grid-cell');
-  console.log(recipes);
   for (let recipe of recipes){
     recipe.addEventListener('click', openSingleRecipe);
   }
@@ -227,7 +229,6 @@ function openSingleRecipe (e){
   var pageContent = document.getElementById('page-content');
   doJSONRequest('GET', '/singlerecipe/' + e.target.id, null, null, function(res, req){
     let recipe = res;
-    console.log(recipe);
     let obj = {};
     obj.title = recipe.title;
     obj.author = 'Vanessa';
@@ -241,7 +242,6 @@ function openSingleRecipe (e){
     }
     obj.image = recipe.image;
     obj.comments = [];
-    console.log(obj)
     pageContent.innerHTML = recipeTemplate({recipe : obj});
   })
 }
@@ -249,8 +249,8 @@ function openSingleRecipe (e){
 function openSingleRecipeMongo (e){
   var pageContent = document.getElementById('page-content');
   doJSONRequest('GET', '/recipes/' + e.target.id, null, null, function(res, req){
+    console.log(res.ingredients[0][0]);
     let recipe = res;
-    console.log(recipe);
     let obj = {};
     obj.title = recipe.title;
     obj.author = 'Susanna';
@@ -258,14 +258,12 @@ function openSingleRecipeMongo (e){
     obj.ingredients = [];
     for (let ingr of recipe.ingredients){
       let ingredient = {};
-      console.log()
       ingredient.name = ingr.name;
       ingredient.quantity = ingr.quant + " " +ingr.unity;
       obj.ingredients.push(ingredient);
     }
     obj.image = recipe.image;
     obj.comments = [];
-    console.log(obj)
     pageContent.innerHTML = recipeTemplate({recipe : obj});
     // upvotes(e.target.id);
     // downvotes(e.target.id);
@@ -284,8 +282,8 @@ function upvotes(idRecipe) {
       let recipe = res;
       let up = recipe.likes;
       res.update({_id:idRecipe}, {$set:{likes:up++}}, function(err, result) {
-        if (err)
-        console.log(result);
+        // if (err)
+        // console.log(result);
       });
     })
   })
@@ -298,8 +296,8 @@ function downvotes(idRecipe) {
       let recipe = res;
       let down = recipe.dislikes;
       res.update({_id:idRecipe}, {$set:{dislikes:down++}}, function(err, result) {
-        if (err)
-        console.log(result);
+        // if (err)
+        // console.log(result);
       });
     })
   })
