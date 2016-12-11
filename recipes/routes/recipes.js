@@ -65,7 +65,8 @@ router.post('/', function(req, res) {
       image : fields['image'] || '',
       lactosefree : fields['lactosefree'],
       glutenfree : fields['glutenfree'],
-      vegan : fields['vegan']
+      vegan : fields['vegan'],
+      category : fields['category']
     });
 
     newRecipe.save(function(err, saved) {

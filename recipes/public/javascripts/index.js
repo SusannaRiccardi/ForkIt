@@ -114,6 +114,7 @@ function createRecipe(e) {
   let names = document.getElementsByClassName('create-ingredient-name');
   let quantities = document.getElementsByClassName('create-ingredient-quantity');
   let inputFile = document.getElementById('file-upload').files[0];
+  let selectCategory = document.getElementById('selectCategory').value;
   let data = new FormData();
 
   if(title == ''){
@@ -136,6 +137,7 @@ function createRecipe(e) {
       ingredients.push(ing);
     }
     data.append('title', title);
+    data.append('category', selectCategory);
     data.append('readyInMinutes', time);
     data.append('instructions', instructions);
     data.append('ingredients', JSON.stringify(ingredients));
