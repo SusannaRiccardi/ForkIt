@@ -285,9 +285,24 @@ function searchSubmit(e) {
   let c2 = document.getElementById("c2").checked;
   let c3 = document.getElementById("c3").checked;
 
-  console.log(excludeField);
 
-  doJSONRequest("GET", "/search?name=" + searchName + "&ingredient=" + excludeField, null, null, function(res, req) {
+  let parameters = "/search?name=" + searchName + "&ingredient=" + excludeField
+
+  if(c1 && c2){
+    parameters+= "&intolerances=" + document.getElementById("c1").name + "," + document.getElementById("c2").name;
+  }
+  else if (c1){
+    parameters+= "&intolerances=" + document.getElementById("c1").name;
+  }
+  else if (c2){
+    parameters+= "&intolerances=" + document.getElementById("c2").name;
+  }
+
+  if(c3){
+    parameters+= "&diet=" + document.getElementById("c3").name;
+  }
+
+  doJSONRequest("GET", parameters, null, null, function(res, req) {
     pageContent.innerHTML = discoverTemplate(res);
     accessToSingleRecipe();
   })
