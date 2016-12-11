@@ -11,6 +11,7 @@ var recipes = require('./routes/recipes');
 var create = require('./routes/create');
 var category = require('./routes/category');
 var singlerecipe = require('./routes/singlerecipe');
+var search = require('./routes/search');
 
 var app = express();
 
@@ -37,6 +38,7 @@ app.use('/recipes', recipes);
 app.use('/create', create);
 app.use('/category', category);
 app.use('/singlerecipe', singlerecipe);
+app.use('/search', search);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

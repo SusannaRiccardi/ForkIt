@@ -21,7 +21,8 @@ window.onload = function() {
   btnCreate.addEventListener('click', displayPage);
   btnDiscover.addEventListener('click', displayPage);
   btnAbout.addEventListener('click', displayPage);
-  btnCategories.addEventListener('click', displayPage)
+  btnCategories.addEventListener('click', displayPage);
+  btnSearchSubmit.addEventListener('click', searchSubmit);
 
 
   let menubar = document.getElementById('menubar');
@@ -271,7 +272,26 @@ function openSingleRecipeMongo (e){
 }
 
 
-//Search Recipe
+//SEARCHRECIPE
+// When clicking on search it looks for the recipes you want to find
+function searchSubmit(e) {
+  e.preventDefault();
+  var pageContent = document.getElementById('page-content');
+  let searchName = document.getElementById('searchName').value;
+  let searchIngredient = document.getElementById('searchIngredient').value;
+  let excludeField = document.getElementById('excludeField').value;
+
+  let c1 = document.getElementById("c1").checked;
+  let c2 = document.getElementById("c2").checked;
+  let c3 = document.getElementById("c3").checked;
+
+  doJSONRequest("GET", "/search/" + searchName, null, null, function(res, req) {
+    pageContent.innerHTML = discoverTemplate(res);
+    accessToSingleRecipe();
+  })
+
+}
+
 
 // Upvote and dowvote the recipe
 function upvotes(idRecipe) {
