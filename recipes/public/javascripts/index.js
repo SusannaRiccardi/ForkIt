@@ -182,10 +182,8 @@ function addIngredients(){
 
 function accessToSingleRecipeMongo(){
   let recipes = document.getElementsByClassName('grid-cell');
-  console.log(recipes)
 
   for (let i = 0; i<recipes.length;i++){
-    console.log(recipes[i]);
     recipes[i].addEventListener('click', openSingleRecipeMongo)
   }
 }
@@ -204,7 +202,9 @@ function clickCategory() {
   let mexican = document.getElementById('mexican');
   let french = document.getElementById('french');
   let spanish = document.getElementById('spanish');
-  let usersrecipes = document.getElementById('usersrecipes');
+  let nordic = document.getElementById('nordic');
+  let jewish = document.getElementById('jewish');
+  // let usersrecipes = document.getElementById('usersrecipes');
 
   greek.addEventListener('click', openCategory);
   british.addEventListener('click', openCategory);
@@ -216,38 +216,88 @@ function clickCategory() {
   mexican.addEventListener('click', openCategory);
   french.addEventListener('click', openCategory);
   spanish.addEventListener('click', openCategory);
-  usersrecipes.addEventListener('click', function(){
-    var pageContent = document.getElementById('page-content');
-    doJSONRequest('GET', '/recipes', null, null, function(res, req){
-      pageContent.innerHTML = discoverTemplate(res);
-      accessToSingleRecipeMongo();
-    })
+  nordic.addEventListener('click', openCategory);
+  jewish.addEventListener('click', openCategory);
+
+
+  // usersrecipes.addEventListener('click', function(){
+  //   var pageContent = document.getElementById('page-content');
+  //   doJSONRequest('GET', '/recipes', null, null, function(res, req){
+  //     pageContent.innerHTML = discoverTemplate(res);
+  //     accessToSingleRecipeMongo();
+  //   })
+  // });
+}
+
+let jsonResponse;
+let jsonResponseCounter;
+let toRender;
+let arrowDown;
+let pageContent;
+
+function openCategory(e) {
+  let recipeId = e.target.alt;
+  pageContent = document.getElementById('page-content');
+  jsonResponseCounter = 0;
+
+  doJSONRequest('GET', '/category/'+ recipeId, null, null, function(res, req){
+    jsonResponse = res;
+    toRender = jsonResponse.results.slice(jsonResponseCounter, jsonResponseCounter + 6);
+
+    if (jsonResponse.results.length > jsonResponseCounter + 6){
+      jsonResponseCounter += 6;
+    }
+    else {
+      jsonResponseCounter = 0;
+    }
+
+    pageContent.innerHTML = discoverTemplate({results: toRender});
+    arrowDown = document.getElementById('arrow-down');
+
+    arrowDownEvListener();
+    accessToSingleRecipe();
   });
 }
 
-function openCategory(e) {
-  var pageContent = document.getElementById('page-content');
-  let recipeId = e.target.alt;
-  doJSONRequest('GET', '/category/'+ recipeId, null, null, function(res, req){
-    pageContent.innerHTML = discoverTemplate(res);
+function arrowDownEvListener() {
+  arrowDown = document.getElementById('arrow-down');
+  pageContent = document.getElementById('page-content');
+
+  arrowDown.addEventListener('click', function () {
+    toRender = jsonResponse.results.slice(jsonResponseCounter, jsonResponseCounter + 6);
+
+    if (jsonResponse.results.length > jsonResponseCounter + 6){
+      jsonResponseCounter += 6;
+    }
+    else {
+      jsonResponseCounter = 0;
+    }
+
+    pageContent.innerHTML = discoverTemplate({results: toRender});
+
+    arrowDownEvListener();
     accessToSingleRecipe();
   });
 }
 
 function accessToSingleRecipe(){
   let recipes = document.getElementsByClassName('grid-cell');
-  for (let recipe of recipes){
-    recipe.addEventListener('click', openSingleRecipe);
+
+  for (let i = 0; i < recipes.length; i++) {
+    recipes[i].onclick = function () {
+      openSingleRecipe(event, i)
+    }
   }
 }
 
-function openSingleRecipe (e){
+function openSingleRecipe (e, activeRecipe){
   var pageContent = document.getElementById('page-content');
   doJSONRequest('GET', '/singlerecipe/' + e.target.id, null, null, function(res, req){
     let recipe = res;
     let obj = {};
+    obj.activeRecipe = activeRecipe;
     obj.title = recipe.title;
-    obj.author = 'Vanessa';
+    obj.author = '';
     obj.instructions = recipe.instructions;
     obj.ingredients = [];
     for (let ingr of recipe.extendedIngredients){
@@ -256,20 +306,41 @@ function openSingleRecipe (e){
       ingredient.quantity = ingr.amount + " " +ingr.unit;
       obj.ingredients.push(ingredient);
     }
-    obj.image = recipe.image;
+
+    let recipeBack = (obj.activeRecipe - 1 < 0) ? jsonResponse.results.length - 1 : obj.activeRecipe - 1;
+    let recipeNext = (obj.activeRecipe + 1 > jsonResponse.results.length - 1) ? 0 : obj.activeRecipe + 1;
+
+    obj.image = {
+      actual:recipe.image,
+      back:jsonResponse.baseUri + jsonResponse.results[recipeBack].image,
+      next: jsonResponse.baseUri + jsonResponse.results[recipeNext].image
+    };
+
     obj.comments = [];
     pageContent.innerHTML = recipeTemplate({recipe : obj});
+
+    let arrowBack = document.getElementById('arrow-back');
+    let arrowNext = document.getElementById('arrow-next');
+
+    arrowEvtListener(arrowBack,recipeBack);
+    arrowEvtListener(arrowNext,recipeNext);
   })
+}
+
+function arrowEvtListener(dom, index) {
+    dom.addEventListener('click', function () {
+      let target = {target: {id: jsonResponse.results[index].id}};
+      openSingleRecipe(target, index)
+    })
 }
 
 function openSingleRecipeMongo (e){
   var pageContent = document.getElementById('page-content');
   doJSONRequest('GET', '/recipes/' + e.target.id, null, null, function(res, req){
-    console.log(res);
     let recipe = res;
     let obj = {};
     obj.title = recipe.title;
-    obj.author = 'Susanna';
+    obj.author = '';
     obj.instructions = recipe.instructions;
     obj.ingredients = [];
     for (let ingr of recipe.ingredients){
@@ -458,7 +529,6 @@ function doRequestSetHeaders(r, method, headers) {
     for (header in headers) {
       r.setRequestHeader(header,headers[header]);
     }
-
   }
 }
 

@@ -44,6 +44,7 @@
   margin: 0px;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
   align-content: flex-start;
 }
@@ -52,13 +53,28 @@
 /*recipe preview*/
 
 .recipe-preview {
-  border-radius: 125px;
+  border-radius: 50%;
   width: 250px;
   height: 250px;
   padding: 0px;
   margin: 20px;
   background-color: white;
   overflow: hidden;
+}
+
+#image-actual{
+  width: 280px;
+  height: 280px;
+  /*border-style: solid;*/
+  /*border-width: 1px;*/
+  /*border-color: white;*/
+}
+
+#image-next img, #image-back img{
+  filter: brightness(75%);
+  -webkit-filter: brightness(75%);
+  -moz-filter: brightness(75%);
+  -o-filter: brightness(75%);
 }
 
 
@@ -74,7 +90,7 @@
 /*Direction arrows*/
 
 .arrow {
-  height: 250px;
+  height: 150px;
   padding: 0px;
   margin: 20px;
   cursor: pointer;
@@ -137,7 +153,9 @@
   font-family: 'Lato', sans-serif;
   color: black;
   padding-bottom: 30px;
-  width: 100%;
+  margin-left: 25%;
+  margin-right: 25%;
+  width: 50%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -150,7 +168,22 @@
   padding: 10px;
   width: 92%;
   margin-top: 30px;
+  background-color: rgba(0,0,0,0);
+  color: white;
+  border-width: 2px;
+  border-radius: 5px;
+  text-align: center;
+  outline: none;
+
   /*background: floralwhite;*/
+}
+
+#my-comment textarea:focus {
+  background-color: rgba(10,10,10,0.4);
+  border-color: #4CAF50;
+  outline: auto;
+  outline-color: #4CAF50;
+
 }
 
 #my-comment button {
@@ -177,7 +210,11 @@
     height: 200px;
   }
   .arrow {
-    height: 200px;
+    height: 150px;
+  }
+  #image-actual{
+    width: 230px;
+    height: 230px;
   }
 }
 
@@ -185,6 +222,10 @@
   .recipe-preview {
     width: 130px;
     height: 130px;
+  }
+  #image-actual{
+    width: 160px;
+    height: 160px;
   }
   .arrow {
     height: 130px;
@@ -210,6 +251,10 @@
     margin-top: 25px;
     position: relative;
     /*TODO: hide when login is selected*/
+  }
+  #image-actual{
+    width: 140px;
+    height: 140px;
   }
   #recipe-text {
     display: initial;
