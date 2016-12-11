@@ -49,12 +49,17 @@ router.get('/:recipeid', function(req, res) {
 router.post('/', function(req, res) {
 
   let form = new formidable.IncomingForm();
-	form.parse(req, function(err, fields, files) {
+  form.parse(req, function(err, fields, files) {
+    console.log(fields);
+    let ingredients = []
+    for(let ing of fields['ingredients']){
+      ingredients.push(JSON.parse(ing));
+    }
 
     const newRecipe = new Recipe({
       title : fields['title'],
       instructions : fields['instructions'],
-      ingredients : fields['ingredients'],
+      ingredients : ingredients,
       video : fields['video'] || '',
       image : fields['image'] || '',
       lactosefree : 'TODO',

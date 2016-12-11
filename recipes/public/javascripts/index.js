@@ -134,7 +134,7 @@ function createRecipe(e) {
     }
     data.append('title', title);
     data.append('instructions', instructions);
-    data.append('ingredients', ingredients);
+    data.append('ingredients', JSON.stringify(ingredients));
     if (inputFile === undefined) {
       data.append('image', '');
     } else {
@@ -249,7 +249,7 @@ function openSingleRecipe (e){
 function openSingleRecipeMongo (e){
   var pageContent = document.getElementById('page-content');
   doJSONRequest('GET', '/recipes/' + e.target.id, null, null, function(res, req){
-    console.log(res.ingredients[0][0]);
+    console.log(res);
     let recipe = res;
     let obj = {};
     obj.title = recipe.title;
@@ -259,7 +259,7 @@ function openSingleRecipeMongo (e){
     for (let ingr of recipe.ingredients){
       let ingredient = {};
       ingredient.name = ingr.name;
-      ingredient.quantity = ingr.quant + " " +ingr.unity;
+      ingredient.quantity = ingr.amount + " " +ingr.unit;
       obj.ingredients.push(ingredient);
     }
     obj.image = recipe.image;
