@@ -105,7 +105,6 @@ function create() {
 function createRecipe(e) {
   e.preventDefault();
   let title = document.getElementById('create-name').value;
-  let time = document.getElementById('create-time').value;
   let instructions = document.getElementById('create-description').value;
   let ingredients = [];
   let isGlutenFree = document.getElementById('c11').checked;
@@ -115,6 +114,7 @@ function createRecipe(e) {
   let quantities = document.getElementsByClassName('create-ingredient-quantity');
   let inputFile = document.getElementById('file-upload').files[0];
   let selectCategory = document.getElementById('selectCategory').value;
+  let selectTime = document.getElementById('selectTime').value;
   let data = new FormData();
 
   if(title == ''){
@@ -138,7 +138,7 @@ function createRecipe(e) {
     }
     data.append('title', title);
     data.append('category', selectCategory);
-    data.append('readyInMinutes', time);
+    data.append('readyInMinutes', selectTime);
     data.append('instructions', instructions);
     data.append('ingredients', JSON.stringify(ingredients));
     data.append('lactosefree', isDairy);

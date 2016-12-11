@@ -114,7 +114,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  background-color: rgba(76, 120, 34, 0.9);
+  /*background-color: rgba(76, 120, 34, 0.9);*/
 }
 
 .recipe-comments-element {

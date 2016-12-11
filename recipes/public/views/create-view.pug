@@ -25,10 +25,23 @@
       option(value='spanish') Spanish
     br
     br
-    label.input-label Required time
+    label.input-label Required Time
     br
     br
-    input.large-input(id='create-time', name='recipe-time', type='text')
+    select#selectTime.select-style
+      option(value='5') 5 min
+      option(value='10') 10 min
+      option(value='15') 15 min
+      option(value='20') 20 min
+      option(value='25') 25 min
+      option(value='30') 30 min
+      option(value='35') 35 min
+      option(value='40') 40 min
+      option(value='45') 45 min
+      option(value='100') 1 h
+      option(value='130') 1 h 30 min
+      option(value='200') 2 h
+      option(value='+') + 2h
     br
     br
     label.input-label Ingredients

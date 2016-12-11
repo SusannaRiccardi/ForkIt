@@ -277,6 +277,7 @@ input{
 
 #search-submit-btn {
   margin: 20px;
+
   width: calc(100% - 40px)!important;
   background-color: #4CAF50;
   border: none;
@@ -286,7 +287,6 @@ input{
   text-decoration: none;
   font-size: 16px;
   height: auto!important;
-  margin-top: 40px;
 }
 
 #search-submit-btn:hover {
