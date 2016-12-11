@@ -268,7 +268,7 @@ function openSingleRecipeMongo (e){
     pageContent.innerHTML = recipeTemplate({recipe : obj});
     upvotes(e.target.id);
     downvotes(e.target.id);
-    // commentRecipe(e.target.id);
+    commentRecipe(e.target.id);
   })
 }
 
@@ -321,8 +321,8 @@ function downvotes(idRecipe) {
 
 function commentRecipe(idRecipe) {
   let commentSubmit = document.getElementById('submit-comment');
-  let comment = document.getElementById('inner-editor');
-  console.log(comment);
+  let comment = document.getElementById('comment');
+  console.log(comment.value);
   commentSubmit.addEventListener('click', function(){
     if(comment.value == ''){
       alert('You have to insert a comment before submit');
