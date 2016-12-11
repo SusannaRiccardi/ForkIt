@@ -49,9 +49,7 @@ html(lang='en')
         #search-btn-back
           i.material-icons.icon keyboard_backspace
         .form-text Search by name
-        input#searchField(type='text', name='search', placeholder="Yoji's sushi - Apple Pie")
-        .form-text Include ingredient
-        input#searchField(type='text', name='search', placeholder='Japanese - Vegan - Onions')
+        input#searchName(type='text', name='search', placeholder="Yoji's sushi - Apple Pie")
         .form-text Exclude ingredient
         input#excludeField(type='text', name='filter', placeholder='Fish - Meat - Spicy')
 
@@ -131,7 +129,7 @@ html(lang='en')
                           p Login
                         br
                         input#signup-submit-btn.submit-btn(type='submit', value='Signup')
-    // 
+    //
     #page-content
   script.
     $(document).ready(function() {
@@ -191,4 +189,3 @@ html(lang='en')
     $('#signup').slideUp(300).hide();
     });
     });
-

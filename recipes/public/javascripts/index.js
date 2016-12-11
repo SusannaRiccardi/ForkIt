@@ -21,7 +21,8 @@ window.onload = function() {
   btnCreate.addEventListener('click', displayPage);
   btnDiscover.addEventListener('click', displayPage);
   btnAbout.addEventListener('click', displayPage);
-  btnCategories.addEventListener('click', displayPage)
+  btnCategories.addEventListener('click', displayPage);
+  btnSearchSubmit.addEventListener('click', searchSubmit);
 
 
   let menubar = document.getElementById('menubar');
@@ -280,26 +281,59 @@ function openSingleRecipeMongo (e){
     obj.image = recipe.image;
     obj.comments = [];
     pageContent.innerHTML = recipeTemplate({recipe : obj});
-    // upvotes(e.target.id);
-    // downvotes(e.target.id);
+    upvotes(e.target.id);
+    downvotes(e.target.id);
+    commentRecipe(e.target.id);
   })
 }
 
 
+//SEARCHRECIPE
+// When clicking on search it looks for the recipes you want to find
+function searchSubmit(e) {
+  e.preventDefault();
+  var pageContent = document.getElementById('page-content');
+  let searchName = document.getElementById('searchName').value;
+  let excludeField = document.getElementById('excludeField').value;
+
+  let c1 = document.getElementById("c1").checked;
+  let c2 = document.getElementById("c2").checked;
+  let c3 = document.getElementById("c3").checked;
+
+
+  let parameters = "/search?name=" + searchName + "&ingredient=" + excludeField
+
+  if(c1 && c2){
+    parameters+= "&intolerances=" + document.getElementById("c1").name + "," + document.getElementById("c2").name;
+  }
+  else if (c1){
+    parameters+= "&intolerances=" + document.getElementById("c1").name;
+  }
+  else if (c2){
+    parameters+= "&intolerances=" + document.getElementById("c2").name;
+  }
+
+  if(c3){
+    parameters+= "&diet=" + document.getElementById("c3").name;
+  }
+
+  doJSONRequest("GET", parameters, null, null, function(res, req) {
+    pageContent.innerHTML = discoverTemplate(res);
+    accessToSingleRecipe();
+  })
+
+}
 
 
 // Upvote and dowvote the recipe
 function upvotes(idRecipe) {
-  const mongoose = require('mongoose');
   let upvote = document.getElementById('arrow-back');
   upvote.addEventListener('click', function(){
     doJSONRequest('GET', '/recipes/'+idRecipe, null, null, function(res, req){
       let recipe = res;
-      let up = recipe.likes;
-      res.update({_id:idRecipe}, {$set:{likes:up++}}, function(err, result) {
-        // if (err)
-        // console.log(result);
-      });
+      let up = recipe.upvotes + 1;
+      let down = recipe.downvotes;
+      doJSONRequest('PUT', '/recipes/'+idRecipe, null, {upvotes : up}, function(){});
     })
   })
 }
@@ -309,13 +343,26 @@ function downvotes(idRecipe) {
   downvote.addEventListener('click', function(){
     doJSONRequest('GET', '/recipes/'+idRecipe, null, null, function(res, req){
       let recipe = res;
-      let down = recipe.dislikes;
-      res.update({_id:idRecipe}, {$set:{dislikes:down++}}, function(err, result) {
-        // if (err)
-        // console.log(result);
-      });
+      let up = recipe.upvotes;
+      let down = recipe.downvotes + 1;
+      doJSONRequest('PUT', '/recipes/'+idRecipe, null, {downvotes : down}, function(){});
     })
   })
+}
+
+function commentRecipe(idRecipe) {
+  let commentSubmit = document.getElementById('submit-comment');
+  let comment = document.getElementById('comment');
+  console.log(comment.value);
+  commentSubmit.addEventListener('click', function(){
+    if(comment.value == ''){
+      alert('You have to insert a comment before submit');
+    }
+    else {
+      doJSONRequest('PUT', '/recipes/'+idRecipe, null, {comment : comment.value}, function(){});
+    }
+  })
+
 }
 
 

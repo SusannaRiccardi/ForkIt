@@ -38,4 +38,4 @@ pug_html = pug_html + "\u003Cdiv class=\"recipe-comments-element\"\u003E\u003Csp
   }
 }).call(this);
 
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\u003Cdiv id=\"my-comment\"\u003E\u003Ctextarea rows=\"4\" cols=\"50\"\u003E\u003C\u002Ftextarea\u003E\u003Cbutton type=\"button\"\u003ESubmit\u003C\u002Fbutton\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";}.call(this,"recipe" in locals_for_with?locals_for_with.recipe:typeof recipe!=="undefined"?recipe:undefined));;return pug_html;}
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\u003Cdiv id=\"my-comment\"\u003E\u003Ctextarea rows=\"4\" cols=\"50\" id=\"comment\"\u003E\u003C\u002Ftextarea\u003E\u003Cbutton type=\"button\" r=\"r\" id=\"submit-comment\"\u003ESubmit\u003C\u002Fbutton\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";}.call(this,"recipe" in locals_for_with?locals_for_with.recipe:typeof recipe!=="undefined"?recipe:undefined));;return pug_html;}
