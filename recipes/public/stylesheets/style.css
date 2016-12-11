@@ -277,6 +277,7 @@ input{
 
 #search-submit-btn {
   margin: 20px;
+
   width: calc(100% - 40px)!important;
   background-color: #4CAF50;
   border: none;
@@ -286,7 +287,6 @@ input{
   text-decoration: none;
   font-size: 16px;
   height: auto!important;
-  margin-top: 40px;
 }
 
 #search-submit-btn:hover {
@@ -357,6 +357,33 @@ input[type="checkbox"]:checked + label span {
 
 
 /*<--Content*/
+
+/**/
+.select-style {
+    height: 36px;
+    margin-left: 30px;
+    margin-right: 30px;
+    border: 1px solid #ccc;
+    width: calc(100% - 60px);
+    border-radius: 3px;
+    overflow: hidden;
+    background: #fafafa url("img/icon-select.png") no-repeat 90% 50%;
+}
+
+.select-style select {
+    padding: 5px 8px;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+}
+
+.select-style select:focus {
+    outline: none;
+}
+/**/
 
 
 /*/////////////////////////////// size adaptation /////////////////////////////*/

@@ -1,5 +1,5 @@
 doctype html
-html
+html(lang='en')
   head
     title ForkIt
     link(rel='stylesheet', type='text/css', href='stylesheets/style.css')
@@ -18,7 +18,6 @@ html
     script(src='views/discover-view.js')
     script(src='views/categories-view.js')
     script(src='views/create-view-ingredient.js')
-    script(src='views/discover-view-users.js')
   body
     .background#back-one
     .background#back-two
@@ -79,6 +78,7 @@ html
           <i class="material-icons star" id="star4" style="color: rgba(0,0,0,0);">star</i>
           <i class="material-icons star" id="star5" style="color: rgba(0,0,0,0);">star</i>
           </div>
+
         button#search-submit-btn Search
       #login-view
         // Login
@@ -140,9 +140,9 @@ html
     });
     $(function() {
     // CREATE change background
-      $('#btn-create').on('click', function () {
-        $('#back-two').fadeOut(10);
-      });
+    $('#btn-create').on('click', function () {
+    $('#back-two').fadeOut(10);
+    });
     // DISCOVER change background
     $('#btn-discover').on('click', function() {
     $('#back-two').fadeIn(10);

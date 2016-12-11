@@ -108,11 +108,15 @@ function createRecipe(e) {
   let title = document.getElementById('create-name').value;
   let instructions = document.getElementById('create-description').value;
   let ingredients = [];
+  let isGlutenFree = document.getElementById('c11').checked;
+  let isDairy = document.getElementById('c22').checked;
+  let isVegan = document.getElementById('c33').checked;
   let names = document.getElementsByClassName('create-ingredient-name');
   let quantities = document.getElementsByClassName('create-ingredient-quantity');
   let inputFile = document.getElementById('file-upload').files[0];
+  let selectCategory = document.getElementById('selectCategory').value;
+  let selectTime = document.getElementById('selectTime').value;
   let data = new FormData();
-
 
   if(title == ''){
     window.alert('The title of the recipe is a compulsory field');
@@ -134,8 +138,13 @@ function createRecipe(e) {
       ingredients.push(ing);
     }
     data.append('title', title);
+    data.append('category', selectCategory);
+    data.append('readyInMinutes', selectTime);
     data.append('instructions', instructions);
     data.append('ingredients', JSON.stringify(ingredients));
+    data.append('lactosefree', isDairy);
+    data.append('glutenfree', isGlutenFree);
+    data.append('vegan', isVegan);
     if (inputFile === undefined) {
       data.append('image', '');
     } else {

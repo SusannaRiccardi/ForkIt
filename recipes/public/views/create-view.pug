@@ -9,6 +9,41 @@
     input.large-input(id='create-name', name='recipe-name', type='text')
     br
     br
+    label.input-label Category
+    br
+    br
+    select#selectCategory.select-style
+      option(value='greek') Greek
+      option(value='british') British
+      option(value='indian') Indian
+      option(value='japanese') Japanese
+      option(value='chinese') Chinese
+      option(value='thai') Thai
+      option(value='italian') Italian
+      option(value='mexican') Mexican
+      option(value='french') French
+      option(value='spanish') Spanish
+    br
+    br
+    label.input-label Required Time
+    br
+    br
+    select#selectTime.select-style
+      option(value='5') 5 min
+      option(value='10') 10 min
+      option(value='15') 15 min
+      option(value='20') 20 min
+      option(value='25') 25 min
+      option(value='30') 30 min
+      option(value='35') 35 min
+      option(value='40') 40 min
+      option(value='45') 45 min
+      option(value='100') 1 h
+      option(value='130') 1 h 30 min
+      option(value='200') 2 h
+      option(value='+') + 2h
+    br
+    br
     label.input-label Ingredients
     br
     br
@@ -19,7 +54,22 @@
         #btnAddIngredient
           span
             img(src='./images/add.png')
-    br
+    #checkboxCreate
+      .outerCheckbox
+        input#c11(type='checkbox', name='gluten')
+        label(for='c11')
+          span
+          | Gluten free
+      .outerCheckbox
+        input#c22(type='checkbox', name='dairy')
+        label(for='c22')
+          span
+          | Dairy
+      .outerCheckbox
+        input#c33(type='checkbox', name='vegan')
+        label(for='c33')
+          span
+          | Vegan
     input.load-file(name='picture', type='file', size='50', accept='image/*')
     label.input-label Preparation
     br
