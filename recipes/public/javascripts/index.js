@@ -341,7 +341,7 @@ function openSingleRecipe (e, activeRecipe){
       back:jsonResponse.baseUri + jsonResponse.results[recipeBack].image,
       next: jsonResponse.baseUri + jsonResponse.results[recipeNext].image
     };
-
+    obj.comments = [];
     pageContent.innerHTML = recipeTemplate({recipe : obj});
 
     let arrowBack = document.getElementById('arrow-back');
