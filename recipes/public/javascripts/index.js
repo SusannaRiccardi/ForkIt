@@ -158,14 +158,14 @@ function createRecipe(e) {
   }
   else {
     for (i = 0; i < names.length; i++) {
-      let q = (quantities[i].value).split(/(\d+)/);
+      // let q = (quantities[i].value).split(/(\d+)/);
 
       let ing = {};
       ing.name = names[i].value;
-      ing.amount = Number(q[1]);
-      ing.unit = q[2];
+      ing.quantity = quantities[i].value;
       ingredients.push(ing);
     }
+    console.log(ingredients);
     data.append('title', title);
     data.append('category', selectCategory);
     data.append('readyInMinutes', selectTime);
@@ -182,6 +182,7 @@ function createRecipe(e) {
     }
 
     data.append('file', inputFile);
+    console.log(data);
     doFormDataRequest('POST', '/recipes', data)
     var pageContent = document.getElementById('page-content');
     pageContent.innerHTML = mainTemplate();
@@ -369,7 +370,7 @@ function openSingleRecipeMongo (e){
     for (let ingr of recipe.ingredients){
       let ingredient = {};
       ingredient.name = ingr.name;
-      ingredient.quantity = ingr.amount + " " +ingr.unit;
+      ingredient.quantity = ingr.quantity;
       obj.ingredients.push(ingredient);
     }
     obj.image = {
