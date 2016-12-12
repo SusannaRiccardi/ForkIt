@@ -24,11 +24,10 @@
       br
       span#preparation
       p= recipe.instructions
-  #recipe-comments
-    each comment in recipe.comments
-      .recipe-comments-element
-        span.comment-name= comment.username
-        span.comment-text= comment.text
   #my-comment
     textarea(rows='4', cols='50', id='comment')
     button(type='button',r id='submit-comment') Submit
+  #recipe-comments
+    each comment in recipe.comments
+      .recipe-comments-element
+        span.comment-text= comment

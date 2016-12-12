@@ -19,23 +19,23 @@ pug_html = pug_html + "\u003Cli\u003E" + (pug_escape(null == (pug_interp = ingre
   }
 }).call(this);
 
-pug_html = pug_html + "\u003C\u002Ful\u003E\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E\u003Cdiv id=\"recipe-preparation\"\u003E\u003Cb\u003EPreparation\u003C\u002Fb\u003E\u003Cbr\u002F\u003E\u003Cspan id=\"preparation\"\u003E\u003C\u002Fspan\u003E\u003Cp\u003E" + (pug_escape(null == (pug_interp = recipe.instructions) ? "" : pug_interp)) + "\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003Cdiv id=\"recipe-comments\"\u003E";
+pug_html = pug_html + "\u003C\u002Ful\u003E\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E\u003Cdiv id=\"recipe-preparation\"\u003E\u003Cb\u003EPreparation\u003C\u002Fb\u003E\u003Cbr\u002F\u003E\u003Cspan id=\"preparation\"\u003E\u003C\u002Fspan\u003E\u003Cp\u003E" + (pug_escape(null == (pug_interp = recipe.instructions) ? "" : pug_interp)) + "\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003Cdiv id=\"my-comment\"\u003E\u003Ctextarea rows=\"4\" cols=\"50\" id=\"comment\"\u003E\u003C\u002Ftextarea\u003E\u003Cbutton type=\"button\" r=\"r\" id=\"submit-comment\"\u003ESubmit\u003C\u002Fbutton\u003E\u003C\u002Fdiv\u003E\u003Cdiv id=\"recipe-comments\"\u003E";
 // iterate recipe.comments
 ;(function(){
   var $$obj = recipe.comments;
   if ('number' == typeof $$obj.length) {
       for (var pug_index1 = 0, $$l = $$obj.length; pug_index1 < $$l; pug_index1++) {
         var comment = $$obj[pug_index1];
-pug_html = pug_html + "\u003Cdiv class=\"recipe-comments-element\"\u003E\u003Cspan class=\"comment-name\"\u003E" + (pug_escape(null == (pug_interp = comment.username) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E\u003Cspan class=\"comment-text\"\u003E" + (pug_escape(null == (pug_interp = comment.text) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"recipe-comments-element\"\u003E\u003Cspan class=\"comment-text\"\u003E" + (pug_escape(null == (pug_interp = comment) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E";
       }
   } else {
     var $$l = 0;
     for (var pug_index1 in $$obj) {
       $$l++;
       var comment = $$obj[pug_index1];
-pug_html = pug_html + "\u003Cdiv class=\"recipe-comments-element\"\u003E\u003Cspan class=\"comment-name\"\u003E" + (pug_escape(null == (pug_interp = comment.username) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E\u003Cspan class=\"comment-text\"\u003E" + (pug_escape(null == (pug_interp = comment.text) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"recipe-comments-element\"\u003E\u003Cspan class=\"comment-text\"\u003E" + (pug_escape(null == (pug_interp = comment) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E";
     }
   }
 }).call(this);
 
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\u003Cdiv id=\"my-comment\"\u003E\u003Ctextarea rows=\"4\" cols=\"50\" id=\"comment\"\u003E\u003C\u002Ftextarea\u003E\u003Cbutton type=\"button\" r=\"r\" id=\"submit-comment\"\u003ESubmit\u003C\u002Fbutton\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";}.call(this,"recipe" in locals_for_with?locals_for_with.recipe:typeof recipe!=="undefined"?recipe:undefined));;return pug_html;}
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";}.call(this,"recipe" in locals_for_with?locals_for_with.recipe:typeof recipe!=="undefined"?recipe:undefined));;return pug_html;}

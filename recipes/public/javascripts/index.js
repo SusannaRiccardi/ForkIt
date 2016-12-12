@@ -268,6 +268,7 @@ function openSingleRecipeMongo (e){
     obj.author = 'Susanna';
     obj.instructions = recipe.instructions;
     obj.ingredients = [];
+    obj.comments = recipe.comments;
     for (let ingr of recipe.ingredients){
       let ingredient = {};
       ingredient.name = ingr.name;
@@ -275,7 +276,6 @@ function openSingleRecipeMongo (e){
       obj.ingredients.push(ingredient);
     }
     obj.image = recipe.image;
-    obj.comments = [];
     pageContent.innerHTML = recipeTemplate({recipe : obj});
     upvotes(e.target.id);
     downvotes(e.target.id);
@@ -348,14 +348,17 @@ function downvotes(idRecipe) {
 
 function commentRecipe(idRecipe) {
   let commentSubmit = document.getElementById('submit-comment');
+  commentSubmit.id = idRecipe;
   let comment = document.getElementById('comment');
   console.log(comment.value);
-  commentSubmit.addEventListener('click', function(){
+  commentSubmit.addEventListener('click', function(e){
     if(comment.value == ''){
       alert('You have to insert a comment before submit');
     }
     else {
-      doJSONRequest('PUT', '/recipes/'+idRecipe, null, {comment : comment.value}, function(){});
+      doJSONRequest('PUT', '/recipes/'+idRecipe, null, {comment : comment.value}, function(){
+        openSingleRecipeMongo(e);
+      });
     }
   })
 
