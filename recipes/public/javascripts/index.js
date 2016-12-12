@@ -198,6 +198,7 @@ function clickCategory() {
   let mexican = document.getElementById('mexican');
   let french = document.getElementById('french');
   let spanish = document.getElementById('spanish');
+  let nordic = document.getElementById('nordic');
   let usersrecipes = document.getElementById('usersrecipes');
 
   greek.addEventListener('click', openCategory);
@@ -210,6 +211,7 @@ function clickCategory() {
   mexican.addEventListener('click', openCategory);
   french.addEventListener('click', openCategory);
   spanish.addEventListener('click', openCategory);
+  nordic.addEventListener('click', openCategory);
   usersrecipes.addEventListener('click', function(){
     var pageContent = document.getElementById('page-content');
     doJSONRequest('GET', '/recipes', null, null, function(res, req){
