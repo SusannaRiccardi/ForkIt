@@ -32,6 +32,7 @@ background-size: cover;
 }
 
 .grid-cell {
+  flex-basis: 33%;
   /*margin: 1px;*/
   cursor: pointer;
   /*border-radius: 15%;*/
@@ -51,10 +52,8 @@ background-size: cover;
 
 .recipe-picture {
   position: static;
-  min-width: 100%;
-  min-width: 100%;
-  height: auto;
-  width: auto;
+  height: 427px!important;
+  width: 500px!important;
 }
 
 #arrow-down{
@@ -180,6 +179,14 @@ background-size: cover;
 
 
 @media only screen and (max-width : 480px) {
+  .grid-cell {
+  flex-basis: 50%;
+}
+  .recipe-picture {
+    position: static;
+    height: 213px!important;
+    width: 250px!important;
+  }
   /*Smartphone view:*/
   .grid-cell{
     width: 145px;
@@ -196,6 +203,11 @@ background-size: cover;
 }
 
 @media only screen and (max-width : 650px) and (min-width : 481px) {
+  .recipe-picture {
+    position: static;
+    height: 213px!important;
+    width: 250px!important;
+  }
   /* Tablet view:*/
   .grid-cell{
     width: 145px;
@@ -211,6 +223,11 @@ background-size: cover;
 }
 
 @media only screen and (max-width : 1050px) and (min-width : 651px) {
+  .recipe-picture {
+    position: static;
+    height: 256px!important;
+    width: 300px!important;
+  }
   /* Small desktop / ipad view:*/
   .grid-cell{
     width: 171px;
@@ -224,6 +241,11 @@ background-size: cover;
 }
 
 @media only screen and (max-width : 1290px) and (min-width : 1051px) {
+  .recipe-picture {
+    position: static;
+    height: 256px!important;
+    width: 300px!important;
+  }
   /* Medium desktop:*/
   .grid-cell{
     width: 171px;
