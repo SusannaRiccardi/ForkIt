@@ -54,8 +54,8 @@
 
 .recipe-preview {
   border-radius: 50%;
-  width: 250px;
-  height: 250px;
+  width: 230px;
+  height: 230px;
   padding: 0px;
   margin: 20px;
   background-color: white;
@@ -63,8 +63,8 @@
 }
 
 #image-actual{
-  width: 280px;
-  height: 280px;
+  width: 300px;
+  height: 300px;
   /*border-style: solid;*/
   /*border-width: 1px;*/
   /*border-color: white;*/
@@ -212,26 +212,26 @@
 
 @media (max-width: 1600px) {
   .recipe-preview {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
   }
   .arrow {
     height: 150px;
   }
   #image-actual{
-    width: 230px;
-    height: 230px;
+    width: 250px;
+    height: 250px;
   }
 }
 
 @media (max-width: 1400px) {
   .recipe-preview {
-    width: 130px;
-    height: 130px;
+    width: 110px;
+    height: 110px;
   }
   #image-actual{
-    width: 160px;
-    height: 160px;
+    width: 180px;
+    height: 180px;
   }
   .arrow {
     height: 130px;
@@ -259,8 +259,8 @@
     /*TODO: hide when login is selected*/
   }
   #image-actual{
-    width: 140px;
-    height: 140px;
+    width: 160px;
+    height: 160px;
   }
   #recipe-text {
     display: initial;

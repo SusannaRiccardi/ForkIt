@@ -4,25 +4,38 @@ window.onload = function() {
 
   //menu buttons and functionality
   let btnMenu = document.getElementsByClassName('menu-btn')[0].parentNode;
-  let btnMain = document.getElementById('btn-about').parentNode;
+  // let btnMain = document.getElementById('btn-about').parentNode;
   let btnCreate = document.getElementById('btn-create').parentNode;
-  // let btnDiscover = document.getElementById('btn-discover').parentNode;
-  let btnAbout = document.getElementById('btn-about').parentNode;
+  let btnDiscover = document.getElementById('btn-discover').parentNode;
+  // let btnAbout = document.getElementById('btn-about').parentNode;
   let btnSearchSubmit = document.getElementById('search-submit-btn');
   let btnCategories = document.getElementById('btn-categories').parentNode;
+  let icons = document.getElementById('icon-carousel').getElementsByTagName('img');
+  let mainSearch = document.getElementById('food');
 
   btnCategories.href = "categories";
   btnCreate.href = "create";
-  // btnDiscover.href = "discover";
-  btnAbout.href = "about";
+  btnDiscover.href = "discover";
+  // btnAbout.href = "about";
   btnMenu.href = "menu";
 
   btnMenu.addEventListener('click', displayPage);
   btnCreate.addEventListener('click', displayPage);
-  // btnDiscover.addEventListener('click', displayPage);
-  btnAbout.addEventListener('click', displayPage);
+  btnDiscover.addEventListener('click', displayPage);
+  // btnAbout.addEventListener('click', displayPage);
   btnCategories.addEventListener('click', displayPage);
   btnSearchSubmit.addEventListener('click', searchSubmit);
+  mainSearch.addEventListener('keyup', function(e) {
+    e.preventDefault();
+    if (e.keyCode == 13) {
+        mainIconsEvtListener(mainSearch.value);
+    }
+  });
+  for (let i = 0; i < icons.length; i++) {
+    icons[i].addEventListener('click', function() {
+      mainIconsEvtListener(icons[i].getAttribute('id'));
+    });
+  }
 
 
   let menubar = document.getElementById('menubar');
@@ -89,6 +102,19 @@ function displayPage(e){
   }
   if (href == 'menu'){
     pageContent.innerHTML = mainTemplate();
+    icons = document.getElementById('icon-carousel').getElementsByTagName('img');
+    mainSearch = document.getElementById('food');
+    mainSearch.addEventListener('keyup', function(e) {
+      e.preventDefault();
+      if (e.keyCode == 13) {
+        mainIconsEvtListener(mainSearch.value);
+      }
+    });
+    for (let i = 0; i < icons.length; i++) {
+    icons[i].addEventListener('click', function() {
+      mainIconsEvtListener(icons[i].getAttribute('id'));
+    });
+  }
   }
 }
 
@@ -349,7 +375,9 @@ function openSingleRecipeMongo (e){
       ingredient.quantity = ingr.amount + " " +ingr.unit;
       obj.ingredients.push(ingredient);
     }
-    obj.image = recipe.image;
+    obj.image = {
+      actual:'./uploads/' + recipe._id + '.' + recipe.image
+    };
     obj.comments = [];
     pageContent.innerHTML = recipeTemplate({recipe : obj});
     upvotes(e.target.id);
@@ -560,4 +588,32 @@ function doRequestChecks(method, isAsynchronous, data) {
   if(!canJSON(data)) {
     throw new Error('Illegal data: ' + data + ". It should be an object that can be serialized as JSON.");
   }
+}
+
+function mainIconsEvtListener(category) {
+  console.log(category)
+  var pageContent = document.getElementById('page-content');
+  jsonResponseCounter = 0;
+
+  let parameters = "/search?name=" + category + "&ingredient=";
+
+
+  doJSONRequest("GET", parameters, null, null, function(res, req) {
+    jsonResponse = res;
+    toRender = jsonResponse.results.slice(jsonResponseCounter, jsonResponseCounter + 6);
+
+    if (jsonResponse.results.length > jsonResponseCounter + 6){
+      jsonResponseCounter += 6;
+    }
+    else {
+      jsonResponseCounter = 0;
+    }
+
+    pageContent.innerHTML = discoverTemplate({results: toRender});
+    arrowDown = document.getElementById('arrow-down');
+
+    arrowDownEvListener();
+    accessToSingleRecipe();
+  })
+
 }
