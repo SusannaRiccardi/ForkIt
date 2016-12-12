@@ -6,20 +6,20 @@ window.onload = function() {
   let btnMenu = document.getElementsByClassName('menu-btn')[0].parentNode;
   let btnMain = document.getElementById('btn-about').parentNode;
   let btnCreate = document.getElementById('btn-create').parentNode;
-  let btnDiscover = document.getElementById('btn-discover').parentNode;
+  // let btnDiscover = document.getElementById('btn-discover').parentNode;
   let btnAbout = document.getElementById('btn-about').parentNode;
   let btnSearchSubmit = document.getElementById('search-submit-btn');
   let btnCategories = document.getElementById('btn-categories').parentNode;
 
   btnCategories.href = "categories";
   btnCreate.href = "create";
-  btnDiscover.href = "discover";
+  // btnDiscover.href = "discover";
   btnAbout.href = "about";
   btnMenu.href = "menu";
 
   btnMenu.addEventListener('click', displayPage);
   btnCreate.addEventListener('click', displayPage);
-  btnDiscover.addEventListener('click', displayPage);
+  // btnDiscover.addEventListener('click', displayPage);
   btnAbout.addEventListener('click', displayPage);
   btnCategories.addEventListener('click', displayPage);
   btnSearchSubmit.addEventListener('click', searchSubmit);
@@ -366,6 +366,8 @@ function searchSubmit(e) {
   var pageContent = document.getElementById('page-content');
   let searchName = document.getElementById('searchName').value;
   let excludeField = document.getElementById('excludeField').value;
+  pageContent = document.getElementById('page-content');
+  jsonResponseCounter = 0;
 
   let c1 = document.getElementById("c1").checked;
   let c2 = document.getElementById("c2").checked;
@@ -389,7 +391,20 @@ function searchSubmit(e) {
   }
 
   doJSONRequest("GET", parameters, null, null, function(res, req) {
-    pageContent.innerHTML = discoverTemplate(res);
+    jsonResponse = res;
+    toRender = jsonResponse.results.slice(jsonResponseCounter, jsonResponseCounter + 6);
+
+    if (jsonResponse.results.length > jsonResponseCounter + 6){
+      jsonResponseCounter += 6;
+    }
+    else {
+      jsonResponseCounter = 0;
+    }
+
+    pageContent.innerHTML = discoverTemplate({results: toRender});
+    arrowDown = document.getElementById('arrow-down');
+
+    arrowDownEvListener();
     accessToSingleRecipe();
   })
 

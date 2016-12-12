@@ -113,13 +113,19 @@
 #recipe-ingredients {
   padding: 15px;
   width: 40%;
-  background-color: rgba(76, 120, 34, 0.9);
+  /*background-color: rgba(10,10,10,0.9);*/
+}
+
+#recipe-division {
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.8);
+  border-width: 0.5px;
 }
 
 #recipe-preparation {
   padding: 15px;
   width: 40%;
-  background-color: rgba(76, 120, 34, 0.9);
+  /*background-color: rgba(10,10,10,0.9);*/
 }
 
 #recipe-comments {
@@ -261,11 +267,9 @@
   }
   #recipe-ingredients {
     width: auto;
-    background-color: rgba(76, 120, 34, 1);
   }
   #recipe-preparation {
     width: auto;
-    background-color: rgba(76, 120, 34, 1);
   }
 }
 
