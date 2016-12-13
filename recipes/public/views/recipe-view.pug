@@ -27,7 +27,7 @@
     img#down.vote(src='images/icons/down.png', alt='Down')
     span.down-text= recipe.downvotes
   #my-comment
-    textarea(rows='4', cols='50', id='comment')
+    textarea(rows='4', cols='50', id='comment' placeholder='Insert here your comment about this recipe')
     button(type='button',r id='submit-comment') Submit
   #recipe-comments
     each comment in recipe.comments

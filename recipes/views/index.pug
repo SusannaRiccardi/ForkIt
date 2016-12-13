@@ -40,8 +40,6 @@ html(lang='en')
                 a#btn-create(href='create') CREATE
               //- li
               //-   a#btn-about(href='about') ABOUT
-              li
-                a#btn-login LOGIN
       // searchbar
       #search-view
         #search-btn-back
@@ -78,55 +76,6 @@ html(lang='en')
           </div>
 
         button#search-submit-btn Search
-      #login-view
-        // Login
-        #login.login
-          .btn-login-back
-            i.material-icons keyboard_backspace
-          form
-            span.form-text
-              | Username:
-              span
-                br
-                input(type='text', name='username', value='')
-                br
-                span.form-text
-                  | Password:
-                  span
-                    br
-                    input(type='password', name='password', value='')
-                    a#btn-signup
-                      p Signup
-                      img(src='./images/arrow_down.png')
-                    br
-                    input#login-submit-btn.submit-btn(type='submit', value='Login')
-        // Signup
-        #signup.login
-          .btn-login-back
-            i.material-icons keyboard_backspace
-          form
-            span.form-text
-              | Username:
-              span
-                br
-                input(type='text', name='username', value='')
-                br
-                span.form-text
-                  | Password:
-                  span
-                    br
-                    input(type='password', name='password', value='')
-                    br
-                    span.form-text
-                      | Repeat password:
-                      span
-                        br
-                        input(type='password', name='RepeatPassword', value='')
-                        a#btn-signup-login
-                          img(src='./images/arrow_down.png')
-                          p Login
-                        br
-                        input#signup-submit-btn.submit-btn(type='submit', value='Signup')
     //
     #page-content
   script.

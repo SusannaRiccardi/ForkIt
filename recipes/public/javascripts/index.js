@@ -250,13 +250,13 @@ function openCategory(e) {
   doJSONRequest('GET', '/category/'+ recipeId, null, null, function(res, req){
     jsonResponse = res;
     doJSONRequest('GET', '/recipes', null, null, function(res,req){
-      let response = res.results;
-      for (let recipe of response){
+      let response = {results : []};
+      for (let recipe of res.results){
         if ((recipe.category).toLowerCase() == recipeId.toLowerCase()){
-          jsonResponse.results.push(recipe);
+          response.results.push(recipe);
         }
       }
-
+      jsonResponse.results = response.results.concat(jsonResponse.results);
       toRender = jsonResponse.results.slice(jsonResponseCounter, jsonResponseCounter + 6);
 
       if (jsonResponse.results.length > jsonResponseCounter + 6){
@@ -276,8 +276,9 @@ function openCategory(e) {
 }
 
 function arrowDownEvListener() {
-  arrowDown = document.getElementById('arrow-down');
-  pageContent = document.getElementById('page-content');
+  let arrowDown = document.getElementById('arrow-down');
+  let arrowUp = document.getElementById('arrow-up');
+  let pageContent = document.getElementById('page-content');
 
   arrowDown.addEventListener('click', function () {
     toRender = jsonResponse.results.slice(jsonResponseCounter, jsonResponseCounter + 6);
@@ -378,6 +379,12 @@ function openSingleRecipeMongo (e){
       actual:'./uploads/' + recipe._id + '.' + recipe.image
     };
     pageContent.innerHTML = recipeTemplate({recipe : obj});
+    let arrowBack = document.getElementById('arrow-back');
+    let arrowNext = document.getElementById('arrow-next');
+
+    arrowEvtListener(arrowBack,recipeBack);
+    arrowEvtListener(arrowNext,recipeNext);
+
     upvotes(e.target.id);
     downvotes(e.target.id);
     commentRecipe(e.target.id);
