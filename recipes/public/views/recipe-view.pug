@@ -1,15 +1,11 @@
 #recipe-view
   #recipe-title= recipe.title
   #recipe-subtitle= "Author: " + recipe.author
-  #recipe-readyIn= "Ready in: " + recipe.readyInMinutes
+  #recipe-readyIn= "Ready in: " + recipe.readyInMinutes + " minutes"
   #recipes-swipe
     img#arrow-back.arrow(src='images/left_arrow.png', alt='Food')
-    #image-back.recipe-preview
-      img.recipe-picture(src=recipe.image.back, alt='Food')
     #image-actual.recipe-preview
       img.recipe-picture(src=recipe.image.actual, alt='Food')
-    #image-next.recipe-preview
-      img.recipe-picture(src=recipe.image.next, alt='Food')
     img#arrow-next.arrow(src='images/right_arrow.png', alt='Food')
   #recipe-text
     #recipe-ingredients
@@ -26,9 +22,9 @@
       span#preparation
       p= recipe.instructions
   #votes
-    button(type='button',r id='up-vote')  👍
+    img#up.vote(src='images/icons/up.png', alt='Up')
     span.up-text= recipe.upvotes
-    button(type='button',r id='down-vote') 👎
+    img#down.vote(src='images/icons/down.png', alt='Down')
     span.down-text= recipe.downvotes
   #my-comment
     textarea(rows='4', cols='50', id='comment')

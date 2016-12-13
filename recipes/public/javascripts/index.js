@@ -4,39 +4,31 @@ window.onload = function() {
 
   //menu buttons and functionality
   let btnMenu = document.getElementsByClassName('menu-btn')[0].parentNode;
-  // let btnMain = document.getElementById('btn-about').parentNode;
   let btnCreate = document.getElementById('btn-create').parentNode;
-  let btnDiscover = document.getElementById('btn-discover').parentNode;
-  // let btnAbout = document.getElementById('btn-about').parentNode;
   let btnSearchSubmit = document.getElementById('search-submit-btn');
   let btnCategories = document.getElementById('btn-categories').parentNode;
   let icons = document.getElementById('icon-carousel').getElementsByTagName('img');
-  let mainSearch = document.getElementById('food');
+  // let mainSearch = document.getElementById('food');
 
   btnCategories.href = "categories";
   btnCreate.href = "create";
-  btnDiscover.href = "discover";
-  // btnAbout.href = "about";
   btnMenu.href = "menu";
 
   btnMenu.addEventListener('click', displayPage);
   btnCreate.addEventListener('click', displayPage);
-  btnDiscover.addEventListener('click', displayPage);
-  // btnAbout.addEventListener('click', displayPage);
   btnCategories.addEventListener('click', displayPage);
   btnSearchSubmit.addEventListener('click', searchSubmit);
-  mainSearch.addEventListener('keyup', function(e) {
-    e.preventDefault();
-    if (e.keyCode == 13) {
-        mainIconsEvtListener(mainSearch.value);
-    }
-  });
+  // mainSearch.addEventListener('keyup', function(e) {
+  //   e.preventDefault();
+  //   if (e.keyCode == 13) {
+  //       mainIconsEvtListener(mainSearch.value);
+  //   }
+  // });
   for (let i = 0; i < icons.length; i++) {
     icons[i].addEventListener('click', function() {
       mainIconsEvtListener(icons[i].getAttribute('id'));
     });
   }
-
 
   let menubar = document.getElementById('menubar');
   let recipesBtn = document.getElementById('recipes-view-btn');
@@ -62,16 +54,14 @@ window.onload = function() {
     menuBtnFont.removeAttribute('Style');
   });
 
-  mainPageSearchContent.addEventListener('focus', function() {
-    mainPageSearchContent.removeAttribute('placeholder');
-  });
+  // mainPageSearchContent.addEventListener('focus', function() {
+  //   mainPageSearchContent.removeAttribute('placeholder');
+  // });
 
-  mainPageSearchContent.addEventListener('blur', function() {
-    mainPageSearchContent.setAttribute('placeholder', 'SEACH FOOD');
-  });
+  // mainPageSearchContent.addEventListener('blur', function() {
+  //   mainPageSearchContent.setAttribute('placeholder', 'SEACH FOOD');
+  // });
 }
-
-
 
 // Display different pages when the menu buttons are clicked
 function displayPage(e){
@@ -88,10 +78,8 @@ function displayPage(e){
   }
   if (href == 'discover'){
     doJSONRequest('GET', '/recipes', null, null, function(res, req){
-
       pageContent.innerHTML = discoverTemplate(res);
       accessToSingleRecipeMongo();
-
     })
   }
   if (href == 'about'){
@@ -104,22 +92,19 @@ function displayPage(e){
     pageContent.innerHTML = mainTemplate();
     icons = document.getElementById('icon-carousel').getElementsByTagName('img');
     mainSearch = document.getElementById('food');
-    mainSearch.addEventListener('keyup', function(e) {
-      e.preventDefault();
-      if (e.keyCode == 13) {
-        mainIconsEvtListener(mainSearch.value);
-      }
-    });
+    // mainSearch.addEventListener('keyup', function(e) {
+    //   e.preventDefault();
+    //   if (e.keyCode == 13) {
+    //     mainIconsEvtListener(mainSearch.value);
+    //   }
+    // });
     for (let i = 0; i < icons.length; i++) {
     icons[i].addEventListener('click', function() {
       mainIconsEvtListener(icons[i].getAttribute('id'));
     });
-  }
+    }
   }
 }
-
-
-
 
 // CREAT RECIPE VIEW
 // Creation of the recipe with the post request
@@ -128,8 +113,6 @@ function create() {
   let createBtn = document.getElementById('submit-recipe');
   createBtn.addEventListener('click', createRecipe);
 }
-
-
 
 ////////////////////// Create Recipe /////////////////////////////
 function createRecipe(e) {
@@ -160,8 +143,6 @@ function createRecipe(e) {
   }
   else {
     for (i = 0; i < names.length; i++) {
-      // let q = (quantities[i].value).split(/(\d+)/);
-
       let ing = {};
       ing.name = names[i].value;
       ing.quantity = quantities[i].value;
@@ -219,7 +200,6 @@ function accessToSingleRecipeMongo(){
   }
 }
 
-
 // CATEGORIES VIEW
 // click on a single category and open all the recipes of that category
 function clickCategory() {
@@ -235,7 +215,6 @@ function clickCategory() {
   let spanish = document.getElementById('spanish');
   let nordic = document.getElementById('nordic');
   let usersrecipes = document.getElementById('usersrecipes');
-
 
   greek.addEventListener('click', openCategory);
   british.addEventListener('click', openCategory);
@@ -342,6 +321,7 @@ function openSingleRecipe (e, activeRecipe){
     obj.author = 'FoodAPI';
     obj.instructions = recipe.instructions;
     obj.ingredients = [];
+    obj.readyInMinutes = recipe.readyInMinutes;
     for (let ingr of recipe.extendedIngredients){
       let ingredient = {};
       ingredient.name = ingr.name;
@@ -459,7 +439,7 @@ function searchSubmit(e) {
 
 // Upvote and dowvote the recipe
 function upvotes(idRecipe) {
-  let upvote = document.getElementById('up-vote');
+  let upvote = document.getElementById('up');
   upvote.id = idRecipe;
   upvote.addEventListener('click', function(e){
     doJSONRequest('GET', '/recipes/'+idRecipe, null, null, function(res, req){
@@ -474,7 +454,7 @@ function upvotes(idRecipe) {
 }
 
 function downvotes(idRecipe) {
-  let downvote = document.getElementById('down-vote');
+  let downvote = document.getElementById('down');
   downvote.id = idRecipe;
   downvote.addEventListener('click', function(e){
     doJSONRequest('GET', '/recipes/'+idRecipe, null, null, function(res, req){
