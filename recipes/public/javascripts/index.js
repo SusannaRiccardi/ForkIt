@@ -8,7 +8,6 @@ window.onload = function() {
   let btnSearchSubmit = document.getElementById('search-submit-btn');
   let btnCategories = document.getElementById('btn-categories').parentNode;
   let icons = document.getElementById('icon-carousel').getElementsByTagName('img');
-  // let mainSearch = document.getElementById('food');
 
   btnCategories.href = "categories";
   btnCreate.href = "create";
@@ -18,12 +17,7 @@ window.onload = function() {
   btnCreate.addEventListener('click', displayPage);
   btnCategories.addEventListener('click', displayPage);
   btnSearchSubmit.addEventListener('click', searchSubmit);
-  // mainSearch.addEventListener('keyup', function(e) {
-  //   e.preventDefault();
-  //   if (e.keyCode == 13) {
-  //       mainIconsEvtListener(mainSearch.value);
-  //   }
-  // });
+
   for (let i = 0; i < icons.length; i++) {
     icons[i].addEventListener('click', function() {
       mainIconsEvtListener(icons[i].getAttribute('id'));
@@ -54,13 +48,6 @@ window.onload = function() {
     menuBtnFont.removeAttribute('Style');
   });
 
-  // mainPageSearchContent.addEventListener('focus', function() {
-  //   mainPageSearchContent.removeAttribute('placeholder');
-  // });
-
-  // mainPageSearchContent.addEventListener('blur', function() {
-  //   mainPageSearchContent.setAttribute('placeholder', 'SEACH FOOD');
-  // });
 }
 
 // Display different pages when the menu buttons are clicked
@@ -92,12 +79,7 @@ function displayPage(e){
     pageContent.innerHTML = mainTemplate();
     icons = document.getElementById('icon-carousel').getElementsByTagName('img');
     mainSearch = document.getElementById('food');
-    // mainSearch.addEventListener('keyup', function(e) {
-    //   e.preventDefault();
-    //   if (e.keyCode == 13) {
-    //     mainIconsEvtListener(mainSearch.value);
-    //   }
-    // });
+
     for (let i = 0; i < icons.length; i++) {
     icons[i].addEventListener('click', function() {
       mainIconsEvtListener(icons[i].getAttribute('id'));
@@ -149,7 +131,6 @@ function createRecipe(e) {
       ingredients.push(ing);
     }
     let time = (Number(selectHour) * 60) + Number(selectMinutes);
-    console.log(time);
     data.append('author', user);
     data.append('title', title);
     data.append('category', selectCategory);
@@ -167,7 +148,6 @@ function createRecipe(e) {
     }
 
     data.append('file', inputFile);
-    console.log(data);
     doFormDataRequest('POST', '/recipes', data)
     var pageContent = document.getElementById('page-content');
     pageContent.innerHTML = mainTemplate();
@@ -343,10 +323,16 @@ function openSingleRecipe (e, activeRecipe){
 
     let arrowBack = document.getElementById('arrow-back');
     let arrowNext = document.getElementById('arrow-next');
+    let backButton = document.getElementById('back-button');
 
     arrowEvtListener(arrowBack,recipeBack);
     arrowEvtListener(arrowNext,recipeNext);
+    backButton.addEventListener('click', goBackFunction);
   })
+}
+
+function goBackFunction() {
+  console.log("Todo");
 }
 
 function arrowEvtListener(dom, index) {
@@ -440,9 +426,7 @@ function searchSubmit(e) {
     arrowDownEvListener();
     accessToSingleRecipe();
   })
-
 }
-
 
 // Upvote and dowvote the recipe
 function upvotes(idRecipe) {
@@ -479,7 +463,6 @@ function commentRecipe(idRecipe) {
   let commentSubmit = document.getElementById('submit-comment');
   commentSubmit.id = idRecipe;
   let comment = document.getElementById('comment');
-  console.log(comment.value);
   commentSubmit.addEventListener('click', function(e){
     if(comment.value == ''){
       alert('You have to insert a comment before submit');
@@ -605,12 +588,10 @@ function doRequestChecks(method, isAsynchronous, data) {
 }
 
 function mainIconsEvtListener(category) {
-  console.log(category)
   var pageContent = document.getElementById('page-content');
   jsonResponseCounter = 0;
 
   let parameters = "/search?name=" + category + "&ingredient=";
-
 
   doJSONRequest("GET", parameters, null, null, function(res, req) {
     jsonResponse = res;
@@ -629,5 +610,4 @@ function mainIconsEvtListener(category) {
     arrowDownEvListener();
     accessToSingleRecipe();
   })
-
 }
