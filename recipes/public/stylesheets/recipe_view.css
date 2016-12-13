@@ -13,7 +13,16 @@
 
 #recipe-subtitle {
   font-family: 'Lato', sans-serif;
-  font-size: 1.8em;
+  font-size: 1.5em;
+  margin-left: 30px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  color: white;
+}
+
+#recipe-readyIn {
+  font-family: 'Lato', sans-serif;
+  font-size: 1em;
   margin-left: 30px;
   margin-top: 10px;
   margin-bottom: 30px;

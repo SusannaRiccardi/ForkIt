@@ -19,6 +19,7 @@
     br
     br
     select#selectCategory.select-style
+      option(value='none') None
       option(value='greek') Greek
       option(value='british') British
       option(value='indian') Indian
@@ -34,8 +35,25 @@
     label.input-label Required Time
     br
     br
-    select#selectTime.select-style
-      option(value='5') 5 min
+    select#selectHour.select-style
+      option(value='0') 0 h
+      option(value='1') 1 h
+      option(value='2') 2 h
+      option(value='3') 3 h
+      option(value='4') 4 h
+      option(value='5') 5 h
+      option(value='6') 6 h
+      option(value='7') 7 h
+      option(value='8') 8 h
+      option(value='9') 9 h
+      option(value='10') 10 h
+      option(value='11') 11 h
+      option(value='12') 12 h
+    br
+    br
+    select#selectMinutes.select-style
+      option(value='0') 00 min
+      option(value='5') 05 min
       option(value='10') 10 min
       option(value='15') 15 min
       option(value='20') 20 min
@@ -44,10 +62,8 @@
       option(value='35') 35 min
       option(value='40') 40 min
       option(value='45') 45 min
-      option(value='100') 1 h
-      option(value='130') 1 h 30 min
-      option(value='200') 2 h
-      option(value='+') + 2h
+      option(value='50') 50 min
+      option(value='55') 55 min
     br
     br
     label.input-label Ingredients

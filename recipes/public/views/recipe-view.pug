@@ -1,6 +1,7 @@
 #recipe-view
   #recipe-title= recipe.title
-  #recipe-subtitle= recipe.author
+  #recipe-subtitle= "Author: " + recipe.author
+  #recipe-readyIn= "Ready in: " + recipe.readyInMinutes
   #recipes-swipe
     img#arrow-back.arrow(src='images/left_arrow.png', alt='Food')
     #image-back.recipe-preview

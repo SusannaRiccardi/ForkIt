@@ -145,7 +145,8 @@ function createRecipe(e) {
   let quantities = document.getElementsByClassName('create-ingredient-quantity');
   let inputFile = document.getElementById('file-upload').files[0];
   let selectCategory = document.getElementById('selectCategory').value;
-  let selectTime = document.getElementById('selectTime').value;
+  let selectHour = document.getElementById('selectHour').value;
+  let selectMinutes = document.getElementById('selectMinutes').value;
   let data = new FormData();
 
   if(title == ''){
@@ -166,11 +167,12 @@ function createRecipe(e) {
       ing.quantity = quantities[i].value;
       ingredients.push(ing);
     }
-    console.log(ingredients);
+    let time = (Number(selectHour) * 60) + Number(selectMinutes);
+    console.log(time);
     data.append('author', user);
     data.append('title', title);
     data.append('category', selectCategory);
-    data.append('readyInMinutes', selectTime);
+    data.append('readyInMinutes', time);
     data.append('instructions', instructions);
     data.append('ingredients', JSON.stringify(ingredients));
     data.append('lactosefree', isDairy);
@@ -385,6 +387,7 @@ function openSingleRecipeMongo (e){
     obj.downvotes = recipe.downvotes;
     obj.ingredients = [];
     obj.comments = recipe.comments;
+    obj.readyInMinutes = recipe.readyInMinutes;
     for (let ingr of recipe.ingredients){
       let ingredient = {};
       ingredient.name = ingr.name;
