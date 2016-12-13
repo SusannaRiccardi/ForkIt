@@ -1,4 +1,6 @@
 #discover-view.content
+  #arrow-up
+    img(src='images/arrow_up.png')
   .grid-block
     each recipe in results
       .grid-cell
@@ -10,6 +12,6 @@
           img.recipe-picture(src= 'https://spoonacular.com/recipeImages/' + recipe.image id = recipe.id alt='Food')
           .category-title
             div= recipe.title
-          
+
   #arrow-down
     img(src='images/arrow_down.png')

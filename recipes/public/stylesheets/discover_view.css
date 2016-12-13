@@ -66,6 +66,16 @@ background-size: cover;
   width: 100px;
 }
 
+#arrow-up{
+  text-align: center;
+  margin: 20px;
+  cursor: pointer;
+}
+
+#arrow-up img{
+  width: 100px;
+}
+
 /*.recipe-picture:hover{*/
 /*border-radius: 50%;*/
 /*-webkit-transform: scale(1.5);*/

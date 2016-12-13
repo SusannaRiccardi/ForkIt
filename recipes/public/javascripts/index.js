@@ -216,16 +216,16 @@ function clickCategory() {
   });
 }
 
-let jsonResponseCounter;
+let counter;
 let jsonResponse;
 let toRender;
-let arrowDown;
-let pageContent;
 
 function openCategory(e) {
+  let arrowDown = document.getElementById('arrow-down');
+  let arrowUp = document.getElementById('arrow-up');
   let recipeId = e.target.alt;
-  pageContent = document.getElementById('page-content');
-  jsonResponseCounter = 0;
+  let pageContent = document.getElementById('page-content');
+  counter = 0;
 
   doJSONRequest('GET', '/category/'+ recipeId, null, null, function(res, req){
     jsonResponse = res;
@@ -237,42 +237,64 @@ function openCategory(e) {
         }
       }
       jsonResponse.results = response.results.concat(jsonResponse.results);
-      toRender = jsonResponse.results.slice(jsonResponseCounter, jsonResponseCounter + 6);
+      toRender = jsonResponse.results.slice(counter, counter + 6);
 
-      if (jsonResponse.results.length > jsonResponseCounter + 6){
-        jsonResponseCounter += 6;
+      if (jsonResponse.results.length > counter + 6){
+        counter += 6;
       }
       else {
-        jsonResponseCounter = 0;
+        // Far sparire la freccia
       }
 
       pageContent.innerHTML = discoverTemplate({results: toRender});
-      arrowDown = document.getElementById('arrow-down');
 
-      arrowDownEvListener();
+      arrowD(counter);
+      arrowU(counter);
       accessToSingleRecipe();
     })
   });
 }
 
-function arrowDownEvListener() {
+function arrowD(cn) {
   let arrowDown = document.getElementById('arrow-down');
-  let arrowUp = document.getElementById('arrow-up');
   let pageContent = document.getElementById('page-content');
 
   arrowDown.addEventListener('click', function () {
-    toRender = jsonResponse.results.slice(jsonResponseCounter, jsonResponseCounter + 6);
+    toRender = jsonResponse.results.slice(cn, cn + 6);
 
-    if (jsonResponse.results.length > jsonResponseCounter + 6){
-      jsonResponseCounter += 6;
+    if (jsonResponse.results.length > cn + 6){
+      cn += 6;
     }
     else {
-      jsonResponseCounter = 0;
+      // Far sparire la freccia
     }
 
     pageContent.innerHTML = discoverTemplate({results: toRender});
 
-    arrowDownEvListener();
+    arrowD(cn);
+    arrowU(cn-6);
+    accessToSingleRecipe();
+  });
+}
+
+function arrowU(cn) {
+  let arrowUp = document.getElementById('arrow-up');
+  let pageContent = document.getElementById('page-content');
+
+  arrowUp.addEventListener('click', function () {
+    toRender = jsonResponse.results.slice(cn - 6, cn);
+
+    if (cn-6 > 0){
+      cn = cn - 6;
+    }
+    else {
+      // Far sparire la freccia in su
+    }
+
+    pageContent.innerHTML = discoverTemplate({results: toRender});
+
+    arrowD(cn);
+    arrowU(cn);
     accessToSingleRecipe();
   });
 }
@@ -302,7 +324,14 @@ function openSingleRecipe (e, activeRecipe){
     obj.author = 'FoodAPI';
     obj.instructions = recipe.instructions;
     obj.ingredients = [];
-    obj.readyInMinutes = recipe.readyInMinutes;
+    let h = recipe.readyInMinutes / 60 | 0;
+    let m = recipe.readyInMinutes % 60 | 0;
+    if(h == 0){
+      obj.readyInMinutes = m + " minutes";
+    }
+    else {
+      obj.readyInMinutes = h + " hours and " + m + " minutes";
+    }
     for (let ingr of recipe.extendedIngredients){
       let ingredient = {};
       ingredient.name = ingr.name;
@@ -354,7 +383,14 @@ function openSingleRecipeMongo (e){
     obj.downvotes = recipe.downvotes;
     obj.ingredients = [];
     obj.comments = recipe.comments;
-    obj.readyInMinutes = recipe.readyInMinutes;
+    let h = recipe.readyInMinutes / 60 | 0;
+    let m = recipe.readyInMinutes % 60 | 0;
+    if(h == 0){
+      obj.readyInMinutes = m + " minutes";
+    }
+    else {
+      obj.readyInMinutes = h + " hours and " + m + " minutes";
+    }
     for (let ingr of recipe.ingredients){
       let ingredient = {};
       ingredient.name = ingr.name;
@@ -365,9 +401,9 @@ function openSingleRecipeMongo (e){
       actual:'./uploads/' + recipe._id + '.' + recipe.image
     };
     pageContent.innerHTML = recipeTemplate({recipe : obj});
+
     let arrowBack = document.getElementById('arrow-back');
     let arrowNext = document.getElementById('arrow-next');
-
     arrowEvtListener(arrowBack,recipeBack);
     arrowEvtListener(arrowNext,recipeNext);
 
@@ -386,7 +422,7 @@ function searchSubmit(e) {
   let searchName = document.getElementById('searchName').value;
   let excludeField = document.getElementById('excludeField').value;
   pageContent = document.getElementById('page-content');
-  jsonResponseCounter = 0;
+  counter = 0;
 
   let c1 = document.getElementById("c1").checked;
   let c2 = document.getElementById("c2").checked;
@@ -411,13 +447,13 @@ function searchSubmit(e) {
 
   doJSONRequest("GET", parameters, null, null, function(res, req) {
     jsonResponse = res;
-    toRender = jsonResponse.results.slice(jsonResponseCounter, jsonResponseCounter + 6);
+    toRender = jsonResponse.results.slice(counter, counter + 6);
 
-    if (jsonResponse.results.length > jsonResponseCounter + 6){
-      jsonResponseCounter += 6;
+    if (jsonResponse.results.length > counter + 6){
+      counter += 6;
     }
     else {
-      jsonResponseCounter = 0;
+      counter = 0;
     }
 
     pageContent.innerHTML = discoverTemplate({results: toRender});
@@ -589,19 +625,19 @@ function doRequestChecks(method, isAsynchronous, data) {
 
 function mainIconsEvtListener(category) {
   var pageContent = document.getElementById('page-content');
-  jsonResponseCounter = 0;
+  counter = 0;
 
   let parameters = "/search?name=" + category + "&ingredient=";
 
   doJSONRequest("GET", parameters, null, null, function(res, req) {
     jsonResponse = res;
-    toRender = jsonResponse.results.slice(jsonResponseCounter, jsonResponseCounter + 6);
+    toRender = jsonResponse.results.slice(counter, counter + 6);
 
-    if (jsonResponse.results.length > jsonResponseCounter + 6){
-      jsonResponseCounter += 6;
+    if (jsonResponse.results.length > counter + 6){
+      counter += 6;
     }
     else {
-      jsonResponseCounter = 0;
+      counter = 0;
     }
 
     pageContent.innerHTML = discoverTemplate({results: toRender});
