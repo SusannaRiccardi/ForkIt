@@ -24,6 +24,11 @@
       br
       span#preparation
       p= recipe.instructions
+  #votes
+    button(type='button',r id='up-vote')  👍
+    span.up-text= recipe.upvotes
+    button(type='button',r id='down-vote') 👎
+    span.down-text= recipe.downvotes
   #my-comment
     textarea(rows='4', cols='50', id='comment')
     button(type='button',r id='submit-comment') Submit

@@ -275,3 +275,10 @@
 
 
 /*Comments*/
+
+
+#votes {
+  background-color: transparent;
+  border: none;
+  color: white;
+}

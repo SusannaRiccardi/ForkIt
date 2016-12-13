@@ -12,7 +12,7 @@ const CommentSchema = require("./Comment");
 
 const RecipeSchema = new mongoose.Schema({
     title: { type: String, required: true },
-    //author: { type: String, required: true },
+    author: { type: String, required: true },
     image: { type: String, default: "" },
     video: { type: String, default: "" },
     ingredients: { type: [IngredientSchema] },

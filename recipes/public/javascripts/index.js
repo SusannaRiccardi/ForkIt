@@ -134,6 +134,7 @@ function create() {
 ////////////////////// Create Recipe /////////////////////////////
 function createRecipe(e) {
   e.preventDefault();
+  let user = document.getElementById('user-name').value;
   let title = document.getElementById('create-name').value;
   let instructions = document.getElementById('create-description').value;
   let ingredients = [];
@@ -166,6 +167,7 @@ function createRecipe(e) {
       ingredients.push(ing);
     }
     console.log(ingredients);
+    data.append('author', user);
     data.append('title', title);
     data.append('category', selectCategory);
     data.append('readyInMinutes', selectTime);
@@ -253,8 +255,8 @@ function clickCategory() {
   });
 }
 
-let jsonResponse;
 let jsonResponseCounter;
+let jsonResponse;
 let toRender;
 let arrowDown;
 let pageContent;
@@ -266,20 +268,29 @@ function openCategory(e) {
 
   doJSONRequest('GET', '/category/'+ recipeId, null, null, function(res, req){
     jsonResponse = res;
-    toRender = jsonResponse.results.slice(jsonResponseCounter, jsonResponseCounter + 6);
+    doJSONRequest('GET', '/recipes', null, null, function(res,req){
+      let response = res.results;
+      for (let recipe of response){
+        if ((recipe.category).toLowerCase() == recipeId.toLowerCase()){
+          jsonResponse.results.push(recipe);
+        }
+      }
 
-    if (jsonResponse.results.length > jsonResponseCounter + 6){
-      jsonResponseCounter += 6;
-    }
-    else {
-      jsonResponseCounter = 0;
-    }
+      toRender = jsonResponse.results.slice(jsonResponseCounter, jsonResponseCounter + 6);
 
-    pageContent.innerHTML = discoverTemplate({results: toRender});
-    arrowDown = document.getElementById('arrow-down');
+      if (jsonResponse.results.length > jsonResponseCounter + 6){
+        jsonResponseCounter += 6;
+      }
+      else {
+        jsonResponseCounter = 0;
+      }
 
-    arrowDownEvListener();
-    accessToSingleRecipe();
+      pageContent.innerHTML = discoverTemplate({results: toRender});
+      arrowDown = document.getElementById('arrow-down');
+
+      arrowDownEvListener();
+      accessToSingleRecipe();
+    })
   });
 }
 
@@ -308,9 +319,14 @@ function accessToSingleRecipe(){
   let recipes = document.getElementsByClassName('grid-cell');
 
   for (let i = 0; i < recipes.length; i++) {
-    recipes[i].onclick = function () {
-      openSingleRecipe(event, i)
-    }
+    recipes[i].addEventListener('click', function (event) {
+      if((event.target.id).length == 6){
+        openSingleRecipe(event, i)
+      }
+      else{
+        openSingleRecipeMongo(event);
+      }
+    })
   }
 }
 
@@ -321,7 +337,7 @@ function openSingleRecipe (e, activeRecipe){
     let obj = {};
     obj.activeRecipe = activeRecipe;
     obj.title = recipe.title;
-    obj.author = '';
+    obj.author = 'FoodAPI';
     obj.instructions = recipe.instructions;
     obj.ingredients = [];
     for (let ingr of recipe.extendedIngredients){
@@ -363,8 +379,10 @@ function openSingleRecipeMongo (e){
     let recipe = res;
     let obj = {};
     obj.title = recipe.title;
-    obj.author = '';
+    obj.author = recipe.author;
     obj.instructions = recipe.instructions;
+    obj.upvotes = recipe.upvotes;
+    obj.downvotes = recipe.downvotes;
     obj.ingredients = [];
     obj.comments = recipe.comments;
     for (let ingr of recipe.ingredients){
@@ -438,25 +456,31 @@ function searchSubmit(e) {
 
 // Upvote and dowvote the recipe
 function upvotes(idRecipe) {
-  let upvote = document.getElementById('arrow-back');
-  upvote.addEventListener('click', function(){
+  let upvote = document.getElementById('up-vote');
+  upvote.id = idRecipe;
+  upvote.addEventListener('click', function(e){
     doJSONRequest('GET', '/recipes/'+idRecipe, null, null, function(res, req){
       let recipe = res;
       let up = recipe.upvotes + 1;
       let down = recipe.downvotes;
-      doJSONRequest('PUT', '/recipes/'+idRecipe, null, {upvotes : up}, function(){});
+      doJSONRequest('PUT', '/recipes/'+idRecipe, null, {upvotes : up}, function(){
+        openSingleRecipeMongo(e);
+      });
     })
   })
 }
 
 function downvotes(idRecipe) {
-  let downvote = document.getElementById('arrow-next');
-  downvote.addEventListener('click', function(){
+  let downvote = document.getElementById('down-vote');
+  downvote.id = idRecipe;
+  downvote.addEventListener('click', function(e){
     doJSONRequest('GET', '/recipes/'+idRecipe, null, null, function(res, req){
       let recipe = res;
       let up = recipe.upvotes;
       let down = recipe.downvotes + 1;
-      doJSONRequest('PUT', '/recipes/'+idRecipe, null, {downvotes : down}, function(){});
+      doJSONRequest('PUT', '/recipes/'+idRecipe, null, {downvotes : down}, function(){
+        openSingleRecipeMongo(e);
+      });
     })
   })
 }
