@@ -9,7 +9,12 @@ var pug_match_html=/["&<>]/;function discoverTemplate(locals) {var pug_html = ""
         var recipe = $$obj[pug_index0];
 pug_html = pug_html + "\u003Cdiv class=\"grid-cell\"\u003E";
 if (recipe._id) {
+if (recipe.image=='./images/cloche.jpg') {
+pug_html = pug_html + "\u003Cimg" + (" class=\"recipe-picture\""+" src=\".\u002Fimages\u002Fcloche.jpg\""+pug_attr("id", recipe._id, true, false)+" alt=\"Food\"") + "\u002F\u003E\u003Cdiv class=\"category-title\"\u003E\u003Cdiv\u003E" + (pug_escape(null == (pug_interp = recipe.title) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
+}
+else {
 pug_html = pug_html + "\u003Cimg" + (" class=\"recipe-picture\""+pug_attr("src", './uploads/' + recipe._id + '.' + recipe.image, true, false)+pug_attr("id", recipe._id, true, false)+" alt=\"Food\"") + "\u002F\u003E\u003Cdiv class=\"category-title\"\u003E\u003Cdiv\u003E" + (pug_escape(null == (pug_interp = recipe.title) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
+}
 }
 else {
 pug_html = pug_html + "\u003Cimg" + (" class=\"recipe-picture\""+pug_attr("src", 'https://spoonacular.com/recipeImages/' + recipe.image, true, false)+pug_attr("id", recipe.id, true, false)+" alt=\"Food\"") + "\u002F\u003E\u003Cdiv class=\"category-title\"\u003E\u003Cdiv\u003E" + (pug_escape(null == (pug_interp = recipe.title) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
@@ -23,7 +28,12 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E";
       var recipe = $$obj[pug_index0];
 pug_html = pug_html + "\u003Cdiv class=\"grid-cell\"\u003E";
 if (recipe._id) {
+if (recipe.image=='./images/cloche.jpg') {
+pug_html = pug_html + "\u003Cimg" + (" class=\"recipe-picture\""+" src=\".\u002Fimages\u002Fcloche.jpg\""+pug_attr("id", recipe._id, true, false)+" alt=\"Food\"") + "\u002F\u003E\u003Cdiv class=\"category-title\"\u003E\u003Cdiv\u003E" + (pug_escape(null == (pug_interp = recipe.title) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
+}
+else {
 pug_html = pug_html + "\u003Cimg" + (" class=\"recipe-picture\""+pug_attr("src", './uploads/' + recipe._id + '.' + recipe.image, true, false)+pug_attr("id", recipe._id, true, false)+" alt=\"Food\"") + "\u002F\u003E\u003Cdiv class=\"category-title\"\u003E\u003Cdiv\u003E" + (pug_escape(null == (pug_interp = recipe.title) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
+}
 }
 else {
 pug_html = pug_html + "\u003Cimg" + (" class=\"recipe-picture\""+pug_attr("src", 'https://spoonacular.com/recipeImages/' + recipe.image, true, false)+pug_attr("id", recipe.id, true, false)+" alt=\"Food\"") + "\u002F\u003E\u003Cdiv class=\"category-title\"\u003E\u003Cdiv\u003E" + (pug_escape(null == (pug_interp = recipe.title) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";

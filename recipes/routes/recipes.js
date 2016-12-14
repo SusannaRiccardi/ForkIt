@@ -70,13 +70,12 @@ router.post('/', function(req, res) {
       if (err) {
         throw err
       }
-      if (newRecipe['image'] !== '') {
+      if (newRecipe['image'] !== './images/cloche.jpg') {
         var dir = './public/uploads/';
 
         if (!fs.existsSync(dir)){
           fs.mkdirSync(dir);
         }
-
         form.uploadDir = "./public/uploads/";
         fs.rename(files.file.path, "./public/uploads/" + saved.id + '.' + fields['image']);
       }

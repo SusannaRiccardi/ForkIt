@@ -63,15 +63,6 @@ function displayPage(e){
     pageContent.innerHTML = createTemplate();
     create();
   }
-  if (href == 'discover'){
-    doJSONRequest('GET', '/recipes', null, null, function(res, req){
-      pageContent.innerHTML = discoverTemplate(res);
-      accessToSingleRecipe();
-    })
-  }
-  if (href == 'about'){
-    pageContent.innerHTML = "";
-  }
   if (href == 'search'){
     search();
   }
@@ -141,7 +132,7 @@ function createRecipe(e) {
     data.append('glutenfree', isGlutenFree);
     data.append('vegan', isVegan);
     if (inputFile === undefined) {
-      data.append('image', '');
+      data.append('image', './images/cloche.jpg');
     } else {
       let inputField = document.getElementById('file-upload')
       data.append('image', inputField.value.split('.')[inputField.value.split('.').length-1]);
@@ -483,9 +474,14 @@ function openSingleRecipeMongo (e, activeRecipe){
       ingredient.quantity = ingr.quantity;
       obj.ingredients.push(ingredient);
     }
-    obj.image = {
-      actual:'./uploads/' + recipe._id + '.' + recipe.image
-    };
+    if(recipe.image == './images/cloche.jpg'){
+      obj.image = {actual: './images/cloche.jpg'};
+    }
+    else {
+      obj.image = {
+        actual:'./uploads/' + recipe._id + '.' + recipe.image
+      };
+    }
     pageContent.innerHTML = recipeTemplate({recipe : obj});
     let recipeBack = (obj.activeRecipe - 1 < 0) ? jsonResponse.results.length - 1 : obj.activeRecipe - 1;
     let recipeNext = (obj.activeRecipe + 1 > jsonResponse.results.length - 1) ? 0 : obj.activeRecipe + 1;
@@ -550,8 +546,9 @@ function searchSubmit(e) {
 
     pageContent.innerHTML = discoverTemplate({results: toRender});
     arrowDown = document.getElementById('arrow-down');
-
-    arrowDownEvListener();
+    document.getElementById('back-button-discover').style.display = 'none';
+    arrowU(counter);
+    arrowD(counter);
     accessToSingleRecipe();
   })
 

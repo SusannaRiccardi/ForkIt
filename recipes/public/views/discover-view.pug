@@ -6,9 +6,14 @@
     each recipe in results
       .grid-cell
         if recipe._id
-          img.recipe-picture(src= './uploads/' + recipe._id + '.' + recipe.image id = recipe._id alt='Food')
-          .category-title
-            div= recipe.title
+          if recipe.image=='./images/cloche.jpg'
+            img.recipe-picture(src= './images/cloche.jpg' id = recipe._id alt='Food')
+            .category-title
+              div= recipe.title
+          else
+            img.recipe-picture(src= './uploads/' + recipe._id + '.' + recipe.image id = recipe._id alt='Food')
+            .category-title
+              div= recipe.title
         else
           img.recipe-picture(src= 'https://spoonacular.com/recipeImages/' + recipe.image id = recipe.id alt='Food')
           .category-title
