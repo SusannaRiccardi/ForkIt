@@ -12,6 +12,7 @@ var create = require('./routes/create');
 var category = require('./routes/category');
 var singlerecipe = require('./routes/singlerecipe');
 var search = require('./routes/search');
+var api = require('./routes/api');
 
 var app = express();
 
@@ -39,6 +40,7 @@ app.use('/create', create);
 app.use('/category', category);
 app.use('/singlerecipe', singlerecipe);
 app.use('/search', search);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

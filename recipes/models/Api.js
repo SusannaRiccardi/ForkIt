@@ -11,10 +11,10 @@ const CommentSchema = require("./Comment");
 */
 
 const ApiSchema = new mongoose.Schema({
-  id : { type: String, required:true},
+  recipeid : { type: String, required:true},
   upvotes : {type: Number, default: 0},
   downvotes : {type: Number, default: 0},
-  comments : {type: [CommentSchema]},
+  comments : {type: [CommentSchema], default: []},
 });
 
 mongoose.model('Api', ApiSchema);
