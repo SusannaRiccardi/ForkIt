@@ -309,6 +309,8 @@ function accessToSingleRecipe(){
   let recipes = document.getElementsByClassName('grid-cell');
 
   for (let i = 0; i < recipes.length; i++) {
+    console.log(recipes[i].firstChild.id);
+    recipes[i].id = recipes[i].firstChild.id;
     recipes[i].addEventListener('click', function (event) {
       if((event.target.id).length == 6){
         openSingleRecipe(event, i)
