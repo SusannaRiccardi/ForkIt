@@ -216,6 +216,8 @@ function openCategory(e, back) {
     doJSONRequest('GET', '/recipes', null, null, function(res, req){
       jsonResponse = res;
       pageContent.innerHTML = discoverTemplate(res);
+      document.getElementById('arrow-down').style.display = 'none';
+      document.getElementById('arrow-up').style.display = 'none';
       accessToSingleRecipe();
       buttonDiscover();
     })
@@ -410,6 +412,7 @@ function downvotesApi(idRecipe) {
   downvote.id = idRecipe;
   downvote.addEventListener('click', function(e){
     if (localStorage.getItem(idRecipe) == null) {
+      localStorage.setItem(idRecipe, 1);
       doJSONRequest('GET', '/api/'+idRecipe, null, null, function(res, req){
         let recipe = res[0];
         let up = recipe.upvotes;
@@ -573,14 +576,19 @@ function upvotes(idRecipe) {
   let upvote = document.getElementById('up');
   upvote.id = idRecipe;
   upvote.addEventListener('click', function(e){
-    doJSONRequest('GET', '/recipes/'+idRecipe, null, null, function(res, req){
-      let recipe = res;
-      let up = recipe.upvotes + 1;
-      let down = recipe.downvotes;
-      doJSONRequest('PUT', '/recipes/'+idRecipe, null, {upvotes : up}, function(){
-        openSingleRecipeMongo(e);
-      });
-    })
+    if (localStorage.getItem(idRecipe) == null) {
+      localStorage.setItem(idRecipe, 1);
+      doJSONRequest('GET', '/recipes/'+idRecipe, null, null, function(res, req){
+        let recipe = res;
+        let up = recipe.upvotes + 1;
+        let down = recipe.downvotes;
+        doJSONRequest('PUT', '/recipes/'+idRecipe, null, {upvotes : up}, function(){
+          openSingleRecipeMongo(e);
+        });
+      })
+    } else {
+      alert('You already voted');
+    }
   })
 }
 
@@ -588,14 +596,19 @@ function downvotes(idRecipe) {
   let downvote = document.getElementById('down');
   downvote.id = idRecipe;
   downvote.addEventListener('click', function(e){
-    doJSONRequest('GET', '/recipes/'+idRecipe, null, null, function(res, req){
-      let recipe = res;
-      let up = recipe.upvotes;
-      let down = recipe.downvotes + 1;
-      doJSONRequest('PUT', '/recipes/'+idRecipe, null, {downvotes : down}, function(){
-        openSingleRecipeMongo(e);
-      });
-    })
+    if (localStorage.getItem(idRecipe) == null) {
+      localStorage.setItem(idRecipe, 1);
+      doJSONRequest('GET', '/recipes/'+idRecipe, null, null, function(res, req){
+        let recipe = res;
+        let up = recipe.upvotes;
+        let down = recipe.downvotes + 1;
+        doJSONRequest('PUT', '/recipes/'+idRecipe, null, {downvotes : down}, function(){
+          openSingleRecipeMongo(e);
+        });
+      })
+    } else {
+      alert('You already voted');
+    }
   })
 }
 
