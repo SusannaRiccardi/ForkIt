@@ -5,7 +5,8 @@
   font-size: 2.3em;
   text-align: center;
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: top;
+  margin-top: 21px;
   width: 70%;
   color: white;
 }
@@ -273,6 +274,18 @@ width: 50% !important;
   color: white;
   margin: 10px;
 }
+
+.fa-angle-left{
+  color: white;
+  margin-left: 20px;
+  margin-right: 30px;
+}
+
+.fa-angle-right{
+  color: white;
+  margin-left: 30px;
+}
+
 
 #my-comment input{
   font-family: 'Lato', sans-serif;
