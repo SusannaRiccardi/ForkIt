@@ -50,6 +50,10 @@ window.onload = function() {
 
 }
 
+function scrollToTop() {
+  window.scrollTo(0, 0);
+}
+
 // Display different pages when the menu buttons are clicked
 function displayPage(e){
   e.preventDefault();
@@ -57,10 +61,12 @@ function displayPage(e){
   let href = e.target.href.split('/').pop();
   if(href == 'categories'){
     pageContent.innerHTML = categoriesTemplate();
+    scrollToTop()
     clickCategory();
   }
   if (href == 'create'){
     pageContent.innerHTML = createTemplate();
+    scrollToTop()
     create();
   }
   if (href == 'search'){
@@ -68,6 +74,7 @@ function displayPage(e){
   }
   if (href == 'menu'){
     pageContent.innerHTML = mainTemplate();
+    scrollToTop()
     icons = document.getElementById('icon-carousel').getElementsByTagName('img');
     mainSearch = document.getElementById('food');
 
@@ -142,6 +149,7 @@ function createRecipe(e) {
     doFormDataRequest('POST', '/recipes', data)
     var pageContent = document.getElementById('page-content');
     pageContent.innerHTML = mainTemplate();
+    scrollToTop()
   }
 }
 
@@ -216,10 +224,12 @@ function openCategory(e, back) {
     doJSONRequest('GET', '/recipes', null, null, function(res, req){
       jsonResponse = res;
       pageContent.innerHTML = discoverTemplate(res);
+      scrollToTop()
       document.getElementById('arrow-down').style.display = 'none';
       document.getElementById('arrow-up').style.display = 'none';
       accessToSingleRecipe();
       buttonDiscover();
+
     })
   } else {
     doJSONRequest('GET', '/category/'+ recipeId, null, null, function(res, req){
@@ -242,6 +252,7 @@ function openCategory(e, back) {
         }
 
         pageContent.innerHTML = discoverTemplate({results: toRender});
+        scrollToTop()
 
         arrowD(counter);
         arrowU(counter-6);
@@ -252,11 +263,13 @@ function openCategory(e, back) {
   }
 }
 
+
 function buttonDiscover() {
   let pageContent = document.getElementById('page-content');
   let backButtonDiscover = document.getElementById('back-button-discover');
   backButtonDiscover.addEventListener('click', function(e) {
     pageContent.innerHTML = categoriesTemplate();
+    scrollToTop()
     clickCategory();
   });
 }
@@ -276,7 +289,7 @@ function arrowD(cn) {
     pageContent.innerHTML = discoverTemplate({results: toRender});
 
     if(cn >= jsonResponse.results.length){
-      document.getElementById('arrow-down').style.display = 'none';
+      document.getElementById('arrow-down').style.visibility = 'hidden';
     }
 
     arrowD(cn);
@@ -290,7 +303,7 @@ function arrowU(cn) {
   let arrowUp = document.getElementById('arrow-up');
   let pageContent = document.getElementById('page-content');
   if(cn==0){
-    document.getElementById('arrow-up').style.display = 'none';
+    document.getElementById('arrow-up').style.visibility = 'hidden';
   }
 
   arrowUp.addEventListener('click', function () {
@@ -369,6 +382,13 @@ function openSingleRecipe (e, activeRecipe){
     obj.downvotes = recipeApi.downvotes;
 
     pageContent.innerHTML = recipeTemplate({recipe : obj});
+
+    if (localStorage.getItem(recipe.id) == 'up') {
+      document.getElementById("up").style.color = "#4CAF50";
+    } else if (localStorage.getItem(recipe.id) === "down") {
+      document.getElementById("down").style.color = "#4CAF50";
+    }
+
     let arrowBack = document.getElementById('arrow-back');
     let arrowNext = document.getElementById('arrow-next');
     let backButton = document.getElementById('back-button');
@@ -392,7 +412,7 @@ function upvotesApi(idRecipe) {
   upvote.id = idRecipe;
   upvote.addEventListener('click', function(e){
     if (localStorage.getItem(idRecipe) == null) {
-      localStorage.setItem(idRecipe, 1);
+      localStorage.setItem(idRecipe, "up");
       doJSONRequest('GET', '/api/' + idRecipe, null, null, function(res, req) {
         let recipe = res[0];
         let up = recipe.upvotes + 1;
@@ -412,7 +432,7 @@ function downvotesApi(idRecipe) {
   downvote.id = idRecipe;
   downvote.addEventListener('click', function(e){
     if (localStorage.getItem(idRecipe) == null) {
-      localStorage.setItem(idRecipe, 1);
+      localStorage.setItem(idRecipe, "down");
       doJSONRequest('GET', '/api/'+idRecipe, null, null, function(res, req){
         let recipe = res[0];
         let up = recipe.upvotes;
@@ -499,6 +519,12 @@ function openSingleRecipeMongo (e, activeRecipe){
       };
     }
     pageContent.innerHTML = recipeTemplate({recipe : obj});
+    if (localStorage.getItem(recipe._id) == 'up') {
+      document.getElementById("up").style.color = "#4CAF50";
+    } else if (localStorage.getItem(recipe._id) === "down") {
+      document.getElementById("down").style.color = "#4CAF50";
+    }
+
     let recipeBack = (obj.activeRecipe - 1 < 0) ? jsonResponse.results.length - 1 : obj.activeRecipe - 1;
     let recipeNext = (obj.activeRecipe + 1 > jsonResponse.results.length - 1) ? 0 : obj.activeRecipe + 1;
 
@@ -525,7 +551,7 @@ function searchSubmit(e) {
   var pageContent = document.getElementById('page-content');
   let searchName = document.getElementById('searchName').value;
   let excludeField = document.getElementById('excludeField').value;
-  pageContent = document.getElementById('page-content');
+  // pageContent = document.getElementById('page-content');
   counter = 0;
 
   let c1 = document.getElementById("c1").checked;
@@ -561,6 +587,7 @@ function searchSubmit(e) {
     }
 
     pageContent.innerHTML = discoverTemplate({results: toRender});
+    scrollToTop()
     arrowDown = document.getElementById('arrow-down');
     document.getElementById('back-button-discover').style.display = 'none';
     arrowU(counter);
@@ -577,7 +604,7 @@ function upvotes(idRecipe) {
   upvote.id = idRecipe;
   upvote.addEventListener('click', function(e){
     if (localStorage.getItem(idRecipe) == null) {
-      localStorage.setItem(idRecipe, 1);
+      localStorage.setItem(idRecipe, "up");
       doJSONRequest('GET', '/recipes/'+idRecipe, null, null, function(res, req){
         let recipe = res;
         let up = recipe.upvotes + 1;
@@ -597,7 +624,7 @@ function downvotes(idRecipe) {
   downvote.id = idRecipe;
   downvote.addEventListener('click', function(e){
     if (localStorage.getItem(idRecipe) == null) {
-      localStorage.setItem(idRecipe, 1);
+      localStorage.setItem(idRecipe, "down");
       doJSONRequest('GET', '/recipes/'+idRecipe, null, null, function(res, req){
         let recipe = res;
         let up = recipe.upvotes;
