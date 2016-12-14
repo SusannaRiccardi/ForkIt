@@ -226,6 +226,11 @@ function openCategory(e, back) {
       jsonResponse = res;
       pageContent.innerHTML = discoverTemplate(res);
       accessToSingleRecipe();
+      let backButtonDiscover = document.getElementById('back-button-discover');
+      backButtonDiscover.addEventListener('click', function(e) {
+        pageContent.innerHTML = categoriesTemplate();
+        clickCategory();
+      });
     })
   } else {
     doJSONRequest('GET', '/category/'+ recipeId, null, null, function(res, req){
