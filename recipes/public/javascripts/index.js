@@ -242,7 +242,7 @@ function openCategory(e, back) {
         pageContent.innerHTML = discoverTemplate({results: toRender});
 
         arrowD(counter);
-        arrowU(counter);
+        arrowU(counter-6);
         accessToSingleRecipe();
         buttonDiscover();
       })
@@ -267,13 +267,15 @@ function arrowD(cn) {
   arrowDown.addEventListener('click', function () {
     toRender = jsonResponse.results.slice(cn, cn + 6);
 
-    if (jsonResponse.results.length > cn + 6){
+    if (jsonResponse.results.length+6 > cn + 6){
       cn += 6;
-    }
-    else {
     }
 
     pageContent.innerHTML = discoverTemplate({results: toRender});
+
+    if(cn >= jsonResponse.results.length){
+      document.getElementById('arrow-down').style.display = 'none';
+    }
 
     arrowD(cn);
     arrowU(cn-6);
@@ -285,15 +287,15 @@ function arrowD(cn) {
 function arrowU(cn) {
   let arrowUp = document.getElementById('arrow-up');
   let pageContent = document.getElementById('page-content');
+  if(cn==0){
+    document.getElementById('arrow-up').style.display = 'none';
+  }
 
   arrowUp.addEventListener('click', function () {
     toRender = jsonResponse.results.slice(cn - 6, cn);
 
-    if (cn-6 > 0){
+    if (cn-6 >= 0){
       cn = cn - 6;
-    }
-    else {
-      // Far sparire la freccia in su
     }
 
     pageContent.innerHTML = discoverTemplate({results: toRender});
@@ -309,7 +311,6 @@ function accessToSingleRecipe(){
   let recipes = document.getElementsByClassName('grid-cell');
 
   for (let i = 0; i < recipes.length; i++) {
-    console.log(recipes[i].firstChild.id);
     recipes[i].id = recipes[i].firstChild.id;
     recipes[i].addEventListener('click', function (event) {
       if((event.target.id).length == 6){
