@@ -149,7 +149,6 @@ function createRecipe(e) {
       ingredients.push(ing);
     }
     let time = (Number(selectHour) * 60) + Number(selectMinutes);
-    console.log(time);
     data.append('author', user);
     data.append('title', title);
     data.append('category', selectCategory);
@@ -167,7 +166,6 @@ function createRecipe(e) {
     }
 
     data.append('file', inputFile);
-    console.log(data);
     doFormDataRequest('POST', '/recipes', data)
     var pageContent = document.getElementById('page-content');
     pageContent.innerHTML = mainTemplate();
@@ -201,6 +199,7 @@ function addIngredients(){
 //     })
 //   }
 // }
+let history;
 
 // CATEGORIES VIEW
 // click on a single category and open all the recipes of that category
@@ -229,53 +228,72 @@ function clickCategory() {
   french.addEventListener('click', openCategory);
   spanish.addEventListener('click', openCategory);
   nordic.addEventListener('click', openCategory);
-  usersrecipes.addEventListener('click', function(){
-    var pageContent = document.getElementById('page-content');
-    doJSONRequest('GET', '/recipes', null, null, function(res, req){
-      jsonResponse = res;
-      pageContent.innerHTML = discoverTemplate(res);
-      accessToSingleRecipe();
-    })
-  });
+  usersrecipes.addEventListener('click', openCategory);
+  // usersrecipes.addEventListener('click', function(){
+  //   // history = 'usersrecipes';
+  //   // var pageContent = document.getElementById('page-content');
+  //   // doJSONRequest('GET', '/recipes', null, null, function(res, req){
+  //   //   jsonResponse = res;
+  //   //   pageContent.innerHTML = discoverTemplate(res);
+  //   //   accessToSingleRecipe();
+  //   // })
+  // });
 }
+
+
 
 let counter;
 let jsonResponse;
 let toRender;
 
-function openCategory(e) {
+function openCategory(e, back) {
   let arrowDown = document.getElementById('arrow-down');
   let arrowUp = document.getElementById('arrow-up');
-  let recipeId = e.target.alt;
+  let recipeId;
+  if (back === true){
+    recipeId = history;
+  } else {
+    recipeId = e.target.alt;
+    console.log(recipeId);
+    history = recipeId;
+  }
   let pageContent = document.getElementById('page-content');
   counter = 0;
 
-  doJSONRequest('GET', '/category/'+ recipeId, null, null, function(res, req){
-    jsonResponse = res;
-    doJSONRequest('GET', '/recipes', null, null, function(res,req){
-      let response = {results : []};
-      for (let recipe of res.results){
-        if ((recipe.category).toLowerCase() == recipeId.toLowerCase()){
-          response.results.push(recipe);
-        }
-      }
-      jsonResponse.results = response.results.concat(jsonResponse.results);
-      toRender = jsonResponse.results.slice(counter, counter + 6);
-
-      if (jsonResponse.results.length > counter + 6){
-        counter += 6;
-      }
-      else {
-        // Far sparire la freccia
-      }
-
-      pageContent.innerHTML = discoverTemplate({results: toRender});
-
-      arrowD(counter);
-      arrowU(counter);
+  if (recipeId === 'Users') {
+    doJSONRequest('GET', '/recipes', null, null, function(res, req){
+      jsonResponse = res;
+      pageContent.innerHTML = discoverTemplate(res);
       accessToSingleRecipe();
     })
-  });
+  } else {
+    doJSONRequest('GET', '/category/'+ recipeId, null, null, function(res, req){
+      jsonResponse = res;
+      doJSONRequest('GET', '/recipes', null, null, function(res,req){
+        let response = {results : []};
+        for (let recipe of res.results){
+          if ((recipe.category).toLowerCase() == recipeId.toLowerCase()){
+            response.results.push(recipe);
+          }
+        }
+        jsonResponse.results = response.results.concat(jsonResponse.results);
+        toRender = jsonResponse.results.slice(counter, counter + 6);
+
+        if (jsonResponse.results.length > counter + 6){
+          counter += 6;
+        }
+        else {
+          // Far sparire la freccia
+        }
+
+        pageContent.innerHTML = discoverTemplate({results: toRender});
+
+        arrowD(counter);
+        arrowU(counter);
+        accessToSingleRecipe();
+      })
+    });
+  }
 }
 
 function arrowD(cn) {
@@ -375,9 +393,13 @@ function openSingleRecipe (e, activeRecipe){
 
     let arrowBack = document.getElementById('arrow-back');
     let arrowNext = document.getElementById('arrow-next');
+    let backButton = document.getElementById('back-button');
 
     arrowEvtListener(arrowBack,recipeBack);
     arrowEvtListener(arrowNext,recipeNext);
+    backButton.addEventListener('click', function(e) {
+      openCategory(e, true);
+    });
   })
 }
 
@@ -431,8 +453,12 @@ function openSingleRecipeMongo (e, activeRecipe){
 
     let arrowBack = document.getElementById('arrow-back');
     let arrowNext = document.getElementById('arrow-next');
+    let backButton = document.getElementById('back-button');
     arrowEvtListener(arrowBack,recipeBack);
     arrowEvtListener(arrowNext,recipeNext);
+    backButton.addEventListener('click', function(e) {
+      openCategory(e, true);
+    });
 
     upvotes(e.target.id);
     downvotes(e.target.id);
@@ -653,7 +679,6 @@ function doRequestChecks(method, isAsynchronous, data) {
 }
 
 function mainIconsEvtListener(category) {
-  console.log(category)
   var pageContent = document.getElementById('page-content');
   counter = 0;
 
