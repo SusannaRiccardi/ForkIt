@@ -1,36 +1,48 @@
 #recipe-view
-  button(type='button', id='back-button') Back
-  #recipe-title= recipe.title
+  
+  i.fa.fa-arrow-left.fa-2x
+  #recipes-swipe
+    img#arrow-back.arrow(src='images/left_arrow.png', alt='Food')
+
+    #recipe-title= recipe.title
+    img#arrow-next.arrow(src='images/right_arrow.png', alt='Food')
+
   #recipe-subtitle= "Author: " + recipe.author
   #recipe-readyIn= "Ready in: " + recipe.readyInMinutes
   #recipes-swipe
-    img#arrow-back.arrow(src='images/left_arrow.png', alt='Food')
     #image-actual.recipe-preview
       img.recipe-picture(src=recipe.image.actual, alt='Food')
-    img#arrow-next.arrow(src='images/right_arrow.png', alt='Food')
-  #recipe-text
     #recipe-ingredients
-      b Ingredients
-      br
+      #ingredient-title
+        b Ingredients
       span#ingredients
         ul
           each ingredient in recipe.ingredients
             li= ingredient.quantity + ' ' + ingredient.name
-    #recipe-division
+  #recipe-text
+
+
     #recipe-preparation
       b Preparation
       br
       span#preparation
       p= recipe.instructions
+
   #votes
-    img#up.vote(src='images/icons/up.png', alt='Up')
-    span.up-text= recipe.upvotes
-    img#down.vote(src='images/icons/down.png', alt='Down')
-    span.down-text= recipe.downvotes
+    div
+      i.fa.fa-thumbs-up.fa-3x#up
+      br
+      span.up-text= recipe.upvotes
+    div
+      i.fa.fa-thumbs-down.fa-3x#down
+      br
+      span.down-text= recipe.downvotes
   #my-comment
-    textarea(rows='4', cols='50', id='comment' placeholder='Insert here your comment about this recipe')
-    button(type='button',r id='submit-comment') Submit
-  #recipe-comments
-    each comment in recipe.comments
-      .recipe-comments-element
-        span.comment-text= comment
+    input#username(type='text', placeholder='Insert username')
+    textarea(rows='2', cols='50', id='comment' placeholder='Insert here your comment about this recipe')
+    button(type='button', id='submit-comment') Submit
+    #recipe-comments
+      each comment in recipe.comments
+        .recipe-comments-element
+          span.username-text=placeholder
+          span.comment-text= comment
