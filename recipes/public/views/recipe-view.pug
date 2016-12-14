@@ -37,11 +37,11 @@
       br
       span.down-text= recipe.downvotes
   #my-comment
-    input#username(type='text', placeholder='Insert username')
+    input#username(type='text', placeholder='Insert your name')
     textarea(rows='2', cols='50', id='comment' placeholder='Insert here your comment about this recipe')
     button(type='button', id='submit-comment') Submit
     #recipe-comments
       each comment in recipe.comments
         .recipe-comments-element
-          span.username-text=placeholder
-          span.comment-text= comment
+          span.username-text= comment.username
+          span.comment-text= comment.comment

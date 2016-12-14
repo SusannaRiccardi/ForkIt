@@ -75,7 +75,7 @@ router.put('/:id', function(req, res, next) {
     Api.find({'recipeid':id}, function(err, recipe) {
       if (err) return next (err);
       if (recipe){
-        recipe[0].comments.push(data.comment);
+        recipe[0].comments.push(data);
 
         recipe[0].save(onModelSave(res));
       }

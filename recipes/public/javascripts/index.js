@@ -226,11 +226,7 @@ function openCategory(e, back) {
       jsonResponse = res;
       pageContent.innerHTML = discoverTemplate(res);
       accessToSingleRecipe();
-      let backButtonDiscover = document.getElementById('back-button-discover');
-      backButtonDiscover.addEventListener('click', function(e) {
-        pageContent.innerHTML = categoriesTemplate();
-        clickCategory();
-      });
+      buttonDiscover();
     })
   } else {
     doJSONRequest('GET', '/category/'+ recipeId, null, null, function(res, req){
@@ -257,14 +253,19 @@ function openCategory(e, back) {
         arrowD(counter);
         arrowU(counter);
         accessToSingleRecipe();
-        let backButtonDiscover = document.getElementById('back-button-discover');
-        backButtonDiscover.addEventListener('click', function(e) {
-          pageContent.innerHTML = categoriesTemplate();
-          clickCategory();
-        });
+        buttonDiscover();
       })
     });
   }
+}
+
+function buttonDiscover() {
+  let pageContent = document.getElementById('page-content');
+  let backButtonDiscover = document.getElementById('back-button-discover');
+  backButtonDiscover.addEventListener('click', function(e) {
+    pageContent.innerHTML = categoriesTemplate();
+    clickCategory();
+  });
 }
 
 function arrowD(cn) {
@@ -286,6 +287,7 @@ function arrowD(cn) {
     arrowD(cn);
     arrowU(cn-6);
     accessToSingleRecipe();
+    buttonDiscover();
   });
 }
 
@@ -308,6 +310,7 @@ function arrowU(cn) {
     arrowD(cn);
     arrowU(cn);
     accessToSingleRecipe();
+    buttonDiscover();
   });
 }
 
@@ -421,12 +424,16 @@ function commentRecipeApi(idRecipe) {
   let commentSubmit = document.getElementById('submit-comment');
   commentSubmit.id = idRecipe;
   let comment = document.getElementById('comment');
+  let username = document.getElementById('username');
   commentSubmit.addEventListener('click', function(e){
     if(comment.value == ''){
       alert('You have to insert a comment before submit');
     }
     else {
-      doJSONRequest('PUT', '/api/'+idRecipe, null, {comment : comment.value}, function(){
+      if (username.value == '') {
+        username.value = 'Anonymous'
+      }
+      doJSONRequest('PUT', '/api/'+idRecipe, null, {username: username.value, comment : comment.value}, function(){
         openSingleRecipe(e);
       });
     }
@@ -585,13 +592,17 @@ function downvotes(idRecipe) {
 function commentRecipe(idRecipe) {
   let commentSubmit = document.getElementById('submit-comment');
   commentSubmit.id = idRecipe;
+  let username = document.getElementById('username');
   let comment = document.getElementById('comment');
+
   commentSubmit.addEventListener('click', function(e){
     if(comment.value == ''){
       alert('You have to insert a comment before submit');
-    }
-    else {
-      doJSONRequest('PUT', '/recipes/'+idRecipe, null, {comment : comment.value}, function(){
+    } else {
+      if (username.value == '') {
+        username.value = 'Anonymous'
+      }
+      doJSONRequest('PUT', '/recipes/'+idRecipe, null, {username: username.value, comment : comment.value}, function(){
         openSingleRecipeMongo(e);
       });
     }

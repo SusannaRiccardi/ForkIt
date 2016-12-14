@@ -132,7 +132,7 @@ router.put('/:recipeid', function(req, res, next) {
     Recipe.findById(req.params.recipeid, fieldsFilter , function(err, recipe){
       if (err) return next (err);
       if (recipe){
-        recipe.comments.push(data.comment);
+        recipe.comments.push(data);
 
         recipe.save(onModelSave(res));
       }
