@@ -273,17 +273,20 @@ width: 50% !important;
 .fa-arrow-left{
   color: white;
   margin: 10px;
+  cursor: pointer;
 }
 
 .fa-angle-left{
   color: white;
   margin-left: 20px;
   margin-right: 30px;
+  cursor: pointer;
 }
 
 .fa-angle-right{
   color: white;
   margin-left: 30px;
+  cursor: pointer;
 }
 
 
@@ -391,7 +394,8 @@ width: 50% !important;
   border: none;
   color: white;
   text-align: center;
-    width: 25%;
-    display: inline-block;
-    vertical-align: top;
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+  cursor: pointer;
 }

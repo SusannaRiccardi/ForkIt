@@ -328,7 +328,7 @@ function accessToSingleRecipe(){
   for (let i = 0; i < recipes.length; i++) {
     recipes[i].id = recipes[i].firstChild.id;
     recipes[i].addEventListener('click', function (event) {
-      if((event.target.id).length == 6){
+      if((event.target.id).length <= 10){
         openSingleRecipe(event, i)
       }
       else{
@@ -462,6 +462,7 @@ function commentRecipeApi(idRecipe) {
       }
       doJSONRequest('PUT', '/api/'+idRecipe, null, {username: username.value, comment : comment.value}, function(){
         openSingleRecipe(e);
+
       });
     }
   })
