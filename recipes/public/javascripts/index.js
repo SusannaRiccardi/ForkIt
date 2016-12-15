@@ -1,13 +1,34 @@
 window.onload = function() {
+  // Display main page.
   var pageContent = document.getElementById('page-content');
   pageContent.innerHTML = mainTemplate();
 
-  //menu buttons and functionality
-  let btnMenu = document.getElementsByClassName('menu-btn')[0].parentNode;
-  let btnCreate = document.getElementById('btn-create').parentNode;
-  let btnSearchSubmit = document.getElementById('search-submit-btn');
-  let btnCategories = document.getElementById('btn-categories').parentNode;
+  // Icons in the main view.
   let icons = document.getElementById('icon-carousel').getElementsByTagName('img');
+  for (let i = 0; i < icons.length; i++) {
+    icons[i].addEventListener('click', function() {
+      iconsMainClick(icons[i].getAttribute('id'));
+    });
+  }
+
+  // Menuwrapper: list of buttons in the menu.
+  let menuwrapper = document.getElementById('menuwrapper');
+  let menuBtnFont = document.getElementsByClassName('btn-img')[0].getElementsByTagName('i')[0];
+
+  menuwrapper.addEventListener('mouseenter', function() {
+    menuBtnFont.setAttribute('Style', '-ms-transform: rotate(90deg); -webkit-transform: rotate(90deg); transform: rotate(90 deg);');
+  });
+
+  menuwrapper.addEventListener('mouseleave', function() {
+    menuBtnFont.removeAttribute('Style');
+  });
+
+  // Select buttons in the website and add event listener.
+  let btnMenu = document.getElementsByClassName('menu-btn')[0].parentNode;
+  let btnCategories = document.getElementById('btn-categories').parentNode;
+  let btnSearchSubmit = document.getElementById('search-submit-btn');
+  let btnCreate = document.getElementById('btn-create').parentNode;
+  let inputField = document.getElementsByTagName('input');
 
   btnCategories.href = "categories";
   btnCreate.href = "create";
@@ -18,163 +39,125 @@ window.onload = function() {
   btnCategories.addEventListener('click', displayPage);
   btnSearchSubmit.addEventListener('click', searchSubmit);
 
-  for (let i = 0; i < icons.length; i++) {
-    icons[i].addEventListener('click', function() {
-      mainIconsEvtListener(icons[i].getAttribute('id'));
-    });
-  }
-
-  let menubar = document.getElementById('menubar');
-  let recipesBtn = document.getElementById('recipes-view-btn');
-  let menuwrapper = document.getElementById('menuwrapper');
-  let login = document.getElementById('login');
-  let recipeView = document.getElementById('recipe-view');
-  let mainView = document.getElementById('main-view');
-  let menuBtnFont = document.getElementsByClassName('btn-img')[0].getElementsByTagName('i')[0];
-  let mainPageSearch = document.getElementById('mainPageSearch');
-  let mainPageSearchContent = document.getElementById('food');
-
-  let searchBtn = document.getElementById('search-btn');
-  let searchBackBtn = document.getElementById('search-btn-back');
+  // TODO delete?
   let search = document.getElementById('search');
-
-  let inputField = document.getElementsByTagName('input');
-
-  menuwrapper.addEventListener('mouseenter', function() {
-    menuBtnFont.setAttribute('Style', '-ms-transform: rotate(90deg); -webkit-transform: rotate(90deg); transform: rotate(90 deg);');
-  });
-
-  menuwrapper.addEventListener('mouseleave', function() {
-    menuBtnFont.removeAttribute('Style');
-  });
-
 }
 
+// === global variables ===
+let history;
+let counter;
+let jsonResponse;
+let toRender;
+
+// === scrollToTop ===
+// Scroll to the top of the page.
 function scrollToTop() {
   window.scrollTo(0, 0);
 }
 
-// Display different pages when the menu buttons are clicked
+// === displayPage ===
+// Display the different views when the menu buttons are clicked.
 function displayPage(e){
   e.preventDefault();
   var pageContent = document.getElementById('page-content');
   let href = e.target.href.split('/').pop();
-  if(href == 'categories'){
-    pageContent.innerHTML = categoriesTemplate();
-    scrollToTop()
-    clickCategory();
-  }
-  if (href == 'create'){
-    pageContent.innerHTML = createTemplate();
-    scrollToTop()
-    create();
-  }
-  if (href == 'search'){
-    search();
-  }
-  if (href == 'menu'){
+  // Click on 'menu':
+  if (href == 'menu') {
     pageContent.innerHTML = mainTemplate();
-    scrollToTop()
     icons = document.getElementById('icon-carousel').getElementsByTagName('img');
-    mainSearch = document.getElementById('food');
 
     for (let i = 0; i < icons.length; i++) {
     icons[i].addEventListener('click', function() {
-      mainIconsEvtListener(icons[i].getAttribute('id'));
+      iconsMainClick(icons[i].getAttribute('id'));
     });
     }
   }
+  // Click on 'search':
+  if (href == 'search') {
+    search();
+  }
+  // Click on 'categories':
+  if (href == 'categories') {
+    pageContent.innerHTML = categoriesTemplate();
+    clickCategory();
+    scrollToTop();
+  }
+  // Click on 'create':
+  if (href == 'create') {
+    pageContent.innerHTML = createTemplate();
+    displayCreate();
+    scrollToTop();
+  }
 }
 
-// CREAT RECIPE VIEW
-// Creation of the recipe with the post request
-function create() {
-  addIngredients();
-  let createBtn = document.getElementById('submit-recipe');
-  createBtn.addEventListener('click', createRecipe);
-}
+// === iconsMainClick ===
+// When click on icon on main view, open set category.
+function iconsMainClick(category) {
+  var pageContent = document.getElementById('page-content');
+  counter = 0;
+  let parameters = "/search?name=" + category + "&ingredient=";
 
-////////////////////// Create Recipe /////////////////////////////
-function createRecipe(e) {
-  e.preventDefault();
-  let user = document.getElementById('user-name').value;
-  let title = document.getElementById('create-name').value;
-  let instructions = document.getElementById('create-description').value;
-  let ingredients = [];
-  let isGlutenFree = document.getElementById('c11').checked;
-  let isDairy = document.getElementById('c22').checked;
-  let isVegan = document.getElementById('c33').checked;
-  let names = document.getElementsByClassName('create-ingredient-name');
-  let quantities = document.getElementsByClassName('create-ingredient-quantity');
-  let inputFile = document.getElementById('file-upload').files[0];
-  let selectCategory = document.getElementById('selectCategory').value;
-  let selectHour = document.getElementById('selectHour').value;
-  let selectMinutes = document.getElementById('selectMinutes').value;
-  let data = new FormData();
-
-  if(title == ''){
-    window.alert('The title of the recipe is a compulsory field');
-  }
-  else if(instructions == ''){
-    window.alert('Description of the preparation of the recipe is a compulsory field');
-  }
-  else if(names[0].value == ''){
-    window.alert('Ingredients of the recipe are compulsory fields');
-  }
-  else {
-    for (i = 0; i < names.length; i++) {
-      let ing = {};
-      ing.name = names[i].value;
-      ing.quantity = quantities[i].value;
-      ingredients.push(ing);
-    }
-    let time = (Number(selectHour) * 60) + Number(selectMinutes);
-    data.append('author', user);
-    data.append('title', title);
-    data.append('category', selectCategory);
-    data.append('readyInMinutes', time);
-    data.append('instructions', instructions);
-    data.append('ingredients', JSON.stringify(ingredients));
-    data.append('lactosefree', isDairy);
-    data.append('glutenfree', isGlutenFree);
-    data.append('vegan', isVegan);
-    if (inputFile === undefined) {
-      data.append('image', './images/cloche.jpg');
+  doJSONRequest("GET", parameters, null, null, function(res, req) {
+    jsonResponse = res;
+    toRender = jsonResponse.results.slice(counter, counter + 6);
+    if (jsonResponse.results.length > counter + 6){
+      counter += 6;
     } else {
-      let inputField = document.getElementById('file-upload')
-      data.append('image', inputField.value.split('.')[inputField.value.split('.').length-1]);
+      counter = 0;
     }
-
-    data.append('file', inputFile);
-    doFormDataRequest('POST', '/recipes', data)
-    var pageContent = document.getElementById('page-content');
-    pageContent.innerHTML = mainTemplate();
-    scrollToTop()
-  }
+    pageContent.innerHTML = discoverTemplate({results: toRender});
+    arrowDown = document.getElementById('arrow-down');
+    arrowDownEvListener();
+    accessToSingleRecipe();
+  })
 }
 
-////////////////////// Add ingredient /////////////////////////////
-function addIngredients(){
-  let ingredientsContainer = document.getElementById('recipe-create-ingredients');
-  let btnAddIngredient = document.getElementById('btnAddIngredient');
-  let addIngredient = function() {
-    btnAddIngredient.addEventListener('click', function(e) {
-      document.getElementById("btnAddIngredient").outerHTML = '';
-      var container = document.createElement("div");
-      container.className = 'recipe-create-single-ing';
-      container.innerHTML = ingredientTemplate();
-      ingredientsContainer.lastChild.appendChild(container);
-      btnAddIngredient = document.getElementById('btnAddIngredient');
-      addIngredient();
-    })
+// =================== SEARCH ===================
+// === searchSubmit ===
+// When click on search, look for the searched recipes.
+function searchSubmit(e) {
+  e.preventDefault();
+  var pageContent = document.getElementById('page-content');
+  let searchName = document.getElementById('searchName').value;
+  let excludeField = document.getElementById('excludeField').value;
+  let c1 = document.getElementById("c1").checked;
+  let c2 = document.getElementById("c2").checked;
+  let c3 = document.getElementById("c3").checked;
+  counter = 0;
+
+  let parameters = "/search?name=" + searchName + "&ingredient=" + excludeField;
+
+  if (c1 && c2) {
+    parameters+= "&intolerances=" + document.getElementById("c1").name + "," + document.getElementById("c2").name;
+  } else if (c1) {
+    parameters+= "&intolerances=" + document.getElementById("c1").name;
+  } else if (c2) {
+    parameters+= "&intolerances=" + document.getElementById("c2").name;
   }
-  addIngredient();
+  if (c3) {
+    parameters+= "&diet=" + document.getElementById("c3").name;
+  }
+
+  doJSONRequest("GET", parameters, null, null, function(res, req) {
+    jsonResponse = res;
+    toRender = jsonResponse.results.slice(counter, counter + 6);
+    if (jsonResponse.results.length > counter + 6){
+      counter += 6;
+    } else {
+      counter = 0;
+    }
+    pageContent.innerHTML = discoverTemplate({results: toRender});
+    document.getElementById('back-button-discover').style.display = 'none';
+    arrowU(counter);
+    arrowD(counter);
+    accessToSingleRecipe();
+    scrollToTop();
+  })
 }
 
-let history;
-
-// CATEGORIES VIEW
-// click on a single category and open all the recipes of that category
+// =================== CATEGORIES ===================
+// === clickCategory ===
+// Click on a single category and open all the recipes of that category.
 function clickCategory() {
   let greek = document.getElementById('greek');
   let british = document.getElementById('british');
@@ -203,142 +186,147 @@ function clickCategory() {
   usersrecipes.addEventListener('click', openCategory);
 }
 
-let counter;
-let jsonResponse;
-let toRender;
-
+// === openCategory ===
+// Makes requests to open the single category clicked.
 function openCategory(e, back) {
+  let recipeCategory;
+  // History for the back button.
+  if (back === true) {
+    recipeCategory = history;
+  } else {
+    recipeCategory = e.target.alt;
+    history = recipeCategory;
+  }
+
+  var pageContent = document.getElementById('page-content');
   let arrowDown = document.getElementById('arrow-down');
   let arrowUp = document.getElementById('arrow-up');
-  let recipeId;
-  if (back === true){
-    recipeId = history;
-  } else {
-    recipeId = e.target.alt;
-    history = recipeId;
-  }
-  let pageContent = document.getElementById('page-content');
   counter = 0;
 
-  if (recipeId === 'Users') {
-    doJSONRequest('GET', '/recipes', null, null, function(res, req){
+  // User category:
+  if (recipeCategory === 'Users') {
+    doJSONRequest('GET', '/recipes', null, null, function(res, req) {
       jsonResponse = res;
       pageContent.innerHTML = discoverTemplate(res);
-      scrollToTop()
       document.getElementById('arrow-down').style.display = 'none';
       document.getElementById('arrow-up').style.display = 'none';
       accessToSingleRecipe();
-      buttonDiscover();
-
+      backButtonDiscover();
+      scrollToTop();
     })
   } else {
-    doJSONRequest('GET', '/category/'+ recipeId, null, null, function(res, req){
+    // All other categories:
+    doJSONRequest('GET', '/category/' + recipeCategory, null, null, function(res, req) {
       jsonResponse = res;
-      doJSONRequest('GET', '/recipes', null, null, function(res,req){
+      doJSONRequest('GET', '/recipes', null, null, function(res,req) {
         let response = {results : []};
-        for (let recipe of res.results){
-          if ((recipe.category).toLowerCase() == recipeId.toLowerCase()){
+        for (let recipe of res.results) {
+          if ((recipe.category).toLowerCase() == recipeCategory.toLowerCase()) {
             response.results.push(recipe);
           }
         }
+        // Show six recipes:
         jsonResponse.results = response.results.concat(jsonResponse.results);
         toRender = jsonResponse.results.slice(counter, counter + 6);
-
         if (jsonResponse.results.length > counter + 6){
           counter += 6;
         }
-        else {
-          // Far sparire la freccia
-        }
 
         pageContent.innerHTML = discoverTemplate({results: toRender});
-        scrollToTop()
-
         arrowD(counter);
         arrowU(counter-6);
         accessToSingleRecipe();
-        buttonDiscover();
+        backButtonDiscover();
+        scrollToTop();
       })
     });
   }
 }
 
-
-function buttonDiscover() {
-  let pageContent = document.getElementById('page-content');
-  let backButtonDiscover = document.getElementById('back-button-discover');
-  backButtonDiscover.addEventListener('click', function(e) {
-    pageContent.innerHTML = categoriesTemplate();
-    scrollToTop()
-    clickCategory();
-  });
-}
-
-
+// === arrowD ===
+// When clicking on the arrow down in the list of recipes, show other six recipes.
 function arrowD(cn) {
   let arrowDown = document.getElementById('arrow-down');
   let pageContent = document.getElementById('page-content');
 
   arrowDown.addEventListener('click', function () {
     toRender = jsonResponse.results.slice(cn, cn + 6);
-
     if (jsonResponse.results.length+6 > cn + 6){
       cn += 6;
     }
-
     pageContent.innerHTML = discoverTemplate({results: toRender});
 
-    if(cn >= jsonResponse.results.length){
+    // Remove arrow when no more recipes.
+    if (cn >= jsonResponse.results.length) {
       document.getElementById('arrow-down').style.visibility = 'hidden';
     }
 
     arrowD(cn);
     arrowU(cn-6);
     accessToSingleRecipe();
-    buttonDiscover();
+    backButtonDiscover();
   });
 }
 
+// === arrowU ===
+// When clicking on the arrow up in the list of recipes, show other six recipes.
 function arrowU(cn) {
   let arrowUp = document.getElementById('arrow-up');
   let pageContent = document.getElementById('page-content');
-  if(cn==0){
+
+  // Remove arrow when no more recipes.
+  if (cn == 0) {
     document.getElementById('arrow-up').style.visibility = 'hidden';
   }
 
   arrowUp.addEventListener('click', function () {
     toRender = jsonResponse.results.slice(cn - 6, cn);
-
     if (cn-6 >= 0){
       cn = cn - 6;
     }
-
     pageContent.innerHTML = discoverTemplate({results: toRender});
 
     arrowD(cn);
     arrowU(cn);
     accessToSingleRecipe();
-    buttonDiscover();
+    backButtonDiscover();
   });
 }
 
+// === backButtonDiscover ===
+// Button to go back from the list of recipes to the categories view.
+function backButtonDiscover() {
+  let pageContent = document.getElementById('page-content');
+  let buttonDiscover = document.getElementById('back-button-discover');
+  buttonDiscover.addEventListener('click', function(e) {
+    pageContent.innerHTML = categoriesTemplate();
+    clickCategory();
+    scrollToTop();
+  });
+}
+
+// === accessToSingleRecipe ===
+// When click on a recipe, open the single recipe view.
 function accessToSingleRecipe(){
   let recipes = document.getElementsByClassName('grid-cell');
 
   for (let i = 0; i < recipes.length; i++) {
     recipes[i].id = recipes[i].firstChild.id;
     recipes[i].addEventListener('click', function (event) {
-      if((event.target.id).length <= 10){
+      // Open recipe from API:
+      if ((event.target.id).length <= 10) {
         openSingleRecipe(event, i)
-      }
-      else{
+      } else {
+        // Open recipe from our database:
         openSingleRecipeMongo(event, i);
       }
     })
   }
 }
 
-function openSingleRecipe (e, activeRecipe){
+// === openSingleRecipe ===
+// Open single recipe from foodAPI.
+function openSingleRecipe (e, activeRecipe) {
   var pageContent = document.getElementById('page-content');
   let recipeApi = {};
   doJSONRequest("GET", "/api/" + e.target.id, null, null, function(res, req) {
@@ -347,7 +335,7 @@ function openSingleRecipe (e, activeRecipe){
     recipeApi.upvotes = res[0].upvotes;
     recipeApi.downvotes = res[0].downvotes;
   })
-  doJSONRequest('GET', '/singlerecipe/' + e.target.id, null, null, function(res, req){
+  doJSONRequest('GET', '/singlerecipe/' + e.target.id, null, null, function(res, req) {
     let recipe = res;
     let obj = {};
     obj.activeRecipe = activeRecipe;
@@ -357,13 +345,15 @@ function openSingleRecipe (e, activeRecipe){
     obj.ingredients = [];
     let h = recipe.readyInMinutes / 60 | 0;
     let m = recipe.readyInMinutes % 60 | 0;
-    if(h == 0){
+    if (h == 0) {
       obj.readyInMinutes = m + " minutes";
-    }
-    else {
+    } else {
       obj.readyInMinutes = h + " hours and " + m + " minutes";
     }
-    for (let ingr of recipe.extendedIngredients){
+    obj.comments = recipeApi.comments;
+    obj.upvotes = recipeApi.upvotes;
+    obj.downvotes = recipeApi.downvotes;
+    for (let ingr of recipe.extendedIngredients) {
       let ingredient = {};
       ingredient.name = ingr.name;
       ingredient.quantity = ingr.amount + " " +ingr.unit;
@@ -376,13 +366,9 @@ function openSingleRecipe (e, activeRecipe){
     obj.image = {
       actual:recipe.image
     };
-
-    obj.comments = recipeApi.comments;
-    obj.upvotes = recipeApi.upvotes;
-    obj.downvotes = recipeApi.downvotes;
-
     pageContent.innerHTML = recipeTemplate({recipe : obj});
 
+    // Change button upvote and downvote colors.
     if (localStorage.getItem(recipe.id) == 'up') {
       document.getElementById("up").style.color = "#4CAF50";
     } else if (localStorage.getItem(recipe.id) === "down") {
@@ -405,88 +391,11 @@ function openSingleRecipe (e, activeRecipe){
   })
 }
 
-
-// Upvote and dowvote the recipe
-function upvotesApi(idRecipe) {
-  let upvote = document.getElementById('up');
-  upvote.id = idRecipe;
-  upvote.addEventListener('click', function(e){
-    if (localStorage.getItem(idRecipe) == null) {
-      localStorage.setItem(idRecipe, "up");
-      doJSONRequest('GET', '/api/' + idRecipe, null, null, function(res, req) {
-        let recipe = res[0];
-        let up = recipe.upvotes + 1;
-        let down = recipe.downvotes;
-        doJSONRequest('PUT', '/api/' + idRecipe, null, {upvotes : up}, function(){
-          openSingleRecipe(e);
-        });
-      })
-    } else {
-      alert('You already voted');
-    }
-  })
-}
-
-function downvotesApi(idRecipe) {
-  let downvote = document.getElementById('down');
-  downvote.id = idRecipe;
-  downvote.addEventListener('click', function(e){
-    if (localStorage.getItem(idRecipe) == null) {
-      localStorage.setItem(idRecipe, "down");
-      doJSONRequest('GET', '/api/'+idRecipe, null, null, function(res, req){
-        let recipe = res[0];
-        let up = recipe.upvotes;
-        let down = recipe.downvotes + 1;
-        doJSONRequest('PUT', '/api/'+idRecipe, null, {downvotes : down}, function(){
-          openSingleRecipe(e);
-        });
-      })
-    } else {
-      alert('You already voted');
-    }
-  })
-}
-
-function commentRecipeApi(idRecipe) {
-  let commentSubmit = document.getElementById('submit-comment');
-  commentSubmit.id = idRecipe;
-  let comment = document.getElementById('comment');
-  let username = document.getElementById('username');
-  commentSubmit.addEventListener('click', function(e){
-    if(comment.value == ''){
-      alert('You have to insert a comment before submit');
-    }
-    else {
-      if (username.value == '') {
-        username.value = 'Anonymous'
-      }
-      doJSONRequest('PUT', '/api/'+idRecipe, null, {username: username.value, comment : comment.value}, function(){
-        openSingleRecipe(e);
-
-      });
-    }
-  })
-
-}
-
-
-function arrowEvtListener(dom, index) {
-    dom.addEventListener('click', function () {
-      let target;
-      if(jsonResponse.results[index].id){
-        target = {target: {id: jsonResponse.results[index].id}};
-        openSingleRecipe(target, index)
-      }
-      else {
-        target = {target: {id: jsonResponse.results[index]._id}};
-        openSingleRecipeMongo(target, index)
-      }
-    })
-}
-
-function openSingleRecipeMongo (e, activeRecipe){
+// === openSingleRecipeMongo ===
+// Open single recipe from database.
+function openSingleRecipeMongo (e, activeRecipe) {
   var pageContent = document.getElementById('page-content');
-  doJSONRequest('GET', '/recipes/' + e.target.id, null, null, function(res, req){
+  doJSONRequest('GET', '/recipes/' + e.target.id, null, null, function(res, req) {
     let recipe = res;
     let obj = {};
     obj.activeRecipe = activeRecipe;
@@ -499,13 +408,12 @@ function openSingleRecipeMongo (e, activeRecipe){
     obj.comments = recipe.comments;
     let h = recipe.readyInMinutes / 60 | 0;
     let m = recipe.readyInMinutes % 60 | 0;
-    if(h == 0){
+    if (h == 0) {
       obj.readyInMinutes = m + " minutes";
-    }
-    else {
+    } else {
       obj.readyInMinutes = h + " hours and " + m + " minutes";
     }
-    for (let ingr of recipe.ingredients){
+    for (let ingr of recipe.ingredients) {
       let ingredient = {};
       ingredient.name = ingr.name;
       ingredient.quantity = ingr.quantity;
@@ -513,13 +421,14 @@ function openSingleRecipeMongo (e, activeRecipe){
     }
     if(recipe.image == './images/cloche.jpg'){
       obj.image = {actual: './images/cloche.jpg'};
-    }
-    else {
+    } else {
       obj.image = {
         actual:'./uploads/' + recipe._id + '.' + recipe.image
       };
     }
     pageContent.innerHTML = recipeTemplate({recipe : obj});
+
+    // Change button upvote and downvote colors.
     if (localStorage.getItem(recipe._id) == 'up') {
       document.getElementById("up").style.color = "#4CAF50";
     } else if (localStorage.getItem(recipe._id) === "down") {
@@ -532,6 +441,7 @@ function openSingleRecipeMongo (e, activeRecipe){
     let arrowBack = document.getElementById('arrow-back');
     let arrowNext = document.getElementById('arrow-next');
     let backButton = document.getElementById('back-button');
+
     arrowEvtListener(arrowBack,recipeBack);
     arrowEvtListener(arrowNext,recipeNext);
     backButton.addEventListener('click', function(e) {
@@ -544,74 +454,20 @@ function openSingleRecipeMongo (e, activeRecipe){
   })
 }
 
-
-//SEARCHRECIPE
-// When clicking on search it looks for the recipes you want to find
-function searchSubmit(e) {
-  e.preventDefault();
-  var pageContent = document.getElementById('page-content');
-  let searchName = document.getElementById('searchName').value;
-  let excludeField = document.getElementById('excludeField').value;
-  // pageContent = document.getElementById('page-content');
-  counter = 0;
-
-  let c1 = document.getElementById("c1").checked;
-  let c2 = document.getElementById("c2").checked;
-  let c3 = document.getElementById("c3").checked;
-
-
-  let parameters = "/search?name=" + searchName + "&ingredient=" + excludeField
-
-  if(c1 && c2){
-    parameters+= "&intolerances=" + document.getElementById("c1").name + "," + document.getElementById("c2").name;
-  }
-  else if (c1){
-    parameters+= "&intolerances=" + document.getElementById("c1").name;
-  }
-  else if (c2){
-    parameters+= "&intolerances=" + document.getElementById("c2").name;
-  }
-
-  if(c3){
-    parameters+= "&diet=" + document.getElementById("c3").name;
-  }
-
-  doJSONRequest("GET", parameters, null, null, function(res, req) {
-    jsonResponse = res;
-    toRender = jsonResponse.results.slice(counter, counter + 6);
-
-    if (jsonResponse.results.length > counter + 6){
-      counter += 6;
-    }
-    else {
-      counter = 0;
-    }
-
-    pageContent.innerHTML = discoverTemplate({results: toRender});
-    scrollToTop()
-    arrowDown = document.getElementById('arrow-down');
-    document.getElementById('back-button-discover').style.display = 'none';
-    arrowU(counter);
-    arrowD(counter);
-    accessToSingleRecipe();
-  })
-
-}
-
-
-// Upvote and dowvote the recipe
-function upvotes(idRecipe) {
+// === upvotesApi ===
+// Upvote the recipe in the foodAPI.
+function upvotesApi(idRecipe) {
   let upvote = document.getElementById('up');
   upvote.id = idRecipe;
-  upvote.addEventListener('click', function(e){
+  upvote.addEventListener('click', function(e) {
     if (localStorage.getItem(idRecipe) == null) {
       localStorage.setItem(idRecipe, "up");
-      doJSONRequest('GET', '/recipes/'+idRecipe, null, null, function(res, req){
-        let recipe = res;
+      doJSONRequest('GET', '/api/' + idRecipe, null, null, function(res, req) {
+        let recipe = res[0];
         let up = recipe.upvotes + 1;
         let down = recipe.downvotes;
-        doJSONRequest('PUT', '/recipes/'+idRecipe, null, {upvotes : up}, function(){
-          openSingleRecipeMongo(e);
+        doJSONRequest('PUT', '/api/' + idRecipe, null, {upvotes : up}, function() {
+          openSingleRecipe(e);
         });
       })
     } else {
@@ -620,18 +476,20 @@ function upvotes(idRecipe) {
   })
 }
 
-function downvotes(idRecipe) {
+// === downvotesApi ===
+// Downvote the recipe in the foodAPI.
+function downvotesApi(idRecipe) {
   let downvote = document.getElementById('down');
   downvote.id = idRecipe;
-  downvote.addEventListener('click', function(e){
+  downvote.addEventListener('click', function(e) {
     if (localStorage.getItem(idRecipe) == null) {
       localStorage.setItem(idRecipe, "down");
-      doJSONRequest('GET', '/recipes/'+idRecipe, null, null, function(res, req){
-        let recipe = res;
+      doJSONRequest('GET', '/api/' + idRecipe, null, null, function(res, req) {
+        let recipe = res[0];
         let up = recipe.upvotes;
         let down = recipe.downvotes + 1;
-        doJSONRequest('PUT', '/recipes/'+idRecipe, null, {downvotes : down}, function(){
-          openSingleRecipeMongo(e);
+        doJSONRequest('PUT', '/api/' + idRecipe, null, {downvotes : down}, function() {
+          openSingleRecipe(e);
         });
       })
     } else {
@@ -640,46 +498,204 @@ function downvotes(idRecipe) {
   })
 }
 
-function commentRecipe(idRecipe) {
+// === commentRecipeApi ===
+// Comment the recipe from the API.
+function commentRecipeApi(idRecipe) {
   let commentSubmit = document.getElementById('submit-comment');
   commentSubmit.id = idRecipe;
   let username = document.getElementById('username');
   let comment = document.getElementById('comment');
-
-  commentSubmit.addEventListener('click', function(e){
-    if(comment.value == ''){
+  commentSubmit.addEventListener('click', function(e) {
+    if (comment.value == '') {
       alert('You have to insert a comment before submit');
     } else {
       if (username.value == '') {
         username.value = 'Anonymous'
       }
-      doJSONRequest('PUT', '/recipes/'+idRecipe, null, {username: username.value, comment : comment.value}, function(){
+      doJSONRequest('PUT', '/api/' + idRecipe, null, {username: username.value, comment : comment.value}, function() {
+        openSingleRecipe(e);
+      });
+    }
+  })
+}
+
+// === upvotes ===
+// Upvote the recipe from the database.
+function upvotes(idRecipe) {
+  let upvote = document.getElementById('up');
+  upvote.id = idRecipe;
+  upvote.addEventListener('click', function(e) {
+    if (localStorage.getItem(idRecipe) == null) {
+      localStorage.setItem(idRecipe, "up");
+      doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req) {
+        let recipe = res;
+        let up = recipe.upvotes + 1;
+        let down = recipe.downvotes;
+        doJSONRequest('PUT', '/recipes/' + idRecipe, null, {upvotes : up}, function() {
+          openSingleRecipeMongo(e);
+        });
+      })
+    } else {
+      alert('You already voted');
+    }
+  })
+}
+
+// === downvotes ===
+// Downvote the recipe from the database.
+function downvotes(idRecipe) {
+  let downvote = document.getElementById('down');
+  downvote.id = idRecipe;
+  downvote.addEventListener('click', function(e) {
+    if (localStorage.getItem(idRecipe) == null) {
+      localStorage.setItem(idRecipe, "down");
+      doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req) {
+        let recipe = res;
+        let up = recipe.upvotes;
+        let down = recipe.downvotes + 1;
+        doJSONRequest('PUT', '/recipes/' + idRecipe, null, {downvotes : down}, function() {
+          openSingleRecipeMongo(e);
+        });
+      })
+    } else {
+      alert('You already voted');
+    }
+  })
+}
+
+// === commentRecipe ===
+// Comment the recipe from the database.
+function commentRecipe(idRecipe) {
+  let commentSubmit = document.getElementById('submit-comment');
+  commentSubmit.id = idRecipe;
+  let username = document.getElementById('username');
+  let comment = document.getElementById('comment');
+  commentSubmit.addEventListener('click', function(e) {
+    if (comment.value == '') {
+      alert('You have to insert a comment before submit');
+    } else {
+      if (username.value == '') {
+        username.value = 'Anonymous'
+      }
+      doJSONRequest('PUT', '/recipes/' + idRecipe, null, {username: username.value, comment : comment.value}, function() {
         openSingleRecipeMongo(e);
       });
     }
   })
-
 }
 
+// === arrowEvtListener ===
+// TODO When click on the arrows next to the title of the recipe, change recipe.
+function arrowEvtListener(dom, index) {
+  dom.addEventListener('click', function() {
+    let target;
+    if (jsonResponse.results[index].id) {
+      target = {target: {id: jsonResponse.results[index].id}};
+      openSingleRecipe(target, index)
+    } else {
+      target = {target: {id: jsonResponse.results[index]._id}};
+      openSingleRecipeMongo(target, index)
+    }
+  })
+}
 
+// =================== CREATE ===================
+// === displayCreate ===
+// Creation of the recipe with the post request.
+function displayCreate() {
+  addIngredients();
+  let createBtn = document.getElementById('submit-recipe');
+  createBtn.addEventListener('click', createRecipe);
+}
 
-// AJAX
+// === createRecipe ===
+// Crete recipe and save in database.
+function createRecipe(e) {
+  e.preventDefault();
+  let user = document.getElementById('user-name').value;
+  let title = document.getElementById('create-name').value;
+  let instructions = document.getElementById('create-description').value;
+  let ingredients = [];
+  let isGlutenFree = document.getElementById('c11').checked;
+  let isDairy = document.getElementById('c22').checked;
+  let isVegan = document.getElementById('c33').checked;
+  let names = document.getElementsByClassName('create-ingredient-name');
+  let quantities = document.getElementsByClassName('create-ingredient-quantity');
+  let inputFile = document.getElementById('file-upload').files[0];
+  let selectCategory = document.getElementById('selectCategory').value;
+  let selectHour = document.getElementById('selectHour').value;
+  let selectMinutes = document.getElementById('selectMinutes').value;
+  let data = new FormData();
+
+  if(title == '') {
+    window.alert('The title of the recipe is a compulsory field');
+  } else if(instructions == '') {
+    window.alert('Description of the preparation of the recipe is a compulsory field');
+  } else if(names[0].value == '') {
+    window.alert('Ingredients of the recipe are compulsory fields');
+  } else {
+    for (i = 0; i < names.length; i++) {
+      let ing = {};
+      ing.name = names[i].value;
+      ing.quantity = quantities[i].value;
+      ingredients.push(ing);
+    }
+    let time = (Number(selectHour) * 60) + Number(selectMinutes);
+    data.append('author', user);
+    data.append('title', title);
+    data.append('category', selectCategory);
+    data.append('readyInMinutes', time);
+    data.append('instructions', instructions);
+    data.append('ingredients', JSON.stringify(ingredients));
+    data.append('lactosefree', isDairy);
+    data.append('glutenfree', isGlutenFree);
+    data.append('vegan', isVegan);
+    if (inputFile === undefined) {
+      data.append('image', './images/cloche.jpg');
+    } else {
+      let inputField = document.getElementById('file-upload')
+      data.append('image', inputField.value.split('.')[inputField.value.split('.').length-1]);
+    }
+    data.append('file', inputFile);
+    doFormDataRequest('POST', '/recipes', data)
+    var pageContent = document.getElementById('page-content');
+    pageContent.innerHTML = mainTemplate();
+    scrollToTop();
+  }
+}
+
+// === addIngredients ===
+// Add more than one ingredient.
+function addIngredients() {
+  let ingredientsContainer = document.getElementById('recipe-create-ingredients');
+  let btnAddIngredient = document.getElementById('btnAddIngredient');
+  let addIngredient = function() {
+    btnAddIngredient.addEventListener('click', function(e) {
+      document.getElementById("btnAddIngredient").outerHTML = '';
+      var container = document.createElement("div");
+      container.className = 'recipe-create-single-ing';
+      container.innerHTML = ingredientTemplate();
+      ingredientsContainer.lastChild.appendChild(container);
+      btnAddIngredient = document.getElementById('btnAddIngredient');
+      addIngredient();
+    })
+  }
+  addIngredient();
+}
+
+// === doJSONRequest ===
 function doJSONRequest(method, url, headers, data, callback) {
   if (arguments.length != 5) {
     throw new Error('Illegal argument count');
   }
-
   doRequestChecks(method, true, data);
 
   //create an ajax request
   const r = new XMLHttpRequest();
-
   //open a connection to the server using method method on the url API
   r.open(method, url, true);
-
   //set the headers
   doRequestSetHeaders(r, method, headers);
-
   //wait for the response from the server
   r.onreadystatechange = function() {
     //correctly handle the errors based on the HTTP status returned by the called API
@@ -705,9 +721,8 @@ function doJSONRequest(method, url, headers, data, callback) {
 
 function doFormDataRequest(method, url, data) {
   var xhr = new XMLHttpRequest();
-  xhr.open( method, url, true );
-  // xhr.onreadystatechange = handler;
-  xhr.send( data );
+  xhr.open(method, url, true);
+  xhr.send(data);
 }
 
 function canJSON(value) {
@@ -725,32 +740,25 @@ function canJSON(value) {
 }
 
 function isJSON(jsonString) {
-
   try {
     const o = JSON.parse(jsonString);
-
     if (o && typeof o === "object" && o !== null) {
       return true;
     }
   }
   catch (e) {}
-
   return false;
 }
 
 function doRequestSetHeaders(r, method, headers) {
-
   //set the default JSON header according to the method parameter
   r.setRequestHeader("Accept", "application/json");
-
   if (method === "POST" || method === "PUT") {
     r.setRequestHeader("Content-Type", "application/json");
   }
-
   //set the additional headers
   if (!("undefined" == typeof headers)
   && !(headers === null)){
-
     for (header in headers) {
       r.setRequestHeader(header,headers[header]);
     }
@@ -758,43 +766,14 @@ function doRequestSetHeaders(r, method, headers) {
 }
 
 function doRequestChecks(method, isAsynchronous, data) {
-
   //verify the request method
   if (method!="GET" && method!="POST" && method!="PUT" && method!="DELETE") {
     throw new Error('Illegal method: ' + method + ". It should be one of: GET, POST, PUT, DELETE.");
   }
-
   //verify the data parameter
   if (!("undefined" == typeof data)
   && !(data === null))
   if(!canJSON(data)) {
     throw new Error('Illegal data: ' + data + ". It should be an object that can be serialized as JSON.");
   }
-}
-
-function mainIconsEvtListener(category) {
-  var pageContent = document.getElementById('page-content');
-  counter = 0;
-
-  let parameters = "/search?name=" + category + "&ingredient=";
-
-
-  doJSONRequest("GET", parameters, null, null, function(res, req) {
-    jsonResponse = res;
-    toRender = jsonResponse.results.slice(counter, counter + 6);
-
-    if (jsonResponse.results.length > counter + 6){
-      counter += 6;
-    }
-    else {
-      counter = 0;
-    }
-
-    pageContent.innerHTML = discoverTemplate({results: toRender});
-    arrowDown = document.getElementById('arrow-down');
-
-    arrowDownEvListener();
-    accessToSingleRecipe();
-  })
-
 }
