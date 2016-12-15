@@ -951,7 +951,7 @@ function displayCreate() {
 // Crete recipe and save in database.
 function createRecipe(e) {
   e.preventDefault();
-  let user = document.getElementById('user-name').value;
+  let user = document.getElementById('user-name').value || 'Anonymous';
   let title = document.getElementById('create-name').value;
   let instructions = document.getElementById('create-description').value;
   let ingredients = [];
