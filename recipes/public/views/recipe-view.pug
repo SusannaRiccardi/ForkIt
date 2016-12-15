@@ -8,6 +8,12 @@
 
   #recipe-subtitle= "Author: " + recipe.author
   #recipe-readyIn= "Ready in: " + recipe.readyInMinutes
+  #recipe-cross
+    span.i.fa.fa-times.fa-1x
+    span.False=recipe.intolerancesok
+  #recipe-tik
+    span.i.fa.fa-check.fa-1x
+    span.True=recipe.intolerancesnot
   #recipes-swipe
     #image-actual.recipe-preview
       img.recipe-picture(src=recipe.image.actual, alt='Food')
@@ -22,8 +28,9 @@
 
 
     #recipe-preparation
-      b Preparation
-      br
+      #preparation-title
+        b Preparation
+        br
       span#preparation
       p= recipe.instructions
 

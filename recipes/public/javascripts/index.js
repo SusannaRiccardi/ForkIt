@@ -28,15 +28,18 @@ window.onload = function() {
   let btnCategories = document.getElementById('btn-categories').parentNode;
   let btnSearchSubmit = document.getElementById('search-submit-btn');
   let btnCreate = document.getElementById('btn-create').parentNode;
+  let btnBestRecipe = document.getElementById('btn-about').parentNode;
   let inputField = document.getElementsByTagName('input');
 
   btnCategories.href = "categories";
   btnCreate.href = "create";
   btnMenu.href = "menu";
+  btnBestRecipe.href = "bestRecipe";
 
   btnMenu.addEventListener('click', displayPage);
   btnCreate.addEventListener('click', displayPage);
   btnCategories.addEventListener('click', displayPage);
+  btnBestRecipe.addEventListener('click', displayPage);
   btnSearchSubmit.addEventListener('click', searchSubmit);
 }
 
@@ -84,6 +87,10 @@ function displayPage(e){
     pageContent.innerHTML = createTemplate();
     displayCreate();
     scrollToTop();
+  }
+  // Click on 'best recipe'
+  if (href == 'bestRecipe') {
+    findBestRecipe();
   }
 }
 
@@ -216,9 +223,13 @@ function openCategory(e, back) {
   if (recipeCategory === 'Users') {
     doJSONRequest('GET', '/recipes', null, null, function(res, req) {
       jsonResponse = res;
-      pageContent.innerHTML = discoverTemplate(res);
-      document.getElementById('arrow-down').style.display = 'none';
-      document.getElementById('arrow-up').style.display = 'none';
+      toRender = jsonResponse.results.slice(counter, counter + 6);
+      if (jsonResponse.results.length > counter + 6){
+        counter += 6;
+      }
+      pageContent.innerHTML = discoverTemplate({results : toRender});
+      arrowD(counter);
+      arrowU(counter-6);
       accessToSingleRecipe();
       backButtonDiscover();
       scrollToTop();
@@ -348,7 +359,6 @@ function openSingleRecipe (e, index) {
   var pageContent = document.getElementById('page-content');
   let recipeApi = {};
   doJSONRequest("GET", "/api/" + e.target.id, null, null, function(res, req) {
-    console.log(res)
     recipeApi.comments = res[0].comments;
     recipeApi.upvotes = res[0].upvotes;
     recipeApi.downvotes = res[0].downvotes;
@@ -712,6 +722,26 @@ function addIngredients() {
   }
   addIngredient();
 }
+
+// === findBestRecipe ===
+// Find the best Recipe in the database and visualize it
+function findBestRecipe() {
+  doJSONRequest('GET', '/recipes', null, null, function(res, req){
+    let recipes = res.results;
+    let bestRecipe = recipes[0];
+    for (let i=1; i<recipes.length; i++) {
+      if((recipes[i].upvotes - recipes[i].downvotes) > (bestRecipe.upvotes - bestRecipe.downvotes)){
+        bestRecipe = recipes[i];
+      }
+    }
+    var pageContent = document.getElementById('page-content');
+    pageContent.innerHTML = recipeTemplate({recipe : bestRecipe});
+    document.getElementById('arrow-back').style.visibility = 'hidden';
+    document.getElementById('arrow-next').style.visibility = 'hidden';
+    document.getElementById('back-button').style.display = "none";
+  })
+}
+
 
 // === doJSONRequest ===
 function doJSONRequest(method, url, headers, data, callback) {
