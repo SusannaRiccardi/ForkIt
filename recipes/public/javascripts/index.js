@@ -645,6 +645,10 @@ function commentRecipe(idRecipe) {
 function displayCreate() {
   addIngredients();
   let createBtn = document.getElementById('submit-recipe');
+  document.getElementById('file-upload').onchange = function() {
+    document.getElementsByClassName('custom-label-left')[0].innerHTML = 'Loaded';
+    document.getElementsByClassName('custom-label-left')[0].addEventListener('click', function(){})
+  };
   createBtn.addEventListener('click', createRecipe);
 }
 
@@ -693,7 +697,7 @@ function createRecipe(e) {
     if (inputFile === undefined) {
       data.append('image', './images/cloche.jpg');
     } else {
-      let inputField = document.getElementById('file-upload')
+      let inputField = document.getElementById('file-upload');
       data.append('image', inputField.value.split('.')[inputField.value.split('.').length-1]);
     }
     data.append('file', inputFile);
