@@ -50,6 +50,7 @@ let history;
 let counter;
 let jsonResponse;
 let toRender;
+let parameterSearch;
 
 // === scrollToTop ===
 // Scroll to the top of the page.
@@ -142,7 +143,7 @@ function iconsMainClick(category) {
 // =================== SEARCH ===================
 // === searchSubmit ===
 // When click on search, look for the searched recipes.
-function searchSubmit(e) {
+function searchSubmit(e, back) {
   e.preventDefault();
   var pageContent = document.getElementById('page-content');
   let searchName = document.getElementById('searchName').value;
@@ -151,8 +152,13 @@ function searchSubmit(e) {
   let c2 = document.getElementById("c2").checked;
   let c3 = document.getElementById("c3").checked;
   counter = 0;
-
-  let parameters = "/search?name=" + searchName + "&ingredient=" + excludeField;
+  let parameters;
+  if (back == true) {
+    parameters = parameterSearch;
+  } else {
+    parameters = "/search?name=" + searchName + "&ingredient=" + excludeField;
+    parameterSearch = parameters;
+  }
 
   if (c1 && c2) {
     parameters+= "&intolerances=" + document.getElementById("c1").name + "," + document.getElementById("c2").name;
@@ -173,6 +179,7 @@ function searchSubmit(e) {
     } else {
       counter = 0;
     }
+    history = 'search';
     pageContent.innerHTML = discoverTemplate({results: toRender});
     backButtonDiscover();
     arrowU(counter-6);
@@ -245,6 +252,8 @@ function openCategory(e, back) {
       backButtonDiscover();
       scrollToTop();
     })
+  } else if (recipeCategory === 'search') {
+    searchSubmit(e, true);
   } else {
     // All other categories:
     doJSONRequest('GET', '/category/' + recipeCategory, null, null, function(res, req) {
