@@ -38,9 +38,6 @@ window.onload = function() {
   btnCreate.addEventListener('click', displayPage);
   btnCategories.addEventListener('click', displayPage);
   btnSearchSubmit.addEventListener('click', searchSubmit);
-
-  // TODO delete?
-  let search = document.getElementById('search');
 }
 
 // === global variables ===
@@ -107,7 +104,19 @@ function iconsMainClick(category) {
     }
     pageContent.innerHTML = discoverTemplate({results: toRender});
     arrowDown = document.getElementById('arrow-down');
-    arrowDownEvListener();
+    arrowU(counter);
+    arrowD(counter);
+    let backButtonMain = document.getElementById('back-button-discover');
+    backButtonMain.addEventListener('click', function() {
+      pageContent.innerHTML = mainTemplate();
+      icons = document.getElementById('icon-carousel').getElementsByTagName('img');
+
+      for (let i = 0; i < icons.length; i++) {
+      icons[i].addEventListener('click', function() {
+        iconsMainClick(icons[i].getAttribute('id'));
+      });
+      }
+    })
     accessToSingleRecipe();
   })
 }
@@ -147,8 +156,8 @@ function searchSubmit(e) {
       counter = 0;
     }
     pageContent.innerHTML = discoverTemplate({results: toRender});
-    document.getElementById('back-button-discover').style.display = 'none';
-    arrowU(counter);
+    backButtonDiscover();
+    arrowU(counter-6);
     arrowD(counter);
     accessToSingleRecipe();
     scrollToTop();
@@ -313,12 +322,21 @@ function accessToSingleRecipe(){
   for (let i = 0; i < recipes.length; i++) {
     recipes[i].id = recipes[i].firstChild.id;
     recipes[i].addEventListener('click', function (event) {
+      let id = event.target.id;
       // Open recipe from API:
       if ((event.target.id).length <= 10) {
-        openSingleRecipe(event, i)
-      } else {
-        // Open recipe from our database:
-        openSingleRecipeMongo(event, i);
+        for(let i=0; i<jsonResponse.results.length; i++){
+          if(id == jsonResponse.results[i].id){
+            openSingleRecipe(event, i);
+          }
+        }
+      }
+      else {
+        for(let i=0; i<jsonResponse.results.length; i++){
+          if(id == jsonResponse.results[i]._id){
+            openSingleRecipeMongo(event, i);
+          }
+        }
       }
     })
   }
@@ -326,11 +344,10 @@ function accessToSingleRecipe(){
 
 // === openSingleRecipe ===
 // Open single recipe from foodAPI.
-function openSingleRecipe (e, activeRecipe) {
+function openSingleRecipe (e, index) {
   var pageContent = document.getElementById('page-content');
   let recipeApi = {};
   doJSONRequest("GET", "/api/" + e.target.id, null, null, function(res, req) {
-    console.log(res);
     recipeApi.comments = res[0].comments;
     recipeApi.upvotes = res[0].upvotes;
     recipeApi.downvotes = res[0].downvotes;
@@ -338,7 +355,6 @@ function openSingleRecipe (e, activeRecipe) {
   doJSONRequest('GET', '/singlerecipe/' + e.target.id, null, null, function(res, req) {
     let recipe = res;
     let obj = {};
-    obj.activeRecipe = activeRecipe;
     obj.title = recipe.title;
     obj.author = 'FoodAPI';
     obj.instructions = recipe.instructions;
@@ -360,9 +376,6 @@ function openSingleRecipe (e, activeRecipe) {
       obj.ingredients.push(ingredient);
     }
 
-    let recipeBack = (obj.activeRecipe - 1 < 0) ? jsonResponse.results.length - 1 : obj.activeRecipe - 1;
-    let recipeNext = (obj.activeRecipe + 1 > jsonResponse.results.length - 1) ? 0 : obj.activeRecipe + 1;
-
     obj.image = {
       actual:recipe.image
     };
@@ -375,16 +388,13 @@ function openSingleRecipe (e, activeRecipe) {
       document.getElementById("down").style.color = "#4CAF50";
     }
 
-    let arrowBack = document.getElementById('arrow-back');
-    let arrowNext = document.getElementById('arrow-next');
     let backButton = document.getElementById('back-button');
 
-    arrowEvtListener(arrowBack,recipeBack);
-    arrowEvtListener(arrowNext,recipeNext);
     backButton.addEventListener('click', function(e) {
       openCategory(e, true);
     });
 
+    arrowsEvent(index-1, index+1);
     upvotesApi(e.target.id);
     downvotesApi(e.target.id);
     commentRecipeApi(e.target.id);
@@ -393,12 +403,11 @@ function openSingleRecipe (e, activeRecipe) {
 
 // === openSingleRecipeMongo ===
 // Open single recipe from database.
-function openSingleRecipeMongo (e, activeRecipe) {
+function openSingleRecipeMongo (e, index) {
   var pageContent = document.getElementById('page-content');
   doJSONRequest('GET', '/recipes/' + e.target.id, null, null, function(res, req) {
     let recipe = res;
     let obj = {};
-    obj.activeRecipe = activeRecipe;
     obj.title = recipe.title;
     obj.author = recipe.author;
     obj.instructions = recipe.instructions;
@@ -435,24 +444,57 @@ function openSingleRecipeMongo (e, activeRecipe) {
       document.getElementById("down").style.color = "#4CAF50";
     }
 
-    let recipeBack = (obj.activeRecipe - 1 < 0) ? jsonResponse.results.length - 1 : obj.activeRecipe - 1;
-    let recipeNext = (obj.activeRecipe + 1 > jsonResponse.results.length - 1) ? 0 : obj.activeRecipe + 1;
-
-    let arrowBack = document.getElementById('arrow-back');
-    let arrowNext = document.getElementById('arrow-next');
     let backButton = document.getElementById('back-button');
 
-    arrowEvtListener(arrowBack,recipeBack);
-    arrowEvtListener(arrowNext,recipeNext);
     backButton.addEventListener('click', function(e) {
       openCategory(e, true);
     });
 
+    arrowsEvent(index-1, index+1);
     upvotes(e.target.id);
     downvotes(e.target.id);
     commentRecipe(e.target.id);
   })
 }
+
+// === arrowsEvent ===
+// Go to the previous or next recipe
+function arrowsEvent(prev, next){
+  let arrowBack = document.getElementById('arrow-back');
+  let arrowNext = document.getElementById('arrow-next');
+
+  if(prev < 0){
+    document.getElementById('arrow-back').style.visibility = 'hidden';
+  }
+  if(next > jsonResponse.results.length-1){
+    document.getElementById('arrow-next').style.visibility = 'hidden';
+  }
+
+  arrowBack.addEventListener('click', function(e){
+    let previousRecipe = jsonResponse.results[prev];
+    if(previousRecipe.id){
+      arrowBack.id = previousRecipe.id;
+      openSingleRecipe(e, prev);
+    }
+    else {
+      arrowBack.id = previousRecipe._id;
+      openSingleRecipeMongo(e, prev);
+    }
+  })
+
+  arrowNext.addEventListener('click', function(e){
+    let nextRecipe = jsonResponse.results[next];
+    if(nextRecipe.id){
+      arrowNext.id = nextRecipe.id;
+      openSingleRecipe(e, next);
+    }
+    else {
+      arrowNext.id = nextRecipe._id;
+      openSingleRecipeMongo(e, next);
+    }
+  })
+}
+
 
 // === upvotesApi ===
 // Upvote the recipe in the foodAPI.
@@ -584,20 +626,6 @@ function commentRecipe(idRecipe) {
   })
 }
 
-// === arrowEvtListener ===
-// TODO When click on the arrows next to the title of the recipe, change recipe.
-function arrowEvtListener(dom, index) {
-  dom.addEventListener('click', function() {
-    let target;
-    if (jsonResponse.results[index].id) {
-      target = {target: {id: jsonResponse.results[index].id}};
-      openSingleRecipe(target, index)
-    } else {
-      target = {target: {id: jsonResponse.results[index]._id}};
-      openSingleRecipeMongo(target, index)
-    }
-  })
-}
 
 // =================== CREATE ===================
 // === displayCreate ===
