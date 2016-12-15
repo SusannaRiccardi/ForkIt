@@ -386,7 +386,9 @@ function openSingleRecipe (e, index) {
       ingredient.quantity = ingr.amount + " " +ingr.unit;
       obj.ingredients.push(ingredient);
     }
-
+    obj.lactosefree = obj.dairyFree;
+    obj.glutenfree = recipe.glutenFree;
+    obj.vegan = recipe.vegan;
     obj.image = {
       actual:recipe.image
     };
@@ -397,6 +399,25 @@ function openSingleRecipe (e, index) {
       document.getElementById("up").style.color = "#4CAF50";
     } else if (localStorage.getItem(recipe.id) === "down") {
       document.getElementById("down").style.color = "#4CAF50";
+    }
+
+    if (recipe.glutenFree === true) {
+      document.getElementById("glutenfree").className = "i fa fa-check fa-1x";
+      document.getElementById("glutenfree").style.color = 'green';
+    } else {
+      document.getElementById("glutenfree").style.color = 'red';
+    }
+    if (recipe.dairyFree === true) {
+      document.getElementById("dairyfree").className = "i fa fa-check fa-1x";
+      document.getElementById("dairyfree").style.color = 'green';
+    } else {
+      document.getElementById("dairyfree").style.color = 'red';
+    }
+    if (recipe.vegan === true) {
+      document.getElementById("vegan").className = "i fa fa-check fa-1x";
+      document.getElementById("vegan").style.color = 'green';
+    } else {
+      document.getElementById("vegan").style.color = 'red';
     }
 
     let backButton = document.getElementById('back-button');
@@ -446,6 +467,10 @@ function openSingleRecipeMongo (e, index) {
         actual:'./uploads/' + recipe._id + '.' + recipe.image
       };
     }
+    obj.lactosefree = obj.lactosefree;
+    obj.glutenfree = recipe.glutenfree;
+    obj.vegan = recipe.vegan;
+
     pageContent.innerHTML = recipeTemplate({recipe : obj});
 
     // Change button upvote and downvote colors.
@@ -453,6 +478,25 @@ function openSingleRecipeMongo (e, index) {
       document.getElementById("up").style.color = "#4CAF50";
     } else if (localStorage.getItem(recipe._id) === "down") {
       document.getElementById("down").style.color = "#4CAF50";
+    }
+
+    if (recipe.glutenfree === true) {
+      document.getElementById("glutenfree").className = "i fa fa-check fa-1x";
+      document.getElementById("glutenfree").style.color = 'green';
+    } else {
+      document.getElementById("glutenfree").style.color = 'red';
+    }
+    if (recipe.lactosefree === true) {
+      document.getElementById("dairyfree").className = "i fa fa-check fa-1x";
+      document.getElementById("dairyfree").style.color = 'green';
+    } else {
+      document.getElementById("dairyfree").style.color = 'red';
+    }
+    if (recipe.vegan === true) {
+      document.getElementById("vegan").className = "i fa fa-check fa-1x";
+      document.getElementById("vegan").style.color = 'green';
+    } else {
+      document.getElementById("vegan").style.color = 'red';
     }
 
     let backButton = document.getElementById('back-button');
