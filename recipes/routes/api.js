@@ -53,7 +53,20 @@ router.get('/:id', function(req, res) {
 router.put('/:id', function(req, res, next) {
   const data = req.body;
   let id = req.params.id;
-  if(data.upvotes){
+  console.log(data);
+  if((data.upvotes || data.upvotes==0)  && (data.downvotes || data.downvotes==0)){
+    console.log("ENTRAMBI");
+    Api.find({'recipeid':id}, function(err, recipe) {
+      if (err) return next (err);
+      if (recipe){
+        recipe[0].upvotes = data.upvotes;
+        recipe[0].downvotes = data.downvotes;
+        recipe[0].save(onModelSave(res));
+      }
+    });
+  }
+  if(data.upvotes || data.upvotes==0){
+    console.log("UP");
     Api.find({'recipeid':id}, function(err, recipe) {
       if (err) return next (err);
       if (recipe){
@@ -62,7 +75,8 @@ router.put('/:id', function(req, res, next) {
       }
     });
   }
-  if(data.downvotes){
+  if(data.downvotes || data.downvotes==0){
+    console.log("DOWN");
     Api.find({'recipeid':id}, function(err, recipe) {
       if (err) return next (err);
       if (recipe){

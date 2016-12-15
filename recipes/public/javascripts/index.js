@@ -408,10 +408,10 @@ function openSingleRecipe (e, index) {
     pageContent.innerHTML = recipeTemplate({recipe : obj});
 
     // Change button upvote and downvote colors.
-    if (localStorage.getItem(recipe.id) == 'up') {
+    if (localStorage.getItem(recipe.id) === 'up') {
       document.getElementById("up").style.color = "#4CAF50";
     } else if (localStorage.getItem(recipe.id) === "down") {
-      document.getElementById("down").style.color = "#4CAF50";
+      document.getElementById("down").style.color = "#D32F2F";
     }
 
     if (recipe.glutenFree === true) {
@@ -572,7 +572,9 @@ function upvotesApi(idRecipe, index) {
   let upvote = document.getElementById('up');
   upvote.id = idRecipe;
   upvote.addEventListener('click', function(e) {
+    console.log(localStorage.getItem(idRecipe));
     if (localStorage.getItem(idRecipe) == null) {
+      console.log("CLICCHI UP, HAI NULL")
       localStorage.setItem(idRecipe, "up");
       doJSONRequest('GET', '/api/' + idRecipe, null, null, function(res, req) {
         let recipe = res[0];
@@ -582,9 +584,30 @@ function upvotesApi(idRecipe, index) {
           openSingleRecipe(e, index);
         });
       })
-    } else {
-      document.getElementById('toast').innerHTML = "You have already voted";
-      showToast();
+    }
+    else if (localStorage.getItem(idRecipe) == 'up'){
+      console.log("CLICCHI UP, HAI UP")
+      localStorage.removeItem(idRecipe);
+      doJSONRequest('GET', '/api/' + idRecipe, null, null, function(res, req) {
+        let recipe = res[0];
+        let up = recipe.upvotes - 1;
+        let down = recipe.downvotes;
+        doJSONRequest('PUT', '/api/' + idRecipe, null, {upvotes : up}, function() {
+          openSingleRecipe(e, index);
+        });
+      })
+    }
+    else if(localStorage.getItem(idRecipe) == 'down'){
+      console.log("CLICCHI UP, HAI DOWN")
+      localStorage.setItem(idRecipe, 'up');
+      doJSONRequest('GET', '/api/' + idRecipe, null, null, function(res, req) {
+        let recipe = res[0];
+        let up = recipe.upvotes + 1;
+        let down = recipe.downvotes - 1;
+        doJSONRequest('PUT', '/api/' + idRecipe, null, {upvotes : up, downvotes : down}, function() {
+          openSingleRecipe(e, index);
+        });
+      })
     }
   })
 }
@@ -596,18 +619,45 @@ function downvotesApi(idRecipe, index) {
   downvote.id = idRecipe;
   downvote.addEventListener('click', function(e) {
     if (localStorage.getItem(idRecipe) == null) {
+      console.log("CLICCHI DOWN, HAI NULL")
       localStorage.setItem(idRecipe, "down");
       doJSONRequest('GET', '/api/' + idRecipe, null, null, function(res, req) {
         let recipe = res[0];
         let up = recipe.upvotes;
         let down = recipe.downvotes + 1;
+        console.log(recipe.downvotes);
         doJSONRequest('PUT', '/api/' + idRecipe, null, {downvotes : down}, function() {
+          console.log(recipe.downvotes);
           openSingleRecipe(e, index);
         });
       })
-    } else {
-      document.getElementById('toast').innerHTML = "You have already voted";
-      showToast();
+    }
+    else if (localStorage.getItem(idRecipe) == 'down') {
+      console.log("CLICCHI DOWN, HAI DOWN")
+      localStorage.removeItem(idRecipe);
+      doJSONRequest('GET', '/api/' + idRecipe, null, null, function(res, req) {
+        let recipe = res[0];
+        let up = recipe.upvotes;
+        let down = recipe.downvotes - 1;
+        console.log(recipe.downvotes);
+        doJSONRequest('PUT', '/api/' + idRecipe, null, {downvotes : down}, function() {
+          console.log(recipe.downvotes);
+          openSingleRecipe(e, index);
+        });
+      })
+    }
+    else if (localStorage.getItem(idRecipe) == 'up') {
+      console.log("CLICCHI DOWN, HAI UP")
+      localStorage.setItem(idRecipe, "down");
+      doJSONRequest('GET', '/api/' + idRecipe, null, null, function(res, req) {
+        let recipe = res[0];
+        let up = recipe.upvotes - 1;
+        let down = recipe.downvotes + 1;
+        console.log(recipe.downvotes);
+        doJSONRequest('PUT', '/api/' + idRecipe, null, {upvotes : up, downvotes : down}, function() {
+          openSingleRecipe(e, index);
+        });
+      })
     }
   })
 }
