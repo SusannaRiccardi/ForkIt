@@ -57,6 +57,14 @@ function scrollToTop() {
   window.scrollTo(0, 0);
 }
 
+// === showToast ===
+// Alert messages
+function showToast() {
+    var x = document.getElementById("toast")
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
 // === displayPage ===
 // Display the different views when the menu buttons are clicked.
 function displayPage(e){
@@ -126,6 +134,7 @@ function iconsMainClick(category) {
       });
       }
     })
+    console.log(jsonResponse);
     accessToSingleRecipe();
   })
 }
@@ -338,8 +347,10 @@ function accessToSingleRecipe(){
       let id = event.target.id;
       // Open recipe from API:
       if ((event.target.id).length <= 10) {
+        console.log(jsonResponse);
         for(let i=0; i<jsonResponse.results.length; i++){
           if(id == jsonResponse.results[i].id){
+            console.log(i);
             openSingleRecipe(event, i);
           }
         }
@@ -572,7 +583,8 @@ function upvotesApi(idRecipe, index) {
         });
       })
     } else {
-      alert('You already voted');
+      document.getElementById('toast').innerHTML = "You have already voted";
+      showToast();
     }
   })
 }
@@ -594,7 +606,8 @@ function downvotesApi(idRecipe, index) {
         });
       })
     } else {
-      alert('You already voted');
+      document.getElementById('toast').innerHTML = "You have already voted";
+      showToast();
     }
   })
 }
@@ -608,7 +621,8 @@ function commentRecipeApi(idRecipe, index) {
   let comment = document.getElementById('comment');
   commentSubmit.addEventListener('click', function(e) {
     if (comment.value == '') {
-      alert('You have to insert a comment before submit');
+      document.getElementById('toast').innerHTML = "You have to insert a comment before submit";
+      showToast();
     } else {
       let usname = username.value;
       if (usname == '') {
@@ -638,7 +652,8 @@ function upvotes(idRecipe, index) {
         });
       })
     } else {
-      alert('You already voted');
+      document.getElementById('toast').innerHTML = "You already voted";
+      showToast();
     }
   })
 }
@@ -660,7 +675,8 @@ function downvotes(idRecipe, index) {
         });
       })
     } else {
-      alert('You already voted');
+      document.getElementById('toast').innerHTML = "You already voted";
+      showToast();
     }
   })
 }
@@ -674,7 +690,8 @@ function commentRecipe(idRecipe, index) {
   let comment = document.getElementById('comment');
   commentSubmit.addEventListener('click', function(e) {
     if (comment.value == '') {
-      alert('You have to insert a comment before submit');
+      document.getElementById('toast').innerHTML = "You have to insert a comment before submit";
+      showToast();
     } else {
       if (username.value == '') {
         username.value = 'Anonymous'
@@ -721,7 +738,8 @@ function upvoteBestRecipe(bestRecipe){
           });
         })
       } else {
-        alert('You already voted');
+        document.getElementById('toast').innerHTML = "You already voted";
+        showToast();
       }
     })
 }
@@ -745,7 +763,8 @@ function downvoteBestRecipe(bestRecipe){
           });
         })
       } else {
-        alert('You already voted');
+        document.getElementById('toast').innerHTML = 'You already voted';
+        showToast();
       }
     })
 
@@ -760,7 +779,8 @@ function commentBestRecipe(bestRecipe){
     let comment = document.getElementById('comment');
     commentSubmit.addEventListener('click', function(e) {
       if (comment.value == '') {
-        alert('You have to insert a comment before submit');
+        document.getElementById('toast').innerHTML = 'You have to insert a comment before submit';
+        showToast();
       } else {
         if (username.value == '') {
           username.value = 'Anonymous'
@@ -853,11 +873,14 @@ function createRecipe(e) {
   let data = new FormData();
 
   if(title == '') {
-    window.alert('The title of the recipe is a compulsory field');
+    document.getElementById('toast').innerHTML = "The title of the recipe is a compulsory field";
+    showToast();
   } else if(instructions == '') {
-    window.alert('Description of the preparation of the recipe is a compulsory field');
+    document.getElementById('toast').innerHTML = "The preparation of the recipe is a compulsory field";
+    showToast();
   } else if(names[0].value == '') {
-    window.alert('Ingredients of the recipe are compulsory fields');
+    document.getElementById('toast').innerHTML = "ingredients of the recipe are compulsory fields";
+    showToast();
   } else {
     for (i = 0; i < names.length; i++) {
       let ing = {};
