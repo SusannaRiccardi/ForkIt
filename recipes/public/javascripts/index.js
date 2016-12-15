@@ -686,6 +686,137 @@ function commentRecipe(idRecipe, index) {
   })
 }
 
+// === findBestRecipe ===
+// Find the best Recipe in the database and visualize it
+function findBestRecipe() {
+  var pageContent = document.getElementById('page-content');
+  doJSONRequest('GET', '/recipes', null, null, function(res, req){
+    let recipes = res.results;
+    let bestRecipe = recipes[0];
+    for (let i=1; i<recipes.length; i++) {
+      if((recipes[i].upvotes - recipes[i].downvotes) > (bestRecipe.upvotes - bestRecipe.downvotes)){
+        bestRecipe = recipes[i];
+      }
+    }
+    openBestRecipe(bestRecipe);
+  })
+}
+
+function upvoteBestRecipe(bestRecipe){
+    let idRecipe = bestRecipe._id;
+    // Upvote
+    let upvote = document.getElementById('up');
+    upvote.id = idRecipe;
+    upvote.addEventListener('click', function(e) {
+      if (localStorage.getItem(idRecipe) == null) {
+        localStorage.setItem(idRecipe, "up");
+        doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req) {
+          let recipe = res;
+          let up = recipe.upvotes + 1;
+          let down = recipe.downvotes;
+          doJSONRequest('PUT', '/recipes/' + idRecipe, null, {upvotes : up}, function() {
+            doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req){
+              openBestRecipe(res);
+            })
+          });
+        })
+      } else {
+        alert('You already voted');
+      }
+    })
+}
+
+function downvoteBestRecipe(bestRecipe){
+  let idRecipe = bestRecipe._id;
+    //downvote
+    let downvote = document.getElementById('down');
+    downvote.id = idRecipe;
+    downvote.addEventListener('click', function(e) {
+      if (localStorage.getItem(idRecipe) == null) {
+        localStorage.setItem(idRecipe, "down");
+        doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req) {
+          let recipe = res;
+          let up = recipe.upvotes;
+          let down = recipe.downvotes + 1;
+          doJSONRequest('PUT', '/recipes/' + idRecipe, null, {downvotes : down}, function() {
+            doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req){
+              openBestRecipe(res);
+            })
+          });
+        })
+      } else {
+        alert('You already voted');
+      }
+    })
+
+  }
+
+function commentBestRecipe(bestRecipe){
+  let idRecipe = bestRecipe._id;
+    // Comment
+    let commentSubmit = document.getElementById('submit-comment');
+    commentSubmit.id = idRecipe;
+    let username = document.getElementById('username');
+    let comment = document.getElementById('comment');
+    commentSubmit.addEventListener('click', function(e) {
+      if (comment.value == '') {
+        alert('You have to insert a comment before submit');
+      } else {
+        if (username.value == '') {
+          username.value = 'Anonymous'
+        }
+        doJSONRequest('PUT', '/recipes/' + idRecipe, null, {username: username.value, comment : comment.value}, function(res, req) {
+          doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req){
+            openBestRecipe(res);
+          })
+        });
+      }
+    })
+  }
+
+
+function openBestRecipe (recipe) {
+  console.log(recipe.image)
+  recipe.image = {actual : './uploads/' + recipe._id + "." + recipe.image};
+  console.log(recipe.image.actual);
+  var pageContent = document.getElementById('page-content');
+  scrollToTop();
+  console.log(recipe)
+    pageContent.innerHTML = recipeTemplate({recipe : recipe});
+
+    // Change button upvote and downvote colors.
+    if (localStorage.getItem(recipe._id) == 'up') {
+      document.getElementById("up").style.color = "#4CAF50";
+    } else if (localStorage.getItem(recipe._id) === "down") {
+      document.getElementById("down").style.color = "#4CAF50";
+    }
+
+    if (recipe.glutenfree === true) {
+      document.getElementById("glutenfree").className = "i fa fa-check fa-1x";
+      document.getElementById("glutenfree").style.color = 'green';
+    } else {
+      document.getElementById("glutenfree").style.color = 'red';
+    }
+    if (recipe.lactosefree === true) {
+      document.getElementById("dairyfree").className = "i fa fa-check fa-1x";
+      document.getElementById("dairyfree").style.color = 'green';
+    } else {
+      document.getElementById("dairyfree").style.color = 'red';
+    }
+    if (recipe.vegan === true) {
+      document.getElementById("vegan").className = "i fa fa-check fa-1x";
+      document.getElementById("vegan").style.color = 'green';
+    } else {
+      document.getElementById("vegan").style.color = 'red';
+    }
+
+    document.getElementById('arrow-back').style.visibility = 'hidden';
+    document.getElementById('arrow-next').style.visibility = 'hidden';
+    document.getElementById('back-button').style.display = "none";
+  upvoteBestRecipe(recipe);
+  downvoteBestRecipe(recipe);
+  commentBestRecipe(recipe);
+}
 
 // =================== CREATE ===================
 // === displayCreate ===
@@ -776,26 +907,6 @@ function addIngredients() {
   }
   addIngredient();
 }
-
-// === findBestRecipe ===
-// Find the best Recipe in the database and visualize it
-function findBestRecipe() {
-  doJSONRequest('GET', '/recipes', null, null, function(res, req){
-    let recipes = res.results;
-    let bestRecipe = recipes[0];
-    for (let i=1; i<recipes.length; i++) {
-      if((recipes[i].upvotes - recipes[i].downvotes) > (bestRecipe.upvotes - bestRecipe.downvotes)){
-        bestRecipe = recipes[i];
-      }
-    }
-    var pageContent = document.getElementById('page-content');
-    pageContent.innerHTML = recipeTemplate({recipe : bestRecipe});
-    document.getElementById('arrow-back').style.visibility = 'hidden';
-    document.getElementById('arrow-next').style.visibility = 'hidden';
-    document.getElementById('back-button').style.display = "none";
-  })
-}
-
 
 // === doJSONRequest ===
 function doJSONRequest(method, url, headers, data, callback) {
