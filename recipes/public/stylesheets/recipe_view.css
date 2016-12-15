@@ -13,7 +13,7 @@
 
 #recipe-subtitle {
   font-family: 'Lato', sans-serif;
-  font-size: 1.2em;
+  font-size: 1.4em;
   margin-left: 30px;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -64,6 +64,7 @@
 
 #recipes-swipe {
   margin-left: 0px;
+  text-align: center;
 }
 
 /*recipe preview*/
@@ -87,12 +88,14 @@
   display: inline-block;
   margin-right: 0px;
   margin-left: 0px;
+  border-radius: 25px;
 }
 
 /*recipe preview image*/
 .recipe-picture {
   width: 100% !important;
   height: auto !important;
+  vertical-align: middle;
 }
 
 #recipe-text {
@@ -117,6 +120,7 @@
   width: 45%;
   padding: 0px;
   padding-left: 20px;
+  text-align: left;
 }
 
 #recipe-preparation {
@@ -194,7 +198,6 @@
 
 #image-actual{
   height: auto !important;
-  padding-left: 30px;
 }
 
 #votes div{
