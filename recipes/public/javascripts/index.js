@@ -107,6 +107,7 @@ function displayPage(e){
 // === iconsMainClick ===
 // When click on icon on main view, open set category.
 function iconsMainClick(category) {
+  history = category;
   var pageContent = document.getElementById('page-content');
   counter = 0;
   let parameters = "/search?name=" + category + "&ingredient=";
@@ -134,7 +135,6 @@ function iconsMainClick(category) {
       });
       }
     })
-    console.log(jsonResponse);
     accessToSingleRecipe();
   })
 }
@@ -436,7 +436,11 @@ function openSingleRecipe (e, index) {
     let backButton = document.getElementById('back-button');
 
     backButton.addEventListener('click', function(e) {
-      openCategory(e, true);
+      if (history == 'chinese' || history == 'bread' || history == 'cake' || history == 'drink') {
+        iconsMainClick(history);
+      } else {
+        openCategory(e, true);
+      }
     });
 
     arrowsEvent(index-1, index+1);
