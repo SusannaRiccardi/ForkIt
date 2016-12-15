@@ -17,10 +17,12 @@ window.onload = function() {
 
   menuwrapper.addEventListener('mouseenter', function() {
     menuBtnFont.setAttribute('Style', '-ms-transform: rotate(90deg); -webkit-transform: rotate(90deg); transform: rotate(90 deg);');
+    document.getElementsByClassName('btn-text')[0].innerHTML = 'HOME';
   });
 
   menuwrapper.addEventListener('mouseleave', function() {
     menuBtnFont.removeAttribute('Style');
+    document.getElementsByClassName('btn-text')[0].innerHTML = 'MENU';
   });
 
   // Select buttons in the website and add event listener.
@@ -427,15 +429,16 @@ function openSingleRecipe (e, index) {
     });
 
     arrowsEvent(index-1, index+1);
-    upvotesApi(e.target.id);
-    downvotesApi(e.target.id);
-    commentRecipeApi(e.target.id);
+    upvotesApi(e.target.id, index);
+    downvotesApi(e.target.id, index);
+    commentRecipeApi(e.target.id, index);
   })
 }
 
 // === openSingleRecipeMongo ===
 // Open single recipe from database.
 function openSingleRecipeMongo (e, index) {
+  console.log(index);
   var pageContent = document.getElementById('page-content');
   doJSONRequest('GET', '/recipes/' + e.target.id, null, null, function(res, req) {
     let recipe = res;
@@ -506,9 +509,10 @@ function openSingleRecipeMongo (e, index) {
     });
 
     arrowsEvent(index-1, index+1);
-    upvotes(e.target.id);
-    downvotes(e.target.id);
-    commentRecipe(e.target.id);
+    upvotes(e.target.id, index);
+    downvotes(e.target.id, index);
+    console.log(index);
+    commentRecipe(e.target.id, index);
   })
 }
 
@@ -553,7 +557,7 @@ function arrowsEvent(prev, next){
 
 // === upvotesApi ===
 // Upvote the recipe in the foodAPI.
-function upvotesApi(idRecipe) {
+function upvotesApi(idRecipe, index) {
   let upvote = document.getElementById('up');
   upvote.id = idRecipe;
   upvote.addEventListener('click', function(e) {
@@ -564,7 +568,7 @@ function upvotesApi(idRecipe) {
         let up = recipe.upvotes + 1;
         let down = recipe.downvotes;
         doJSONRequest('PUT', '/api/' + idRecipe, null, {upvotes : up}, function() {
-          openSingleRecipe(e);
+          openSingleRecipe(e, index);
         });
       })
     } else {
@@ -575,7 +579,7 @@ function upvotesApi(idRecipe) {
 
 // === downvotesApi ===
 // Downvote the recipe in the foodAPI.
-function downvotesApi(idRecipe) {
+function downvotesApi(idRecipe, index) {
   let downvote = document.getElementById('down');
   downvote.id = idRecipe;
   downvote.addEventListener('click', function(e) {
@@ -586,7 +590,7 @@ function downvotesApi(idRecipe) {
         let up = recipe.upvotes;
         let down = recipe.downvotes + 1;
         doJSONRequest('PUT', '/api/' + idRecipe, null, {downvotes : down}, function() {
-          openSingleRecipe(e);
+          openSingleRecipe(e, index);
         });
       })
     } else {
@@ -597,7 +601,7 @@ function downvotesApi(idRecipe) {
 
 // === commentRecipeApi ===
 // Comment the recipe from the API.
-function commentRecipeApi(idRecipe) {
+function commentRecipeApi(idRecipe, index) {
   let commentSubmit = document.getElementById('submit-comment');
   commentSubmit.id = idRecipe;
   let username = document.getElementById('username');
@@ -611,7 +615,7 @@ function commentRecipeApi(idRecipe) {
         usname = 'Anonymous'
       }
       doJSONRequest('PUT', '/api/' + idRecipe, null, {username: usname, comment : comment.value}, function() {
-        openSingleRecipe(e);
+        openSingleRecipe(e, index);
       });
     }
   })
@@ -619,7 +623,7 @@ function commentRecipeApi(idRecipe) {
 
 // === upvotes ===
 // Upvote the recipe from the database.
-function upvotes(idRecipe) {
+function upvotes(idRecipe, index) {
   let upvote = document.getElementById('up');
   upvote.id = idRecipe;
   upvote.addEventListener('click', function(e) {
@@ -630,7 +634,7 @@ function upvotes(idRecipe) {
         let up = recipe.upvotes + 1;
         let down = recipe.downvotes;
         doJSONRequest('PUT', '/recipes/' + idRecipe, null, {upvotes : up}, function() {
-          openSingleRecipeMongo(e);
+          openSingleRecipeMongo(e, index);
         });
       })
     } else {
@@ -641,7 +645,7 @@ function upvotes(idRecipe) {
 
 // === downvotes ===
 // Downvote the recipe from the database.
-function downvotes(idRecipe) {
+function downvotes(idRecipe, index) {
   let downvote = document.getElementById('down');
   downvote.id = idRecipe;
   downvote.addEventListener('click', function(e) {
@@ -652,7 +656,7 @@ function downvotes(idRecipe) {
         let up = recipe.upvotes;
         let down = recipe.downvotes + 1;
         doJSONRequest('PUT', '/recipes/' + idRecipe, null, {downvotes : down}, function() {
-          openSingleRecipeMongo(e);
+          openSingleRecipeMongo(e, index);
         });
       })
     } else {
@@ -663,7 +667,7 @@ function downvotes(idRecipe) {
 
 // === commentRecipe ===
 // Comment the recipe from the database.
-function commentRecipe(idRecipe) {
+function commentRecipe(idRecipe, index) {
   let commentSubmit = document.getElementById('submit-comment');
   commentSubmit.id = idRecipe;
   let username = document.getElementById('username');
@@ -676,7 +680,7 @@ function commentRecipe(idRecipe) {
         username.value = 'Anonymous'
       }
       doJSONRequest('PUT', '/recipes/' + idRecipe, null, {username: username.value, comment : comment.value}, function() {
-        openSingleRecipeMongo(e);
+        openSingleRecipeMongo(e, index);
       });
     }
   })
@@ -690,8 +694,10 @@ function displayCreate() {
   addIngredients();
   let createBtn = document.getElementById('submit-recipe');
   document.getElementById('file-upload').onchange = function() {
-    document.getElementsByClassName('custom-label-left')[0].innerHTML = 'Loaded';
-    document.getElementsByClassName('custom-label-left')[0].addEventListener('click', function(){})
+    document.getElementsByClassName('custom-label-left')[0].innerHTML = 'Image Loaded';
+    document.getElementsByClassName('custom-label-left')[0].addEventListener('click', function(e){
+      e.preventDefault();
+    })
   };
   createBtn.addEventListener('click', createRecipe);
 }
