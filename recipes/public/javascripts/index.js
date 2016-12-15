@@ -831,9 +831,32 @@ function upvoteBestRecipe(bestRecipe){
             })
           });
         })
-      } else {
-        document.getElementById('toast').innerHTML = "You already voted";
-        showToast();
+      }
+      else if (localStorage.getItem(idRecipe) == 'up'){
+        localStorage.removeItem(idRecipe);
+        doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req) {
+          let recipe = res;
+          let up = recipe.upvotes - 1;
+          let down = recipe.downvotes;
+          doJSONRequest('PUT', '/recipes/' + idRecipe, null, {upvotes : up}, function() {
+            doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req){
+              openBestRecipe(res);
+            })
+          });
+        })
+      }
+      else if(localStorage.getItem(idRecipe) == 'down'){
+        localStorage.setItem(idRecipe, "up");
+        doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req) {
+          let recipe = res;
+          let up = recipe.upvotes + 1;
+          let down = recipe.downvotes - 1;
+          doJSONRequest('PUT', '/recipes/' + idRecipe, null, {upvotes : up, downvotes : down}, function() {
+            doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req){
+              openBestRecipe(res);
+            })
+          });
+        })
       }
     })
 }
@@ -856,9 +879,32 @@ function downvoteBestRecipe(bestRecipe){
             })
           });
         })
-      } else {
-        document.getElementById('toast').innerHTML = 'You already voted';
-        showToast();
+      }
+      else if (localStorage.getItem(idRecipe) == 'down'){
+        localStorage.removeItem(idRecipe);
+        doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req) {
+          let recipe = res;
+          let up = recipe.upvotes;
+          let down = recipe.downvotes - 1;
+          doJSONRequest('PUT', '/recipes/' + idRecipe, null, {downvotes : up}, function() {
+            doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req){
+              openBestRecipe(res);
+            })
+          });
+        })
+      }
+      else if(localStorage.getItem(idRecipe) == 'up'){
+        localStorage.setItem(idRecipe, "down");
+        doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req) {
+          let recipe = res;
+          let up = recipe.upvotes - 1;
+          let down = recipe.downvotes + 1;
+          doJSONRequest('PUT', '/recipes/' + idRecipe, null, {upvotes : up, downvotes : down}, function() {
+            doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req){
+              openBestRecipe(res);
+            })
+          });
+        })
       }
     })
 
