@@ -107,7 +107,17 @@ router.delete('/:recipeid', function(req, res, next) {
 //updateRecipe
 router.put('/:recipeid', function(req, res, next) {
   const data = req.body;
-  if(data.upvotes){
+  if((data.upvotes || data.upvotes==0)  && (data.downvotes || data.downvotes==0)){
+    Recipe.findById(req.params.recipeid, fieldsFilter , function(err, recipe){
+      if (err) return next (err);
+      if (recipe){
+        recipe.upvotes =  data.upvotes;
+        recipe.downvotes = data.downvotes;
+        recipe.save(onModelSave(res));
+      }
+    });
+  }
+  if(data.upvotes || data.upvotes==0){
     Recipe.findById(req.params.recipeid, fieldsFilter , function(err, recipe){
       if (err) return next (err);
       if (recipe){
@@ -117,7 +127,7 @@ router.put('/:recipeid', function(req, res, next) {
       }
     });
   }
-  if(data.downvotes){
+  if(data.downvotes || data.downvotes==0){
     Recipe.findById(req.params.recipeid, fieldsFilter , function(err, recipe){
       if (err) return next (err);
       if (recipe){

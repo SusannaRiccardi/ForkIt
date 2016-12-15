@@ -495,7 +495,7 @@ function openSingleRecipeMongo (e, index) {
     if (localStorage.getItem(recipe._id) == 'up') {
       document.getElementById("up").style.color = "#4CAF50";
     } else if (localStorage.getItem(recipe._id) === "down") {
-      document.getElementById("down").style.color = "#4CAF50";
+      document.getElementById("down").style.color = "#D32F2F";
     }
 
     if (recipe.glutenfree === true) {
@@ -576,7 +576,6 @@ function upvotesApi(idRecipe, index) {
   let upvote = document.getElementById('up');
   upvote.id = idRecipe;
   upvote.addEventListener('click', function(e) {
-    console.log(localStorage.getItem(idRecipe));
     if (localStorage.getItem(idRecipe) == null) {
       console.log("CLICCHI UP, HAI NULL")
       localStorage.setItem(idRecipe, "up");
@@ -695,6 +694,7 @@ function upvotes(idRecipe, index) {
   let upvote = document.getElementById('up');
   upvote.id = idRecipe;
   upvote.addEventListener('click', function(e) {
+    console.log('CLICCO UP');
     if (localStorage.getItem(idRecipe) == null) {
       localStorage.setItem(idRecipe, "up");
       doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req) {
@@ -705,11 +705,31 @@ function upvotes(idRecipe, index) {
           openSingleRecipeMongo(e, index);
         });
       })
-    } else {
-      document.getElementById('toast').innerHTML = "You already voted";
-      showToast();
+    }
+    else if (localStorage.getItem(idRecipe) == 'up'){
+      localStorage.removeItem(idRecipe);
+      doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req) {
+        let recipe = res;
+        let up = recipe.upvotes - 1;
+        let down = recipe.downvotes;
+        doJSONRequest('PUT', '/recipes/' + idRecipe, null, {upvotes : up}, function() {
+          openSingleRecipeMongo(e, index);
+        });
+      })
+    }
+    else if(localStorage.getItem(idRecipe) == 'down'){
+      localStorage.setItem(idRecipe, "up");
+      doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req) {
+        let recipe = res;
+        let up = recipe.upvotes + 1;
+        let down = recipe.downvotes - 1;
+        doJSONRequest('PUT', '/recipes/' + idRecipe, null, {upvotes : up, downvotes : down}, function() {
+          openSingleRecipeMongo(e, index);
+        });
+      })
     }
   })
+
 }
 
 // === downvotes ===
@@ -718,6 +738,7 @@ function downvotes(idRecipe, index) {
   let downvote = document.getElementById('down');
   downvote.id = idRecipe;
   downvote.addEventListener('click', function(e) {
+    console.log('CLICCO DOWN');
     if (localStorage.getItem(idRecipe) == null) {
       localStorage.setItem(idRecipe, "down");
       doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req) {
@@ -728,9 +749,28 @@ function downvotes(idRecipe, index) {
           openSingleRecipeMongo(e, index);
         });
       })
-    } else {
-      document.getElementById('toast').innerHTML = "You already voted";
-      showToast();
+    }
+    else if (localStorage.getItem(idRecipe) == 'down'){
+      localStorage.removeItem(idRecipe);
+      doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req) {
+        let recipe = res;
+        let up = recipe.upvotes;
+        let down = recipe.downvotes - 1;
+        doJSONRequest('PUT', '/recipes/' + idRecipe, null, {downvotes : up}, function() {
+          openSingleRecipeMongo(e, index);
+        });
+      })
+    }
+    else if(localStorage.getItem(idRecipe) == 'up'){
+      localStorage.setItem(idRecipe, "down");
+      doJSONRequest('GET', '/recipes/' + idRecipe, null, null, function(res, req) {
+        let recipe = res;
+        let up = recipe.upvotes - 1;
+        let down = recipe.downvotes + 1;
+        doJSONRequest('PUT', '/recipes/' + idRecipe, null, {upvotes : up, downvotes : down}, function() {
+          openSingleRecipeMongo(e, index);
+        });
+      })
     }
   })
 }
@@ -862,7 +902,7 @@ function openBestRecipe (recipe) {
     if (localStorage.getItem(recipe._id) == 'up') {
       document.getElementById("up").style.color = "#4CAF50";
     } else if (localStorage.getItem(recipe._id) === "down") {
-      document.getElementById("down").style.color = "#4CAF50";
+      document.getElementById("down").style.color = "#D32F2F";
     }
 
     if (recipe.glutenfree === true) {
