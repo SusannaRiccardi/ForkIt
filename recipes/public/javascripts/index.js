@@ -104,7 +104,7 @@ function iconsMainClick(category) {
     }
     pageContent.innerHTML = discoverTemplate({results: toRender});
     arrowDown = document.getElementById('arrow-down');
-    arrowU(counter);
+    arrowU(counter-6);
     arrowD(counter);
     let backButtonMain = document.getElementById('back-button-discover');
     backButtonMain.addEventListener('click', function() {
@@ -552,10 +552,11 @@ function commentRecipeApi(idRecipe) {
     if (comment.value == '') {
       alert('You have to insert a comment before submit');
     } else {
-      if (username.value == '') {
-        username.value = 'Anonymous'
+      let usname = username.value;
+      if (usname == '') {
+        usname = 'Anonymous'
       }
-      doJSONRequest('PUT', '/api/' + idRecipe, null, {username: username.value, comment : comment.value}, function() {
+      doJSONRequest('PUT', '/api/' + idRecipe, null, {username: usname, comment : comment.value}, function() {
         openSingleRecipe(e);
       });
     }
