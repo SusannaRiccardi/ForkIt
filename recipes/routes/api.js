@@ -11,8 +11,8 @@ router.get('/:id', function(req, res) {
   let id = req.params.id;
   // console.log("Recipe id: " + id);
   Api.find({'recipeid':id}, function(err, results) {
-    if (err || results === null) {
-      // console.log("Not in Mongo");
+    if (err || results === undefined) {
+      console.log("Not in Mongo");
       const newApi = new Api({
         recipeid : id
       })
@@ -20,28 +20,29 @@ router.get('/:id', function(req, res) {
       newApi.save(function(err) {
         if (err) {
           res.status(400);
-          res.send();
+          // res.send();
         } else {
           res.status(201);
-          res.send(newApi);
+          console.log('sending');
+          res.send([newApi]);
         }
       })
     } else if (results.length > 0) {
       // console.log("Miao");
       res.send(results);
     } else {
-      // console.log("Not in Mongo");
+      console.log("Not in Mongo ELSE");
       const newApi = new Api({
         recipeid : id
       })
-      // console.log("newApi created: " + newApi);
+      console.log("newApi created: ELSE" + newApi);
       newApi.save(function(err) {
         if (err) {
           res.status(400);
-          res.send();
+          // res.send();
         } else {
           res.status(201);
-          res.send(newApi);
+          res.send([newApi]);
         }
       })
     }

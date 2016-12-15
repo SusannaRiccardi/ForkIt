@@ -348,6 +348,7 @@ function openSingleRecipe (e, index) {
   var pageContent = document.getElementById('page-content');
   let recipeApi = {};
   doJSONRequest("GET", "/api/" + e.target.id, null, null, function(res, req) {
+    console.log(res)
     recipeApi.comments = res[0].comments;
     recipeApi.upvotes = res[0].upvotes;
     recipeApi.downvotes = res[0].downvotes;
