@@ -1,0 +1,159 @@
+* {
+  font-family: 'Lato', sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+#main {
+  margin-top: 13%;
+}
+
+#title {
+  text-align: center;
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+#icon-carousel {
+  text-align: center;
+}
+
+.icon {
+  width: 40px;
+  margin-left: 1%;
+  margin-right: 1%;
+  cursor: pointer;
+}
+
+
+/*/////////////////////////////// video background /////////////////////////////*/
+/** { box-sizing: border-box; }*/
+.video-background {
+  background-color: black;
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: -1;
+}
+.video-foreground,
+.video-background iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+#vidtop-content {
+  top: 0;
+  color: #fff;
+}
+
+.message {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  transition: top 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
+  overflow: hidden;
+  box-sizing: border-box;
+  text-align: center;
+  background-image: url("../images/pasta.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: black;
+}
+
+#content {
+  margin-top: 10%;
+}
+
+#toggle {
+  position: absolute;
+  cursor: pointer;
+  left: -100%;
+  top: -100%;
+}
+
+#toggle+label {
+  position: absolute;
+  cursor: pointer;
+  width: 100px;
+  line-height: 20px;
+  transition: all 500ms ease;
+  z-index: 1;
+  margin-left: calc(50% - 50px)!important;
+  bottom: 40px;
+  height: 188px;
+  background-image: url("../images/arrow_down.png");
+  background-size: 55%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#toggle+label:after {}
+
+#toggle:checked+label:after {}
+
+.container {
+  transition: margin 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
+  padding: 5em 3em;
+}
+
+#toggle:checked~.message {
+  top: 0;
+}
+
+#toggle:checked~.container {}
+
+#toggle:checked+label {
+  -moz-transform: scaleY(-1);
+  -o-transform: scaleY(-1);
+  -webkit-transform: scaleY(-1);
+  transform: scaleY(-1);
+  filter: FlipY;
+  -ms-filter: "FlipY";
+}
+
+
+/*/////////////////////////////// text field /////////////////////////////*/
+
+#food {
+  text-align: center;
+  border-width: 2px;
+  border-radius: 5px;
+  height: 70px;
+  width: 350px;
+  z-index: 3;
+  font-size: 1.3em;
+  font-weight: bold;
+  border-style: solid;
+  color: white;
+  border-color: white;
+  background-color: rgba(250, 250, 255, 0.1);
+  margin-top: 19%;
+  position: relative;
+}
+
+#food:focus {
+  outline: none;
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .video-foreground { height: 300%; top: -100%; }
+}
+@media (max-aspect-ratio: 16/9) {
+  .video-foreground { width: 300%; left: -100%; }
+}
+@media all and (max-width: 600px) {
+  .vid-info { width: 50%; padding: .5rem; }
+  .vid-info h1 { margin-bottom: .2rem; }
+}
+@media all and (max-width: 500px) {
+  .vid-info .acronym { display: none; }
+}

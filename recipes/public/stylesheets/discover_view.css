@@ -1,0 +1,167 @@
+/*/////////////////////////////// image grid /////////////////////////////*/
+#selectHour, #selectMinutes{
+  width: 10%;
+}
+#selectMinutes{
+  margin-left: 0px;
+}
+
+.grid-block{
+  margin: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  justify-content: center;
+}
+
+.grid-cell {
+  flex-basis: 33%;
+  cursor: pointer;
+  width: 290px;
+  height: 340px;
+  padding: 0px;
+  overflow: hidden;
+  filter: brightness(90%);
+  position: relative;
+  background-color: transparent;
+}
+
+.grid-cell:hover{
+  filter: brightness(100%);
+}
+
+.recipe-picture {
+  position: static;
+  height: 427px!important;
+  width: 500px!important;
+}
+
+#arrow-down{
+  text-align: center;
+  margin: 20px;
+  cursor: pointer;
+}
+
+#arrow-down img{
+  width: 100px;
+}
+
+#arrow-up{
+  text-align: center;
+  margin: 20px;
+  cursor: pointer;
+}
+
+#arrow-up img{
+  width: 100px;
+}
+
+/*/////////////////////////////// category title /////////////////////////////*/
+
+
+.category-title{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 20%;
+  background-color: rgba(50,50,55,0.8);
+  z-index: 1;
+}
+
+.grid-cell img{
+  position: absolute;
+  z-index: 0;
+}
+
+.category-title div{
+  font-size: 1.2em;
+  position: absolute;
+  top:calc(50% - 0.6em);
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+/*/////////////////////////////// media querries grid /////////////////////////////*/
+
+@media only screen and (max-width : 480px) {
+  .grid-cell {
+  flex-basis: 50%;
+}
+  .recipe-picture {
+    position: static;
+    height: 213px!important;
+    width: 250px!important;
+  }
+  /*Smartphone view:*/
+  .grid-cell{
+    width: 145px;
+    height: 170px;
+  }
+  .grid-block{
+    margin: 25px;
+  }
+  .category-title div{
+    font-size: 1em;
+    top:calc(50% - 0.5em);
+  }
+}
+
+@media only screen and (max-width : 650px) and (min-width : 481px) {
+  .recipe-picture {
+    position: static;
+    height: 213px!important;
+    width: 250px!important;
+  }
+  /* Tablet view:*/
+  .grid-cell{
+    width: 145px;
+    height: 170px;
+  }
+  .grid-block{
+    margin: 25px;
+  }
+  .category-title div{
+    font-size: 1em;
+    top:calc(50% - 0.5em);
+  }
+}
+
+@media only screen and (max-width : 1050px) and (min-width : 651px) {
+  .recipe-picture {
+    position: static;
+    height: 256px!important;
+    width: 300px!important;
+  }
+  /* Small desktop / ipad view:*/
+  .grid-cell{
+    width: 171px;
+    height: 200px;
+  }
+
+  .grid-block{
+    margin: 25px;
+  }
+
+}
+
+@media only screen and (max-width : 1290px) and (min-width : 1051px) {
+  .recipe-picture {
+    position: static;
+    height: 256px!important;
+    width: 300px!important;
+  }
+  /* Medium desktop:*/
+  .grid-cell{
+    width: 171px;
+    height: 200px;
+  }
+}
+
+@media only screen and (max-width : 1490px) and (min-width : 1291px) {
+  /* Large desktop:*/
+  .grid-cell{
+  }
+}

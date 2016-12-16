@@ -8,10 +8,15 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var recipes = require('./routes/recipes');
+var category = require('./routes/category');
+var singlerecipe = require('./routes/singlerecipe');
+var search = require('./routes/search');
+var api = require('./routes/api');
 
 var app = express();
 
-const mongoose   = require('mongoose');
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 mongoose.connect(config.mongoUrl + config.mongoDbName);
 
 require('./models');
@@ -30,6 +35,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/recipes', recipes);
+app.use('/category', category);
+app.use('/singlerecipe', singlerecipe);
+app.use('/search', search);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -46,7 +55,7 @@ app.use(function(err, req, res, next) {
 
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
+    // res.render('error');
 });
 
 module.exports = app;

@@ -1,5 +1,135 @@
-extends layout
+doctype html
+html(lang='en')
+  head
+    title ForkIt
+    link(rel='stylesheet', type='text/css', href='stylesheets/style.css')
+    link(rel='stylesheet', type='text/css', href='stylesheets/main_view.css')
+    link(rel='stylesheet', type='text/css', href='stylesheets/discover_view.css')
+    link(rel='stylesheet', type='text/css', href='stylesheets/recipe_view.css')
+    link(rel='stylesheet', type='text/css', href='stylesheets/create_view.css')
+    link(rel='stylesheet', type='text/css', href='stylesheets/font-awesome.css')
+    link(href='https://fonts.googleapis.com/css?family=Lato:300', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    script(src='javascripts/jquery-3.1.1.js')
+    script(src='javascripts/index.js')
+    script(src='views/main-view.js')
+    script(src='views/recipe-view.js')
+    script(src='views/create-view.js')
+    script(src='views/discover-view.js')
+    script(src='views/categories-view.js')
+    script(src='views/create-view-ingredient.js')
+  body
+    .background#back-one
+    .background#back-two
+    // menubar
+    #menubar
+      #menuwrapper
+        ul
+          li
+            div
+              a(href='menu').menu-btn
+                span.btn-img
+                  i.material-icons reorder
+                span.btn-text MENU
+            ul
+              li
+                a#btn-search SEARCH
+              li
+                a#btn-categories(href='categories') CATEGORIES
+              li
+                a#btn-create(href='create') CREATE
+              li
+                a#btn-about(href='bestRecipe') BEST RECIPE
+      // searchbar
+      #search-view
+        #search-btn-back
+          i.material-icons.icon keyboard_backspace
+        .form-text Search by name or ingredient
+        input#searchName(type='text', name='search', placeholder="Yoji's sushi - Apple Pie")
+        .form-text Exclude ingredient
+        input#excludeField(type='text', name='filter', placeholder='Fish - Meat - Spicy')
 
-block content
-  h1= title
-  p Welcome to #{title}
+        .outerCheckbox
+          input#c1(type='checkbox', name='gluten')
+          label(for='c1')
+            span
+            | Gluten free
+        .outerCheckbox
+          input#c2(type='checkbox', name='dairy')
+          label(for='c2')
+            span
+            | Dairy
+        .outerCheckbox
+          input#c3(type='checkbox', name='vegan')
+          label(for='c3')
+            span
+            | Vegan
+
+        //
+          <div class="form-text">User Rating</div> <br>
+          <div class="form-text" id="stars">
+          <i class="material-icons star" id="star1" style="color: rgba(0,0,0,0);">star</i>
+          <i class="material-icons star" id="star2" style="color: rgba(0,0,0,0);">star</i>
+          <i class="material-icons star" id="star3" style="color: rgba(0,0,0,0);">star</i>
+          <i class="material-icons star" id="star4" style="color: rgba(0,0,0,0);">star</i>
+          <i class="material-icons star" id="star5" style="color: rgba(0,0,0,0);">star</i>
+          </div>
+
+        button#search-submit-btn Search
+    //
+    #page-content
+  script.
+    $(document).ready(function() {
+    $('#search-view').hide();
+    $('#login-view').hide();
+    $('#signup').hide();
+    $('#back-two').hide();
+    });
+    $(function() {
+    // CREATE change background
+    $('#btn-create').on('click', function () {
+    $('#back-two').fadeOut(10);
+    });
+    // CATEGORIES change background
+    $('#btn-categories').on('click', function () {
+    $('#back-two').fadeIn(10);
+    });
+    // ABOUT change background
+    $('#btn-about').on('click', function() {
+    $('#back-two').fadeOut(10);
+    });
+    // ABOUT change background
+    $('#btn-tdRecipe').on('click', function() {
+    $('#back-two').fadeOut(10);
+    });
+    //SHOW search-view
+    $('#btn-search').parent().on('click', function() {
+    $('#menuwrapper').fadeOut(300).hide();
+    $('#search-view').fadeIn(300).show();
+    });
+    // SHOW login-view
+    $('#btn-login').parent().on('click', function() {
+    $('#menuwrapper').fadeOut(300).hide();
+    $('#login-view').fadeIn(300).show();
+    });
+    // SHOW menubar-view
+    $('.btn-login-back').on('click', function() {
+    $('#login-view').fadeOut(300).hide();
+    $('#menuwrapper').fadeIn(300).show();
+    });
+    $('#search-btn-back').on('click', function() {
+    $('#search-view').fadeOut(300).hide();
+    $('#menuwrapper').fadeIn(300).show();
+    });
+    // SHOW signup
+    $('#btn-signup').on('click', function() {
+    $('#signup').show();
+    $('#login').hide();
+    });
+    // SHOW login
+    $('#btn-signup-login').on('click', function() {
+    $('#login').show();
+    $('#signup').slideUp(300).hide();
+    });
+    });

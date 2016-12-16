@@ -1,0 +1,216 @@
+input {
+  box-sizing: border-box;
+}
+
+#create-view {
+  color: white;
+  left: 360px;
+  right: 30px;
+  top: 30px;
+  height: auto;
+  margin: 0px;
+  z-index: 0;
+  position: absolute;
+  background-color: rgba(30, 30, 30, 0.8);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+#create-view .outerCheckbox {
+  margin-left: 30px;
+}
+
+#create-title {
+  font-family: 'Lato', sans-serif;
+  font-size: 2.3em;
+  margin-left: 30px;
+  margin-top: 30px;
+  color: white;
+}
+
+#btnAddIngredient{
+      cursor: pointer;
+}
+
+#create-subtitle {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.8em;
+  margin-left: 30px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  color: white;
+}
+
+#create-description {
+  padding: 20px;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.8em;
+  margin-left: 30px;
+  width: calc(100% - 100px)!important;
+}
+
+#create-view .load-file {
+  margin: 20px;
+  width: calc(100% - 40px)!important;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  height: auto!important;
+  margin-top: 40px;
+}
+
+.custom-label-right {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.3em;
+  margin-left: 5px;
+  background-color: #4CAF50;
+  text-decoration: none;
+  height: auto!important;
+  display: inline-block;
+  padding: 15px 32px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+/*REMOVE*/
+.custom-label-left {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.3em;
+  margin-right: 5px;
+  background-color: #4CAF50;
+  text-decoration: none;
+  height: auto!important;
+  display: inline-block;
+  padding: 15px 32px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+#create-view input[type="file"] {
+  display: none;
+}
+
+#create-view button[type="submit"] {
+  display: none;
+}
+
+.large-input {
+  width: calc(100% - 60px);
+  height: 36px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+#create-view .input-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.3em;
+  margin: 30px;
+}
+
+#recipe-create-ingredients {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.recipe-create-single-ing {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.recipe-create-single-ing input {
+  height: 36px;
+  margin: 0px;
+  display: inline-block;
+  margin: 0;
+  width: calc((100% - 36px)/2);
+}
+
+.recipe-create-single-ing span {
+  width: 36px;
+  height: 36px;
+  display: inline-block;
+  text-align: center;
+}
+
+.recipe-create-single-ing img {
+  width: 36px;
+  height: 36px;
+}
+
+@media (max-width: 900px) {
+  #create-view {
+    overflow: initial;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin-top: 25px;
+    /*position: relative;*/
+    /*TODO: hide when login is selected*/
+  }
+}
+
+#submit-bar {
+  margin: 30px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.custom-label-left {
+  width: calc(50% - 69px);
+}
+
+.custom-label-right {
+  width: calc(50% - 69px);
+}
+
+
+#toast {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: #D32F2F; /* Black background color */
+    color: #fff; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 50%; /* Center the snackbar */
+    bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#toast.show {
+    visibility: visible; /* Show the snackbar */
+
+/* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}

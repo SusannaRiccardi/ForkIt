@@ -1,281 +1,426 @@
-body {
-    background-image: url("../images/bamboo.jpg");
-    background-size: 100%;
+* {
+  font-family: 'Lato', sans-serif;
+}
+
+.background {
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: -1;
+}
+
+#back-one {
+  background-image: url("../images/create_background.jpg")
+}
+
+#back-two {
+  background-image: url("../images/lattuce.jpg")
+}
+
+#menubar {
+  z-index: 4;
+  position: fixed;
+  padding: 0px;
+  margin: 0px;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  border: 0px;
 }
 
 
+#menubar:focus {
+  z-index: 4;
+}
+
+a {
+  cursor: pointer;
+}
+
+input{
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+/*#menubar:active {}*/
+
+.login {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.3em;
+  width: 300px;
+  left: 30px;
+  top: 30px;
+  position: fixed;
+  z-index: 1;
+  background-color: rgba(30, 30, 30, 0.8);
+  color: white;
+}
+
+.login input {
+  margin: 20px;
+  width: calc(100% - 40px)!important;
+  box-sizing: border-box;
+  height: 40px;
+  font-size: 1em;
+}
+
+.submit-btn {
+  margin: 20px;
+  width: calc(100% - 40px)!important;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  height: auto!important;
+  margin-top: 40px;
+  -webkit-appearance: none;
+}
+
+.submit-btn:hover {
+  cursor: pointer;
+}
+
+.btn-login-back {
+  margin: 5%;
+}
+
+.btn-login-back:hover {
+  cursor: pointer;
+}
+
+.form-text {
+  margin: 5%;
+}
+
+#btn-signup {
+  position: relative;
+  width: 100%;
+}
+
+#btn-signup p {
+  margin: 0px;
+  text-align: center;
+  position: relative;
+  left: 0;
+  right: 0;
+}
+
+#btn-signup img {
+  width: 37px;
+  margin-left: calc(50% - 18.5px)!important;
+  margin-right: calc(50% - 18.5px)!important;
+}
+
+#btn-signup-login {
+  position: relative;
+  width: 100%;
+}
+
+#btn-signup-login p {
+  margin: 0px;
+  text-align: center;
+  position: relative;
+  left: 0;
+  right: 0;
+}
+
+#btn-signup-login img {
+  width: 37px;
+  margin-left: calc(50% - 18.5px)!important;
+  margin-right: calc(50% - 18.5px)!important;
+  -webkit-transform: scale(1, -1);
+  -o-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  transform: scale(1, -1);
+}
+
 /*MenuBar-->*/
 
+.material-icons {
+  color: white;
+  font-size: 27px!important;
+}
+
+.btn-img {
+  float: left;
+  vertical-align: text-middle;
+}
+
+.btn-text {
+  float: left;
+  vertical-align: text-middle;
+  padding-left: 3px;
+}
+
+.menu-btn {
+  vertical-align: middle;
+  height: 27px;
+}
+
 #menuwrapper {
-    font-family: 'Lato', sans-serif;
-    font-size: 1.3em;
-    left: 30px;
-    top: 30px;
-    bottom: 30px;
-    position: fixed;
-    z-index: 1;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.3em;
+  width: 300px;
+  left: 30px;
+  top: 30px;
+  position: fixed;
+  z-index: 1;
+  height: auto;
+}
+
+#menuwrapper a {
+  width: auto;
 }
 
 #menuwrapper ul,
 #menuwrapper ul li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 #menuwrapper ul li {
-    background-color: rgba(30, 30, 30, 0.8);
-    width: 250px;
-    cursor: pointer;
+  background-color: rgba(30, 30, 30, 0.8);
+  width: 300px;
+  cursor: pointer;
+}
+
+#menuwrapper ul li div {
+  width: 100%;
+  height: 100%;
 }
 
 #menuwrapper ul li:hover {
-    background-color: rgba(30, 30, 30, 0.8);
-    position: relative;
+  background-color: rgba(30, 30, 30, 0.8);
+  position: relative;
 }
 
 #menuwrapper ul li a {
-    padding: 15px 25px;
-    color: white;
-    display: inline-block;
-    text-decoration: none;
+  padding: 15px 25px;
+  color: white;
+  display: inline-block;
+  text-decoration: none;
 }
 
 #menuwrapper ul li ul {
-    position: absolute;
-    display: none;
+  position: absolute;
+  display: none;
 }
 
 #menuwrapper ul li:hover ul {
-    top: auto;
-    display: block;
-}
-
-#menuwrapper ul li ul li {
-    background-color: rgba(30, 30, 30, 0.7);
+  top: auto;
+  display: block;
 }
 
 #menuwrapper ul li:hover ul li:hover {
-    background-color: rgba(170, 170, 170, 0.7);
-}
-
-#menuwrapper ul li ul li a {
-    color: white;
-    display: inline-block;
-    width: 160px;
+  background-color: rgba(170, 170, 170, 0.7);
 }
 
 #menuwrapper ul li:hover ul li ul {
-    position: absolute;
-    display: none;
+  position: absolute;
+  display: none;
 }
 
 #menuwrapper ul li:hover ul li:hover ul {
-    display: block;
-    left: 250px;
-    top: 0;
+  display: block;
+  left: 300px;
+  top: 0;
 }
 
 #menuwrapper ul li:hover ul li:hover ul li {
-    background-color: rgba(0, 0, 0, 0.1);
-    width: 200px;
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 200px;
 }
 
 #menuwrapper ul li:hover ul li:hover ul li:hover {
-    background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 #menuwrapper ul li:hover ul li:hover ul li a {
-    color: #ffffff;
+  color: #ffffff;
 }
-
-.clear {
-    clear: both;
-}
-
 
 /*<--MenuBar*/
 
+/*//////////////////////////// Search Button //////////////////////*/
 
-/*Content*/
-
-#content {
-    left: 310px;
-    right: 30px;
-    top: 30px;
-    height: auto;
-    margin: 0px;
-    z-index: 0;
-    position: absolute;
-    background-color: rgba(56, 113, 40, 0.8);
-    -webkit-backdrop-filter: blur(10px);
+#search-view {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.3em;
+  width: 300px;
+  left: 30px;
+  top: 30px;
+  position: fixed;
+  z-index: 1;
+  background-color: rgba(30, 30, 30, 0.8);
+  color: white;
 }
 
+#search-view input {
+  margin: 20px;
+  width: calc(100% - 40px)!important;
+  box-sizing: border-box;
+  height: 40px;
+  font-size: 1em;
+}
 
-/*receipe Title*/
+#search-submit-btn {
+  margin: 20px;
 
-#receipe-title {
-    font-family: 'Lato', sans-serif;
-    font-size: 2.3em;
+  width: calc(100% - 40px)!important;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  height: auto!important;
+}
+
+#search-submit-btn:hover {
+  cursor: pointer;
+}
+
+#search-btn-back {
+  margin: 5%;
+}
+
+#search-btn-back:hover {
+  cursor: pointer;
+}
+
+.outerCheckbox {
+  margin: 20px;
+}
+
+input[type="checkbox"] {
+    display:none;
+}
+input[type="checkbox"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    background:url("../images/check_radio_sheet.png") left top no-repeat;
+    cursor:pointer;
+}
+input[type="checkbox"]:checked + label span {
+    background:url("../images/check_radio_sheet.png") -19px top no-repeat;
+}
+
+/*Content-->*/
+
+.content {
+  left: 360px;
+  right: 30px;
+  top: 30px;
+  height: auto;
+  margin: 0px;
+  z-index: 0;
+  position: absolute;
+  background-color: rgba(30, 30, 30, 0.8);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/*<--Content*/
+
+/**/
+.select-style {
+    height: 36px;
     margin-left: 30px;
-    margin-top: 30px;
-    color: white;
-}
-
-
-/*receipe Subtitle*/
-
-#receipe-subtitle {
-    font-family: 'Lato', sans-serif;
-    font-size: 1.8em;
-    margin-left: 30px;
-    margin-top: 10px;
-    margin-bottom: 30px;
-    color: white;
-}
-
-
-/*receipe scroll-view-->*/
-
-
-/*receipes caroussel*/
-
-#receipes-swipe {
-    margin: 0px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: flex-start;
-}
-
-
-/*receipe preview*/
-
-.receipe-preview {
-    border-radius: 125px;
-    width: 250px;
-    height: 250px;
-    padding: 0px;
-    margin: 20px;
-    background-color: white;
+    margin-right: 30px;
+    border: 1px solid #ccc;
+    width: calc(100% - 60px);
+    border-radius: 3px;
     overflow: hidden;
+    background: #fafafa url("img/icon-select.png") no-repeat 90% 50%;
 }
 
-
-/*receipe preview image*/
-
-.receipe-picture {
-    position: static;
-    width: auto;
-    height: 100%;
+.select-style select {
+    padding: 5px 8px;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
 }
 
-
-/*Direction arrows*/
-
-.arrow {
-    height: 250px;
-    padding: 0px;
-    margin: 20px;
+.select-style select:focus {
+    outline: none;
 }
-
-
-/*<--receipe scroll-view*/
-
-#receipe-text {
-    font-family: 'Lato', sans-serif;
-    font-size: 1.3em;
-    color: white;
-    padding-top: 50px;
-    padding-bottom: 30px;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-}
-
-#receipe-ingredients {
-    padding: 15px;
-    width: 40%;
-    background-color: rgba(76, 120, 34, 0.9);
-}
-
-#receipe-preparation {
-    padding: 15px;
-    width: 40%;
-    background-color: rgba(76, 120, 34, 0.9);
-}
-
-
+/**/
 /*/////////////////////////////// size adaptation /////////////////////////////*/
 
-@media (max-width: 1550px) {
-    .receipe-preview {
-        width: 200px;
-        height: 200px;
-    }
-    .arrow {
-        height: 200px;
-    }
-}
-
-@media (max-width: 1350px) {
-    .receipe-preview {
-        width: 130px;
-        height: 130px;
-    }
-    .arrow {
-        height: 130px;
-    }
-}
-
-@media (max-width: 1080px) {
-    #image-back {
-        display: none;
-    }
-    #image-next {
-        display: none;
-    }
-}
-
 @media (max-width: 900px) {
-    /*body {
-        background: rgba(56, 113, 40, 1);
-    }*/
-    #menuwrapper {
-        left: 0px;
-        right: 0px;
-        top: 0px;
-        position: absolute;
-    }
-    #content {
-        overflow: initial;
-        left: 0px;
-        right: 0px;
-        bottom: 0px;
-        margin-top: 25px;
-        /*position: relative;*/
-    }
-    #menuwrapper ul li {
-        background-color: rgba(30, 30, 30, 1);
-        width: 100%;
-    }
-    #menuwrapper ul,
-    #menuwrapper ul li {
-        background-color: rgba(30, 30, 30, 1);
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-    }
-    #receipe-text {
-        display: initial;
-    }
-    #receipe-ingredients {
-        width: auto;
-        background-color: rgba(76, 120, 34, 1);
-    }
-    #receipe-preparation {
-        width: auto;
-        background-color: rgba(76, 120, 34, 1);
-    }
+  #menuwrapper {
+    width: 100%;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    position: absolute;
+  }
+  .login {
+    padding: 0px;
+    font-size: 2em;
+    width: 100%;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    background-color: rgba(30, 30, 30, 1);
+    position: fixed;
+    z-index: 2;
+    margin: 0px;
+  }
+  .login input {
+    height: 50px;
+    font-size: 0.7em;
+  }
+  .login-submit-btn {
+    bottom: 15px;
+    position: absolute;
+    left: 0px;
+  }
+  .content {
+    overflow: initial;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin-top: 25px;
+  }
+  #search-view {
+    padding: 0px;
+    font-size: 2em;
+    width: 100%;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    background-color: rgba(30, 30, 30, 1);
+    position: fixed;
+    z-index: 2;
+    margin: 0px;
+  }
+  #menuwrapper ul li {
+    background-color: rgba(30, 30, 30, 1);
+    width: 100%;
+  }
+  #menuwrapper ul,
+  #menuwrapper ul li {
+    background-color: rgba(30, 30, 30, 1);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 }

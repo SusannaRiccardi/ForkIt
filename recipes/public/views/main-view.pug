@@ -1,0 +1,13 @@
+#main-view
+  .container
+    #main
+      p#title FORK IT
+      #icon-carousel
+        img.icon(id='chinese', src='./images/icons/chineese.png')
+        img.icon(id='bread', src='./images/icons/bread.png')
+        img.icon(id='drink', src='./images/icons/red_vine.png')
+        img.icon(id='cake', src='./images/icons/muffin.png')
+    .video-background
+      .video-foreground
+        //width='1280', height='720', IN case too slow to load video
+        iframe(src='https://www.youtube.com/embed/f1CBFUc4LVY?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&list=PLvMZraBTdNAtF-2eELQsz90BAFwJHwUpF', frameborder='0', allowfullscreen='')

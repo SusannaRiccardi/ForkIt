@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const fs = require('fs');
+const formidable = require('formidable');
+const url        = require('url');
+const path       = require('path');
 require('../models');
 const Recipe = mongoose.model('Recipe');
 const config = require('../config')
@@ -17,9 +21,8 @@ router.get('/', function(req, res, next) {
       addLinks(obj);
     }
 
-    let recipes = {'recipes' : found}
-    console.log(recipes.recipes);
-    res.render('recipes', {title : "Recipes", message : recipes});
+    let recipes = {'results' : found}
+    res.send(recipes);
   })
 });
 
@@ -37,28 +40,48 @@ router.get('/:recipeid', function(req, res) {
       });
     } else {
       addLinks(recipe);
-      res.render('recipe', {title : "Recipe", message : recipe});
+      res.send(recipe);
     }
   })
 })
 
 // Post /recipes
 router.post('/', function(req, res) {
-  videoNew = req.body.video || "";
-  imageNew = req.body.video || "";
-  const newRecipe = new Recipe({
-    title : req.body.title,
-    instructions : req.body.instructions,
-    ingredients : req.body.ingredients,
-    video : videoNew,
-    image : imageNew
+
+  let form = new formidable.IncomingForm();
+  form.parse(req, function(err, fields, files) {
+
+    const newRecipe = new Recipe({
+      title : fields['title'],
+      author : fields['author'],
+      readyInMinutes : fields['readyInMinutes'],
+      instructions : fields['instructions'],
+      ingredients : JSON.parse(fields['ingredients']),
+      video : fields['video'] || '',
+      image : fields['image'] || '',
+      lactosefree : fields['lactosefree'],
+      glutenfree : fields['glutenfree'],
+      vegan : fields['vegan'],
+      category : fields['category']
+    });
+
+    newRecipe.save(function(err, saved) {
+      if (err) {
+        throw err
+      }
+      if (newRecipe['image'] !== './images/cloche.jpg') {
+        var dir = './public/uploads/';
+
+        if (!fs.existsSync(dir)){
+          fs.mkdirSync(dir);
+        }
+        form.uploadDir = "./public/uploads/";
+        fs.rename(files.file.path, "./public/uploads/" + saved.id + '.' + fields['image']);
+      }
+      res.json(saved);
+    })
+
   });
-  newRecipe.save(function(err, saved) {
-    if (err) {
-      throw err
-    }
-    res.json(saved);
-  })
 })
 
 router.delete('/:recipeid', function(req, res, next) {
@@ -79,6 +102,70 @@ router.delete('/:recipeid', function(req, res, next) {
   });
 });
 
+
+//updateRecipe
+router.put('/:recipeid', function(req, res, next) {
+  const data = req.body;
+  if((data.upvotes || data.upvotes==0)  && (data.downvotes || data.downvotes==0)){
+    Recipe.findById(req.params.recipeid, fieldsFilter , function(err, recipe){
+      if (err) return next (err);
+      if (recipe){
+        recipe.upvotes =  data.upvotes;
+        recipe.downvotes = data.downvotes;
+        recipe.save(onModelSave(res));
+      }
+    });
+  }
+  if(data.upvotes || data.upvotes==0){
+    Recipe.findById(req.params.recipeid, fieldsFilter , function(err, recipe){
+      if (err) return next (err);
+      if (recipe){
+        recipe.upvotes =  data.upvotes;
+
+        recipe.save(onModelSave(res));
+      }
+    });
+  }
+  if(data.downvotes || data.downvotes==0){
+    Recipe.findById(req.params.recipeid, fieldsFilter , function(err, recipe){
+      if (err) return next (err);
+      if (recipe){
+        recipe.downvotes = data.downvotes;
+
+        recipe.save(onModelSave(res));
+      }
+    });
+  }
+  if(data.comment){
+    Recipe.findById(req.params.recipeid, fieldsFilter , function(err, recipe){
+      if (err) return next (err);
+      if (recipe){
+        recipe.comments.push(data);
+
+        recipe.save(onModelSave(res));
+      }
+    });
+  }
+});
+
+function onModelSave(res, status, sendItAsResponse){
+  const statusCode = status || 204;
+  const sendItAsResponseCheck = sendItAsResponse || false;
+  return function(err, saved){
+    if (err) {
+      if (err.name === 'ValidationError'
+      || err.name === 'TypeError' ) {
+        res.status(400)
+        return res.json({
+          statusCode: 400,
+          message: "Bad Request"
+        });
+      }else{
+        return next (err);
+      }
+    }
+  }
+}
 
 function addLinks(recipe) {
   recipe.links = [

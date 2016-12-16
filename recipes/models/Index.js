@@ -9,10 +9,12 @@ require('./Recipe');
 require('./Ingredient');
 require('./Comment');
 require('./User');
+require('./Api');
 
 module.exports = {
   'Recipe' : mongoose.model('Recipe'),
   'Ingredient' : mongoose.model('Ingredient'),
   'Comment' : mongoose.model('Comment'),
-  'User' : mongoose.model('User')
+  'User' : mongoose.model('User'),
+  'Api' : mongoose.model('Api')
 }
