@@ -30,23 +30,6 @@ body {
 
 
 /*/////////////////////////////// video background /////////////////////////////*/
-
-/*#bgvid {*/
-/*position: fixed;*/
-/*top: 50%;*/
-/*left: 50%;*/
-/*min-width: 100%;*/
-/*min-height: 100%;*/
-/*height: 100%;*/
-/*width: auto;*/
-/*z-index: -1;*/
-/*-ms-transform: translateX(-50%) translateY(-50%);*/
-/*-moz-transform: translateX(-50%) translateY(-50%);*/
-/*-webkit-transform: translateX(-50%) translateY(-50%);*/
-/*transform: translateX(-50%) translateY(-50%);*/
-/*background-color: black;*/
-/*}*/
-
 /** { box-sizing: border-box; }*/
 .video-background {
   background-color: black;
@@ -100,19 +83,10 @@ body {
 #toggle+label {
   position: absolute;
   cursor: pointer;
-  /*padding: 15px 20px;*/
-  /*background: rgba(255, 255, 255, 0.1);*/
   width: 100px;
-  /*color: white;*/
   line-height: 20px;
-  /*font-size:18px;*/
-  /*text-align:center;*/
-  /*-webkit-font-smoothing: antialiased;*/
-  /*cursor: pointer;*/
-  /*margin-top: 20%;*/
   transition: all 500ms ease;
   z-index: 1;
-  /*border: 2px solid white;*/
   margin-left: calc(50% - 50px)!important;
   bottom: 40px;
   height: 188px;
@@ -144,8 +118,6 @@ body {
   transform: scaleY(-1);
   filter: FlipY;
   -ms-filter: "FlipY";
-  /*margin-left: 42%;*/
-  /*margin-left: calc(20px - 10px);*/
 }
 
 
@@ -171,13 +143,6 @@ body {
 #food:focus {
   outline: none;
 }
-
-/*@media screen and (min-aspect-ratio: 16/9) {*/
-  /*#bgvid {*/
-    /*width: 100%;*/
-    /*height: auto;*/
-  /*}*/
-/*}*/
 
 @media (min-aspect-ratio: 16/9) {
   .video-foreground { height: 300%; top: -100%; }

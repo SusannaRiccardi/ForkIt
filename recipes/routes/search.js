@@ -17,11 +17,8 @@ router.get('/', function(req, res, next) {
   }
 
   if(req.query.intolerances){
-    console.log(req.query.intolerances)
     restUrl += "&intolerances=" + req.query.intolerances;
   }
-
-
 
   restUrl += "&number=100&offset=0&query="+name;
 
@@ -32,16 +29,5 @@ router.get('/', function(req, res, next) {
       res.send(result.body);
     });
 });
-
-
-
-// unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?diet=vegan&excludeIngredients=sugar&intolerances=dairy%2C+gluten&number=100&offset=0&query=cake")
-// .header("X-Mashape-Key", "gAlLXPZyJsmshAGu1ZMh0jlusuoVp1e9WKZjsnUUFxeSibN4A9")
-// .header("Accept", "application/json")
-// .end(function (result) {
-//   console.log(result.status, result.headers, result.body);
-// });
-
-
 
 module.exports = router;

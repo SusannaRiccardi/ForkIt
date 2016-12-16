@@ -9,7 +9,6 @@ require('../models');
 const Recipe = mongoose.model('Recipe');
 const config = require('../config')
 const fieldsFilter = {'__v' : 0};
-const pubsub = require('../pubsub');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -165,22 +164,8 @@ function onModelSave(res, status, sendItAsResponse){
         return next (err);
       }
     }
-
-    pubsub.emit('artist.updated', {})
-    if(sendItAsResponseCheck){
-      const obj = saved.toObject();
-      delete obj.password;
-      delete obj.__v;
-      addLinks(obj);
-      return res.status(statusCode).json(obj);
-    }else{
-      return res.status(statusCode).end();
-    }
   }
 }
-
-
-
 
 function addLinks(recipe) {
   recipe.links = [

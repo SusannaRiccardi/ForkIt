@@ -3,7 +3,7 @@
 }
 
 .background {
-  background-attachment: fixed; 
+  background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
@@ -101,7 +101,6 @@ input{
 #btn-signup {
   position: relative;
   width: 100%;
-  /*left: calc(50% - 18.5px)!important;*/
 }
 
 #btn-signup p {
@@ -141,7 +140,6 @@ input{
   transform: scale(1, -1);
 }
 
-
 /*MenuBar-->*/
 
 .material-icons {
@@ -163,7 +161,6 @@ input{
 .menu-btn {
   vertical-align: middle;
   height: 27px;
-  /*vertical-align: text-bottom;*/
 }
 
 #menuwrapper {
@@ -179,7 +176,6 @@ input{
 
 #menuwrapper a {
   width: auto;
-  /*TODO: fix width*/
 }
 
 #menuwrapper ul,
@@ -249,7 +245,6 @@ input{
 #menuwrapper ul li:hover ul li:hover ul li a {
   color: #ffffff;
 }
-
 
 /*<--MenuBar*/
 
@@ -321,25 +316,6 @@ input[type="checkbox"]:checked + label span {
     background:url("../images/check_radio_sheet.png") -19px top no-repeat;
 }
 
-
-/*input[type="checkbox"] {
-  width: 10px;
-  background: red;
-  margin: 0px;
-  padding: 0px;
-}*/
-
-/*input[type="checkbox"] + label span {*/
-  /*height:19px;
-  margin:-1px 4px 0 0;
-  vertical-align:middle;
-  cursor:pointer;*/
-/*}*/
-
-/*input[type="checkbox"]:checked + label span {
-}*/
-
-
 /*Content-->*/
 
 .content {
@@ -354,7 +330,6 @@ input[type="checkbox"]:checked + label span {
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
-
 
 /*<--Content*/
 
@@ -384,8 +359,6 @@ input[type="checkbox"]:checked + label span {
     outline: none;
 }
 /**/
-
-
 /*/////////////////////////////// size adaptation /////////////////////////////*/
 
 @media (max-width: 900px) {
@@ -414,7 +387,6 @@ input[type="checkbox"]:checked + label span {
     font-size: 0.7em;
   }
   .login-submit-btn {
-    /*width: calc(100%-260px);*/
     bottom: 15px;
     position: absolute;
     left: 0px;
@@ -425,8 +397,6 @@ input[type="checkbox"]:checked + label span {
     right: 0px;
     bottom: 0px;
     margin-top: 25px;
-    /*position: relative;*/
-    /*TODO: hide when login is selected*/
   }
   #search-view {
     padding: 0px;

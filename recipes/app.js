@@ -8,7 +8,6 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var recipes = require('./routes/recipes');
-var create = require('./routes/create');
 var category = require('./routes/category');
 var singlerecipe = require('./routes/singlerecipe');
 var search = require('./routes/search');
@@ -36,7 +35,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/recipes', recipes);
-app.use('/create', create);
 app.use('/category', category);
 app.use('/singlerecipe', singlerecipe);
 app.use('/search', search);
