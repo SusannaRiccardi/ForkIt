@@ -405,7 +405,7 @@ function openSingleRecipe (e, index) {
     for (let ingr of recipe.extendedIngredients) {
       let ingredient = {};
       ingredient.name = ingr.name;
-      ingredient.quantity = ingr.amount + " " +ingr.unit;
+      ingredient.quantity = Math.round(ingr.amount * 100)/100 + " " +ingr.unit;
       obj.ingredients.push(ingredient);
     }
     obj.lactosefree = obj.dairyFree;
@@ -949,7 +949,6 @@ function openBestRecipe (recipe) {
   recipe.image = {actual : './uploads/' + recipe._id + "." + recipe.image};
   console.log(recipe.image.actual);
   var pageContent = document.getElementById('page-content');
-  scrollToTop();
   console.log(recipe)
     pageContent.innerHTML = recipeTemplate({recipe : recipe});
 
