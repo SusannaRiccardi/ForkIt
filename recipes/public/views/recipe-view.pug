@@ -8,15 +8,6 @@
 
   #recipe-subtitle= "Author: " + recipe.author
   #recipe-readyIn= "Ready in: " + recipe.readyInMinutes
-  #recipe-cross
-    span.i.fa.fa-times.fa-1x(id='glutenfree')
-    span.True= "Gluten Free"
-  #recipe-cross
-    span.i.fa.fa-times.fa-1x(id='dairyfree')
-    span.True= "Dairy Free"
-  #recipe-cross
-    span.i.fa.fa-times.fa-1x(id='vegan')
-    span.True= "Vegan"
   #recipes-swipe
     #image-actual.recipe-preview
       img.recipe-picture(src=recipe.image.actual, alt='Food')
@@ -27,6 +18,16 @@
         ul
           each ingredient in recipe.ingredients
             li= ingredient.quantity + ' ' + ingredient.name
+  #recipe-intolerances
+    #recipe-cross
+      span.i.fa.fa-times.fa-1x(id='glutenfree')
+      span.True= "Gluten Free"
+    #recipe-cross
+      span.i.fa.fa-times.fa-1x(id='dairyfree')
+      span.True= "Dairy Free"
+    #recipe-cross
+      span.i.fa.fa-times.fa-1x(id='vegan')
+      span.True= "Vegan"
   #recipe-text
 
 
