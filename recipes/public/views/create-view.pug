@@ -1,0 +1,109 @@
+#create-view
+  #create-title CREATE
+  #create-subtitle Create your recipe
+  br
+  form
+    label.input-label Your name
+    br
+    br
+    input.large-input(id='user-name', name='user-name', type='text')
+    br
+    br
+    label.input-label Title of the recipe
+    br
+    br
+    input.large-input(id='create-name', name='recipe-name', type='text')
+    br
+    br
+    label.input-label Category
+    br
+    br
+    select#selectCategory.select-style
+      option(value='none') Other
+      option(value='greek') Greek
+      option(value='british') British
+      option(value='indian') Indian
+      option(value='japanese') Japanese
+      option(value='chinese') Chinese
+      option(value='thai') Thai
+      option(value='italian') Italian
+      option(value='mexican') Mexican
+      option(value='french') French
+      option(value='spanish') Spanish
+    br
+    br
+    label.input-label Required Time
+    br
+    br
+    select#selectHour.select-style
+      option(value='0') 0 h
+      option(value='1') 1 h
+      option(value='2') 2 h
+      option(value='3') 3 h
+      option(value='4') 4 h
+      option(value='5') 5 h
+      option(value='6') 6 h
+      option(value='7') 7 h
+      option(value='8') 8 h
+      option(value='9') 9 h
+      option(value='10') 10 h
+      option(value='11') 11 h
+      option(value='12') 12 h
+    select#selectMinutes.select-style
+      option(value='0') 00 min
+      option(value='5') 05 min
+      option(value='10') 10 min
+      option(value='15') 15 min
+      option(value='20') 20 min
+      option(value='25') 25 min
+      option(value='30') 30 min
+      option(value='35') 35 min
+      option(value='40') 40 min
+      option(value='45') 45 min
+      option(value='50') 50 min
+      option(value='55') 55 min
+    br
+    br
+    label.input-label Ingredients
+    br
+    br
+    #recipe-create-ingredients
+      .recipe-create-single-ing
+        input(class='create-ingredient-name', name='recipe-ingredient', placeholder='Ingredient', type='text')
+        input(class='create-ingredient-quantity', name='recipe-ingredient-quantity', placeholder='Quantity (i.e. 2 kg)', type='text')
+        #btnAddIngredient
+          span
+            img(src='./images/add.png')
+    #checkboxCreate
+      .outerCheckbox
+        input#c11(type='checkbox', name='gluten')
+        label(for='c11')
+          span
+          | Gluten free
+      .outerCheckbox
+        input#c22(type='checkbox', name='dairy')
+        label(for='c22')
+          span
+          | Dairy
+      .outerCheckbox
+        input#c33(type='checkbox', name='vegan')
+        label(for='c33')
+          span
+          | Vegan
+    input.load-file(name='picture', type='file', size='50', accept='image/*')
+    label.input-label Preparation
+    br
+    br
+    textarea#create-description(name='description' rows='4', cols='20')
+    #submit-bar
+      label.custom-label-left(for='file-upload')
+        | Load Image
+      input#file-upload(type='file', name='file' accept='image/*')
+      br
+      label.custom-label-right(for='submit-recipe')
+        | Submit
+      button#submit-recipe(type='submit')
+        br
+
+    #toast
+      div
